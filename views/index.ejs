@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <h1>Users</h1>
+    <form action = "/users" method = "POST">	
+    	<input type="text" name="first_name" placeholder= "first name"> 
+    	<input type="text" name="last_name" placeholder= "last name">
+    	<input type="text" name="username" placeholder= "username">
+    	<input type="text" name="email" placeholder = "email">
+    	<input type="text" name="password" placeholder = "password">
+        <input type="hidden" name="trips" placeholder= 'trips' value = "551b45be2fab8806860d6964">
+        <input type="hidden" name="friends" placeholder= 'friends' value = "551b0c1e96da0feb81e80981">
+    	<input type="submit">
+    </form>
+
+    <h1>Trips</h1>
+    <form action = "/trips" method = "POST">
+        <input type="hidden" name="created_by" value = "551b0bfd96da0feb81e8097f">
+        <input type="hidden" name="attending" value = "551b48efd804655e86502469">
+    	<input type="text" name="location" placeholder= "location name">
+    	<input type="text" name="title" placeholder= "title">
+    	<input type="text" name="description" placeholder = "description">
+    	<input type="text" name="duration" placeholder = "duration">
+    	<input type="text" name="start_date" placeholder = "Start Date">
+    	<input type="text" name="finish_date" placeholder = "Finish Date">
+    	<input type="submit">
+    </form>
+
+    <h1>Categories</h1>
+    <form action = "/categories" method = "POST">    
+        <input type="hidden" name="trip_id" value= '551b0e1758bece448280fe23' > 
+        <input type="text" name="name" placeholder= "category_name">
+        <input type="submit">
+    </form>
+
+    <h1>Suggestions</h1>
+    <form action = "/suggestions" method = "POST">
+        <input type="hidden" name="user_id" value= '551b0c1b96da0feb81e80980' > 
+        <input type="hidden" name="category_id" value= '551b0c1b96da0feb81e80980' > 
+        <input type="text" name="title" placeholder= "title">
+        <input type="text" name="content" placeholder= "content">
+        <input type="text" name="link" placeholder = "link">
+        <input type="submit">
+    </form>
+
+    <h1>Comments</h1>
+     <form action = "/comments" method = "POST">
+        <input type="hidden" name="suggesion_id" value= '551b13293c2c53e5828d623e' > 
+        <input type="hidden" name="user_id" value= '551b0bfd96da0feb81e8097f' > 
+        <input type="text" name="content" placeholder= "content">
+        <input type="submit">
+    </form>   
+  </body>
+</html>
