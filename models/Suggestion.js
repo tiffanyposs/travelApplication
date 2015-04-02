@@ -1,22 +1,29 @@
-cvar mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var timestamps = require('mongoose-times');
+var Schema = mongoose.Schema;
 
 var SuggestionSchema = new mongoose.Schema({
   title: String,
   content: String,
   link: String,
-  upvote: { type: Number, default: 0 },
-  downvote: { type: Number, default: 0 },
-  user_id: String,
-  category_id: String
-  // user_id: {
-  //   type: Schema.ObjectId,
-  //   ref: 'users'
-  // },
-  // category_id: {
-  //   type: Schema.ObjectId,
-  //   ref: 'categories'
-  // },
+  upvote: [{
+    type: Schema.ObjectId,
+    ref: 'User',
+    voted: {type: Boolean, default: false}
+  }],
+  downvote: [{
+    type: Schema.ObjectId,
+    ref: 'User',
+    voted: {type: Boolean, default: false}
+  }],
+  user_id: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  category_id: {
+    type: Schema.ObjectId,
+    ref: 'Category'
+  },
 });
 
 SuggestionSchema.plugin(timestamps);

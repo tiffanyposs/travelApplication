@@ -9,9 +9,14 @@ var UserSchema = new Schema({
   username: String,
   email: String,
   password: String,
+  image: String,
   trips: [{
   	type: Schema.ObjectId,
   	ref: "Trip"
+  }],
+  friends: [{
+  	type: Schema.ObjectId,
+  	ref: "User"
   }]
 });
 

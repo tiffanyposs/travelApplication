@@ -6,20 +6,53 @@ var Trip = require('../models/Trip.js');
 
 
 /* GET /tripss listing. */
-router.get('/', function(req, res, next) {
+router.get('/all', function(req, res, next) {
   Trip.find(function (err, trips) {
     if (err) return next(err);
     res.json(trips);
   });
 });
 
+// GET /trips from user
+// router.get('/', function(req, res, next) {
+//   Trip.find(function (err, trips) {
+//     if (err) return next(err);
+//     res.json(trips);
+//   });
+// });
+
 /* POST /trips */
+// this creates a new trip with the user's id
 router.post('/', function(req, res, next) {
+  req.body.created_by = req.session.user_id;
   Trip.create(req.body, function (err, trips) {
     if (err) return next(err);
-    res.json(trips);
+    res.redirect('/')
   });
+
 });
+
+// GET /trips 
+// gets all the trips from current user
+//need to add the ability to get the trips they are attending too
+router.get('/', function(req, res, next) {
+  var query = Trip.find({'created_by': req.session.user_id});
+  query.exec(function (err, trips) {
+    if (err) return handleError(err);
+      res.json(trips)
+  })
+});
+
+// // GET /trips/:id
+// router.get('/:id', function(req, res, next){
+//   // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');
+//   var query = Trip.findById( req.params.id ).populate('created_by attending');
+//   // query.select('created_by location title');
+//   query.exec(function (err, trip) {
+//   if (err) return handleError(err);
+//     res.json(trip)
+// })
+// })
 
 // /* GET /trips/id */
 // router.get('/:id', function(req, res, next) {
@@ -41,16 +74,7 @@ router.post('/', function(req, res, next) {
 // })
 
 
-router.get('/:id', function(req, res, next){
-  // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');
-  var query = Trip.findById( req.params.id ).populate('created_by attending');
 
-  // query.select('created_by location title');
-  query.exec(function (err, trip) {
-  if (err) return handleError(err);
-    res.json(trip)
-})
-})
 
 // /* PUT /todos/:id */
 // router.put('/:id', function(req, res, next) {
