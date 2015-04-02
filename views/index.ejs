@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -9,13 +8,14 @@
     <form action = "users/logout" method = "POST">
         <button>Logout</button>
     </form>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
 
     <h1>Users</h1>
-
+    <div id = 'user_container'>
+        <ul></ul>
+    </div>
 
     <h1>Trips</h1>
+    <div id = 'trip_container'></div>
     <form action = "/trips" method = "POST">
     	<input type="text" name="location" placeholder= "location name">
     	<input type="text" name="title" placeholder= "title">
@@ -25,6 +25,7 @@
     	<input type="text" name="finish_date" placeholder = "Finish Date">
     	<input type="submit">
     </form>
+
 
     <h1>Categories</h1>
     <form action = "/categories" method = "POST">    
@@ -47,39 +48,7 @@
         <input type="submit">
     </form>
 
-    <script type="text/javascript">
-
-    var current_url = document.URL;
-    var current_trip;
-    var current_category;
-    var current_suggestion;
-
-    // GET ajax call
-    var ajaxCall = function(string){
-        return function(){
-        var url = string;
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener('load', function(e) {
-            var d = xhr.responseText;
-            var parsed = JSON.parse(d);
-            console.log(parsed);
-            return parsed
-        })
-        xhr.open("GET", url);
-        xhr.send();
-     }
-    }
-
-    //gets the user's info
-    var getUser = ajaxCall(current_url + 'users/stuff');
-    //gets that User's trips
-    var getUserTrips = ajaxCall(current_url + 'trips');
-
-    getUser();
-    getUserTrips();
-
-
-
-    </script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src = "/javascripts/index.js"></script>   
   </body>
 </html>
