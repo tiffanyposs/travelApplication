@@ -16,7 +16,16 @@
 
     <h1>Trips</h1>
     <div id = 'trip_container'></div>
-    <form action = "/trips" method = "POST">
+    <div id = 'trip_input'>
+        <input id = "location" type="text"placeholder= "location name">
+        <input id = "title" type="text" placeholder= "title">
+        <input id = "description" type="text" placeholder = "description">
+        <input id = "duration" type="text" placeholder = "duration">
+        <input id = "start_date" type="text" placeholder = "Start Date">
+        <input id = "finish_date" type="text" placeholder = "Finish Date">
+        <button id = "trip_submit">Submit</button>
+    </div>
+<!--     <form action = "/trips" method = "POST">
     	<input type="text" name="location" placeholder= "location name">
     	<input type="text" name="title" placeholder= "title">
     	<input type="text" name="description" placeholder = "description">
@@ -24,14 +33,21 @@
     	<input type="text" name="start_date" placeholder = "Start Date">
     	<input type="text" name="finish_date" placeholder = "Finish Date">
     	<input type="submit">
-    </form>
+    </form> -->
 
 
     <h1>Categories</h1>
+    <div id = "category_container"></div>
+    <div id = 'category_input'>    
+        <input id = 'category_name' type="text" placeholder= "category_name">
+        <button id = 'category_submit'>Submit</button>
+    </form>
+
+<!--     <h1>Categories</h1>
     <form action = "/categories" method = "POST">    
         <input type="text" name="name" placeholder= "category_name">
         <input type="submit">
-    </form>
+    </form> -->
 
     <h1>Suggestions</h1>
     <form action = "/suggestions" method = "POST">

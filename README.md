@@ -12,7 +12,12 @@ mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 
 ```
 
+###Notes
+* Completed my users, trips, and categories
+* need to find the the suggestions and comments
+
 ###Stuff to Remember
+
 
 * Write out routes
 * when looking for trips, need to add a loop through attending one

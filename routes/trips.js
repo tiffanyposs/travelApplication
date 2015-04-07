@@ -43,6 +43,16 @@ router.get('/', function(req, res, next) {
   })
 });
 
+
+//gets the last trip a user posted
+router.get('/last', function(req,res, next){
+  var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);
+  query.exec(function( err, trips){
+    if (err) return handleError(err);
+    res.json(trips)
+  })
+})
+
 // // GET /trips/:id
 // router.get('/:id', function(req, res, next){
 //   // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');

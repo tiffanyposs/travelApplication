@@ -1,8 +1,8 @@
-    var current_url = document.URL;
-    var current_trip;
-    var current_category;
-    var current_suggestion;
-
+//these track what is clicked on
+var current_url = document.URL;
+var current_trip;
+var current_category;
+var current_suggestion;
 
 //get user information
 var userInfo = function(data){
@@ -12,14 +12,12 @@ var userInfo = function(data){
     $('#user_container ul').append(first_name, last_name, username);
 }
 
-
-
 var getUser = function(){
     $.ajax({
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data);
+        // console.log(data);
         userInfo(data)
     }
   });
@@ -28,7 +26,10 @@ var getUser = function(){
 getUser();
 //end get user information
 
-//get user trip info
+
+
+
+//This renders the current user's trips
 var userTripInfo = function(data){
     data.forEach(function(trip){
         console.log(trip)
@@ -48,11 +49,13 @@ var userTripInfo = function(data){
             $(this).css('background-color', 'red')
             current_trip = $(this).attr('id');
             console.log(current_trip)
+            getTripCategories()
         })
     })
 }
 
 
+//this gets the current user's trips then passes it to another function to render it
 var getUserTrips = function(){
     $.ajax({
     url: current_url + 'trips',
@@ -64,7 +67,127 @@ var getUserTrips = function(){
   });
 }
 
+
 getUserTrips();
-//end get user trip info
 
 
+// this gets the trip someone just posted
+var getLastTrip = function(){
+    $.ajax({
+    url: current_url + 'trips/last',
+    dataType: 'json',
+    success: function(data){
+        userTripInfo(data)
+    }
+  });  
+}
+
+
+
+//post request to POST a new trip
+$('#trip_submit').click(function(){
+  var formData = {
+    location: $('#location').val(),
+    title: $('#title').val(),
+    description: $('#description').val(),
+    duration: $('#duration').val(),
+    start_date: $('#start_date').val(),
+    finish_date: $('#finish_date').val()
+  }
+  // console.log(formData)
+$.ajax({
+  url: current_url + 'trips',
+  type: 'POST',
+  data: formData,
+  success: function(data, textStatus, jqXHR)
+    {
+      // calls to get the last trip
+      getLastTrip(),
+      // this removes the content from the inputs
+      $('#trip_input input').each(function(each){
+        this.value = "";
+      })
+    }
+});  
+
+})
+//end POST user trip info
+
+
+
+// Start Category section, refers to the clicked on trip
+
+//triggered when you click on a trip
+var getTripCategories = function(){
+    $.ajax({
+    url: current_url + 'categories/' + current_trip,
+    dataType: 'json',
+    success: function(data){
+      //removes old data
+      if($('#category_container').children().length > 0){
+        $('#category_container').empty();
+        current_category = "";
+      };
+      //renders new data
+      getTripCategoryInfo(data)
+    }
+  });
+}
+
+var getTripCategoryInfo = function(data){
+    data.forEach(function(category){
+        console.log(category)
+        var category_card = $('<div></div');
+        category_card.addClass('category_card')
+        category_card.attr('id', category._id)
+        $( '#category_container' ).append(category_card)
+
+        var name = $('<p></p>').text(category.name);
+        category_card.append(name)
+
+        category_card.click(function(){
+            $( '.category_card' ).css('background-color', 'white')
+            $(this).css('background-color', 'purple')
+            current_category = $(this).attr('id');
+            console.log(current_category)
+            // getTripCategories()
+        })
+    })
+}
+
+//this gets the last category posted in a group
+//is called when you POST the category_submit
+var getLastCategory = function(){
+    $.ajax({
+    url: current_url + 'categories/' + current_trip + "/last",
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+        // renders the new post on the page
+        // userTripInfo(data)
+        getTripCategoryInfo(data)
+    }
+  });  
+}
+
+
+
+// this posts a new category
+$('#category_submit').click(function(){
+  var formData = {
+    name: $('#category_name').val(),
+    trip_id : current_trip
+  }
+  $.ajax({
+    url: current_url + "categories/" + current_trip,
+    type: 'POST',
+    data: formData,
+    success: function(data, textStatus, jqXHR)
+      {
+        getLastCategory();
+        $('#category_input input').each(function(each){
+        this.value = "";
+      })
+      }
+  })
+})// end getting categories
