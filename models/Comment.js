@@ -12,9 +12,10 @@ var CommentSchema = new mongoose.Schema({
   user_id: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
 });
 
 CommentSchema.plugin(timestamps);
 
 module.exports = mongoose.model('Comment', CommentSchema);
+

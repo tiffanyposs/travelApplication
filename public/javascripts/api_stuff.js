@@ -64,6 +64,16 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description)
         trip_card.click(function(){
+
+            // empty or hide existing content
+            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
+            current_category = "";
+            $('#categories').empty();
+            $('#suggestion_content').empty();
+            $('#comments').empty();
+            current_suggestion = "";
+
+            // create cards
             $( '.trip_card_selected' ).attr('class', 'trip_card');
             $( this ).attr('class', 'trip_card_selected')
             current_trip = $(this).attr('id');
@@ -148,10 +158,9 @@ var getTripCategories = function(){
     dataType: 'json',
     success: function(data){
       //removes old data
-      if($('#categories').children().length > 0){
+
         $('#categories').empty();
         current_category = "";
-      };
       //renders new data
       getTripCategoryInfo(data)
     }
@@ -166,6 +175,12 @@ var getTripCategoryInfo = function(data){
         $( '#categories' ).append(category_name);
 
         category_name.click(function(){
+            $('#suggestion_content').empty();
+            $('#comments').empty();
+            current_suggestion = "";
+            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
+
+
             $('.nav_clicked').attr('class', '')
             $(this).attr('class', 'nav_clicked')
             current_category = $(this).attr('id');
@@ -236,7 +251,6 @@ var getSuggestions = function(){
 }
 
 var getSuggestionInfo = function(data){
-    $('#suggestion_content').empty();
     data.forEach(function(suggestion){
         console.log(suggestion)
         //empties existing content
@@ -254,7 +268,7 @@ var getSuggestionInfo = function(data){
 
         content_div.append(title, created_by, date)
         suggestion_info.append(content_div)
-        console.log(date)
+        // console.log(date)
 
         // voting section 
         var suggestion_voting = $('<div></div').attr('class', 'suggestion_voting')
@@ -275,10 +289,34 @@ var getSuggestionInfo = function(data){
         inside_voting.append(up_vote_div, down_vote_div)
 
         suggestion_card.append(suggestion_info, suggestion_voting);
-        $('#suggestion_content').append(suggestion_card)
+        $('#suggestion_content').prepend(suggestion_card)
 
         suggestion_card.click(function(){
-            alert(suggestion.title)
+            $('#comments').empty();
+            
+            // alert(suggestion._id);
+            // $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
+            current_suggestion = suggestion._id;
+            // console.log(current_suggestion)
+            $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
+
+            $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.first_name);
+            $('#suggestion_date').text(suggestion.created.substring(0, 10));
+            $('#suggestion_comment_about').text(suggestion.content);
+
+            // if there is a suggestion link render it
+            if(suggestion.link){
+                $('#suggestion_comment_link').css('visibility', 'visible')
+                $('#suggestion_comment_link').text('Link: ' + suggestion.link.substring(7, 20) + "....");
+                $('#suggestion_comment_link').attr('href', suggestion.link);
+            }else{
+                $('#suggestion_comment_link').css('visibility', 'hidden')
+            }
+
+            $('#comment_suggestion_upvote').text(suggestion.upvote.length)
+            $('#comment_suggestion_downvote').text(suggestion.downvote.length)
+            getComments();
+
         })
 
         // var category_name = $('<h2></h2>').text(category.name);
@@ -296,56 +334,30 @@ var getSuggestionInfo = function(data){
 
 
 
-            // <div class = 'suggestion_card'>
-            //     <div class = 'suggestion_info'>
-            //         <div>
-            //             <h1>Suggestion Title</h1>
-            //             <h2>By: Jamie</h2>
-            //             <h3>April 25th, 2015</h3>
-            //         </div>
-            //     </div>
-
-
-            //     <div class = 'suggestion_voting'>
-            //             <div>
-            //                 <div>
-            //                     <span class = 'fa fa-arrow-circle-up fa-2x green'></span>
-            //                     <h2>0</h2>
-            //                 </div>
-            //                 <div>
-            //                     <span class = 'fa fa-arrow-circle-down fa-2x red'></span>
-            //                     <h2>0</h2>
-            //                 </div>
-            //             </div>
-            //     </div>
-            // </div>
-
-
-
 
 // //this gets the last category posted in a group
 // //is called when you POST the category_submit
-// var getLastCategory = function(){
-//     $.ajax({
-//     url: current_url + 'categories/' + current_trip + "/last",
-//     dataType: 'json',
-//     success: function(data){
-//         console.log(data);
-//         // renders the new post on the page
-//         // userTripInfo(data)
-//         getTripCategoryInfo(data)
-//     }
-//   });  
-// }
+var getLastSuggestion = function(){
+    $.ajax({
+    url: current_url + 'suggestions/' + current_category + "/last",
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+        // renders the new post on the page
+        // userTripInfo(data)
+        getSuggestionInfo(data)
+    }
+  });  
+}
 
 
 
-// this posts a new category
+// this posts a new suggestion
 $('#suggestion_submit').click(function(){
   var formData = {
     title: $('#suggestion_title').val(),
     content: $('#suggestion_about').val(),
-    link: $('suggestion_link').val(),
+    link: $('#suggestion_link').val(),
     category_id: current_category,
     user_id: current_user
   }
@@ -360,6 +372,111 @@ $('#suggestion_submit').click(function(){
             this.value = "";
         })
         console.log('it posted')
+        getLastSuggestion()
       }
   })
 })// end getting categories
+
+
+
+// !!!!!!!!
+// start getting comments
+// !!!!!!!!!
+
+
+//triggered when you click on a trip
+var getComments = function(){
+    $.ajax({
+    url: current_url + 'comments/' + current_suggestion,
+    dataType: 'json',
+    success: function(data){
+      console.log(data);
+      //removes old data
+      // if($('#categories').children().length > 0){
+      //   $('#categories').empty();
+      //   current_category = "";
+      // };
+      //renders new data
+      // getTripCategoryInfo(data)
+      // getSuggestionInfo(data)
+      getCommentInfo(data)
+    }
+  });
+}
+
+
+var getCommentInfo = function(data){
+    data.forEach(function(comment){
+        // console.log(comment._id)
+        // var category_name = $('<h2></h2>').text(category.name);
+        // category_name.attr('id', category._id);
+        // $( '#categories' ).append(category_name);
+        console.log(comment)
+        var comment_card = $('<div></div').attr('class', 'comment_card');
+
+        var image_div = $('<div></div>');
+        var img = $('<img>').attr('src', '/images/users.jpg');
+        image_div.append(img);
+
+        var comment_info = $('<div></div>').attr('class', 'comment_info');
+        var info_inner_div = $('<div></div');
+
+        var date_container = $('<div></div>');
+        var name = $('<h2></h2>').text(comment.user_id.first_name + " " + comment.user_id.last_name);
+        var date = $('<h2></h2').text(comment.created.substring(0, 10))
+        date_container.append(name, date);
+
+        var content = $('<h3></h3>').text(comment.content)
+
+        info_inner_div.append(date_container, content);
+        comment_info.append(info_inner_div)
+
+
+        comment_card.append(image_div, comment_info)
+        $('#comments').prepend(comment_card)
+
+    })
+}
+
+
+            // <div class = 'comment_card'>
+            //     <div>
+            //         <img src="/images/users.jpg">
+            //     </div>
+            //     <div class = 'comment_info'>
+            //         <div>
+            //             <div>
+            //                 <h2>Jamie</h2>
+            //                 <h2>12/21/2015</h2>
+            //             </div>
+            //             <h3>This is about the comment I'm making blah blah blah....
+            //             and this is more of the comment.... and this is even more
+            //             of my comments.</h3>
+            //         </div>
+            //     </div>
+            // </div>
+
+
+
+//post comment
+$('#comment_submit').click(function(){
+  var formData = {
+    content: $('#comment_input_area').val(),
+    suggestion_id: current_suggestion,
+    user_id: current_user,
+  }
+  $.ajax({
+    url: current_url + "comments",
+    type: 'POST',
+    data: formData,
+    success: function(data, textStatus, jqXHR)
+      {
+      //   getLastCategory();
+        $('#comment_input_area').val("");
+
+        console.log('it posted')
+        // getLastSuggestion()
+      }
+  })
+})// end getting categories
+

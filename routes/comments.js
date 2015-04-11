@@ -21,13 +21,19 @@ router.post('/', function(req, res, next) {
   });
 });
 
-// /* GET /comments/id */
-router.get('/:id', function(req, res, next) {
-  Comment.findById(req.params.id, function (err, comments) {
-    if (err) return next(err);
-    res.json(comments);
-  });
+// /* GET /comments/suggestion_id */
+router.get('/:suggestion_id', function(req, res, next) {
+  var query = Comment.find({'suggestion_id' : req.params.suggestion_id});
+  query.populate('user_id');
+  query.exec(function(err, comments){
+    if (err) return handleError(err);
+    res.json(comments)
+  })
 });
+
+
+
+
 
 // /* PUT /todos/:id */
 // router.put('/:id', function(req, res, next) {

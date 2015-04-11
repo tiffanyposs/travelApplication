@@ -261,38 +261,110 @@ a{
 
 #comments_container{
 	width: 40%;
-	background-color: #E0E0E0;
+	/*background-color: #E0E0E0;*/
 	height: 100%;
-/*	display: flex;
-	flex-direction: column;*/
-}
-
-#comments_container > :first-child{
-	width: 100%;
-	height: 20%;
-	background-color: #707070;
 	display: flex;
+	flex-direction: column;
 }
 
-#comments_container > :first-child h1{
-	margin: auto;
-	font-size: 2em;
-	font-weight: bold;
+#comment_suggestion{
+	width: 95%;
+	height: 200px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border-radius: 30px;
+	margin: 20px auto 20px auto;
+
+}
+
+#comment_suggestion_info{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+	visibility: hidden;
+}
+
+#comment_suggestion_info p{
+	padding: 20px 25px 5px 25px;
+}
+
+
+
+#comment_suggestion_content{
+	display: flex;
+	height: 80%;
+	padding: 10px;
+	/*margin: auto;*/
+	visibility: hidden;
+}
+
+#comment_suggestion_content > :first-child{
+	width: 20%;
+
+	/*background-color: red;*/
+	/*display: flex;*/
+}
+
+
+#comment_suggestion_content img{
+	width: 90px;
+	border-radius: 50px;
+	margin-top: 10px;
+	margin-left: 15px;
+	border: 3px solid grey;
+	/*margin: auto;*/
+}
+
+#comment_suggestion_content > :nth-child(2){
+	width: 55%;
+	/*background-color: orange;*/
+	/*padding: 0 10px 0 10px;*/
+	padding: 0 20px 0 20px;
+
+}
+
+#comment_suggestion_content > :nth-child(2) > p{
+	margin-bottom: 15px;
+	font-style: italic;
+
+}
+
+#comment_suggestion_content > :nth-child(2) > a{
+	background-color: orange;
 	color: white;
+	border-radius: 15px;
+	font-size: 1em;
+	padding: 5px 10px 5px 10px
+}
+
+#comment_suggestion_content > :nth-child(3){
+	width: 25%;
+	/*background-color: yellow;*/
+	display: flex;
+	align-items: center;
 }
 
 
-#comments_container > :first-child span{
-	color: white;
-	font-size: 0.75em;
-	margin: auto 0 auto 15px;
+#comment_suggestion_content > :nth-child(3) div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
 }
 
+
+
+
+
+
+/*generated comments*/
 #comments{
 	width: 100%;
-	height: 80%;
+	height: 65%;
 	overflow: scroll;
-	background-color: grey;
+	/*background-color: grey;*/
 }
 
 #comments > :nth-child(even){
@@ -305,9 +377,13 @@ a{
 
 .comment_card{
 	/*background-color: #e2e2e2;*/
-	width: 100%;
-	height: 25%;
+	width: 80%;
+	/*height: 150px;*/
 	display: flex;
+	margin: 0 auto 20px auto;
+	border-radius: 40px;
+	/*padding: 20px 0 20px 0;*/
+	padding: 20px;
 	/*border-bottom: 2px solid white;*/
 }
 
@@ -324,14 +400,24 @@ a{
 }
 
 .comment_card > :nth-child(2){
-	width: 80%;
+	width: 85%;
 	display: flex;
 }
 
-.comment_card > :nth-child(2) div{
+.comment_card > :nth-child(2) > div{
 	margin: auto;
 	padding: 10px;
+	width: 100%;
+	/*display: flex;*/
+}
 
+.comment_card > :nth-child(2) > div > div{
+	/*margin: auto;*/
+	/*padding: 10px;*/
+	display: flex;
+	justify-content: space-between;
+	padding-right: 20px;
+	margin-bottom: 10px;
 }
 
 .comment_info h2{
@@ -341,4 +427,39 @@ a{
 
 .comment_info h3{
 	color: #303030;
+}
+
+#comment_input{
+	height: 10%;
+	background-color: grey;
+	display: flex;
+}
+
+#comment_input div{
+	margin: auto;
+	display: flex;
+	align-items: center;
+
+}
+
+#comment_input textarea{
+	width: 400px;
+	font-size: 1.15em;
+	margin-right: 20px;
+	border: none;
+	resize: none;
+	text-align: center;
+	border-radius: 5px;
+}
+
+#comment_input button{
+	font-size: 2em;
+	color: white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	padding: 3px;
+	width: 50px;
+	border: 2px solid white;
+
 }

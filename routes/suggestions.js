@@ -30,6 +30,25 @@ router.get('/:category_id', function(req, res, next) {
   })
 });
 
+
+// GET /suggestions/:category_id/last
+router.get('/:category_id/last', function(req, res, next) {
+  var query = Suggestion.find({'category_id' : req.params.category_id}).sort({'created': 'desc'}).limit(1);
+  query.populate('user_id', 'first_name last_name')
+  query.exec(function(err, suggestions){
+    if (err) return handleError(err);
+    res.json(suggestions)
+  })
+});
+
+// router.get('/last', function(req,res, next){
+//   var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);
+//   query.exec(function( err, trips){
+//     if (err) return handleError(err);
+//     res.json(trips)
+//   })
+// })
+
 // /* GET /categories/id */
 // router.get('/:id', function(req, res, next) {
 //   Suggestion.findById(req.params.id, function (err, suggestions) {
