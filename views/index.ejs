@@ -13,6 +13,14 @@
 </head>
 <body>
 
+<!-- MODALS -->
+<!-- trip modal -->
+<% include partials/modals/index_trip.ejs %>
+<!-- category modal -->
+<% include partials/modals/index_category.ejs %>
+<!-- suggestion modal -->
+<% include partials/modals/index_suggestion.ejs %>
+
 
 <header id = 'heading_container'>
 	<div id = 'trip_container'>
@@ -31,8 +39,8 @@
 </header>
 
 
-<!-- trip modal -->
-<% include partials/modals/index_trip.ejs %>
+
+
 
 
 <section id = 'main_container'>
@@ -41,12 +49,8 @@
 			<h1>Group Chat</h1>
 			<div id = 'categories_nav'>
 				<h1>Categories</h1>
-				<h3>+ Create New Category</h3>
-				<div id = 'categories'>
-					<!-- <h2>Food</h2>
-					<h2 class = 'nav_clicked'>Lodging</h2>
-					<h2>Beaches</h2> -->
-				</div>
+				<h3 id = 'add_category'>+ Create New Category</h3>
+				<div id = 'categories'></div>
 				<h4>+ 2 More</h4>
 			</div>
 			<div id = 'friends_nav'>
@@ -66,8 +70,7 @@
 	</nav>
 
 
-<!-- suggestion modal -->
-<% include partials/modals/index_suggestion.ejs %>
+
 
 
 

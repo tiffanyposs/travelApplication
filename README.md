@@ -13,14 +13,29 @@ mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 ```
 
 ###Notes
-* Need to add post for new trips
+
+* Style Trips
+* Fix Issue with Trip Dates
+* Fix # links so they don't break things
+* upvote/down capability
+* ability to find friends on site and add them to your trip
+* Logout Button
+* control when you can post
+* Ability to delete  your posts and update
+* emails must be unique
+
+
+###To Do
+
+* Finish Posts
+* Do Find Friends
+* Host Online
+* Work on Email Stuff
+* Make Responsive
 
 ###Stuff to Remember
 
 
-* Write out routes
-* when looking for trips, need to add a loop through attending one
-* add search for friends
 
 
 

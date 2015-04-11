@@ -32,7 +32,15 @@ router.get('/:suggestion_id', function(req, res, next) {
 });
 
 
-
+// GET /comments/:suggestion_id/last
+router.get('/:suggestion_id/last', function(req, res, next) {
+  var query = Comment.find({'suggestion_id' : req.params.suggestion_id}).sort({'created': 'desc'}).limit(1);
+  query.populate('user_id', 'first_name last_name')
+  query.exec(function(err, comments){
+    if (err) return handleError(err);
+    res.json(comments)
+  })
+});
 
 
 // /* PUT /todos/:id */
