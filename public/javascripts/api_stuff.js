@@ -3,17 +3,8 @@ var current_url = document.URL;
 var current_user;
 var current_user_name;
 var current_trip;
-// var current_trip_title;
 var current_category;
 var current_suggestion;
-
-//get user information
-// var userInfo = function(data){
-//     var first_name = $('<li></li>').text('First name: ' + data.first_name);
-//     var last_name = $('<li></li>').text('Last name ' + data.last_name);
-//     var username = $('<li></li>').text('Username ' + data.username);
-//     $('#user_container ul').append(first_name, last_name, username);
-// }
 
 var getUser = function(){
     $.ajax({
@@ -22,26 +13,17 @@ var getUser = function(){
     success: function(data){
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
-        // userInfo(data)
     }
   });
 }
 
 getUser();
-//end get user information
-
-
-
-
-
-
 
 
 //This renders the current user's trips
 var userTripInfo = function(data){
     //this sets the default of trip to the first one
     $('.trip_card_selected').attr('class', 'trip_card')
-    // console.log(current_trip)
     var counter = 0;
     data.forEach(function(trip){
         var trip_card = $('<ul></ul>');
@@ -126,46 +108,41 @@ $('#trip_add').click(function(){
     location: $('#trip_location').val(),
     title: $('#trip_name').val(),
     description: $('#trip_description').val(),
-    dates: {
-        start: $('#trip_start_date').val(),
-        finish: $('#trip_end_date').val()
-    },
+    start: $('#trip_start_date').val(),
+    finish: $('#trip_end_date').val(),
     created_by: current_user
   }
-  // console.log(formData)
-$.ajax({
-  url: current_url + 'trips',
-  type: 'POST',
-  data: formData,
-  success: function(data, textStatus, jqXHR)
-    {
-    // calls to get the last trip
-    getLastTrip(),
+  console.log(formData)
+    $.ajax({
+      url: current_url + 'trips',
+      type: 'POST',
+      data: formData,
+      success: function(data, textStatus, jqXHR)
+        {
+        // calls to get the last trip
+        getLastTrip(),
 
-    // this removes the content from the inputs
-    $('#make_trip_content input').each(function(each){
-    this.value = "";
-    })
+        // this removes the content from the inputs
+        $('#make_trip_content input').each(function(each){
+        this.value = "";
+        })
 
-    //this deletes everything when you make a new post
-    $('#suggestion_content').empty();
-    $('#comments').empty();
-    $('#categories').empty();
-    current_suggestion = "";
-    current_category = "";
-    $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
-    $('#view_trips').click();
+        //this deletes everything when you make a new post
+        $('#suggestion_content').empty();
+        $('#comments').empty();
+        $('#categories').empty();
+        current_suggestion = "";
+        current_category = "";
+        $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
+        $('#view_trips').click();
 
-    }
-});  
+        }
+    });  
 
-})
-//end POST user trip info
-
+})//end POST user trip info
 
 
 // Start Category section, refers to the clicked on trip
-
 //triggered when you click on a trip
 var getTripCategories = function(){
     $.ajax({
@@ -181,6 +158,7 @@ var getTripCategories = function(){
     }
   });
 }
+
 
 var getTripCategoryInfo = function(data){
     data.forEach(function(category){
@@ -205,6 +183,7 @@ var getTripCategoryInfo = function(data){
     })
 }
 
+
 // //this gets the last category posted in a group
 // //is called when you POST the category_submit
 var getLastCategory = function(){
@@ -217,7 +196,6 @@ var getLastCategory = function(){
     }
   });  
 }
-
 
 
 // this posts a new category
@@ -240,36 +218,21 @@ $('#category_submit').click(function(){
 })// end getting categories
 
 
-
-
-
 //triggered when you click on a trip
 var getSuggestions = function(){
     $.ajax({
     url: current_url + 'suggestions/' + current_category,
     dataType: 'json',
     success: function(data){
-      // console.log(data);
-      //removes old data
-      // if($('#categories').children().length > 0){
-      //   $('#categories').empty();
-      //   current_category = "";
-      // };
-      //renders new data
-      // getTripCategoryInfo(data)
       getSuggestionInfo(data)
     }
   });
 }
 
+
 var getSuggestionInfo = function(data){
     data.forEach(function(suggestion){
-        // console.log(suggestion)
-        //empties existing content
-
-
         var suggestion_card = $('<div></div').attr('class', 'suggestion_card')
-        // suggestion_card.attr('id', suggestion._id)
         var suggestion_info = $('<div></div').attr('class', 'suggestion_info')
         
 
@@ -280,7 +243,6 @@ var getSuggestionInfo = function(data){
 
         content_div.append(title, created_by, date)
         suggestion_info.append(content_div)
-        // console.log(date)
 
         // voting section 
         var suggestion_voting = $('<div></div').attr('class', 'suggestion_voting')
@@ -304,6 +266,7 @@ var getSuggestionInfo = function(data){
         $('#suggestion_content').prepend(suggestion_card)
 
         suggestion_card.click(function(){
+            console.log(suggestion)
             $('#comments').empty();
             current_suggestion = suggestion._id;
             $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
@@ -341,9 +304,6 @@ var getLastSuggestion = function(){
     url: current_url + 'suggestions/' + current_category + "/last",
     dataType: 'json',
     success: function(data){
-        // console.log(data);
-        // renders the new post on the page
-        // userTripInfo(data)
         getSuggestionInfo(data)
     }
   });  
@@ -366,11 +326,9 @@ $('#suggestion_submit').click(function(){
     data: formData,
     success: function(data, textStatus, jqXHR)
       {
-      //   getLastCategory();
         $('#suggestion_input input').each(function(each){
             this.value = "";
         })
-        // console.log('it posted')
         getLastSuggestion()
       }
   })
@@ -389,15 +347,6 @@ var getComments = function(){
     url: current_url + 'comments/' + current_suggestion,
     dataType: 'json',
     success: function(data){
-      // console.log(data);
-      //removes old data
-      // if($('#categories').children().length > 0){
-      //   $('#categories').empty();
-      //   current_category = "";
-      // };
-      //renders new data
-      // getTripCategoryInfo(data)
-      // getSuggestionInfo(data)
       getCommentInfo(data)
     }
   });
@@ -406,11 +355,6 @@ var getComments = function(){
 
 var getCommentInfo = function(data){
     data.forEach(function(comment){
-        // console.log(comment._id)
-        // var category_name = $('<h2></h2>').text(category.name);
-        // category_name.attr('id', category._id);
-        // $( '#categories' ).append(category_name);
-        // console.log(comment)
         var comment_card = $('<div></div').attr('class', 'comment_card');
 
         var image_div = $('<div></div>');
@@ -446,9 +390,6 @@ var getLastComment = function(){
     url: current_url + 'comments/' + current_suggestion + "/last",
     dataType: 'json',
     success: function(data){
-        // console.log(data);
-        // renders the new post on the page
-        // userTripInfo(data)
         getCommentInfo(data)
     }
   });  
@@ -469,11 +410,7 @@ $('#comment_submit').click(function(){
     data: formData,
     success: function(data, textStatus, jqXHR)
       {
-      //   getLastCategory();
         $('#comment_input_area').val("");
-
-        // console.log('it posted')
-        // getLastSuggestion()
         getLastComment()
       }
   })

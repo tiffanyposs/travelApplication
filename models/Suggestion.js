@@ -7,14 +7,16 @@ var SuggestionSchema = new mongoose.Schema({
   content: String,
   link: String,
   upvote: [{
+    user_id: {
     type: Schema.ObjectId,
-    ref: 'User',
-    voted: {type: Boolean, default: false}
+    ref: 'User'
+    }
   }],
   downvote: [{
+    user_id: {
     type: Schema.ObjectId,
-    ref: 'User',
-    voted: {type: Boolean, default: false}
+    ref: 'User'
+    }
   }],
   user_id: {
     type: Schema.ObjectId,

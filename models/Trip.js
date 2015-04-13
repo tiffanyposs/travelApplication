@@ -7,10 +7,8 @@ var TripSchema = new Schema({
   title: String,
   description: String,
   duration: String,
-  dates: {
-    start: String,
-    finish: String
-  },
+  start: String,
+  finish: String,
   created_by: {
   	type: Schema.ObjectId,
   	ref: "User",

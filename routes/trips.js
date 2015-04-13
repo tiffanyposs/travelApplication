@@ -25,6 +25,7 @@ router.get('/all', function(req, res, next) {
 // this creates a new trip with the user's id
 router.post('/', function(req, res, next) {
   req.body.created_by = req.session.user_id;
+  console.log(req.body);
   Trip.create(req.body, function (err, trips) {
     if (err) return next(err);
     res.redirect('/')
@@ -52,6 +53,9 @@ router.get('/last', function(req,res, next){
     res.json(trips)
   })
 })
+
+
+
 
 // // GET /trips/:id
 // router.get('/:id', function(req, res, next){

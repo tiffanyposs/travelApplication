@@ -41,6 +41,51 @@ router.get('/:category_id/last', function(req, res, next) {
   })
 });
 
+
+/* PUT /suggestions/:suggestion_id/upvote */
+router.put('/:suggestion_id/upvote', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion_id,
+    {$push: {"upvote": req.body}},
+    function(err, suggestion) {
+        console.log(err);
+    }
+);
+});
+
+
+/* PUT /suggestions/:suggestion_id/downvote */
+router.put('/:suggestion_id/downvote', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion_id,
+    {$push: {"downvote": req.body}},
+    function(err, suggestion) {
+        console.log(err);
+    }
+);
+});
+
+
+
+
+
+
+// Place.findById(req.params.id, function(err, p) {
+//   if (!p)
+//     return next(new Error('Could not load Document'));
+//   else {
+//     // do your updates here
+//     p.modified = new Date();
+
+//     p.save(function(err) {
+//       if (err)
+//         console.log('error')
+//       else
+//         console.log('success')
+//     });
+//   }
+// });
+
 // router.get('/last', function(req,res, next){
 //   var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);
 //   query.exec(function( err, trips){

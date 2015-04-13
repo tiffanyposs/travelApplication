@@ -25,15 +25,20 @@
 <header id = 'heading_container'>
 	<div id = 'trip_container'>
 		<!-- the content is appeneded through js -->
-		<h1 id = 'current_trip'>Mexico <span class = 'fa fa-arrow-down'></span></h1>
+		<h1 id = 'current_trip'>+ Add Trips<span class = 'fa fa-arrow-down'></span></h1>
 	</div>
 
 	<nav id = 'heading_nav'>
 		<ul>
-			<li><a href="#"><span class = 'fa fa-search fa-2x'></span></a></li>
-			<li><a href="#"><span class = 'fa fa-bell-o fa-2x'></span></a></li>
-			<li><a href="#"><img src="/images/users.jpg"></a></li>
-			<li><a href="#"><span class = 'fa fa-arrow-down'></span></a></li>
+			<li><span class = 'fa fa-search fa-2x'></span></li>
+			<li><span class = 'fa fa-bell-o fa-2x'></span></li>
+			<li>
+				<form action = '/users/logout' method = 'POST'>
+				<button class = 'fa fa-sign-out fa-2x'></button>
+				</form>
+			</li>
+			<li><img src="/images/users.jpg"></li>
+			<li><span class = 'fa fa-arrow-down'></span></li>
 		</ul>
 	</nav>
 </header>
@@ -132,11 +137,11 @@
 					</div>
 					<div>
 						<div>
-							<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
+							<span id = 'upvote' class = 'fa fa-arrow-circle-up fa-3x green'></span>
 							<h2 id = 'comment_suggestion_upvote'>0</h2>
 						</div>
 						<div>
-							<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
+							<span id = 'downvote' class = 'fa fa-arrow-circle-down fa-3x red'></span>
 							<h2 id = 'comment_suggestion_downvote'>0</h2>
 						</div>
 					</div>
@@ -184,17 +189,10 @@
 <script type="text/javascript" src = '/javascripts/vendors/jquery-2.1.3.js'></script>
 <script type="text/javascript" src = '/javascripts/modals.js'></script>
 <script type="text/javascript" src = '/javascripts/api_stuff.js'></script>
+<script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
 
 
-<script type="text/javascript">
-	// $(function() {
- //    	$( "#main_menu" ).accordion({
- //  			collapsible: true
-	// 	});
- //  	});
 
-
-</script>
 
 </body>
 </html>

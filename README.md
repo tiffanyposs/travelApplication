@@ -12,20 +12,24 @@ mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 
 ```
 
-###Notes
+[Notes on Input Types](http://www.w3schools.com/html/html_form_input_types.asp)
+
+###Immediate ToDos
 
 * Style Trips
-* Fix Issue with Trip Dates
-* Fix # links so they don't break things
-* upvote/down capability
+* Style Login Page
+* fix errors on put requests.
 * ability to find friends on site and add them to your trip
-* Logout Button
 * control when you can post
-* Ability to delete  your posts and update
 * emails must be unique
 
+###Some Other Random Todos
 
-###To Do
+* Ability to delete  your posts and update
+* Be able to press enter to submit forms
+* Be able to update the dates of the trip
+
+###Big Todos
 
 * Finish Posts
 * Do Find Friends
