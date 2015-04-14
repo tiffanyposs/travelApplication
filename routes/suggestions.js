@@ -42,6 +42,16 @@ router.get('/:category_id/last', function(req, res, next) {
 });
 
 
+router.get('/:suggestion_id/votes', function(req, res, next){
+  var query = Suggestion.findById(req.params.suggestion_id, 'upvote downvote');
+  // query.populate('user_id', 'first_name last_name')
+  query.exec(function(err, suggestions){
+    if (err) return handleError(err);
+    res.json(suggestions)
+  })
+})
+
+
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/:suggestion_id/upvote', function(req, res, next) {
   Suggestion.findByIdAndUpdate(

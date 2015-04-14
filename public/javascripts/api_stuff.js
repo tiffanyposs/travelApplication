@@ -29,19 +29,18 @@ var userTripInfo = function(data){
         var trip_card = $('<ul></ul>');
         //selects the first trip in array
         if(counter === data.length - 1){
-          trip_card.attr('class', 'trip_card_selected')
+          // trip_card.attr('class', 'trip_card_selected')
 
         $('#current_trip').text(trip.title);
         current_trip = trip._id;
         $('#current_trip').append('<span class = "fa fa-arrow-down"></span>')
-        }else{
-          trip_card.attr('class', 'trip_card');
         }
         counter++;
 
+          trip_card.attr('class', 'trip_card');
+
         trip_card.attr('id', trip._id);
         $( '#trip_list' ).prepend(trip_card)
-        console.log(trip)
         var title = $('<li></li>').text(trip.title);
         var location = $('<li></li>').text(trip.location);
         var duration = $('<li></li>').text(trip.duration);
@@ -67,7 +66,10 @@ var userTripInfo = function(data){
             //calls to get the categories for selected trip
             getTripCategories()
         })
+
     })
+        $('.trip_card:first').click()
+
 }
 
 
@@ -77,7 +79,6 @@ var getUserTrips = function(){
     url: current_url + 'trips',
     dataType: 'json',
     success: function(data){
-        // console.log(data);
         userTripInfo(data)
     }
   });
@@ -112,7 +113,6 @@ $('#trip_add').click(function(){
     finish: $('#trip_end_date').val(),
     created_by: current_user
   }
-  console.log(formData)
     $.ajax({
       url: current_url + 'trips',
       type: 'POST',
@@ -162,7 +162,6 @@ var getTripCategories = function(){
 
 var getTripCategoryInfo = function(data){
     data.forEach(function(category){
-        console.log(category._id)
         var category_name = $('<h2></h2>').text(category.name);
         category_name.attr('id', category._id);
         $( '#categories' ).append(category_name);
@@ -177,7 +176,6 @@ var getTripCategoryInfo = function(data){
             $('.nav_clicked').attr('class', '')
             $(this).attr('class', 'nav_clicked')
             current_category = $(this).attr('id');
-            // console.log(current_category);
             getSuggestions();
         })
     })
@@ -191,7 +189,6 @@ var getLastCategory = function(){
     url: current_url + 'categories/' + current_trip + "/last",
     dataType: 'json',
     success: function(data){
-        // console.log(data);
         getTripCategoryInfo(data)
     }
   });  
@@ -233,6 +230,7 @@ var getSuggestions = function(){
 var getSuggestionInfo = function(data){
     data.forEach(function(suggestion){
         var suggestion_card = $('<div></div').attr('class', 'suggestion_card')
+        suggestion_card.attr('id', suggestion._id)
         var suggestion_info = $('<div></div').attr('class', 'suggestion_info')
         
 
@@ -251,12 +249,12 @@ var getSuggestionInfo = function(data){
 
         var up_vote_div = $('<div></div>')
         var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green')
-        var up_count = $('<h2></h2>').text(suggestion.upvote.length)
+        var up_count = $('<h2></h2>').text(suggestion.upvote.length).attr('class', 'suggestion_upvote_count')
         up_vote_div.append(up_span, up_count)
 
         var down_vote_div = $('<div></div>')
         var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red')
-        var down_count = $('<h2></h2>').text(suggestion.downvote.length)
+        var down_count = $('<h2></h2>').text(suggestion.downvote.length).attr('class', 'suggestion_downvote_count')
         down_vote_div.append(down_span, down_count)
 
 
@@ -266,9 +264,11 @@ var getSuggestionInfo = function(data){
         $('#suggestion_content').prepend(suggestion_card)
 
         suggestion_card.click(function(){
-            console.log(suggestion)
             $('#comments').empty();
+            $('.suggestion_clicked').removeClass('suggestion_clicked')
+            
             current_suggestion = suggestion._id;
+            $(this).addClass('suggestion_clicked')
             $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
 
             $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.first_name);
