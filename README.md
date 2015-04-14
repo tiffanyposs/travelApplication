@@ -10,7 +10,6 @@ To run the mongodb server:
 ```
 mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 
-mongod --dbpath /data/db
 
 ```
 
@@ -20,11 +19,23 @@ mongod --dbpath /data/db
 This changes it to be able to run the code node instead of nodejs
 
 
-nohup mongod --dbpath=/data/db --port 27017 &
-
-
 ```
 ln -s /usr/bin/nodejs /usr/bin/node
+
+```
+
+This runs mongodb in background
+
+```
+
+nohup mongod --dbpath=/data/db --port 27017 &
+
+```
+
+This Runs the website
+
+```
+nohup DEBUG=TravelTest ./bin/www &
 
 ```
 
