@@ -14,6 +14,20 @@ mongod --dbpath /data/db
 
 ```
 
+
+###Digital Ocean Notes
+
+This changes it to be able to run the code node instead of nodejs
+
+
+nohup mongod --dbpath=/data/db --port 27017 &
+
+
+```
+ln -s /usr/bin/nodejs /usr/bin/node
+
+```
+
 [Notes on Input Types](http://www.w3schools.com/html/html_form_input_types.asp)
 
 ###Immediate ToDos
