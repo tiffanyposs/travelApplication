@@ -35,7 +35,7 @@ nohup mongod --dbpath=/data/db --port 27017 &
 This Runs the website
 
 ```
-nohup DEBUG=TravelTest ./bin/www &
+nohup node app.js &
 
 ```
 
