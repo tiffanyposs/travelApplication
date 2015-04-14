@@ -19,9 +19,10 @@ var suggestions = require('./routes/suggestions');
 var comments = require('./routes/comments');
 // var groups = require('./routes/groups');
 
+// var current_url = document.URL;
 
-
-mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+mongoose.connect('mongodb://../localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {

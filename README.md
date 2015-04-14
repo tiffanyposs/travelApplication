@@ -10,6 +10,8 @@ To run the mongodb server:
 ```
 mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 
+mongod --dbpath /data/db
+
 ```
 
 [Notes on Input Types](http://www.w3schools.com/html/html_form_input_types.asp)
