@@ -2,32 +2,54 @@
 <html>
 <head>
 	<title></title>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' href='/stylesheets/reset.css'/>
+	<link rel='stylesheet' href='/stylesheets/login_style.css'/>
 </head>
 <body>
 
+<div id = 'login_header'>
+	<h1>Tripppper</h1>
+</div>
 
-<!-- sign in -->
-<h1>Sign In</h1>
-<form action = "users/session" method = "POST">
-	<input type = 'text' name = "email" placeholder = "email">
-	<!-- type = 'email' -->
-	<input type = 'password' name = "password" placeholder = "password" >
-	<input type = "submit">
-</form>
+<section id = 'login_wrapper'>
+	<div id = 'login_container'>
+		<!-- sign in -->
+		<div>
+			<h2>Sign In</h2>
+			<form action = "users/session" method = "POST">
+				<label>E-mail:</label>
+				<input type = 'text' name = "email">
+				<!-- type = 'email' -->
+				<label>Password:</label>
+				<input type = 'password' name = "password">
+				<!-- <input type = "submit"> -->
+				<button>Submit</button>
+			</form>
+		</div>
 
-
-<!-- sign up -->
-<h1>Sign Up</h1>
-<form action = "/users/signup" method = "POST">
-	<input type="text" name="first_name" placeholder= "first name"> 
-	<input type="text" name="last_name" placeholder= "last name">
-	<input type="text" name="username" placeholder= "username">
-	<input type = 'email' name="email" placeholder = "email">
-	<input type="password" name="password" placeholder = "password">
-	<input type="password" name="confirm_password" placeholder = "confirm_password">
-	<input type="submit">
-</form>
+		<!-- sign up -->
+		<div>
+			<h2>Sign Up</h2>
+			<form action = "/users/signup" method = "POST">
+				<label>First Name:</label>
+				<input type="text" name="first_name"> 
+				<label>Last Name:</label>
+				<input type="text" name="last_name">
+				<label>Username:</label>
+				<input type="text" name="username">
+				<label>E-mail:</label>
+				<input type = 'email' name="email">
+				<label>Password:</label>
+				<input type="password" name="password">
+				<label>Confirm Password:</label>
+				<input type="password" name="confirm_password">
+				<!-- <input type="submit"> -->
+				<button>Submit</button>
+			</form>
+		</div>
+	</div>
+</section>
 
 </body>
 </html>

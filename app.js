@@ -21,8 +21,9 @@ var comments = require('./routes/comments');
 
 // var current_url = document.URL;
 
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+//THIS IS FOR DATABASE
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -109,4 +110,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(80)
+app.listen(3000)
+// app.listen(80)

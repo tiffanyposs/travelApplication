@@ -5,9 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res) {
   console.log(req.session)
   if(req.session.valid_user === true){
-    res.render('index', { title: 'Express' });
+    res.render('index');
   }else{
-  	res.redirect('/login')
+  	res.render('splash')
   }
 });
 

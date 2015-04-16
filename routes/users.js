@@ -104,7 +104,7 @@ router.post('/session', function(req, res){
 // POST users/logout
 router.post('/logout', function(req, res){
   req.session.valid_user = false;
-  res.redirect('/login')
+  res.redirect('/')
 })
 
 // router.get('/:title', function(req, res, next){
