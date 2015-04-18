@@ -14,15 +14,16 @@ var TripSchema = new Schema({
   	ref: "User",
   },
   attending: [{
+    user_id: {
   	type: Schema.ObjectId,
   	ref: "User",
+    }
   }]
 });
 
 TripSchema.plugin(timestamps);
 
 module.exports = mongoose.model('Trip', TripSchema);
-
 
 
 

@@ -20,6 +20,8 @@
 <% include partials/modals/index_category.ejs %>
 <!-- suggestion modal -->
 <% include partials/modals/index_suggestion.ejs %>
+<!-- friends -->
+<% include partials/modals/index_friend.ejs %>
 
 
 <header id = 'heading_container'>
@@ -56,17 +58,15 @@
 				<h1>Categories</h1>
 				<h3 id = 'add_category'>+ Create New Category</h3>
 				<div id = 'categories'></div>
-				<h4>+ 2 More</h4>
+				<!-- <h4>+ 2 More</h4> -->
 			</div>
 			<div id = 'friends_nav'>
-				<h1>Friends</h1>
-				<h3>+ Add Friends</h3>
+				<h1>Friends Attending</h1>
+				<h3 id = 'add_friend'>+ Add Friends</h3>
 				<div id = 'friends'>
-					<h2>Jamie</h2>
-					<h2>Madison</h2>
-					<h2>Eric</h2>
+					
 				</div>
-				<h4>+ 7 More</h4>
+				<!-- <h4>+ 7 More</h4> -->
 			</div>
 		</div>
 		<div id = 'calendar'>
@@ -190,6 +190,7 @@
 <script type="text/javascript" src = '/javascripts/modals.js'></script>
 <script type="text/javascript" src = '/javascripts/api_stuff.js'></script>
 <script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
+<script type="text/javascript" src = '/javascripts/friends.js'></script>
 
 
 

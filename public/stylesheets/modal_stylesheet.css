@@ -221,33 +221,75 @@
 
 }
 
-/*
-#suggestion_modal h3{
-     font-size: 1.5em;
-     margin-bottom: 30px;
-}
 
-#suggestion_input{
+
+
+/*comment modal*/
+#friend_modal {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 1000;
+     background-color: rgba( 0, 0, 0, 0.5);
      display: flex;
-     flex-direction: column;
 }
 
-#suggestion_input p{
-     margin-bottom: 15px;
+#friend_modal > div {
+     width: 500px;
+     height: 400px;
+     margin: auto;
+     background-color: rgb(255, 255, 255);
+     padding:30px 40px 15px 50px;
 }
 
-#suggestion_input input{
-     width: 300px;
-     font-size: 1.25em;
-     margin-bottom: 25px;
+#friend_modal h2{
+     font-size: 2em;
+     margin-bottom: 50px;
+     font-weight: bold;
 }
 
-
-#suggestion_close{
+#friend_close{
      position: relative;
      float: right;
      border: none;
      background-color: white;
      font-weight: bold;
-}*/
+}
 
+#friend_input{
+     display: flex;
+     flex-direction: column;
+}
+
+#friend_modal h3{
+     font-size: 1.5em;
+     margin-bottom: 20px;
+}
+
+#friend_title{
+     width: 250px;
+     font-size: 1.25em;
+     margin-bottom: 30px;
+}
+
+#friend_title:focus{
+     outline: none;
+}
+
+#find_friend_submit{
+     width: 100px;
+     outline: none;
+     border: none;
+     border-radius: 5px;
+     font-size: 1em;
+     padding: 5px;
+
+}
+
+#found_friends{
+     width: 400px;
+     height: 200px;
+}

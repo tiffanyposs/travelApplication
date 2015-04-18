@@ -37,6 +37,21 @@ router.get('/stuff', function(req, res, next) {
   })
 });
 
+// GET users/findfriends
+// gets all the user's trips
+router.get('/findfriend/:email', function(req, res, next) {
+  var query = User.find({'email': req.params.email});
+  query.exec(function (err, user) {
+    if (err) return handleError(err);
+    res.json(user)
+  })
+});
+
+
+
+
+
+
 // GET users/trips
 // gets all the user's trips
 router.get('/trips', function(req, res, next) {

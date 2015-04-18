@@ -26,6 +26,8 @@ var userTripInfo = function(data){
     $('.trip_card_selected').attr('class', 'trip_card')
     var counter = 0;
     data.forEach(function(trip){
+        console.log(trip)
+
         var trip_card = $('<ul></ul>');
         //selects the first trip in array
         if(counter === data.length - 1){
@@ -56,6 +58,15 @@ var userTripInfo = function(data){
             $('#comments').empty();
             current_suggestion = "";
 
+            console.log(trip.attending)
+
+            //this populates the friends
+            $('#friends').empty();
+            trip.attending.forEach(function(friend){
+                $('#friends').prepend('<h2>' + friend.user_id.first_name + '</h2>')
+            })
+
+            
             // create cards
             $( '.trip_card_selected' ).attr('class', 'trip_card');
             $( this ).attr('class', 'trip_card_selected')
@@ -69,6 +80,7 @@ var userTripInfo = function(data){
 
     })
         $('.trip_card:first').click()
+        console.log(current_trip)
 
 }
 

@@ -59,3 +59,20 @@ add_category.addEventListener('click', function(){
     modal.style.visibility = "hidden";
   })
 });
+
+
+
+// comment modal
+var add_friend = document.getElementById('add_friend')
+add_friend.addEventListener('click', function(){
+  var modal = document.getElementById('friend_modal');
+  if(modal.style.visibility === "visible"){
+    modal.style.visibility = "hidden";
+  }else{
+    modal.style.visibility = "visible";
+  }
+  var friend_close = document.getElementById('friend_close')
+  friend_close.addEventListener('click', function(){
+    modal.style.visibility = "hidden";
+  })
+});

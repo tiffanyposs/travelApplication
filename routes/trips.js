@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 // gets all the trips from current user
 //need to add the ability to get the trips they are attending too
 router.get('/', function(req, res, next) {
-  var query = Trip.find({'created_by': req.session.user_id});
+  var query = Trip.find({'created_by': req.session.user_id}).populate('attending.user_id');
   query.exec(function (err, trips) {
     if (err) return handleError(err);
       res.json(trips)
@@ -56,17 +56,35 @@ router.get('/last', function(req,res, next){
 
 
 
+/* PUT /trips/addfriend/trip_id */
+router.put('/addfriend/:trip_id', function(req, res, next) {
+  console.log(req.body)
+  Trip.findByIdAndUpdate(
+    req.params.trip_id,
+    {$push: {"attending": req.body}},
+    function(err, trips) {
+        console.log(err);
+    }
+);
+});
 
-// // GET /trips/:id
-// router.get('/:id', function(req, res, next){
-//   // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');
-//   var query = Trip.findById( req.params.id ).populate('created_by attending');
-//   // query.select('created_by location title');
-//   query.exec(function (err, trip) {
-//   if (err) return handleError(err);
-//     res.json(trip)
-// })
-// })
+
+
+
+
+
+
+
+// GET /trips/:id
+router.get('/:id', function(req, res, next){
+  // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');
+  var query = Trip.findById( req.params.id ).select('created_by attending');
+  // query.select('created_by location title');
+  query.exec(function (err, trip) {
+  if (err) return handleError(err);
+    res.json(trip)
+})
+})
 
 // /* GET /trips/id */
 // router.get('/:id', function(req, res, next) {
