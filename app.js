@@ -23,9 +23,9 @@ var comments = require('./routes/comments');
 
 
 
-mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
-// mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/data/db', function(err) {
 // mongoose.connect('mongodb://data/db', function(err) {
     if(err) {
         console.log('connection error', err);
@@ -87,11 +87,13 @@ var clients = [];
 server.on("connection", function(connection) {
   console.log("Client connected!"); 
   console.log(connection.upgradeReq.url)
+  clients.push(connection);
   connection.on("close", function (){
     var x = clients.indexOf(connection);
     clients.splice(x, 1); 
   });
   connection.on("message", function(message){
+    console.log(message)
     var msg = JSON.parse(message);
     clients.forEach(function(client){
         // client.send(msg);

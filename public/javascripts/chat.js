@@ -33,6 +33,7 @@ $('#chat_submit').click(function(){
   var msg = {message: $('#chat_input_box').val()}
   msg['name'] = current_user;
   msg['trip_id'] = current_trip;
+  msg['firstname'] = current_user_name;
   var encoded_msg = JSON.stringify(msg);
   console.log(encoded_msg)
   client.send(encoded_msg)
@@ -47,7 +48,7 @@ client.addEventListener("message", function(message){
   console.log(hash_message)
   var new_chat_card = $('<div></div>').attr('class', 'chat_card_current')
   // var newLi = document.createElement("li");
-  var name = $('<h3></h3>').text(message.name)
+  var name = $('<h3></h3>').text(hash_message.firstname)
   var content = $('<p></p>').text(hash_message.message)
   // var messageText = message.data;
   // newLi.innerHTML = "<li>" + messageText + "</li> ";

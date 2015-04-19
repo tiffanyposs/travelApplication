@@ -25,8 +25,13 @@
 	height: 75%;
 }
 
+#chat h3{
+	font-size: 1.25em;
+	margin-bottom: 20px;
+}
+
 .chat_card{
-	background-color: green;
+	background-color: #696969;
 	width: 600px;
 	padding: 30px;
 	border-radius: 20px;
@@ -38,7 +43,8 @@
 }
 
 .chat_card_current{
-	background-color: blue;
+	background-color: #2a2a2a;
+	color: white;
 	width: 600px;
 	padding: 30px;
 	border-radius: 40px 40px 40px 0;
@@ -65,5 +71,11 @@
 }
 
 #chat_input button{
-	font-size: 2em;
+	font-size: 1.5em;
+	padding: 5px;
+	border-radius: 5px;
+	outline: 0;
+	border: none;
+	background-color: orange;
+	color: white;
 }
