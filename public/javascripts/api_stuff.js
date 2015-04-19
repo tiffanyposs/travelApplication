@@ -11,6 +11,7 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
+        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
     }
@@ -51,6 +52,8 @@ var userTripInfo = function(data){
         trip_card.click(function(){
 
             // empty or hide existing content
+            // $('#chat_container').hide();
+            // $('#suggestions, #comments_container').show();
             $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
             current_category = "";
             $('#categories').empty();
@@ -66,7 +69,7 @@ var userTripInfo = function(data){
                 $('#friends').prepend('<h2>' + friend.user_id.first_name + '</h2>')
             })
 
-            
+
             // create cards
             $( '.trip_card_selected' ).attr('class', 'trip_card');
             $( this ).attr('class', 'trip_card_selected')
@@ -181,6 +184,13 @@ var getTripCategoryInfo = function(data){
         category_name.click(function(){
             $('#suggestion_content').empty();
             $('#comments').empty();
+
+            //this toggles the chat
+            $('#chat_container').hide('slow', function(){
+                $('#suggestions, #comments_container').show('slow');
+            });
+            
+
             current_suggestion = "";
             $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
 

@@ -8,18 +8,20 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
-// var timestamps = require("mongoose-times");
+
+
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// var friends = require('./routes/friends');
 var trips = require('./routes/trips');
 var categories = require('./routes/categories');
 var suggestions = require('./routes/suggestions');
 var comments = require('./routes/comments');
-// var groups = require('./routes/groups');
 
-// var current_url = document.URL;
+
+
 
 mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
@@ -68,12 +70,44 @@ app.use(session({
 // for routes
 app.use('/', routes);
 app.use('/users', users);
-// app.use('/friends', friends);
 app.use('/trips', trips);
 app.use('/categories', categories);
 app.use('/suggestions', suggestions);
 app.use('/comments', comments);
-// app.use('/groups', groups)
+
+
+
+
+//!!!!!!!!!!!!!
+//WEBSOCKET STUFF
+var WebSocketServer = require("ws").Server;
+var server = new WebSocketServer({port: 2000});
+var clients = [];
+
+server.on("connection", function(connection) {
+  console.log("Client connected!"); 
+  console.log(connection.upgradeReq.url)
+  connection.on("close", function (){
+    var x = clients.indexOf(connection);
+    clients.splice(x, 1); 
+  });
+  connection.on("message", function(message){
+    var msg = JSON.parse(message);
+    clients.forEach(function(client){
+        // client.send(msg);
+        console.log(client.upgradeReq.url)
+        if(client.upgradeReq.url === '/' + msg.trip_id){
+          client.send(message)
+        }
+      });
+  // connection.send(message)
+
+  });
+});
+
+//!!!!!!!!!!!!
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
 // /* GET /users/stuff */
 router.get('/stuff', function(req, res, next) {
   var query = User.findById(req.session.user_id).populate('trips friends');
-  query.select('username first_name last_name friends')
+  query.select('username first_name last_name friends trips')
   query.exec(function (err, user) {
     if (err) return handleError(err);
       res.json(user);

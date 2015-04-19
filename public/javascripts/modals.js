@@ -2,8 +2,8 @@
 //move to own file
 
 // trip modal
-var current_trip = document.getElementById('current_trip')
-current_trip.addEventListener('click', function(){
+var current_trip_section = document.getElementById('current_trip')
+current_trip_section.addEventListener('click', function(){
   var modal = document.getElementById('overlay');
   if(modal.style.visibility === "visible"){
     modal.style.visibility = "hidden";
