@@ -84,7 +84,7 @@ router.post('/signup', function(req, res){
         if (err) return next(err);
          else{
           req.session.valid_user = true;
-          req.session.user_id = users._id;
+          // req.session.user_id = users._id;
           res.redirect('/');
          } 
       });
@@ -107,8 +107,9 @@ router.post('/session', function(req, res){
     if(user){
       var passwordMatches = bcrypt.compareSync(password, user.password);
     }if(passwordMatches){
+      // console.log(req.session)
       req.session.valid_user = true;
-      req.session.user_id = user._id;
+      // req.session.user_id = user._id;
       res.redirect('/')
     }else{
       res.redirect('/login')

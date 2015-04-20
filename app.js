@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
 
+var MongoStore = require('connect-mongo')(session)
+
 
 
 
@@ -65,6 +67,11 @@ app.use(session({
   secret: config.sessionSecret, //this is from secrets.json
   resave: false,
   saveUninitialized: true,
+  //new stuff
+  store: new MongoStore({
+    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    url: 'mongodb://localhost/data/db'
+  })
 }));
 
 // for routes
@@ -76,7 +83,7 @@ app.use('/suggestions', suggestions);
 app.use('/comments', comments);
 
 
-
+console.log(session)
 
 //!!!!!!!!!!!!!
 //WEBSOCKET STUFF
