@@ -13,7 +13,6 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data);
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
     }
@@ -96,7 +95,7 @@ var getUserTrips = function(){
     url: current_url + 'trips',
     dataType: 'json',
     success: function(data){
-        userTripInfo(data)
+        userTripInfo(data);
     }
   });
 }
@@ -113,7 +112,7 @@ var getLastTrip = function(){
     url: current_url + 'trips/last',
     dataType: 'json',
     success: function(data){
-        userTripInfo(data)
+        userTripInfo(data);
     }
   });  
 }
@@ -137,7 +136,7 @@ $('#trip_add').click(function(){
       success: function(data, textStatus, jqXHR)
         {
         // calls to get the last trip
-        getLastTrip(),
+        getLastTrip();
 
         // this removes the content from the inputs
         $('#make_trip_content input').each(function(each){
@@ -179,11 +178,11 @@ var getTripCategoryInfo = function(data){
             
 
             current_suggestion = "";
-            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
+            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
 
 
-            $('.nav_clicked').attr('class', '')
-            $(this).attr('class', 'nav_clicked')
+            $('.nav_clicked').attr('class', '');
+            $(this).attr('class', 'nav_clicked');
             current_category = $(this).attr('id');
             getSuggestions();
         })
@@ -204,7 +203,7 @@ var getTripCategories = function(){
         $('#categories').empty();
         current_category = "";
       //renders new data
-      getTripCategoryInfo(data)
+      getTripCategoryInfo(data);
     }
   });
 }
@@ -217,7 +216,7 @@ var getLastCategory = function(){
     url: current_url + 'categories/' + current_trip + "/last",
     dataType: 'json',
     success: function(data){
-        getTripCategoryInfo(data)
+        getTripCategoryInfo(data);
     }
   });  
 }
@@ -236,7 +235,7 @@ $('#category_submit').click(function(){
     success: function(data, textStatus, jqXHR)
       {
         getLastCategory();
-        $('#category_title').val('')
+        $('#category_title').val('');
 
       }
   })
@@ -321,7 +320,7 @@ var getSuggestions = function(){
     url: current_url + 'suggestions/' + current_category,
     dataType: 'json',
     success: function(data){
-      getSuggestionInfo(data)
+      getSuggestionInfo(data);
     }
     
   });
@@ -336,7 +335,7 @@ var getLastSuggestion = function(){
     url: current_url + 'suggestions/' + current_category + "/last",
     dataType: 'json',
     success: function(data){
-        getSuggestionInfo(data)
+        getSuggestionInfo(data);
     }
   });  
 }
@@ -366,7 +365,7 @@ $('#suggestion_submit').click(function(){
         $('#suggestion_input input').each(function(each){
             this.value = "";
         })
-        getLastSuggestion()
+        getLastSuggestion();
       }
   })
 })// end getting categories
@@ -387,7 +386,7 @@ var getComments = function(){
     url: current_url + 'comments/' + current_suggestion,
     dataType: 'json',
     success: function(data){
-      getCommentInfo(data)
+      getCommentInfo(data);
     }
   });
 }
@@ -409,7 +408,7 @@ var getCommentInfo = function(data){
         var date = $('<h2></h2').text(comment.created.substring(0, 10))
         date_container.append(name, date);
 
-        var content = $('<h3></h3>').text(comment.content)
+        var content = $('<h3></h3>').text(comment.content);
 
         info_inner_div.append(date_container, content);
         comment_info.append(info_inner_div)
@@ -430,7 +429,7 @@ var getLastComment = function(){
     url: current_url + 'comments/' + current_suggestion + "/last",
     dataType: 'json',
     success: function(data){
-        getCommentInfo(data)
+        getCommentInfo(data);
     }
   });  
 }
@@ -451,7 +450,7 @@ $('#comment_submit').click(function(){
     success: function(data, textStatus, jqXHR)
       {
         $('#comment_input_area').val("");
-        getLastComment()
+        getLastComment();
       }
   })
 })// end getting categories
