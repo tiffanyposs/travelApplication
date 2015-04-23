@@ -290,7 +290,7 @@ var getSuggestionInfo = function(data){
             $(this).addClass('suggestion_clicked')
             $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
 
-            $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.first_name);
+            $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.last_name);
             $('#suggestion_date').text(suggestion.created.substring(0, 10));
             $('#suggestion_comment_about').text(suggestion.content);
 
