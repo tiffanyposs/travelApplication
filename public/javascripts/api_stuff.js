@@ -1,5 +1,3 @@
-
-
 //these track what is clicked on
 var current_url = document.URL;
 var current_user;
@@ -277,6 +275,7 @@ var getSuggestionInfo = function(data){
         down_vote_div.append(down_span, down_count)
 
 
+
         inside_voting.append(up_vote_div, down_vote_div)
 
         suggestion_card.append(suggestion_info, suggestion_voting);
@@ -288,23 +287,61 @@ var getSuggestionInfo = function(data){
             
             current_suggestion = suggestion._id;
             $(this).addClass('suggestion_clicked')
-            $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
 
-            $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.last_name);
-            $('#suggestion_date').text(suggestion.created.substring(0, 10));
-            $('#suggestion_comment_about').text(suggestion.content);
 
-            // if there is a suggestion link render it
-            if(suggestion.link){
-                $('#suggestion_comment_link').css('visibility', 'visible')
-                $('#suggestion_comment_link').text('Link: ' + suggestion.link.substring(7, 20) + "....");
-                $('#suggestion_comment_link').attr('href', suggestion.link);
-            }else{
-                $('#suggestion_comment_link').css('visibility', 'hidden')
+
+            var createSuggestionCard = function(data){
+                console.log(data)
+                $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
+
+                $('#suggestion_name').text(data[0].user_id.first_name + ' ' + data[0].user_id.last_name);
+                $('#suggestion_date').text(data[0].created.substring(0, 10));
+                $('#suggestion_comment_about').text(data[0].content);
+
+                // if there is a suggestion link render it
+                if(suggestion.link){
+                    $('#suggestion_comment_link').css('visibility', 'visible')
+                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(7, 20) + "....");
+                    $('#suggestion_comment_link').attr('href', data[0].link);
+                }else{
+                    $('#suggestion_comment_link').css('visibility', 'hidden')
+                }
+
+                $('#comment_suggestion_upvote').text(data[0].upvote.length)
+                $('#comment_suggestion_downvote').text(data[0].downvote.length)
             }
 
-            $('#comment_suggestion_upvote').text(suggestion.upvote.length)
-            $('#comment_suggestion_downvote').text(suggestion.downvote.length)
+
+            var getSuggestion = function(){
+                $.ajax({
+                url: current_url + 'suggestions/' + current_suggestion + '/one',
+                dataType: 'json',
+                success: function(data){
+                  createSuggestionCard(data);
+                }
+                
+              });
+            }
+
+            getSuggestion();
+            // $('#downvote').click(function(){
+            //     var array = [];
+            //     suggestion.downvote.forEach(function(each){
+            //         array.push(each.user_id);
+            //     });
+            //     if(array.indexOf(current_user) === -1){
+            //         suggestion.downvote.push(current_user)
+            //     }
+            // })
+            // $('#upvote').click(function(){
+            //     var array = [];
+            //     suggestion.upvote.forEach(function(each){
+            //         array.push(each.user_id);
+            //     });
+            //     if(array.indexOf(current_user) === -1){
+            //         suggestion.upvote.push(current_user)
+            //     }
+            // })
             getComments();
 
         })
