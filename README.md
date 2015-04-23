@@ -1,8 +1,9 @@
-* Style login
-* Splashpage
-* tripppper.com domain
-* freinds
-* direct message
+* Safari, murder Apple
+* Fix Voting
+* Email send out to invite people to your trip
+
+* email capture mail chimp
+
 
 
 

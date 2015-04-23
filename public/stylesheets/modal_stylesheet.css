@@ -8,12 +8,12 @@
      height:100%;
      z-index: 1000;
      background-color: rgba( 0, 0, 0, 0.5);
-     display: flex;
+     display: flex; display: -webkit-flex;
 }
 
 #overlay > div {
      width: 500px;
-     height: 450px;
+     height: 500px;
      margin: auto;
      background-color: rgb(255, 255, 255);
      padding: 25px 15px 15px 50px;
@@ -57,8 +57,7 @@
 
 #make_trip_content{
      display: none;
-     flex-direction: column;
-     /*padding-left: 20px;*/
+     flex-direction: column; -webkit-flex-direction: column;
 }
 
 #make_trip_content h5{
@@ -109,7 +108,7 @@
      height:100%;
      z-index: 1000;
      background-color: rgba( 0, 0, 0, 0.5);
-     display: flex;
+     display: flex; display: -webkit-flex;
 }
 
 #suggestion_modal > div {
@@ -129,8 +128,8 @@
 }
 
 #suggestion_input{
-     display: flex;
-     flex-direction: column;
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
 }
 
 #suggestion_input p{
@@ -166,7 +165,7 @@
      height:100%;
      z-index: 1000;
      background-color: rgba( 0, 0, 0, 0.5);
-     display: flex;
+     display: flex; display: -webkit-flex;
 }
 
 #category_modal > div {
@@ -192,8 +191,8 @@
 }
 
 #category_input{
-     display: flex;
-     flex-direction: column;
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
 }
 
 #category_input h3{
@@ -234,7 +233,7 @@
      height:100%;
      z-index: 1000;
      background-color: rgba( 0, 0, 0, 0.5);
-     display: flex;
+     display: flex; display: -webkit-flex;
 }
 
 #friend_modal > div {
@@ -260,8 +259,8 @@
 }
 
 #friend_input{
-     display: flex;
-     flex-direction: column;
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
 }
 
 #friend_modal h3{

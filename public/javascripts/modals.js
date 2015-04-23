@@ -18,13 +18,18 @@ current_trip_section.addEventListener('click', function(){
 
 //toggles view
 $('#add_trip').click(function(){
-  $('#trip_content').css('display', 'none');
-  $('#make_trip_content').css('display', 'flex')
+  // $('#trip_content').css('display', 'none');
+  $('#trip_content').hide();
+  // $('#make_trip_content').css('display', 'flex')
+  $('#make_trip_content').show();
 })
 
 $('#view_trips').click(function(){
-  $('#trip_content').css('display', 'inherit');
-  $('#make_trip_content').css('display', 'none')
+  // $('#trip_content').css('display', 'inherit');
+  $('#trip_content').show();
+  // $('#make_trip_content').css('display', 'none')
+  $('#make_trip_content').hide();
+
 })
 
 

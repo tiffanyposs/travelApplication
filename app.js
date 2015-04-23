@@ -1,4 +1,5 @@
 var express = require('express');
+
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -15,6 +16,32 @@ var MongoStore = require('connect-mongo')(session)
 
 
 
+
+var app = express();
+
+
+
+// Add headers
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var trips = require('./routes/trips');
@@ -25,10 +52,12 @@ var comments = require('./routes/comments');
 
 
 
+
+
+
 // mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
 mongoose.connect('mongodb://localhost/data/db', function(err) {
-// mongoose.connect('mongodb://data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -36,7 +65,7 @@ mongoose.connect('mongodb://localhost/data/db', function(err) {
     }
 });
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

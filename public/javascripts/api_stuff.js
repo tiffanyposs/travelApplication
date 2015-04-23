@@ -1,3 +1,5 @@
+
+
 //these track what is clicked on
 var current_url = document.URL;
 var current_user;
@@ -11,12 +13,12 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data)
+        console.log(data);
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
     }
   });
-}
+};
 
 getUser();
 
@@ -157,22 +159,7 @@ $('#trip_add').click(function(){
 })//end POST user trip info
 
 
-// Start Category section, refers to the clicked on trip
-//triggered when you click on a trip
-var getTripCategories = function(){
-    $.ajax({
-    url: current_url + 'categories/' + current_trip,
-    dataType: 'json',
-    success: function(data){
-      //removes old data
 
-        $('#categories').empty();
-        current_category = "";
-      //renders new data
-      getTripCategoryInfo(data)
-    }
-  });
-}
 
 
 var getTripCategoryInfo = function(data){
@@ -201,6 +188,25 @@ var getTripCategoryInfo = function(data){
             getSuggestions();
         })
     })
+}
+
+
+
+// Start Category section, refers to the clicked on trip
+//triggered when you click on a trip
+var getTripCategories = function(){
+    $.ajax({
+    url: current_url + 'categories/' + current_trip,
+    dataType: 'json',
+    success: function(data){
+      //removes old data
+
+        $('#categories').empty();
+        current_category = "";
+      //renders new data
+      getTripCategoryInfo(data)
+    }
+  });
 }
 
 
@@ -237,19 +243,11 @@ $('#category_submit').click(function(){
 })// end getting categories
 
 
-//triggered when you click on a trip
-var getSuggestions = function(){
-    $.ajax({
-    url: current_url + 'suggestions/' + current_category,
-    dataType: 'json',
-    success: function(data){
-      getSuggestionInfo(data)
-    }
-  });
-}
+
 
 
 var getSuggestionInfo = function(data){
+    console.log(data)
     data.forEach(function(suggestion){
         var suggestion_card = $('<div></div').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
@@ -317,6 +315,18 @@ var getSuggestionInfo = function(data){
 }
 
 
+//triggered when you click on a trip
+var getSuggestions = function(){
+    $.ajax({
+    url: current_url + 'suggestions/' + current_category,
+    dataType: 'json',
+    success: function(data){
+      getSuggestionInfo(data)
+    }
+    
+  });
+}
+
 
 
 // //this gets the last category posted in a group
@@ -343,9 +353,14 @@ $('#suggestion_submit').click(function(){
     user_id: current_user
   }
   $.ajax({
+    
     url: current_url + "suggestions",
     type: 'POST',
     data: formData,
+    // contentType : "text/plain",
+    // dataType : "text",
+    // contentType: "application/json; charset=utf-8",
+    // dataType: "json",
     success: function(data, textStatus, jqXHR)
       {
         $('#suggestion_input input').each(function(each){
@@ -355,6 +370,9 @@ $('#suggestion_submit').click(function(){
       }
   })
 })// end getting categories
+
+
+
 
 
 
@@ -437,4 +455,8 @@ $('#comment_submit').click(function(){
       }
   })
 })// end getting categories
+
+
+
+
 

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 html, body{
@@ -27,7 +28,7 @@ a{
 #heading_container{
 	width: 100%;
 	height: 12%;
-	display: flex;
+	display: flex; display: -webkit-flex;
 	background-color: #A8A8A8; 
 }
 
@@ -35,7 +36,7 @@ a{
 	background-color: #707070;
 	width: 15%;
 	height: 100%;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 #trip_container h1{
@@ -55,12 +56,12 @@ a{
 	width: 85%;
 	height: 100%;
 	color: #303030;
-	display: flex;
-	flex-direction: row-reverse;
+	display: flex; display: -webkit-flex;
+	flex-direction: row-reverse; -webkit-flex-direction: row-reverse;
 }
 
 #heading_nav ul{
-	display: flex;
+	display: flex; display: -webkit-flex;
 	margin-right: 30px;
 }
 
@@ -88,16 +89,16 @@ a{
 	width: 100%;
 	height: 88%;
 	background-color: #E0E0E0;
-	display: flex;
-	flex-wrap: wrap;
+	display: flex; display: -webkit-flex;
+	flex-wrap: wrap; -webkit-flex-wrap: wrap;
 }
 
 #main_container > nav{
 	width: 15%;
 	height: 100%;
 	background-color: purple;
-	display: flex;
-	flex-direction: column;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
 	display: inline-block;
 }
 
@@ -147,13 +148,13 @@ a{
 #calendar{
 	height: 25%;
 	background-color: #303030;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 
 #calendar img{
 	width: 100%;
-	align-self: center;
+	align-self: center; -webkit-align-self: center;
 }
 
 
@@ -162,12 +163,12 @@ a{
 	/*min-width: 500px;*/
 	height: 100%;
 	background-color: #C0C0C0;
-	display: flex;
-	flex-direction: column;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
 }
 
 #suggestion_header{
-	display: flex;
+	display: flex; display: -webkit-flex;
 	width: 100%;
 	height: 15%;
 	/*margin-bottom: 50px;*/
@@ -180,7 +181,7 @@ a{
 	font-size: 1.5em;
 	/*font-weight: bold;*/
 	font-style: italic;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 /*#suggestion_header span{
@@ -200,7 +201,7 @@ a{
 .suggestion_card{
 	background-color: grey;
 	height: 150px;
-	display: flex;
+	display: flex; display: -webkit-flex;
 	border-bottom: 2px solid white;
 	border-radius: 30px;
 	/*margin-bottom: 30px;*/
@@ -211,7 +212,7 @@ a{
 
 .suggestion_info{
 	height: 100%;
-	display: flex;
+	display: flex; display: -webkit-flex;
 	width: 70%;
 	/*background-color: red;*/
 }
@@ -241,12 +242,12 @@ a{
 }
 
 .suggestion_voting{
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 .suggestion_voting > div{
 	margin: auto 0 auto 0;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 .suggestion_voting > div > div{
@@ -283,26 +284,25 @@ a{
 	width: 40%;
 	/*background-color: #E0E0E0;*/
 	height: 100%;
-	display: flex;
-	flex-direction: column;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
 }
 
 #comment_suggestion{
 	width: 95%;
 	height: 200px;
 	background-color: white;
-	display: flex;
-	flex-direction: column;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
 	border-radius: 30px;
 	margin: 20px auto 20px auto;
 
 }
 
 #comment_suggestion_info{
-	display: flex;
-	justify-content: space-between;
+	display: flex; display: -webkit-flex;
+	justify-content: space-between; -webkit-justify-content: space-between;
 	width: 100%;
-
 	visibility: hidden;
 }
 
@@ -313,12 +313,12 @@ a{
 
 
 #comment_suggestion_content{
-	display: flex;
+	display: flex; display: -webkit-flex;
 	height: 80%;
 	padding: 10px;
 	/*margin: auto;*/
 	visibility: hidden;
-	align-items: center;
+	align-items: center; -webkit-align-items: center;
 }
 
 #comment_suggestion_content > :first-child{
@@ -358,15 +358,15 @@ a{
 #comment_suggestion_content > :nth-child(3){
 	width: 25%;
 	/*background-color: yellow;*/
-	display: flex;
-	align-items: center;
+	display: flex; display: -webkit-flex;
+	align-items: center; -webkit-align-items: center;
 }
 
 
 #comment_suggestion_content > :nth-child(3) div{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+	align-items: center; -webkit-align-items: center;
 	padding: 10px;
 }
 
@@ -395,7 +395,7 @@ a{
 	/*background-color: #e2e2e2;*/
 	width: 80%;
 	/*height: 150px;*/
-	display: flex;
+	display: flex; display: -webkit-flex;
 	margin: 0 auto 20px auto;
 	border-radius: 40px;
 	/*padding: 20px 0 20px 0;*/
@@ -405,7 +405,7 @@ a{
 
 .comment_card > :first-child{
 	width: 20%;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 .comment_card img{
@@ -417,7 +417,7 @@ a{
 
 .comment_card > :nth-child(2){
 	width: 85%;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 .comment_card > :nth-child(2) > div{
@@ -430,8 +430,8 @@ a{
 .comment_card > :nth-child(2) > div > div{
 	/*margin: auto;*/
 	/*padding: 10px;*/
-	display: flex;
-	justify-content: space-between;
+	display: flex; display: -webkit-flex;
+	justify-content: space-between; -webkit-justify-content: space-between;
 	padding-right: 20px;
 	margin-bottom: 10px;
 }
@@ -448,13 +448,13 @@ a{
 #comment_input{
 	height: 10%;
 	background-color: grey;
-	display: flex;
+	display: flex; display: -webkit-flex;
 }
 
 #comment_input div{
 	margin: auto;
-	display: flex;
-	align-items: center;
+	display: flex; display: -webkit-flex;
+	align-items: center; -webkit-align-items: center;
 
 }
 

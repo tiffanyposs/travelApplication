@@ -20,8 +20,8 @@
 	overflow: auto;
 	background-color: white;
 	padding: 15px;
-	display: flex;
-	flex-direction: column;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
 	height: 75%;
 }
 
@@ -37,9 +37,9 @@
 	border-radius: 20px;
 	margin-bottom: 30px; margin-left: 20px;
 	border-radius: 40px 0 40px 40px;
-	display: flex;
-	flex-direction: column;
-	flex-shrink: 0;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+	flex-shrink: 0; -webkit-flex-shrink: 0;
 }
 
 .chat_card_current{
@@ -49,14 +49,14 @@
 	padding: 30px;
 	border-radius: 40px 40px 40px 0;
 	margin-bottom: 30px; margin-right: 20px;
-	align-self: flex-end;
-	display: flex;
-	flex-direction: column;
-	flex-shrink: 0;
+	align-self: flex-end; -webkit-align-self: flex-end;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; column; -webkit-flex-direction: column;
+	flex-shrink: 0; -webkit-flex-shrink: 0;
 }
 
 #chat_input{
-	display: flex;
+	display: flex; display: -webkit-flex;
 	/*background-color: red;*/
 	height: 10%;
 }
