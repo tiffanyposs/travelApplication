@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 
 // GET /suggestions/:suggestion_id/one
 router.get('/:suggestion_id/one', function(req, res, next) {
-  var query = Suggestion.find({'_id' : req.params.suggestion_id});
+  var query = Suggestion.find({'_id' : req.params.suggestion_id}).populate('user_id');
   query.exec(function(err, suggestions){
     if (err) return handleError(err);
     res.json(suggestions)
