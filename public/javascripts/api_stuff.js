@@ -6,13 +6,33 @@ var current_trip;
 var current_category;
 var current_suggestion;
 
+var attendingTrips = function(trips){
+    var finaltrips = [];
+    var counter = 0;
+
+    trips.forEach(function(each){
+        // console.log(each.trip_id)
+
+        finaltrips.push(each.trip_id)
+        
+        if(finaltrips.length === trips.length){
+            userTripInfo(finaltrips)
+        }
+        counter++;
+    })
+
+}
+
+
 var getUser = function(){
     $.ajax({
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
+        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
+        attendingTrips(data.trips)
     }
   });
 };
@@ -22,11 +42,12 @@ getUser();
 
 //This renders the current user's trips
 var userTripInfo = function(data){
+    // console.log(data)
     //this sets the default of trip to the first one
     $('.trip_card_selected').attr('class', 'trip_card')
     var counter = 0;
     data.forEach(function(trip){
-        console.log(trip)
+        // console.log(trip)
 
         var trip_card = $('<ul></ul>');
         //selects the first trip in array
@@ -39,7 +60,7 @@ var userTripInfo = function(data){
         }
         counter++;
 
-          trip_card.attr('class', 'trip_card');
+        trip_card.attr('class', 'trip_card');
 
         trip_card.attr('id', trip._id);
         $( '#trip_list' ).prepend(trip_card)
@@ -49,7 +70,7 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description)
         trip_card.click(function(){
-
+            console.log(trip)
             // empty or hide existing content
             // $('#chat_container').hide();
             // $('#suggestions, #comments_container').show();
@@ -60,13 +81,34 @@ var userTripInfo = function(data){
             $('#comments').empty();
             current_suggestion = "";
 
-            console.log(trip.attending)
+            // console.log(trip)
 
             //this populates the friends
+            
+            // console.log(trip.attending)
             $('#friends').empty();
             trip.attending.forEach(function(friend){
-                $('#friends').prepend('<h2>' + friend.user_id.first_name + '</h2>')
+                // console.log(typeof friend.user_id)
+                console.log(friend)
+                if(typeof friend.user_id == "string"){
+                    console.log('string')
+                    $.ajax({
+                        url: current_url + 'users/' + friend.user_id,
+                        dataType: 'json',
+                        success: function(data){
+                            $('#friends').append('<h2>' + data.first_name + '</h2>')
+                        }
+                    });
+                    
+                }else{
+                    console.log('object')
+                    $('#friends').append('<h2>' + friend.user_id.first_name + '</h2>')
+
+                    
+                }
+                // $('#friends').prepend('<h2>' + friend.user_id.first_name + '</h2>')
             })
+
 
 
             // create cards
@@ -82,12 +124,12 @@ var userTripInfo = function(data){
 
     })
         $('.trip_card:first').click()
-        console.log(current_trip)
+        // console.log(current_trip)
 
 }
 
 
-//this gets the current user's trips then passes it to another function to render it
+//this gets the current user's trips they created then passes it to another function to render it
 var getUserTrips = function(){
     $.ajax({
     url: current_url + 'trips',
@@ -97,6 +139,7 @@ var getUserTrips = function(){
     }
   });
 }
+
 
 
 getUserTrips();
@@ -244,7 +287,7 @@ $('#category_submit').click(function(){
 
 
 var getSuggestionInfo = function(data){
-    console.log(data)
+    // console.log(data)
     data.forEach(function(suggestion){
         var suggestion_card = $('<div></div').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
@@ -291,7 +334,7 @@ var getSuggestionInfo = function(data){
 
 
             var createSuggestionCard = function(data){
-                console.log(data)
+                // console.log(data)
                 $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
 
                 $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.last_name);

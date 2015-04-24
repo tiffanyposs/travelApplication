@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-times');
+
 var Schema = mongoose.Schema;
 
 
@@ -16,6 +17,7 @@ var CommentSchema = new mongoose.Schema({
 });
 
 CommentSchema.plugin(timestamps);
+
 
 module.exports = mongoose.model('Comment', CommentSchema);
 

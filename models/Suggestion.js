@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-times');
+
 var Schema = mongoose.Schema;
 
 var SuggestionSchema = new mongoose.Schema({
@@ -29,5 +30,6 @@ var SuggestionSchema = new mongoose.Schema({
 });
 
 SuggestionSchema.plugin(timestamps);
+
 
 module.exports = mongoose.model('Suggestion', SuggestionSchema);

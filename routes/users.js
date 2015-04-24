@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 
 // /* GET /users/stuff */
 router.get('/stuff', function(req, res, next) {
-  var query = User.findById(req.session.user_id).populate('trips friends');
+  var query = User.findById(req.session.user_id).populate('trips.trip_id friends');
   query.select('username first_name last_name friends trips')
   query.exec(function (err, user) {
     if (err) return handleError(err);
@@ -63,13 +63,36 @@ router.get('/trips', function(req, res, next) {
 });
 
 
+
+/* PUT /users/addtrip/trip_id */
+router.put('/addtrip/:user_id', function(req, res, next) {
+  console.log(req.body)
+  User.findByIdAndUpdate(
+    req.params.user_id,
+    {$push: {"trips": req.body}},
+    function(err, trips) {
+        console.log(err);
+    }
+);
+});
+
 // // /* GET /users/id */
-// router.get('/:id', function(req, res, next) {
-//   User.findById(req.params.id, function (err, users) {
+// router.get('/:user_id', function(req, res, next) {
+//   User.findById(req.params.user_id, function (err, users) {
 //     if (err) return next(err);
 //     res.json(users);
 //   });
 // });
+
+
+router.get('/:user_id', function(req, res, next) {
+  var query = User.findById(req.params.user_id).populate('trips.trip_id friends');
+  query.select('username first_name last_name friends trips')
+  query.exec(function (err, user) {
+    if (err) return handleError(err);
+      res.json(user);
+  })
+});
 
 
 // POST users/signup

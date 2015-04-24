@@ -12,6 +12,7 @@ var bcrypt = require("bcrypt");
 
 var MongoStore = require('connect-mongo')(session)
 
+var deepPopulate = require('mongoose-deep-populate');
 
 
 

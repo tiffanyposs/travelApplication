@@ -4,7 +4,7 @@ var addFriend = function(foundfriend, data){
     var user = {
         user_id: foundfriend._id
     }
-    console.log(user)
+
     $.ajax({
             url: current_url + "trips/addfriend/" + data._id,
             type: 'PUT',
@@ -12,41 +12,47 @@ var addFriend = function(foundfriend, data){
             success: function(data){
                 console.log("Put Worked!")
 
+
             }
-    }); 
+    });
+
+    var trip = {
+        trip_id: current_trip
+    }
+
+    $.ajax({
+        url: current_url + 'users/addtrip/' + foundfriend._id,
+        type: 'PUT',
+        data: trip,
+        success: function(data){
+            console.log("Added to the user's trips")
+        }
+    })
+
+    //ads it to the 
+    $('#friends').prepend('<h2>' + foundfriend.first_name + '</h2>') 
 }
 
 
 
 var addFoundFriend = function(foundfriend){
-    console.log('add friends ' + foundfriend)
     $('#found_friend').click(function(){
-        // console.log(foundfriend._id)
+        // console.log(foundfriend)
         // console.log(current_trip)
     //checks if it is 
     $.ajax({
     url: current_url + 'trips/' + current_trip,
     dataType: 'json',
     success: function(data){
-        var friend_attending = false;
-        console.log(data)
+        attending_array = []
         data.attending.forEach(function(each){
-            if(each.user_id === foundfriend._id){
-                friend_attending = true;
-            }
-        });
-        if(data.created_by === found_friend._id){
-            friend_attending = true;
-        }
-        
-        if(friend_attending === false){
+            attending_array.push(each.user_id);
+        })
+        if(attending_array.indexOf(foundfriend._id) === -1){
             addFriend(foundfriend, data)
         }else{
             console.log('This friend is already added')
         }
-
-        // console.log(data)
-        // console.log(foundfriend)
     }
     });
 
@@ -55,25 +61,29 @@ var addFoundFriend = function(foundfriend){
 }
 
 
+var showFriend = function(data){
+        $('#found_friends').empty();
+        // userTripInfo(data)
+        if(data.length != 0){
+            // console.log(data);
+            var found = $('<p></p>').text('+ ' + data[0].first_name + ' ' + data[0].last_name);
+            found.attr('id', 'found_friend')
+            $('#found_friends').append(found)
+            addFoundFriend(data[0])
+        }else{
+            $('#found_friends').empty();
+            var not_found = $('<p></p>').text("Didn't find your friend")
+            $('#found_friends').append(not_found)
+        }
+}
+
 
 var getFriend = function(email){
     $.ajax({
     url: current_url + 'users/findfriend/' + email,
     dataType: 'json',
     success: function(data){
-        $('#found_friends').empty();
-        // userTripInfo(data)
-        if(data.length != 0){
-        	console.log(data);
-        	var found = $('<p></p>').text('+ ' + data[0].first_name + ' ' + data[0].last_name);
-            found.attr('id', 'found_friend')
-        	$('#found_friends').append(found)
-            addFoundFriend(data[0])
-        }else{
-            $('#found_friends').empty();
-        	var not_found = $('<p></p>').text("Didn't find your friend")
-        	$('#found_friends').append(not_found)
-        }
+        showFriend(data);
     }
   	});
 }
@@ -83,7 +93,7 @@ var getFriend = function(email){
 $('#find_friend_submit').click(function(){
     var email = $('#friend_email').val()
     $('#friend_email').val('')
-    console.log(email)
+    // console.log(email)
     getFriend(email)
 })
 

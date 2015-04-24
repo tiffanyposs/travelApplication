@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require("mongoose-times");
+
 var Schema = mongoose.Schema;
 
 var TripSchema = new Schema({
@@ -22,6 +23,7 @@ var TripSchema = new Schema({
 });
 
 TripSchema.plugin(timestamps);
+
 
 module.exports = mongoose.model('Trip', TripSchema);
 

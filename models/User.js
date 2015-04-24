@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require("mongoose-times");
+
 var Schema = mongoose.Schema;
 
 
@@ -11,8 +12,10 @@ var UserSchema = new Schema({
   password: String,
   image: String,
   trips: [{
+    trip_id: {
   	type: Schema.ObjectId,
   	ref: "Trip"
+    }
   }],
   friends: [{
   	type: Schema.ObjectId,
@@ -21,6 +24,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.plugin(timestamps);
+
 
 module.exports = mongoose.model('User', UserSchema);
 

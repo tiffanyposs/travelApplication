@@ -86,13 +86,7 @@ router.get('/:id', function(req, res, next){
 })
 })
 
-// /* GET /trips/id */
-// router.get('/:id', function(req, res, next) {
-//   Trip.findById(req.params.id, function (err, trips) {
-//     if (err) return next(err);
-//     res.json(trips);
-//   }).populate('users');
-// });
+
 
 
 
