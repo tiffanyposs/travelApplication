@@ -6,12 +6,12 @@ var Trip = require('../models/Trip.js');
 
 
 /* GET /tripss listing. */
-router.get('/all', function(req, res, next) {
-  Trip.find(function (err, trips) {
-    if (err) return next(err);
-    res.json(trips);
-  });
-});
+// router.get('/all', function(req, res, next) {
+//   Trip.find(function (err, trips) {
+//     if (err) return next(err);
+//     res.json(trips);
+//   });
+// });
 
 // GET /trips from user
 // router.get('/', function(req, res, next) {
@@ -77,9 +77,7 @@ router.put('/addfriend/:trip_id', function(req, res, next) {
 
 // GET /trips/:id
 router.get('/:id', function(req, res, next){
-  // var query = Trip.findById( req.params.id ).populate('created_by attending', 'first_name');
   var query = Trip.findById( req.params.id ).select('created_by attending');
-  // query.select('created_by location title');
   query.exec(function (err, trip) {
   if (err) return handleError(err);
     res.json(trip)

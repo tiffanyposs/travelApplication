@@ -11,10 +11,7 @@ var attendingTrips = function(trips){
     var counter = 0;
 
     trips.forEach(function(each){
-        // console.log(each.trip_id)
-
         finaltrips.push(each.trip_id)
-        
         if(finaltrips.length === trips.length){
             userTripInfo(finaltrips)
         }
@@ -29,7 +26,6 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         attendingTrips(data.trips)
@@ -40,14 +36,16 @@ var getUser = function(){
 getUser();
 
 
+
+
 //This renders the current user's trips
 var userTripInfo = function(data){
-    // console.log(data)
+    console.log(data)
     //this sets the default of trip to the first one
     $('.trip_card_selected').attr('class', 'trip_card')
     var counter = 0;
     data.forEach(function(trip){
-        // console.log(trip)
+        console.log(trip)
 
         var trip_card = $('<ul></ul>');
         //selects the first trip in array
@@ -70,10 +68,6 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description)
         trip_card.click(function(){
-            console.log(trip)
-            // empty or hide existing content
-            // $('#chat_container').hide();
-            // $('#suggestions, #comments_container').show();
             $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
             current_category = "";
             $('#categories').empty();
@@ -81,36 +75,35 @@ var userTripInfo = function(data){
             $('#comments').empty();
             current_suggestion = "";
 
-            // console.log(trip)
-
-            //this populates the friends
-            
-            // console.log(trip.attending)
             $('#friends').empty();
             trip.attending.forEach(function(friend){
-                // console.log(typeof friend.user_id)
-                console.log(friend)
                 if(typeof friend.user_id == "string"){
-                    console.log('string')
                     $.ajax({
                         url: current_url + 'users/' + friend.user_id,
                         dataType: 'json',
                         success: function(data){
-                            $('#friends').append('<h2>' + data.first_name + '</h2>')
+                            if(data._id != current_user){
+                                $('#friends').append('<h2>' + data.first_name + '</h2>');
+                            }
                         }
                     });
-                    
-                }else{
-                    console.log('object')
-                    $('#friends').append('<h2>' + friend.user_id.first_name + '</h2>')
 
-                    
+                }else{
+                    if( typeof friend.user_id == "object" ){
+                        $('#friends').append('<h2>' + friend.user_id.first_name + '</h2>');
+                    }
                 }
-                // $('#friends').prepend('<h2>' + friend.user_id.first_name + '</h2>')
             })
 
-
-
+            $.ajax({
+                url: current_url + 'users/' + trip.created_by,
+                dataType: 'json',
+                success: function(data){
+                    if(data._id != current_user){
+                        $('#friends').append('<h2>' + data.first_name + '</h2>');
+                    }
+                }
+            });
             // create cards
             $( '.trip_card_selected' ).attr('class', 'trip_card');
             $( this ).attr('class', 'trip_card_selected')
@@ -118,13 +111,11 @@ var userTripInfo = function(data){
             var trip_name = this.children[0].innerHTML;
             $('#current_trip').text(trip_name);
             $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
-            //calls to get the categories for selected trip
             getTripCategories()
         })
 
     })
         $('.trip_card:first').click()
-        // console.log(current_trip)
 
 }
 
@@ -176,7 +167,6 @@ $('#trip_add').click(function(){
       data: formData,
       success: function(data, textStatus, jqXHR)
         {
-        // calls to get the last trip
         getLastTrip();
 
         // this removes the content from the inputs
