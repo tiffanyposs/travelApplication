@@ -1,9 +1,5 @@
-* Safari, murder Apple
-* Fix Voting
 * Email send out to invite people to your trip
-
 * email capture mail chimp
-
 
 
 
@@ -25,7 +21,6 @@
 * Style Login Page
 * control when you can post
 * emails must be unique
-
 
 
 

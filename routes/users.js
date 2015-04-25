@@ -85,6 +85,9 @@ router.put('/addtrip/:user_id', function(req, res, next) {
 // });
 
 
+
+
+
 router.get('/:user_id', function(req, res, next) {
   var query = User.findById(req.params.user_id).populate('trips.trip_id friends');
   query.select('username first_name last_name friends trips')

@@ -74,10 +74,9 @@ router.put('/addfriend/:trip_id', function(req, res, next) {
 
 
 
-
 // GET /trips/:id
 router.get('/:id', function(req, res, next){
-  var query = Trip.findById( req.params.id ).select('created_by attending');
+  var query = Trip.findById( req.params.id );
   query.exec(function (err, trip) {
   if (err) return handleError(err);
     res.json(trip)

@@ -3,8 +3,8 @@ $('#group_chat').click(function(){
 console.log(current_trip)
 
 
-// var client = new WebSocket("ws://localhost:2000/" + current_trip);
-var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
+var client = new WebSocket("ws://localhost:2000/" + current_trip);
+// var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 console.log(client)
 //use this code when you're ready to host online
