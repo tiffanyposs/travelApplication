@@ -24,8 +24,8 @@ var app = express();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -55,9 +55,9 @@ var comments = require('./routes/comments');
 
 
 
-mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
-// mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -98,8 +98,8 @@ app.use(session({
   saveUninitialized: true,
   //new stuff
   store: new MongoStore({
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    url: 'mongodb://localhost/data/db'
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    // url: 'mongodb://localhost/data/db'
   })
 }));
 
@@ -112,7 +112,6 @@ app.use('/suggestions', suggestions);
 app.use('/comments', comments);
 
 
-console.log(session)
 
 //!!!!!!!!!!!!!
 //WEBSOCKET STUFF
@@ -121,8 +120,8 @@ var server = new WebSocketServer({port: 2000});
 var clients = [];
 
 server.on("connection", function(connection) {
-  console.log("Client connected!"); 
-  console.log(connection.upgradeReq.url)
+  // console.log("Client connected!"); 
+  // console.log(connection.upgradeReq.url)
   clients.push(connection);
   connection.on("close", function (){
     var x = clients.indexOf(connection);
@@ -133,7 +132,7 @@ server.on("connection", function(connection) {
     var msg = JSON.parse(message);
     clients.forEach(function(client){
         // client.send(msg);
-        console.log(client.upgradeReq.url)
+        // console.log(client.upgradeReq.url)
         if(client.upgradeReq.url === '/' + msg.trip_id){
           client.send(message)
         }

@@ -81,3 +81,19 @@ add_friend.addEventListener('click', function(){
     modal.style.visibility = "hidden";
   })
 });
+
+
+// comment modal
+var invite_friend = document.getElementById('invite_friends')
+invite_friend.addEventListener('click', function(){
+  var modal = document.getElementById('invite_modal');
+  if(modal.style.visibility === "visible"){
+    modal.style.visibility = "hidden";
+  }else{
+    modal.style.visibility = "visible";
+  }
+  var invite_close = document.getElementById('invite_close')
+  invite_close.addEventListener('click', function(){
+    modal.style.visibility = "hidden";
+  })
+});

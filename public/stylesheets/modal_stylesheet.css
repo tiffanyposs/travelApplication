@@ -223,7 +223,7 @@
 
 
 
-/*comment modal*/
+/*friend modal*/
 #friend_modal {
      visibility: hidden;
      position: absolute;
@@ -291,4 +291,56 @@
 #found_friends{
      width: 400px;
      height: 200px;
+}
+
+
+
+
+
+/*comment modal*/
+#invite_modal {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 1000;
+     background-color: rgba( 0, 0, 0, 0.5);
+     display: flex; display: -webkit-flex;
+}
+
+#invite_modal > div {
+     width: 750px;
+     height: 300px;
+     margin: auto;
+     background-color: rgb(255, 255, 255);
+     padding:30px 40px 15px 50px;
+     cursor: default;
+}
+
+
+#invite_modal h2{
+     font-size: 2em;
+     margin-bottom: 50px;
+     font-weight: bold;
+}
+
+#invite_modal h3{
+     font-size: 1em;
+     margin-bottom: 50px;
+     font-weight: bold;
+}
+
+#invite_modal a{
+     color: blue;
+     /*cursor: text;*/
+}
+
+#invite_close{
+     position: relative;
+     float: right;
+     border: none;
+     background-color: white;
+     font-weight: bold;
 }

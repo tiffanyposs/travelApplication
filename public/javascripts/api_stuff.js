@@ -76,10 +76,11 @@ var userTripInfo = function(data){
             $('#suggestion_content').empty();
             $('#comments').empty();
             current_suggestion = "";
+            current_trip = $(this).attr('id');
 
-            console.log(this.id)
-
-
+            // THIS SETS THE INVITE MODAL TO HAVE THE CORRECT LINK
+            var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
+            $('#invite_url').text(invite_url).attr('href', invite_url)
 
             var makeFriends = function(trip){
             $('#friends').empty();
@@ -103,12 +104,12 @@ var userTripInfo = function(data){
             })
 
             }
-
+            //call to get the most updated friends
               $.ajax({
                 url: current_url + 'trips/' + this.id,
                 dataType: 'json',
                 success: function(data){
-                    console.log(data)
+                    // console.log(data)
                     makeFriends(data)
 
                 }
@@ -117,7 +118,7 @@ var userTripInfo = function(data){
             // create cards
             $( '.trip_card_selected' ).attr('class', 'trip_card');
             $( this ).attr('class', 'trip_card_selected')
-            current_trip = $(this).attr('id');
+            
             var trip_name = this.children[0].innerHTML;
             $('#current_trip').text(trip_name);
             $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
@@ -156,13 +157,13 @@ var getLastTrip = function(){
     url: current_url + 'trips/last',
     dataType: 'json',
     success: function(data){
-        console.log(data)
+        // console.log(data)
         if(data[0].attending.length === 0){
             updateAttending(data)
         }else if(data[0].attending.length > 0){
             userTripInfo(data);
         }else{
-            console.log('else')
+            // console.log('else')
         }
     }
   });  
@@ -175,7 +176,7 @@ var updateAttending = function(data){
     var user = {
         user_id: current_user
     }
-    console.log('updateAttending')
+    // console.log('updateAttending')
     // adds person to the friend list in trips
     $.ajax({
             url: current_url + "trips/addfriend/" + data[0]._id,

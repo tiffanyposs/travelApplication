@@ -52,6 +52,7 @@ router.get('/findfriend/:email', function(req, res, next) {
 
 
 
+
 // GET users/trips
 // gets all the user's trips
 router.get('/trips', function(req, res, next) {
@@ -133,7 +134,6 @@ router.post('/session', function(req, res){
     if(user){
       var passwordMatches = bcrypt.compareSync(password, user.password);
     }if(passwordMatches){
-      // console.log(req.session)
       req.session.valid_user = true;
       req.session.user_id = user._id;
       res.redirect('/')
