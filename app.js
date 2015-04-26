@@ -98,8 +98,8 @@ app.use(session({
   saveUninitialized: true,
   //new stuff
   store: new MongoStore({
-    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    // url: 'mongodb://localhost/data/db'
+    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    url: 'mongodb://localhost/data/db'
   })
 }));
 
@@ -112,6 +112,7 @@ app.use('/suggestions', suggestions);
 app.use('/comments', comments);
 
 
+console.log(session)
 
 //!!!!!!!!!!!!!
 //WEBSOCKET STUFF
@@ -120,8 +121,8 @@ var server = new WebSocketServer({port: 2000});
 var clients = [];
 
 server.on("connection", function(connection) {
-  // console.log("Client connected!"); 
-  // console.log(connection.upgradeReq.url)
+  console.log("Client connected!"); 
+  console.log(connection.upgradeReq.url)
   clients.push(connection);
   connection.on("close", function (){
     var x = clients.indexOf(connection);
@@ -132,7 +133,7 @@ server.on("connection", function(connection) {
     var msg = JSON.parse(message);
     clients.forEach(function(client){
         // client.send(msg);
-        // console.log(client.upgradeReq.url)
+        console.log(client.upgradeReq.url)
         if(client.upgradeReq.url === '/' + msg.trip_id){
           client.send(message)
         }
@@ -181,5 +182,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(3000)
-// app.listen(80)
+// app.listen(3000)
+app.listen(80)
