@@ -68,7 +68,7 @@ var userTripInfo = function(data){
         var location = $('<li></li>').text(trip.location);
         var duration = $('<li></li>').text(trip.duration);
         var description = $('<li></li>').text(trip.description);
-        trip_card.append(title, location, duration, description)
+        trip_card.append(title, location, duration, description);
         trip_card.click(function(){
             $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
             current_category = "";
@@ -122,12 +122,19 @@ var userTripInfo = function(data){
             var trip_name = this.children[0].innerHTML;
             $('#current_trip').text(trip_name);
             $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
+            // $('#chat_container').hide();
+            // $('#suggestions, #comments_container').show();
+            $('#chat_container').hide('slow', function(){
+                    $('#suggestions, #comments_container').show('slow');
+            });
+            $('.group_clicked').attr('class', '');
 
             getTripCategories()
         })
 
     })
         $('.trip_card:first').click()
+
 
 }
 
@@ -253,6 +260,8 @@ var getTripCategoryInfo = function(data){
         category_name.attr('id', category._id);
         $( '#categories' ).append(category_name);
 
+        // $( '#categories' ).append(category_name).hide().show('slow');
+
         category_name.click(function(){
             $('#suggestion_content').empty();
             $('#comments').empty();
@@ -267,7 +276,7 @@ var getTripCategoryInfo = function(data){
             $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
 
 
-            $('.nav_clicked').attr('class', '');
+            $('.nav_clicked, .group_clicked').attr('class', '');
             $(this).attr('class', 'nav_clicked');
             current_category = $(this).attr('id');
             getSuggestions();
@@ -367,7 +376,8 @@ var getSuggestionInfo = function(data){
         inside_voting.append(up_vote_div, down_vote_div)
 
         suggestion_card.append(suggestion_info, suggestion_voting);
-        $('#suggestion_content').prepend(suggestion_card)
+        $('#suggestion_content').append(suggestion_card)
+        // $('#suggestion_content').append(suggestion_card).hide().show('easeInOutQuint')
 
         suggestion_card.click(function(){
             $('#comments').empty();

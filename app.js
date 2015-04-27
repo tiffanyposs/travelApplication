@@ -24,8 +24,8 @@ var app = express();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -49,15 +49,15 @@ var categories = require('./routes/categories');
 var suggestions = require('./routes/suggestions');
 var comments = require('./routes/comments');
 
+var chats = require('./routes/chats')
 
 
 
 
 
-
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -98,8 +98,8 @@ app.use(session({
   saveUninitialized: true,
   //new stuff
   store: new MongoStore({
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    url: 'mongodb://localhost/data/db'
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    // url: 'mongodb://localhost/data/db'
   })
 }));
 
@@ -111,39 +111,41 @@ app.use('/categories', categories);
 app.use('/suggestions', suggestions);
 app.use('/comments', comments);
 
+app.use('/chats', chats)
+
 
 console.log(session)
 
-//!!!!!!!!!!!!!
-//WEBSOCKET STUFF
-var WebSocketServer = require("ws").Server;
-var server = new WebSocketServer({port: 2000});
-var clients = [];
+// //!!!!!!!!!!!!!
+// //WEBSOCKET STUFF
+// var WebSocketServer = require("ws").Server;
+// var server = new WebSocketServer({port: 2000});
+// var clients = [];
 
-server.on("connection", function(connection) {
-  console.log("Client connected!"); 
-  console.log(connection.upgradeReq.url)
-  clients.push(connection);
-  connection.on("close", function (){
-    var x = clients.indexOf(connection);
-    clients.splice(x, 1); 
-  });
-  connection.on("message", function(message){
-    console.log(message)
-    var msg = JSON.parse(message);
-    clients.forEach(function(client){
-        // client.send(msg);
-        console.log(client.upgradeReq.url)
-        if(client.upgradeReq.url === '/' + msg.trip_id){
-          client.send(message)
-        }
-      });
-  // connection.send(message)
+// server.on("connection", function(connection) {
+//   console.log("Client connected!"); 
+//   console.log(connection.upgradeReq.url)
+//   clients.push(connection);
+//   connection.on("close", function (){
+//     var x = clients.indexOf(connection);
+//     clients.splice(x, 1); 
+//   });
+//   connection.on("message", function(message){
+//     console.log(message)
+//     var msg = JSON.parse(message);
+//     clients.forEach(function(client){
+//         // client.send(msg);
+//         console.log(client.upgradeReq.url)
+//         if(client.upgradeReq.url === '/' + msg.trip_id){
+//           client.send(message)
+//         }
+//       });
+//   // connection.send(message)
 
-  });
-});
+//   });
+// });
 
-//!!!!!!!!!!!!
+// //!!!!!!!!!!!!
 
 
 
@@ -182,5 +184,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// app.listen(3000)
-app.listen(80)
+app.listen(3000)
+// app.listen(80)

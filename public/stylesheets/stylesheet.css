@@ -114,8 +114,9 @@ a{
 
 #main_nav h1{
 	font-size: 1.25em;
-	margin-left: 5px;
-	padding: 20px 0 0 15px;
+	/*margin-left: 5px;*/
+	margin: 10px 5px 0 15px;
+	padding: 10px 5px 10px 5px;
 	font-weight: bold;
 }
 
@@ -142,6 +143,8 @@ a{
 	border-radius: 30px;
 	width: 90%;
 }
+
+
 
 
 
