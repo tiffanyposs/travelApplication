@@ -205,7 +205,8 @@ a{
 	background-color: grey;
 	height: 150px;
 	display: flex; display: -webkit-flex;
-	border-bottom: 2px solid white;
+	/*border-bottom: 2px solid #4C4646;*/
+	/*box-shadow: 10px 10px 5px #4C4646;*/
 	border-radius: 30px;
 	/*margin-bottom: 30px;*/
 	width: 80%;
@@ -260,6 +261,18 @@ a{
 .suggestion_voting h2{
 	padding: 7px;
 	font-size: 1.25em;
+}
+
+
+.suggestion_pencil{
+	/*color: hotpink;*/
+	color: #4C4646;
+	width: 15%;
+	display: flex; display: -webkit-flex;
+}
+
+.suggestion_pencil > span{
+	margin: 20px auto 0 auto;
 }
 
 

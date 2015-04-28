@@ -55,9 +55,9 @@ var chats = require('./routes/chats')
 
 
 
-mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
-// mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -98,8 +98,8 @@ app.use(session({
   saveUninitialized: true,
   //new stuff
   store: new MongoStore({
-    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    // url: 'mongodb://localhost/data/db'
+    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    url: 'mongodb://localhost/data/db'
   })
 }));
 

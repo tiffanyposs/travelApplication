@@ -269,7 +269,7 @@ var getTripCategoryInfo = function(data){
             //this toggles the chat
             $('#chat_container').hide('slow', function(){
                 $('#suggestions, #comments_container').show('slow');
-            });
+            }); 
             
 
             current_suggestion = "";
@@ -343,9 +343,11 @@ $('#category_submit').click(function(){
 var getSuggestionInfo = function(data){
     // console.log(data)
     data.forEach(function(suggestion){
-        var suggestion_card = $('<div></div').attr('class', 'suggestion_card')
+        
+
+        var suggestion_card = $('<div></div>').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
-        var suggestion_info = $('<div></div').attr('class', 'suggestion_info')
+        var suggestion_info = $('<div></div>').attr('class', 'suggestion_info')
         
 
         var content_div = $('<div></div>');
@@ -371,11 +373,13 @@ var getSuggestionInfo = function(data){
         var down_count = $('<h2></h2>').text(suggestion.downvote.length).attr('class', 'suggestion_downvote_count')
         down_vote_div.append(down_span, down_count)
 
-
+        var edit_div = $('<div></div>').attr('class', 'suggestion_pencil')
+        var edit = $('<span></span>').attr('class', 'fa fa-pencil fa-lg')
+        edit_div.append(edit)
 
         inside_voting.append(up_vote_div, down_vote_div)
 
-        suggestion_card.append(suggestion_info, suggestion_voting);
+        suggestion_card.append(suggestion_info, suggestion_voting, edit_div);
         $('#suggestion_content').append(suggestion_card)
         // $('#suggestion_content').append(suggestion_card).hide().show('easeInOutQuint')
 
