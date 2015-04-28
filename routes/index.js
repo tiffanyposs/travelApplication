@@ -85,9 +85,8 @@ router.post('/invite/:trip_id/signup', function(req, res){
 router.post('/invite/:trip_id/session', function(req, res){
   var email = req.body.email;
   var password = req.body.password;
-  var query = User.findOne({ 'email': email }).select('email _id password');
+  var query = User.findOne({ 'email': email }).select('email _id password trips');
   query.exec(function (err, user) {
-
     if (err) return handleError(err);
     if(user){
       var passwordMatches = bcrypt.compareSync(password, user.password);
@@ -95,19 +94,21 @@ router.post('/invite/:trip_id/session', function(req, res){
       req.session.valid_user = true;
       req.session.user_id = user._id;
 
+      	var addTrips = function(){
 
 	    var makeTrip = function(){
-		    var user = {
-		        user_id: req.session.user_id
+	    var user = {
+	        user_id: req.session.user_id
+	    }
+
+		Trip.findByIdAndUpdate(
+		    req.params.trip_id,
+		    {$push: {"attending": user}},
+		    function(err, trips) {
 		    }
-		    console.log(user)
-			Trip.findByIdAndUpdate(
-			    req.params.trip_id,
-			    {$push: {"attending": user}},
-			    function(err, trips) {
-			    }
-			);
-		}
+		);
+
+		}//end makeTrip
 
 		var trip = {
 			trip_id: req.params.trip_id
@@ -120,9 +121,31 @@ router.post('/invite/:trip_id/session', function(req, res){
 		    	makeTrip();
 		    }
 		);
+      	res.redirect('/')
+  		}//end addTrips
 
-      res.redirect('/')
+  		if(user.trips.length === 0){
+  			addTrips()
+  		}else{
+  			var trip_exists = false;
+  			user.trips.forEach(function(each, index){
+  				if(each.trip_id == req.params.trip_id){
+  					console.log('found it!');
+  					trip_exists = true;
+  				}
+  				if(index === user.trips.length - 1){
+  					if(trip_exists === false){
+  						console.log('adding trip')
+  						addTrips();
+  					}else{
+  						console.log('not adding trip')
+  						res.redirect('/')
+  					}
+  				}
+  			})
+  		}
     }else{
+    	// console.log('else')
       res.redirect('/login')
     }
   })
@@ -134,8 +157,8 @@ router.post('/invite/:trip_id/session', function(req, res){
 //this is for people to invite people to their site
 // /invite/:trip_id/:user_id
 router.get('/invite/:trip_id/:user_id', function(req, res, next) {
-  var the_trip = Trip.findById(req.params.trip_id);
-  var the_user = User.findById(req.params.user_id);
+  var the_trip = Trip.findById(req.params.trip_id).select('trip');
+  var the_user = User.findById(req.params.user_id).select('first_name last_name');
   the_user.exec(function(err, user){
   	if (err) return handleError(err);
 	  the_trip.exec(function(err, trip){

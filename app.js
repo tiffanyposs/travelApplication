@@ -24,7 +24,8 @@ var app = express();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
 
     // Request methods you wish to allow
@@ -116,36 +117,6 @@ app.use('/chats', chats)
 
 console.log(session)
 
-// //!!!!!!!!!!!!!
-// //WEBSOCKET STUFF
-// var WebSocketServer = require("ws").Server;
-// var server = new WebSocketServer({port: 2000});
-// var clients = [];
-
-// server.on("connection", function(connection) {
-//   console.log("Client connected!"); 
-//   console.log(connection.upgradeReq.url)
-//   clients.push(connection);
-//   connection.on("close", function (){
-//     var x = clients.indexOf(connection);
-//     clients.splice(x, 1); 
-//   });
-//   connection.on("message", function(message){
-//     console.log(message)
-//     var msg = JSON.parse(message);
-//     clients.forEach(function(client){
-//         // client.send(msg);
-//         console.log(client.upgradeReq.url)
-//         if(client.upgradeReq.url === '/' + msg.trip_id){
-//           client.send(message)
-//         }
-//       });
-//   // connection.send(message)
-
-//   });
-// });
-
-// //!!!!!!!!!!!!
 
 
 

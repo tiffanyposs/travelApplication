@@ -89,7 +89,7 @@ nohup mongod --dbpath=/data/db --port 27017 &
 This Runs the website
 
 ```
-nohup node app.js &
+
 nohup nodemon app.js &
 
 ```
