@@ -7,8 +7,9 @@ $('#group_chat').click(function(){
 
 
 $('#chat').empty();
-var client = new WebSocket("ws://localhost:2000/" + current_trip);
+// var client = new WebSocket("ws://localhost:2000/" + current_trip);
 
+var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 // var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
