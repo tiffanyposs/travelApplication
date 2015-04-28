@@ -373,9 +373,10 @@ var getSuggestionInfo = function(data){
         var down_count = $('<h2></h2>').text(suggestion.downvote.length).attr('class', 'suggestion_downvote_count')
         down_vote_div.append(down_span, down_count)
 
-        var edit_div = $('<div></div>').attr('class', 'suggestion_pencil')
-        var edit = $('<span></span>').attr('class', 'fa fa-pencil fa-lg')
-        edit_div.append(edit)
+        //this is the editing pencil
+        // var edit_div = $('<div></div>').attr('class', 'suggestion_pencil')
+        // var edit = $('<span></span>').attr('class', 'fa fa-pencil fa-lg')
+        // edit_div.append(edit)
 
         inside_voting.append(up_vote_div, down_vote_div)
 

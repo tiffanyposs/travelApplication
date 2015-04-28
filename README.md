@@ -82,6 +82,8 @@ This runs mongodb in background ()
 nohup mongod --dbpath=/data/db --port 27017 &
 
 
+mongod --dbpath /data/db --port 27017
+
 
 ```
 
