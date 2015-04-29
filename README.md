@@ -56,15 +56,13 @@ mongod --dbpath /Users/tiffany_poss/Desktop/TravelTest/data/db
 ```
 
 
-###Digital Ocean Notes
+###Digital Ocean Production Server
 
 ```
 ssh root@104.131.57.112
 
 ```
-
 This changes it to be able to run the code node instead of nodejs
-
 
 ```
 ln -s /usr/bin/nodejs /usr/bin/node
@@ -76,13 +74,7 @@ ln -s /usr/bin/nodejs /usr/bin/node
 This runs mongodb in background ()
 
 ```
-
-
-
 nohup mongod --dbpath=/data/db --port 27017 &
-
-
-
 
 ```
 
@@ -93,6 +85,16 @@ This Runs the website
 nohup nodemon app.js &
 
 ```
+
+
+
+###Digital Ocean Production Server
+
+ssh root@45.55.221.131
+
+nohup mongod --dbpath=/data/db --port 27017 &
+
+nohup node app.js &
 
 #####Other Notes
 

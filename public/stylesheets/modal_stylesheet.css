@@ -344,3 +344,114 @@
      background-color: white;
      font-weight: bold;
 }
+
+
+
+
+
+/*suggestion modal*/
+#edit_modal {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 1000;
+     background-color: rgba( 0, 0, 0, 0.5);
+     display: flex; display: -webkit-flex;
+}
+
+#edit_modal > div {
+     width: 500px;
+     height: 500px;
+     margin: auto;
+     background-color: rgb(255, 255, 255);
+     padding:30px 40px 15px 50px;
+}
+
+
+
+
+#edit_modal h3{
+     font-size: 1.5em;
+     margin-bottom: 30px;
+}
+
+#edit_input{
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
+}
+
+#edit_input p{
+     margin-bottom: 15px;
+}
+
+#edit_input input{
+     width: 300px;
+     font-size: 1.25em;
+     margin-bottom: 25px;
+}
+
+
+#edit_close{
+     position: relative;
+     float: right;
+     border: none;
+     background-color: white;
+     font-weight: bold;
+}
+
+
+
+
+
+/*suggestion modal*/
+#edit_comment_modal {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 1000;
+     background-color: rgba( 0, 0, 0, 0.5);
+     display: flex; display: -webkit-flex;
+}
+
+#edit_comment_modal > div {
+     width: 500px;
+     height: 500px;
+     margin: auto;
+     background-color: rgb(255, 255, 255);
+     padding:30px 40px 15px 50px;
+}
+
+#edit_comment_modal h3{
+     font-size: 1.5em;
+     margin-bottom: 30px;
+}
+
+#comment_edit_input{
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
+}
+
+#comment_edit_input p{
+     margin-bottom: 15px;
+}
+
+#comment_edit_input input{
+     width: 300px;
+     font-size: 1.25em;
+     margin-bottom: 25px;
+}
+
+
+#edit_comment_close{
+     position: relative;
+     float: right;
+     border: none;
+     background-color: white;
+     font-weight: bold;
+}

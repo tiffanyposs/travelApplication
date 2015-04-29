@@ -63,11 +63,6 @@ router.get('/:suggestion_id/votes', function(req, res, next){
 
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/:suggestion_id/upvote', function(req, res, next) {
-  // var query = Suggestion.findById(req.params.suggestion_id, 'upvote')
-  // query.exec(function(err, suggestions){
-  //   if (err) return handleError(err);
-  //   console.log(suggestions)
-  // })
   Suggestion.findByIdAndUpdate(
     req.params.suggestion_id,
     {$push: {"upvote": req.body}},
@@ -90,9 +85,21 @@ router.put('/:suggestion_id/downvote', function(req, res, next) {
 });
 
 
+/* PUT /suggestions/:suggestion_id/downvote */
+router.put('/:suggestion_id/update', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion_id,
+    {$set: req.body},
+    function(err, suggestion) {
+        console.log(suggestion);
+    }
+);
+});
 
-
-
+// Tank.findByIdAndUpdate(id, { $set: { size: 'large' }}, function (err, tank) {
+//   if (err) return handleError(err);
+//   res.send(tank);
+// });
 
 // Place.findById(req.params.id, function(err, p) {
 //   if (!p)

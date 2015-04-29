@@ -264,15 +264,21 @@ a{
 }
 
 
-.suggestion_pencil{
-	/*color: hotpink;*/
+.edit_div{
 	color: #4C4646;
 	width: 15%;
 	display: flex; display: -webkit-flex;
+
+	
 }
 
-.suggestion_pencil > span{
+
+
+
+.suggestion_pencil{
 	margin: 20px auto 0 auto;
+	/*background-color: red;*/
+	/*visibility: hidden;*/
 }
 
 
@@ -419,7 +425,7 @@ a{
 }
 
 .comment_card > :first-child{
-	width: 20%;
+	width: 15%;
 	display: flex; display: -webkit-flex;
 }
 
@@ -431,7 +437,7 @@ a{
 }
 
 .comment_card > :nth-child(2){
-	width: 85%;
+	width: 80%;
 	display: flex; display: -webkit-flex;
 }
 
@@ -493,4 +499,9 @@ a{
 	width: 50px;
 	border: 2px solid white;
 
+}
+
+
+.comment_pencil{
+	color: grey;
 }

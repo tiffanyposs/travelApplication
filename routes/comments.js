@@ -43,6 +43,19 @@ router.get('/:suggestion_id/last', function(req, res, next) {
 });
 
 
+
+router.put('/:comment_id/update', function(req, res, next) {
+  Comment.findByIdAndUpdate(
+    req.params.comment_id,
+    {$set: req.body},
+    function(err, comment) {
+        // console.log(comment);
+    }
+);
+});
+
+
+
 // /* PUT /todos/:id */
 // router.put('/:id', function(req, res, next) {
 //   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, categories) {

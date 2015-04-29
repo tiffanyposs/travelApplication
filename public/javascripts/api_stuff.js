@@ -5,6 +5,7 @@ var current_user_name;
 var current_trip;
 var current_category;
 var current_suggestion;
+var current_comment;
 
 
 var attendingTrips = function(trips){
@@ -50,9 +51,7 @@ var userTripInfo = function(data){
         console.log(trip)
 
         var trip_card = $('<ul></ul>');
-        //selects the first trip in array
         if(counter === data.length - 1){
-          // trip_card.attr('class', 'trip_card_selected')
 
         $('#current_trip').text(trip.title);
         current_trip = trip._id;
@@ -164,7 +163,6 @@ var getLastTrip = function(){
     url: current_url + 'trips/last',
     dataType: 'json',
     success: function(data){
-        // console.log(data)
         if(data[0].attending.length === 0){
             updateAttending(data)
         }else if(data[0].attending.length > 0){
@@ -195,7 +193,6 @@ var updateAttending = function(data){
     var trip = {
         trip_id: data[0]._id
     }
-
     //adds trip to person's trips
     $.ajax({
             url: current_url + "users/addtrip/" + current_user,
@@ -203,8 +200,6 @@ var updateAttending = function(data){
             data: trip,
             timeout: 15000,
     });
-
-
     getLastTrip();
 }
 
@@ -351,9 +346,10 @@ var getSuggestionInfo = function(data){
         
 
         var content_div = $('<div></div>');
-        var title = $('<h1></h1>').text(suggestion.title);
+        var title = $('<h1></h1>').text(suggestion.title).attr('class', 'title');
         var created_by = $('<h2></h2>').text("by: " + suggestion.user_id.first_name + " " + suggestion.user_id.last_name);
-        var date = $('<h3></h3>').text(suggestion.created.substring(0, 10));
+        created_by.attr('class', 'created_by')
+        var date = $('<h3></h3>').text(suggestion.created.substring(0, 10)).attr('class', 'date');
 
         content_div.append(title, created_by, date)
         suggestion_info.append(content_div)
@@ -374,15 +370,75 @@ var getSuggestionInfo = function(data){
         down_vote_div.append(down_span, down_count)
 
         //this is the editing pencil
-        // var edit_div = $('<div></div>').attr('class', 'suggestion_pencil')
-        // var edit = $('<span></span>').attr('class', 'fa fa-pencil fa-lg')
-        // edit_div.append(edit)
+        if(suggestion.user_id._id === current_user){
+            var edit_div = $('<div></div>').attr('class', 'edit_div')
+            var edit = $('<span></span>').attr('class', 'suggestion_pencil fa fa-pencil fa-lg').hide();
+            edit_div.append(edit)
+ 
+        //this shows the pencil on hover
+        suggestion_card.hover(
+            function(){
+                var $pencil = $( this ).find('.suggestion_pencil').show('fade', 100);
+                    $pencil.click(function(event){
+                        console.log('its working!')
+                        // event.stopPropagation();
+                    })
+            }, function(){
+                var $pencil = $( this ).find('.suggestion_pencil').hide('fade', 100);
+        })
+
+
+        //this is for updating a suggestion
+        $('#suggestion_edit').click(function(){
+            var edit_title = $('#edit_title').val();
+            var edit_about = $('#edit_about').val();
+            var edit_link = $('#edit_link').val();
+            // if(edit_title)
+
+            console.log(this)
+
+            var suggestion_update = {
+                title: edit_title,
+                content: edit_about,
+                link: edit_link
+            }
+
+              $.ajax({
+                url: current_url + 'suggestions/' + current_suggestion + '/update',
+                type: 'PUT',
+                data: suggestion_update,
+                dataType: 'json',
+                success: function(data){
+                    console.log('it worked!')
+                }
+                // contentType: type
+              });
+              $('#' + current_suggestion).find('.title').text(edit_title)
+
+        });
+
+
+        edit.click(function(event){
+            $('#edit_title').val(suggestion.title)
+            $('#edit_about').val(suggestion.content)
+            $('#edit_link').val(suggestion.link)
+          // console.log('clicked')
+          $('#edit_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+        })
+
+        $('#edit_close').click(function(event){
+          $('#edit_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+            function(){
+              $(this).css('visibility', 'hidden')
+            });
+        })
+
+        }
 
         inside_voting.append(up_vote_div, down_vote_div)
 
         suggestion_card.append(suggestion_info, suggestion_voting, edit_div);
         $('#suggestion_content').append(suggestion_card)
-        // $('#suggestion_content').append(suggestion_card).hide().show('easeInOutQuint')
 
         suggestion_card.click(function(){
             $('#comments').empty();
@@ -427,24 +483,6 @@ var getSuggestionInfo = function(data){
             }
 
             getSuggestion();
-            // $('#downvote').click(function(){
-            //     var array = [];
-            //     suggestion.downvote.forEach(function(each){
-            //         array.push(each.user_id);
-            //     });
-            //     if(array.indexOf(current_user) === -1){
-            //         suggestion.downvote.push(current_user)
-            //     }
-            // })
-            // $('#upvote').click(function(){
-            //     var array = [];
-            //     suggestion.upvote.forEach(function(each){
-            //         array.push(each.user_id);
-            //     });
-            //     if(array.indexOf(current_user) === -1){
-            //         suggestion.upvote.push(current_user)
-            //     }
-            // })
             getComments();
 
         })
@@ -496,10 +534,6 @@ $('#suggestion_submit').click(function(){
     url: current_url + "suggestions",
     type: 'POST',
     data: formData,
-    // contentType : "text/plain",
-    // dataType : "text",
-    // contentType: "application/json; charset=utf-8",
-    // dataType: "json",
     success: function(data, textStatus, jqXHR)
       {
         $('#suggestion_input input').each(function(each){
@@ -534,6 +568,7 @@ var getComments = function(){
 
 var getCommentInfo = function(data){
     data.forEach(function(comment){
+        console.log(comment._id)
         var comment_card = $('<div></div').attr('class', 'comment_card');
 
         var image_div = $('<div></div>');
@@ -545,17 +580,83 @@ var getCommentInfo = function(data){
 
         var date_container = $('<div></div>');
         var name = $('<h2></h2>').text(comment.user_id.first_name + " " + comment.user_id.last_name);
-        var date = $('<h2></h2').text(comment.created.substring(0, 10))
-        date_container.append(name, date);
+        // var date = $('<h2></h2').text(comment.created.substring(0, 10))
+        date_container.append(name)//, date);
 
         var content = $('<h3></h3>').text(comment.content);
+        content.attr('class', comment._id)
+
+
+
+        //this is for the pencil
+        if(comment.user_id._id === current_user){
+            var edit_div = $('<div></div>').attr('class', 'edit_comment')
+            var edit = $('<span></span>').attr('class', 'comment_pencil fa fa-pencil fa-lg').hide();
+            edit.attr('id', comment._id)
+            edit_div.append(edit)
+        }
+
+        //when you hover on a comment it shows
+        comment_card.hover(
+            function(){
+                var $comment_pencil = $( this ).find('.comment_pencil').show('fade', 300);
+                    $comment_pencil.click(function(event){
+                        console.log('its working!')
+                        event.stopPropagation();
+                    })
+            }, function(){
+                var $comment_pencil = $( this ).find('.comment_pencil').hide('fade', 300);
+        })
+
+
+
+        //this is for updating a comment
+        $('#comment_edit').click(function(){
+            var edit_content = $('#edit_comment').val();
+
+            var comment_update = {
+                content: edit_content,
+            }
+
+            console.log(comment._id);
+
+              $.ajax({
+                url: current_url + 'comments/' + current_comment + '/update',
+                type: 'PUT',
+                data: comment_update,
+                dataType: 'json',
+              })
+
+
+            // comment_card.find('h3').textContent = edit_content;
+            $('.' + current_comment).text(edit_content)
+        });
+
+
+        //triggers the modal
+        edit.click(function(event){
+            current_comment = $(this).attr('id')
+            console.log(current_comment)
+            console.log('edit modal')
+            $('#edit_comment').val(comment.content);
+            $('#edit_comment_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+        })
+
+        $('#edit_comment_close').click(function(event){
+          $('#edit_comment_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+            function(){
+              $(this).css('visibility', 'hidden')
+            });
+        })
+
+
+
 
         info_inner_div.append(date_container, content);
         comment_info.append(info_inner_div)
 
-
-        comment_card.append(image_div, comment_info)
-        $('#comments').prepend(comment_card)
+        comment_card.append(image_div, comment_info, edit_div)
+        $('#comments').append(comment_card)
 
     })
 }
