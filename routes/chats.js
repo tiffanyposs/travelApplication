@@ -21,12 +21,8 @@ var updateChatroom = function(trip_id){
 	var chatroom = Chat.find({'trip_id' : trip_id})
 	chatroom.populate('chat.user_id', 'first_name last_name _id');
 	chatroom.exec(function(err, chats){
-		// console.log(chats[0].chat)
 		chats[0].chat.forEach(function(each){
-			// var msg = JSON.parse(each);
-			// console.log(msg.message)
 			var encoded_msg = JSON.stringify(each);
-			// console.log(connection)
 			connection.send(encoded_msg)
 		})
 	})

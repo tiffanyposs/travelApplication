@@ -17,16 +17,6 @@ var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 // var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 
-// $('#chat_submit').click(function(){
-//   var msg = {message: $('#chat_input_box').val()}
-//   msg['name'] = current_user;
-//   msg['trip_id'] = current_trip;
-//   msg['firstname'] = current_user_name;
-//   var encoded_msg = JSON.stringify(msg);
-//   console.log(encoded_msg)
-//   client.send(encoded_msg)
-//   $('#chat_input_box').val('')
-// })
 
 $('.nav_clicked').attr('class', '');
 $(this).attr('class', 'group_clicked');
@@ -45,8 +35,11 @@ $('#chat_submit').click(function(){
 })
 
 
-
-
+$('#chat_input_box').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#chat_submit').click();
+  }
+});
 
 
 // listen for messages

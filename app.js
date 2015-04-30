@@ -1,5 +1,4 @@
 var express = require('express');
-
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,16 +8,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
-var MongoStore = require('connect-mongo')(session)
-
-
-
-
+var MongoStore = require('connect-mongo')(session);
 
 
 var app = express();
-
-
 
 // Add headers
 app.use(function (req, res, next) {

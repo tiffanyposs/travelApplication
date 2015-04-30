@@ -41,6 +41,11 @@ getUser();
 
 
 
+
+
+
+
+
 //This renders the current user's trips
 var userTripInfo = function(data){
     console.log(data)
@@ -335,6 +340,28 @@ $('#category_submit').click(function(){
 
 
 
+//checks of something is valid url
+function ValidUrl(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  if(!pattern.test(str)) {
+    console.log(false)
+    return false;
+  } else {
+    console.log(true)
+    return true;
+  }
+}
+
+
+
+
+
+
 var getSuggestionInfo = function(data){
     // console.log(data)
     data.forEach(function(suggestion){
@@ -411,27 +438,46 @@ var getSuggestionInfo = function(data){
                 success: function(data){
                     console.log('it worked!')
                 }
-                // contentType: type
               });
-              $('#' + current_suggestion).find('.title').text(edit_title)
-
+              $('#suggestion_comment_about').text(edit_about);
+              $('#suggestion_comment_link').text(edit_link.substring(7, 20) + "....")
+                        .attr('href', edit_link);
+              $('#' + current_suggestion).find('.title').text(edit_title);
         });
 
 
+        var edit_suggestion_modal = false;
         edit.click(function(event){
-            $('#edit_title').val(suggestion.title)
-            $('#edit_about').val(suggestion.content)
-            $('#edit_link').val(suggestion.link)
-          // console.log('clicked')
-          $('#edit_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+            edit_suggestion_modal = true;
+            $('#edit_title').val(suggestion.title);
+            $('#edit_about').val(suggestion.content);
+            $('#edit_link').val(suggestion.link);
+            $('#edit_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
         })
 
         $('#edit_close').click(function(event){
+            edit_suggestion_modal = false;
           $('#edit_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
             function(){
-              $(this).css('visibility', 'hidden')
+              $(this).css('visibility', 'hidden');
             });
         })
+
+        // if you press enter
+        $('#edit_title, #edit_about, #edit_link').keypress(function(e){
+          if(e.keyCode == 13 && edit_suggestion_modal === true){
+            $('#suggestion_edit').click();
+            $('#edit_close').click();
+          }
+        });
+
+        //if you press esc
+        $(document).keydown(function(e) {
+          if (e.keyCode == 27 && edit_suggestion_modal === true){
+            $('#edit_close').click();
+          }
+        });
+
 
         }
 
@@ -450,18 +496,22 @@ var getSuggestionInfo = function(data){
 
 
             var createSuggestionCard = function(data){
-                // console.log(data)
                 $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
-
                 $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.last_name);
                 $('#suggestion_date').text(data[0].created.substring(0, 10));
                 $('#suggestion_comment_about').text(data[0].content);
 
+                var valid_url = ValidUrl(suggestion.link);
                 // if there is a suggestion link render it
-                if(suggestion.link){
+                //and checks if its valid
+                if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
                     $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(7, 20) + "....");
                     $('#suggestion_comment_link').attr('href', data[0].link);
+                }else if(suggestion.link && valid_url === false){
+                    $('#suggestion_comment_link').css('visibility', 'visible')
+                    $('#suggestion_comment_link').text('Not Valid Link');
+                    $('#suggestion_comment_link').removeAttr('href');
                 }else{
                     $('#suggestion_comment_link').css('visibility', 'hidden')
                 }
@@ -632,23 +682,39 @@ var getCommentInfo = function(data){
             $('.' + current_comment).text(edit_content)
         });
 
-
+        var edit_comment_modal = false;
         //triggers the modal
         edit.click(function(event){
+            edit_comment_modal = true
             current_comment = $(this).attr('id')
-            console.log(current_comment)
-            console.log('edit modal')
             $('#edit_comment').val(comment.content);
             $('#edit_comment_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
         })
 
         $('#edit_comment_close').click(function(event){
+            edit_comment_modal = false;
           $('#edit_comment_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
             function(){
               $(this).css('visibility', 'hidden')
             });
         })
 
+        // if you press enter
+        $('#edit_comment').keypress(function(e){
+          if(e.keyCode == 13 && edit_comment_modal === true){
+            console.log('hi')
+            $('#comment_edit').click();
+            $('#edit_comment_close').click();
+          }
+        });
+
+        //if you press esc
+        $(document).keydown(function(e) {
+          if (e.keyCode == 27 && edit_comment_modal === true){
+            console.log('bye')
+            $('#edit_comment_close').click();
+          }
+        });
 
 
 
@@ -679,24 +745,33 @@ var getLastComment = function(){
 
 //post comment
 $('#comment_submit').click(function(){
-  var formData = {
-    content: $('#comment_input_area').val(),
-    suggestion_id: current_suggestion,
-    user_id: current_user,
-  }
-  $.ajax({
-    url: current_url + "comments",
-    type: 'POST',
-    data: formData,
-    success: function(data, textStatus, jqXHR)
-      {
-        $('#comment_input_area').val("");
-        getLastComment();
+    if(current_suggestion != ""){
+      var formData = {
+        content: $('#comment_input_area').val(),
+        suggestion_id: current_suggestion,
+        user_id: current_user,
       }
-  })
+      $.ajax({
+        url: current_url + "comments",
+        type: 'POST',
+        data: formData,
+        success: function(data, textStatus, jqXHR)
+          {
+            $('#comment_input_area').val("");
+            getLastComment();
+          }
+      })
+      $('#comment_input_area').blur();
+    }
 })// end getting categories
 
 
+//comment press enter
+$('#comment_input_area').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#comment_submit').click();
+  }
+});
 
 
 

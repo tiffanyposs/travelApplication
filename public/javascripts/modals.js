@@ -1,42 +1,52 @@
 $(document).ready(function(){
 
+//tracks the open modalexca
+var close_modal;
 
 
-//this is for the current trip modal
-//move to own file
+$(document).keydown(function(e) {
+  if (e.keyCode == 27){
+    $(close_modal).click();
+  }
+});
 
-// // trip modal
-// var current_trip_section = document.getElementById('current_trip')
-// current_trip_section.addEventListener('click', function(){
-//   var modal = document.getElementById('overlay');
-//   if(modal.style.visibility === "visible"){
-//     modal.style.visibility = "hidden";
-//   }else{
-//     modal.style.visibility = "visible";
-//   }
-//   var modal_close = document.getElementById('modal_close')
-//   modal_close.addEventListener('click', function(){
-//     modal.style.visibility = "hidden";
-//   })
-// });
-
-
+//adds a trip
 $('#current_trip').click(function(event){
-  $('#overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  $('#overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
+      .zIndex('100')
+  close_modal = '#modal_close'
 })
 
 $('#modal_close').click(function(event){
   $('#overlay').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
-      $(this).css('visibility', 'hidden')
+      $(this).css('visibility', 'hidden').zIndex('-100')
+      close_modal = '';
     });
-})
+});
+
+$('#trip_end_date').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#trip_add').click();
+    $('#modal_close').click();
+  }
+});
 
 
-//toggles view
+
+// $('html').click(function() {
+//   if(close_modal != ''){
+//     $('#modal_close').click();
+//   }
+// });
+
+// $('#overlay > div').click(function(event){
+//     event.stopPropagation();
+// });
+
+
+//toggles view of trips
 $('#add_trip').click(function(){
-  // $('#trip_content').hide();
-  // $('#make_trip_content').show();
     $('#trip_content').hide( "drop", { direction: "down" }, "slow",
       function(){
         $('#make_trip_content').show( "drop", { direction: "up" }, "slow" );
@@ -44,8 +54,6 @@ $('#add_trip').click(function(){
 })
 
 $('#view_trips').click(function(){
-  // $('#trip_content').show();
-  // $('#make_trip_content').hide();
     $('#make_trip_content').hide( "drop", { direction: "down" }, "slow",
       function(){
         $('#trip_content').show( "drop", { direction: "up" }, "slow" );
@@ -53,122 +61,93 @@ $('#view_trips').click(function(){
 })
 
 
-// // suggestion modal
-// var add_suggestion = document.getElementById('suggestion_header')
-// add_suggestion.addEventListener('click', function(){
-//   var modal = document.getElementById('suggestion_modal');
-//   if(modal.style.visibility === "visible"){
-//     modal.style.visibility = "hidden";
-//   }else{
-//     modal.style.visibility = "visible";
-//   }
-//   var suggestion_close = document.getElementById('suggestion_close')
-//   suggestion_close.addEventListener('click', function(){
-//     modal.style.visibility = "hidden";
-//   })
-// });
 
 
+
+//add suggestion
 $('#suggestion_header').click(function(event){
   $('#suggestion_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#suggestion_close'
 })
 
 $('#suggestion_close').click(function(event){
   $('#suggestion_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
       $(this).css('visibility', 'hidden')
+      close_modal = '';
     });
 })
 
-
-
-// // comment modal
-// var add_category = document.getElementById('add_category')
-// add_category.addEventListener('click', function(){
-//   var modal = document.getElementById('category_modal');
-//   if(modal.style.visibility === "visible"){
-//     modal.style.visibility = "hidden";
-//   }else{
-//     modal.style.visibility = "visible";
-//   }
-//   var category_close = document.getElementById('category_close')
-//   category_close.addEventListener('click', function(){
-//     modal.style.visibility = "hidden";
-//   })
-// });
+$('#suggestion_link').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#suggestion_submit').click();
+    $('#suggestion_close').click();
+  }
+});
 
 
 
+
+//adds comments
 $('#add_category').click(function(event){
   $('#category_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#category_close';
 })
 
 $('#category_close').click(function(event){
   $('#category_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
-      $(this).css('visibility', 'hidden')
+      $(this).css('visibility', 'hidden');
+      close_modal = '';
     });
 })
 
-
-// // comment modal
-// var add_friend = document.getElementById('add_friend')
-// add_friend.addEventListener('click', function(){
-//   var modal = document.getElementById('friend_modal');
-//   if(modal.style.visibility === "visible"){
-//     modal.style.visibility = "hidden";
-//   }else{
-//     modal.style.visibility = "visible";
-//   }
-//   var friend_close = document.getElementById('friend_close')
-//   friend_close.addEventListener('click', function(){
-//     modal.style.visibility = "hidden";
-//   })
-// });
+$('#category_title').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#category_submit').click();
+    $('#category_close').click();
+  }
+});
 
 
 
+//add friends
 $('#add_friend').click(function(event){
   $('#friend_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#friend_close';
 })
 
 $('#friend_close').click(function(event){
   $('#friend_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
-      $(this).css('visibility', 'hidden')
+      $(this).css('visibility', 'hidden');
+      close_modal = '';
     });
 })
 
-
-// // comment modal
-// var invite_friend = document.getElementById('invite_friends')
-// invite_friend.addEventListener('click', function(){
-//   var modal = document.getElementById('invite_modal');
-//   if(modal.style.visibility === "visible"){
-//     modal.style.visibility = "hidden";
-//   }else{
-//     modal.style.visibility = "visible";
-//   }
-//   var invite_close = document.getElementById('invite_close')
-//   invite_close.addEventListener('click', function(){
-//     modal.style.visibility = "hidden";
-//   })
-// });
+$('#friend_email').keypress(function(e){
+  if(e.keyCode == 13){
+    $('#find_friend_submit').click();
+  }
+});
 
 
 
+//invite friends
 $('#invite_friends').click(function(event){
   $('#invite_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#invite_close';
 })
 
 $('#invite_close').click(function(event){
   $('#invite_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
       $(this).css('visibility', 'hidden')
+      close_modal = '';
     });
 })
 
 
 
 
-})
+})//end document ready
