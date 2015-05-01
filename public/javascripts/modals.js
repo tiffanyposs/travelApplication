@@ -1,12 +1,8 @@
+
 $(document).ready(function(){
 
 //tracks the open modalexca
 var close_modal;
-
-
-$('#chat_input').hide();
-
-
 
 $(document).keydown(function(e) {
   if (e.keyCode == 27){
@@ -38,15 +34,6 @@ $('#trip_end_date').keypress(function(e){
 
 
 
-// $('html').click(function() {
-//   if(close_modal != ''){
-//     $('#modal_close').click();
-//   }
-// });
-
-// $('#overlay > div').click(function(event){
-//     event.stopPropagation();
-// });
 
 
 //toggles view of trips

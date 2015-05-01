@@ -289,7 +289,7 @@ var getTripCategoryInfo = function(data){
     $('.categories:first-child').click();
 
 
-    // $('#chat_input').hide()
+
 
 }
 
