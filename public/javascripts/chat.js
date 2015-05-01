@@ -11,10 +11,10 @@ $('#chat').empty();
 // var client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+// var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
-// var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
+var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 
 
