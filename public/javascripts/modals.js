@@ -4,6 +4,10 @@ $(document).ready(function(){
 var close_modal;
 
 
+$('#chat_input').hide();
+
+
+
 $(document).keydown(function(e) {
   if (e.keyCode == 27){
     $(close_modal).click();

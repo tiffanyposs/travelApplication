@@ -39,13 +39,6 @@ var getUser = function(){
 getUser();
 
 
-
-
-
-
-
-
-
 //This renders the current user's trips
 var userTripInfo = function(data){
     console.log(data)
@@ -251,13 +244,23 @@ $('#trip_add').click(function(){
 })//end POST user trip info
 
 
-
-
-
 var getTripCategoryInfo = function(data){
+
+    //this hides the suggestion if theres no category
+    if(data.length > 0){
+        $('#suggestion_header h1').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
+            .zIndex('100')
+    }else{
+    $('#suggestion_header h1').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+        function(){
+          $(this).css('visibility', 'hidden').zIndex('-100')
+        });
+    }
+
     data.forEach(function(category){
         var category_name = $('<h2></h2>').text(category.name);
         category_name.attr('id', category._id);
+        category_name.attr('class', 'categories')
         $( '#categories' ).append(category_name);
 
         // $( '#categories' ).append(category_name).hide().show('slow');
@@ -282,6 +285,12 @@ var getTripCategoryInfo = function(data){
             getSuggestions();
         })
     })
+    //clicks the first child on page load
+    $('.categories:first-child').click();
+
+
+    // $('#chat_input').hide()
+
 }
 
 
@@ -337,9 +346,6 @@ $('#category_submit').click(function(){
 })// end getting categories
 
 
-
-
-
 //checks of something is valid url
 function ValidUrl(str) {
   var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -349,24 +355,27 @@ function ValidUrl(str) {
   '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
   '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
   if(!pattern.test(str)) {
-    console.log(false)
     return false;
   } else {
-    console.log(true)
     return true;
   }
 }
 
 
-
-
-
-
 var getSuggestionInfo = function(data){
-    // console.log(data)
+    //this hides the comment box if there is no suggestion
+    if(data.length > 0){
+        $('#comment_input').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
+            .zIndex('100')
+    }else{
+    $('#comment_input').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+        function(){
+          $(this).css('visibility', 'hidden').zIndex('-100')
+          close_modal = '';
+        });
+    }
     data.forEach(function(suggestion){
         
-
         var suggestion_card = $('<div></div>').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
         var suggestion_info = $('<div></div>').attr('class', 'suggestion_info')
@@ -407,7 +416,6 @@ var getSuggestionInfo = function(data){
             function(){
                 var $pencil = $( this ).find('.suggestion_pencil').show('fade', 100);
                     $pencil.click(function(event){
-                        console.log('its working!')
                         // event.stopPropagation();
                     })
             }, function(){
@@ -422,7 +430,6 @@ var getSuggestionInfo = function(data){
             var edit_link = $('#edit_link').val();
             // if(edit_title)
 
-            console.log(this)
 
             var suggestion_update = {
                 title: edit_title,
@@ -436,7 +443,6 @@ var getSuggestionInfo = function(data){
                 data: suggestion_update,
                 dataType: 'json',
                 success: function(data){
-                    console.log('it worked!')
                 }
               });
               $('#suggestion_comment_about').text(edit_about);
@@ -537,7 +543,7 @@ var getSuggestionInfo = function(data){
 
         })
 
-
+        $('.suggestion_card:first-child').click();
     })
 }
 
@@ -549,12 +555,9 @@ var getSuggestions = function(){
     dataType: 'json',
     success: function(data){
       getSuggestionInfo(data);
-    }
-    
+    }    
   });
 }
-
-
 
 // //this gets the last category posted in a group
 // //is called when you POST the category_submit
@@ -595,15 +598,6 @@ $('#suggestion_submit').click(function(){
 })// end getting categories
 
 
-
-
-
-
-// !!!!!!!!
-// start getting comments
-// !!!!!!!!!
-
-
 //triggered when you click on a trip
 var getComments = function(){
     $.ajax({
@@ -618,7 +612,6 @@ var getComments = function(){
 
 var getCommentInfo = function(data){
     data.forEach(function(comment){
-        console.log(comment._id)
         var comment_card = $('<div></div').attr('class', 'comment_card');
 
         var image_div = $('<div></div>');
@@ -636,8 +629,6 @@ var getCommentInfo = function(data){
         var content = $('<h3></h3>').text(comment.content);
         content.attr('class', comment._id)
 
-
-
         //this is for the pencil
         if(comment.user_id._id === current_user){
             var edit_div = $('<div></div>').attr('class', 'edit_comment')
@@ -651,7 +642,6 @@ var getCommentInfo = function(data){
             function(){
                 var $comment_pencil = $( this ).find('.comment_pencil').show('fade', 300);
                     $comment_pencil.click(function(event){
-                        console.log('its working!')
                         event.stopPropagation();
                     })
             }, function(){
@@ -668,7 +658,6 @@ var getCommentInfo = function(data){
                 content: edit_content,
             }
 
-            console.log(comment._id);
 
               $.ajax({
                 url: current_url + 'comments/' + current_comment + '/update',
@@ -677,8 +666,6 @@ var getCommentInfo = function(data){
                 dataType: 'json',
               })
 
-
-            // comment_card.find('h3').textContent = edit_content;
             $('.' + current_comment).text(edit_content)
         });
 
@@ -702,7 +689,6 @@ var getCommentInfo = function(data){
         // if you press enter
         $('#edit_comment').keypress(function(e){
           if(e.keyCode == 13 && edit_comment_modal === true){
-            console.log('hi')
             $('#comment_edit').click();
             $('#edit_comment_close').click();
           }
@@ -711,12 +697,9 @@ var getCommentInfo = function(data){
         //if you press esc
         $(document).keydown(function(e) {
           if (e.keyCode == 27 && edit_comment_modal === true){
-            console.log('bye')
             $('#edit_comment_close').click();
           }
         });
-
-
 
         info_inner_div.append(date_container, content);
         comment_info.append(info_inner_div)
@@ -772,6 +755,4 @@ $('#comment_input_area').keypress(function(e){
     $('#comment_submit').click();
   }
 });
-
-
 

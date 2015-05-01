@@ -184,6 +184,7 @@ a{
 	/*font-weight: bold;*/
 	font-style: italic;
 	display: flex; display: -webkit-flex;
+	visibility: hidden;
 }
 
 /*#suggestion_header span{
@@ -469,6 +470,7 @@ a{
 	height: 10%;
 	background-color: grey;
 	display: flex; display: -webkit-flex;
+	visibility: hidden;
 }
 
 #comment_input div{
