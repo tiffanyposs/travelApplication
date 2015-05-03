@@ -28,7 +28,6 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         attendingTrips(data.trips)
@@ -41,12 +40,18 @@ getUser();
 
 //This renders the current user's trips
 var userTripInfo = function(data){
-    console.log(data)
+
+    //this hides the the content if theres no trips
+    if(data.length > 0){
+        $('#group_chat, #categories_nav, #friends_nav').show('fold', 400);
+    }else{
+        $('#group_chat, #categories_nav, #friends_nav').hide('fold', 400);
+    }
+
     //this sets the default of trip to the first one
     $('.trip_card_selected').attr('class', 'trip_card')
     var counter = 0;
     data.forEach(function(trip){
-        console.log(trip)
 
         var trip_card = $('<ul></ul>');
         if(counter === data.length - 1){
@@ -106,7 +111,6 @@ var userTripInfo = function(data){
                 url: current_url + 'trips/' + this.id,
                 dataType: 'json',
                 success: function(data){
-                    // console.log(data)
                     makeFriends(data)
 
                 }

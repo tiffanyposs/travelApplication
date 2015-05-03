@@ -13,7 +13,7 @@ $(document).keydown(function(e) {
 //adds a trip
 $('#current_trip').click(function(event){
   $('#overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
-      .zIndex('100')
+      .zIndex('200')
   close_modal = '#modal_close'
 })
 
@@ -24,6 +24,8 @@ $('#modal_close').click(function(event){
       close_modal = '';
     });
 });
+
+
 
 $('#trip_end_date').keypress(function(e){
   if(e.keyCode == 13){

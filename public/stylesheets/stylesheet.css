@@ -137,6 +137,20 @@ a{
 	text-decoration: underline;
 }
 
+
+#group_chat{
+	display: none;
+	/*visibility: hidden;*/
+}
+
+#categories_nav{
+	display: none;
+}
+
+#friends_nav{
+	display: none;
+}
+
 .nav_clicked{
 	background-color: orange; 
 	border-radius: 30px;

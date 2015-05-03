@@ -1,26 +1,16 @@
-* Email send out to invite people to your trip
-* email capture mail chimp
+###Avatars
+
+* One per person per trip
+* Avatar for each trip everything will change
+* bubbles of avatars for people who voted
+* One page/scroll with all the avatars, greyed out the ones that are already choosen
+* Sillouette of platius for default
 
 
+###Anaylsis
 
-###Immediate Must Dos
+*Find paper!
 
-* Make a google doc or trello for list of bugs or small tweeks.
-* ablility to email a list of people
-* fix weird bug on down vote that will vote mulitple times
-* fix ability to upvote and downvote on one item.
-* Make all append divs into partials so later manipulation will be a snap
-* ability to find friends on site and add them to your trip
-* Make Certain categories automatical generate when a trip is created.
-* Fix link button length so id doesn't break if its too long
-* populate the first suggestion's comments
-* Fix the trip name in upper left corner to format nicer
-* fix the user's name in the comment suggestion box
-* Splash Page
-* Style Trips
-* Style Login Page
-* control when you can post
-* emails must be unique
 
 
 
@@ -95,6 +85,30 @@ ssh root@45.55.221.131
 nohup mongod --dbpath=/data/db --port 27017 &
 
 nohup node app.js &
+
+
+
+###Forever
+
+[FOREVER DOCUMENTATION](http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/)
+
+
+```
+$[sudo] npm install forever
+
+```
+
+```
+$ forever start simple-server.js
+
+```
+
+```
+$ ps axl | grep node
+
+```
+
+
 
 #####Other Notes
 

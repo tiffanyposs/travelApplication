@@ -11,6 +11,10 @@ var bcrypt = require("bcrypt");
 var MongoStore = require('connect-mongo')(session);
 
 
+var domain = require('domain');
+var d = domain.create();
+
+
 var app = express();
 
 // Add headers
@@ -18,8 +22,8 @@ app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -49,9 +53,9 @@ var chats = require('./routes/chats')
 
 
 
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
 //THIS IS FOR DATABASE
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -92,8 +96,8 @@ app.use(session({
   saveUninitialized: true,
   //new stuff
   store: new MongoStore({
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    url: 'mongodb://localhost/data/db'
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
+    // url: 'mongodb://localhost/data/db'
   })
 }));
 
@@ -146,7 +150,12 @@ app.use(function(err, req, res, next) {
 
 
 
+//catches all of the errors 
+d.on('error', function(err) {
+  console.error(err);
+});
+
 module.exports = app;
 
-// app.listen(3000)
-app.listen(80)
+app.listen(3000)
+// app.listen(80)
