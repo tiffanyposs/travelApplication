@@ -157,12 +157,13 @@ router.post('/invite/:trip_id/session', function(req, res){
 //this is for people to invite people to their site
 // /invite/:trip_id/:user_id
 router.get('/invite/:trip_id/:user_id', function(req, res, next) {
-  var the_trip = Trip.findById(req.params.trip_id).select('trip');
+  var the_trip = Trip.findById(req.params.trip_id);
   var the_user = User.findById(req.params.user_id).select('first_name last_name');
   the_user.exec(function(err, user){
   	if (err) return handleError(err);
 	  the_trip.exec(function(err, trip){
 	  	if (err) return handleError(err);
+      console.log(trip);
 	  	res.render('invite', {trip: trip, user: user})
 	  })
   })

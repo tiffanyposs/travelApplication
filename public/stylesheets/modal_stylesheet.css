@@ -237,12 +237,48 @@
 }
 
 #friend_modal > div {
-     width: 500px;
-     height: 400px;
+     display: flex; display: -webkit-flex;
+     flex-direction: column; -webkit-flex-direction: column;
+     width: 700px;
+     height: 600px;
      margin: auto;
      background-color: rgb(255, 255, 255);
      padding:30px 40px 15px 50px;
 }
+
+#friend_modal > div > div{
+      overflow:hidden;
+      word-wrap:break-word;
+}
+
+
+.invite_section{
+     margin-bottom: 15px;
+
+}
+
+.invite_section p{
+     font-weight: bold;
+     margin-bottom: 20px;
+}
+
+
+#friend_close{
+     position: relative;
+     width: 20px;
+     align-self: flex-end; -webkit-align-self: flex-end;
+     border: none;
+     font-weight: bold;
+}
+
+#friend_close button{
+     outline: none;
+     border: none;
+     background-color: white;
+     font-weight: bold;
+     /*margin-bottom: 40px;*/
+}
+
 
 #friend_modal h2{
      font-size: 2em;
@@ -250,12 +286,15 @@
      font-weight: bold;
 }
 
-#friend_close{
-     position: relative;
-     float: right;
-     border: none;
-     background-color: white;
-     font-weight: bold;
+
+#friend_modal h3{
+     font-size: 1.5em;
+     margin-bottom: 20px;
+}
+
+
+#found_friends{
+     height: 20px;
 }
 
 #friend_input{
@@ -263,10 +302,31 @@
      flex-direction: column; -webkit-flex-direction: column;
 }
 
-#friend_modal h3{
-     font-size: 1.5em;
-     margin-bottom: 20px;
+
+#find_friend_submit{
+     margin-bottom: 25px;
+     background-color: orange;
+     color: white;
+     font-size: 1.25em;
+     border: none;
+     outline: 0;
+     padding: 8px 15px 8px 15px;
 }
+
+
+#friend_input input{
+     width: 350px;
+     margin-bottom: 20px;
+     font-size: 1.25em;
+}
+
+#friend_input input:focus{
+     outline: none;
+}
+
+/*
+
+
 
 #friend_title{
      width: 250px;
@@ -274,9 +334,7 @@
      margin-bottom: 30px;
 }
 
-#friend_title:focus{
-     outline: none;
-}
+
 
 #find_friend_submit{
      width: 100px;
@@ -292,13 +350,13 @@
      width: 400px;
      height: 200px;
 }
-
+*/
 
 
 
 
 /*comment modal*/
-#invite_modal {
+/*#invite_modal {
      visibility: hidden;
      position: absolute;
      left: 0px;
@@ -334,7 +392,6 @@
 
 #invite_modal a{
      color: blue;
-     /*cursor: text;*/
 }
 
 #invite_close{
@@ -343,7 +400,7 @@
      border: none;
      background-color: white;
      font-weight: bold;
-}
+}*/
 
 
 

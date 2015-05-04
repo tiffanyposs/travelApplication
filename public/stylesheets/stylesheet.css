@@ -355,7 +355,7 @@ a{
 	/*margin: auto;*/
 	visibility: hidden;
 	align-items: center; -webkit-align-items: center;
-	justify-content: space-around;
+	justify-content: space-around; -webkit-justify-content: space-around;
 }
 
 #comment_suggestion_content > :first-child{

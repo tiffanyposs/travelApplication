@@ -1,4 +1,8 @@
+
+var upvote_clicks = []
+
 $('#upvote').click(function(){
+
 	var user = {
 		user_id: current_user
 	}
@@ -21,17 +25,18 @@ $('#upvote').click(function(){
 	}
 
 
+
 	
 	var userExists = function(data){
 	var array = []
 	vote_amount = data.upvote.length;
 		data.upvote.forEach(function(each){
 			array.push(each.user_id);
-			console.log(array)
+			// console.log(array)
 		})
 		data.downvote.forEach(function(each){
 			array.push(each.user_id);
-			console.log(array)
+			// console.log(array)
 		})
 		if(array.indexOf(current_user) === -1){
 			makePutReqest()
@@ -39,51 +44,24 @@ $('#upvote').click(function(){
 	}
 
 
-	// var userExists = function(data){
-	// var array = [];
-	// vote_amount = data.upvote.length;
-
-	// 	var downvote = function(){
-	// 		if(data.downvote.length > 0){
-	// 			data.downvote.forEach(function(each, index){
-	// 				array.push(each.user_id);
-	// 				if(index === data.upvote.length - 1 || data.upvote.length === 0){
-	// 					if(array.indexOf(current_user) === -1){
-	// 						makePutReqest()
-	// 					}
-	// 				}
-	// 			})
-	// 		}else{
-	// 			if(array.indexOf(current_user) === -1){
-	// 				makePutReqest()
-	// 			}
-	// 		}
-	// 	}
-
-	// 	if(data.upvote.length > 0){
-	// 	data.upvote.forEach(function(each, index){
-	// 		array.push(each.user_id);
-	// 		console.log(array)
-	// 		if(index === data.upvote.length - 1 || data.upvote.length === 0){
-	// 			downvote();
-	// 		}
-	// 	})
-	// 	}else{
-	// 		downvote();
-	// 	}
-
-	// }
-
-
 	var getTripVotes = function(){
 	    $.ajax({
 	    url: current_url + 'suggestions/' + current_suggestion + '/votes',
 	    dataType: 'json',
 	    success: function(data){
+	    	console.log(upvote_clicks.indexOf(current_suggestion))
+	    	if(upvote_clicks.indexOf(current_suggestion) > -1){
+	    		console.log(upvote_clicks)
+	    		console.log('already clicked today')
+	    	}else{
+	    	upvote_clicks.push(current_suggestion)
+	    	console.log('not today')
 	        userExists(data)
+	    }
 	    }
 	});
 }
+
 
 getTripVotes()
 
@@ -92,6 +70,7 @@ getTripVotes()
 
 
 
+var downvote_clicks = []
 
 $('#downvote').click(function(){
 	var user = {
@@ -132,39 +111,6 @@ $('#downvote').click(function(){
 
 
 
-	// var userExists = function(data){
-	// var array = [];
-	// vote_amount = data.upvote.length;
-
-	// 	var downvote = function(){
-	// 		if(data.downvote.length > 0){
-	// 			data.downvote.forEach(function(each, index){
-	// 				array.push(each.user_id);
-	// 				if(index === data.upvote.length - 1 || data.upvote.length === 0){
-	// 					if(array.indexOf(current_user) === -1){
-	// 						makePutReqest()
-	// 					}
-	// 				}
-	// 			})
-	// 		}else{
-	// 			if(array.indexOf(current_user) === -1){
-	// 				makePutReqest()
-	// 			}
-	// 		}
-	// 	}
-
-	// 	if(data.upvote.length > 0){
-	// 	data.upvote.forEach(function(each, index){
-	// 		array.push(each.user_id);
-	// 		if(index === data.upvote.length - 1 || data.upvote.length === 0){
-	// 			downvote();
-	// 		}
-	// 	})
-	// 	}else{
-	// 		downvote();
-	// 	}
-
-	// }
 
 
 
@@ -173,7 +119,14 @@ $('#downvote').click(function(){
 	    url: current_url + 'suggestions/' + current_suggestion + '/votes',
 	    dataType: 'json',
 	    success: function(data){
+	    	if(downvote_clicks.indexOf(current_suggestion) > -1){
+	    		console.log(upvote_clicks)
+	    		console.log('already clicked today')
+	    	}else{
+	    	downvote_clicks.push(current_suggestion)
+	    	console.log('not today')
 	        userExists(data)
+	    }
 	    }
 		});
 	}

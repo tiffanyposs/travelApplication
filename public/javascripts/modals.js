@@ -127,18 +127,18 @@ $('#friend_email').keypress(function(e){
 
 
 //invite friends
-$('#invite_friends').click(function(event){
-  $('#invite_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
-  close_modal = '#invite_close';
-})
+// $('#invite_friends').click(function(event){
+//   $('#invite_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+//   close_modal = '#invite_close';
+// })
 
-$('#invite_close').click(function(event){
-  $('#invite_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
-    function(){
-      $(this).css('visibility', 'hidden')
-      close_modal = '';
-    });
-})
+// $('#invite_close').click(function(event){
+//   $('#invite_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+//     function(){
+//       $(this).css('visibility', 'hidden')
+//       close_modal = '';
+//     });
+// })
 
 
 

@@ -23,6 +23,7 @@ $(this).attr('class', 'group_clicked');
 
 
 $('#chat_submit').click(function(){
+  if($('#chat_input_box').val() != ""){
   var msg = {
     trip_id: current_trip,
     name: current_user_name,
@@ -32,6 +33,7 @@ $('#chat_submit').click(function(){
   var encoded_msg = JSON.stringify(msg);
   client.send(encoded_msg)
   $('#chat_input_box').val('')
+  }
 })
 
 

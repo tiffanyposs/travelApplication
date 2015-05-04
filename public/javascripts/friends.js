@@ -67,12 +67,12 @@ var showFriend = function(data){
         if(data.length != 0){
             // console.log(data);
             var found = $('<p></p>').text('+ ' + data[0].first_name + ' ' + data[0].last_name);
-            found.attr('id', 'found_friend')
+            found.attr('id', 'found_friend').css('color', '#009ACD')
             $('#found_friends').append(found)
             addFoundFriend(data[0])
         }else{
             $('#found_friends').empty();
-            var not_found = $('<p></p>').text("Didn't find your friend")
+            var not_found = $('<p></p>').text("Didn't find your friend").css('color', 'red')
             $('#found_friends').append(not_found)
         }
 }

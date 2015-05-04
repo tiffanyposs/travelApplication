@@ -94,12 +94,12 @@ nohup node app.js &
 
 
 ```
-$[sudo] npm install forever
+$[sudo] npm install -g forever
 
 ```
 
 ```
-$ forever start simple-server.js
+$ forever start app.js
 
 ```
 
