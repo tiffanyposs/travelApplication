@@ -1,26 +1,26 @@
+// need to have variable outside so its can close
+// existing websockets if needed
+var client;
 
 
-  
-
-//use this code for testing locally
-$('#group_chat').click(function(){
-
+//this is called from the trip card on click
+var makeNewWebsocket = function(){
 
 $('#chat').empty();
-//local
-// var client = new WebSocket("ws://localhost:2000/" + current_trip);
+
+if(client != undefined){
+  client.close();
+  client = undefined;
+}
+
+// client = new WebSocket("ws://localhost:2000/" + current_trip);
+// var client = new WebSocket("ws://localhost:2000/");
 
 //test server
-// var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
-var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
-
-
-
-$('.nav_clicked').attr('class', '');
-$(this).attr('class', 'group_clicked');
-
+//client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 $('#chat_submit').click(function(){
   if($('#chat_input_box').val() != ""){
@@ -66,8 +66,6 @@ client.addEventListener("message", function(message){
     var name = $('<h3></h3>').text(fullname);
   }
 
-
-
   var split_message = hash_message.message.split(' ');
 
   var message_section = []
@@ -91,15 +89,12 @@ client.addEventListener("message", function(message){
       }else{
         message_section.push(word)
       }
-      console.log(index)
-      console.log(split_message.length - 1 )
+
       if(index === split_message.length - 1 && message_section.length > 0){
         var card_content = $('<p></p>').text(message_section.join(' '))
         new_chat_card.append(card_content)    
       }
   })
-
-
 
 
   new_chat_card.prepend(name)
@@ -112,6 +107,13 @@ client.addEventListener("message", function(message){
 
 });
 
+}
+
+
+$('#group_chat').click(function(){
+
+$('.nav_clicked').attr('class', '');
+$(this).attr('class', 'group_clicked');
   //toggles the chat
   $('#suggestions, #comments_container').hide('slow', function(){
     $('#chat_container').show('slow')
@@ -119,10 +121,7 @@ client.addEventListener("message", function(message){
       scrollTop: $("#chat")[0].scrollHeight
     }, 100);
 
-    // $('#chat').scrollTop($('#chat')[0].scrollHeight)
   });
-  
-
 
 })
 

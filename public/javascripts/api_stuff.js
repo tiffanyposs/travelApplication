@@ -63,7 +63,7 @@ var userTripInfo = function(data){
         counter++;
 
         trip_card.attr('class', 'trip_card');
-
+        console.log(trip_card)
         trip_card.attr('id', trip._id);
         $( '#trip_list' ).prepend(trip_card)
         var title = $('<li></li>').text(trip.title);
@@ -79,6 +79,10 @@ var userTripInfo = function(data){
             $('#comments').empty();
             current_suggestion = "";
             current_trip = $(this).attr('id');
+
+
+            //this function is in the chat.js file
+            makeNewWebsocket()
 
             // THIS SETS THE INVITE MODAL TO HAVE THE CORRECT LINK
             var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
@@ -273,7 +277,7 @@ var getTripCategoryInfo = function(data){
             $('#suggestion_content').empty();
             $('#comments').empty();
 
-            //this toggles the chat
+            // this toggles the chat
             $('#chat_container').hide('slow', function(){
                 $('#suggestions, #comments_container').show('slow');
             }); 
