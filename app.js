@@ -102,7 +102,7 @@ app.use(session({
   // cookie: {maxAge: 30000},
   //new stuff
   store: new MongoStore({
-    url: 'mongodb://localhose/data/db',
+    url: 'mongodb://localhost/data/db',
     // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
     autoRemove: 'disabled',
     touchAfter: 4 * 3600 // time period in seconds wont make a new session
