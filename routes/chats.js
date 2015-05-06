@@ -70,12 +70,13 @@ var addChatroom = function(trip_id){
 
   connection.on("close", function (){
     var x = clients.indexOf(connection);
-    clients.splice(x, 1); 
+    clients.splice(x, 1);
+    console.log("client exited") 
   });
 
 
   connection.on("message", function(message){
-    // console.log(message)
+    console.log(message)
     var msg = JSON.parse(message);
 
     var msg_data = {

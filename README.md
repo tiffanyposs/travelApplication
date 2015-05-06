@@ -139,3 +139,29 @@ $ ps axl | grep node
 [BEST STUFF](http://adrianmejia.com/blog/2014/10/01/creating-a-restful-api-tutorial-with-nodejs-and-mongodb/)
 
 [VIDEO](https://www.youtube.com/watch?v=5e1NEdfs4is)
+
+
+
+
+
+###Anylitics
+
+[Stuff to Track](http://flippa.com/blog/5-key-metrics-to-always-track-in-your-web-analytics/)
+
+
+#####Google
+```
+
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62513798-1', 'auto');
+  ga('send', 'pageview');
+
+
+
+
+```

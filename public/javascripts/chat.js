@@ -11,10 +11,10 @@ $('#chat').empty();
 // var client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+// var client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
-// var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
+var client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 
 
@@ -30,15 +30,16 @@ $('#chat_submit').click(function(){
     user_id: current_user,
     message: $('#chat_input_box').val()
   }
+  $('#chat_input_box').val('');
   var encoded_msg = JSON.stringify(msg);
   client.send(encoded_msg)
-  $('#chat_input_box').val('')
+  
   }
 })
 
 
 $('#chat_input_box').keypress(function(e){
-  if(e.keyCode == 13){
+  if(e.keyCode == 13 && $('#chat_input_box').val() != ""){
     $('#chat_submit').click();
   }
 });

@@ -9,21 +9,34 @@ var mongoose = require('mongoose');
 var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
 var MongoStore = require('connect-mongo')(session);
-
+var moment = require('moment');
 
 var domain = require('domain');
 var d = domain.create();
 
 
 var app = express();
+app.use(favicon(__dirname + '/public/favicon.ico'));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -47,7 +60,9 @@ var categories = require('./routes/categories');
 var suggestions = require('./routes/suggestions');
 var comments = require('./routes/comments');
 
-var chats = require('./routes/chats')
+var chats = require('./routes/chats');
+var analysis = require('./routes/analysis');
+var sessions = require('./routes/sessions')
 
 
 
@@ -65,17 +80,7 @@ mongoose.connect('mongodb://localhost/data/db', function(err) {
 
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 //for bcrypt
@@ -94,10 +99,14 @@ app.use(session({
   secret: config.sessionSecret, //this is from secrets.json
   resave: false,
   saveUninitialized: true,
+  // cookie: {maxAge: 30000},
   //new stuff
   store: new MongoStore({
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db'
-    url: 'mongodb://localhost/data/db'
+    url: 'mongodb://localhose/data.db'
+    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
+    autoRemove: 'disabled',
+    touchAfter: 4 * 3600 // time period in seconds wont make a new session
+
   })
 }));
 
@@ -109,7 +118,10 @@ app.use('/categories', categories);
 app.use('/suggestions', suggestions);
 app.use('/comments', comments);
 
-app.use('/chats', chats)
+app.use('/chats', chats);
+
+app.use('/analysis', analysis);
+app.use('/sessions', sessions);
 
 
 console.log(session)

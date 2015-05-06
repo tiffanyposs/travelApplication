@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require("bcrypt");
+var moment = require('moment')
 
 
 var mongoose = require('mongoose');
@@ -136,6 +137,7 @@ router.post('/session', function(req, res){
     }if(passwordMatches){
       req.session.valid_user = true;
       req.session.user_id = user._id;
+      req.session.login_time = moment();
       res.redirect('/')
     }else{
       res.redirect('/login')
@@ -145,6 +147,7 @@ router.post('/session', function(req, res){
 
 // POST users/logout
 router.post('/logout', function(req, res){
+  console.log(req.session)
   req.session.valid_user = false;
   res.redirect('/')
 })
