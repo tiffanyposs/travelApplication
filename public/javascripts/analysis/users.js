@@ -56,7 +56,7 @@ var renderSessions = function(data){
 
 var allSessions = function(){
     $.ajax({
-    url: 'http://localhost:3000' + '/analysis/supersecret/platinum/platupi/sessions',
+    url: current_url + '/sessions',
     dataType: 'json',
     success: function(data){
         renderSessions(data);
@@ -261,7 +261,7 @@ var renderComments = function(comments){
 
 var allComments = function(){
     $.ajax({
-    url: 'http://localhost:3000' + '/analysis/supersecret/platinum/platupi/comments',
+    url: current_url + '/comments',
     dataType: 'json',
     success: function(data){
         renderComments(data);
@@ -294,7 +294,7 @@ var renderSuggestions = function(suggestions){
 //called at the end of renderCategories
 var allSuggestions = function(){
     $.ajax({
-    url: 'http://localhost:3000' + '/analysis/supersecret/platinum/platupi/suggestions',
+    url: current_url + '/suggestions',
     dataType: 'json',
     success: function(data){
         renderSuggestions(data);
@@ -333,7 +333,7 @@ var renderCategories = function(categories){
 //called at the end of renderTrips
 var allCategories = function(){
     $.ajax({
-    url: 'http://localhost:3000' + '/analysis/supersecret/platinum/platupi/categories',
+    url: current_url + '/categories',
     dataType: 'json',
     success: function(data){
         renderCategories(data);
@@ -392,7 +392,7 @@ var renderTrips = function(trips){
 
 var allTrips = function(){
     $.ajax({
-    url: 'http://localhost:3000' + '/analysis/supersecret/platinum/platupi/trips',
+    url: current_url + '/trips',
     dataType: 'json',
     success: function(data){
         renderTrips(data);
