@@ -47,6 +47,7 @@ router.post(secretroute + '/session', function(req, res){
       var passwordMatches = true;
     }if(passwordMatches === true){
       req.session.admin_user = true;
+      req.session.secret
 		res.redirect('/analysis' + secretroute)
     }else{
     	res.redirect('/analysis' + secretroute);

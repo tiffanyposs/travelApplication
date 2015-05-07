@@ -78,6 +78,9 @@ body{
 
 
 
+
+
+
 #logout{
 	position: fixed;
 	/*float: right;*/
@@ -91,6 +94,7 @@ body{
 	padding: 8px;
 	border-radius: 10px;
 }
+
 
 
 #dashboard{
@@ -114,8 +118,9 @@ body{
 }
 
 #dashboard h1{
-	font-size: 3em;
+	font-size: 5em;
 	color: white;
+	text-align: center;
 	margin: auto;
 	width: 80%;
 }
@@ -142,6 +147,9 @@ body{
 }
 
 
+.table_style{
+	border: 3px solid #05B8CC;
+}
 
 .table_style th{
 	background-color: #05B8CC;
@@ -182,7 +190,7 @@ body{
 	width: 80%;
 	height: 80%;
 	overflow: scroll;
-	border: 2px solid navy;
+	/*border: 2px solid navy;*/
 }
 
 
@@ -200,15 +208,15 @@ body{
 }
 
 #account_login > div{
-	width: 33%;
+	margin: auto;
+	width: 40%;
 	height: 100%;
 	display: flex; display: -webkit-flex;
 }
 
 #account_login > div > div{
-	width: 90%;
+	width: 100%;
 	margin: auto;
-	border: 2px solid navy;
 }
 
 #account_login table{
@@ -235,10 +243,30 @@ body{
 
 #trip_info > div{
 	/*width: 50%;*/
-	border: 2px solid black;
-	height: 80%;
-	margin: auto;
+	/*border: 2px solid black;*/
+	/*height: 100%;*/
+	width: 50%;
+	/*margin: auto;*/
 	background-color: white;
 	overflow: scroll;
+	display: flex; display: -webkit-flex;
+}
+
+#trip_info > div:first-child > div{
+	width: 100%;
+	
+
+}
+
+#trip_info > div > div{
+	width: 100%;
+	/*border: 2px solid red;*/
+	margin: 50px;
+	/*margin: auto;*/
+}
+
+#trip_info h2{
+	font-size: 1.5em;
+	margin-bottom: 10px;
 }
 

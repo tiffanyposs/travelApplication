@@ -18,7 +18,7 @@
 		<img src="/images/platupi/hat_2.png">
 	</div>
 	<div>
-		<h1>Our Analytics are Strict but Fair, Like the Russian Police.</h1>
+		<h1>Ello!</h1>
 	</div>
 </section>
 
@@ -28,17 +28,78 @@
 	<div class = 'heading'>
 		<h1>Trips</h1>
 	</div>
-	<div id = 'trip_info' class = 'body'>
-		<div>
-		<table class = 'table_style' id = 'totals_table'>
-			<tr>
-				<th>Data Type</th>
-				<th>Data</th>
-			</tr>
+	<div id = 'trip_info'>
 
-		</table>
+		<div>
+			<div>
+				<h2>Interesting Facts:</h2>
+				<table class = 'table_style' id = 'totals_table'>
+					<tr>
+						<th>Data Type</th>
+						<th>Data</th>
+					</tr>
+				</table>
+			</div>
 		</div>
+
+
+
+		<div>
+			<div id = 'new_accounts'>
+				<h2>New Accounts:</h2>
+				
+				<table class = 'table_style'>
+					<tr>
+						<th>Time</th>
+						<th>Total</th>
+					</tr>
+					<tr>
+						<td>Last 24Hours:</td>
+						<td id = 'new_accounts_day'></td>
+					</tr>
+					<tr>
+						<td>Last Week:</td>
+						<td id = 'new_accounts_week'></td>
+					</tr>
+					<tr>
+						<td>Last Month:</td>
+						<td id = 'new_accounts_month'></td>
+					</tr>
+					<tr>
+						<td>Last 3 Months:</td>
+						<td id = 'new_accounts_three_months'></td>
+					</tr>
+					<tr>
+						<td>Last Year:</td>
+						<td id = 'new_accounts_year'></td>
+					</tr>
+				</table>
+			</div>
+
+			<div>
+				<div>
+				<h2>Total Accounts:</h2>
+					<table class = 'table_style'>
+						<tr>
+							<th>Type</th>
+							<th>Data</th>
+						</tr>
+						<tr>
+							<td>Total Accounts</td>
+							<td id = 'total_accounts'></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
 	</div>
+
+
+
+			
 
 </section>
 
@@ -48,9 +109,9 @@
 		<h1>Users</h1>
 	</div>
 
-	<div  id = 'user_table' class = 'table_style'>
+	<div  id = 'user_table'>
 		<div>
-		<table>
+		<table class = 'table_style'>
 		  <tr>
 		    <th>User Id</th>
 		    <th>Date Account Created</th>
@@ -75,52 +136,13 @@
 
 			<div>
 				<div>
-				<h2>Account:</h2>
-					<table>
-						<tr>
-							<td>Total Accounts</td>
-							<td id = 'total_accounts'></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-
-
-			<div>
-				<div>
-				<h2>New Accounts:</h2>
-				
-				<table class = 'table_style'>
-					<tr>
-						<td>Last 24Hours:</td>
-						<td id = 'new_accounts_day'></td>
-					</tr>
-					<tr>
-						<td>Last Week:</td>
-						<td id = 'new_accounts_week'></td>
-					</tr>
-					<tr>
-						<td>Last Month:</td>
-						<td id = 'new_accounts_month'></td>
-					</tr>
-					<tr>
-						<td>Last 3 Months:</td>
-						<td id = 'new_accounts_three_months'></td>
-					</tr>
-					<tr>
-						<td>Last Year:</td>
-						<td id = 'new_accounts_year'></td>
-					</tr>
-				</table>
-				</div>
-			</div>
-
-
-			<div>
-				<div>
 				<h2>Logins:</h2>
 
 				<table class = 'table_style'>
+					<tr>
+						<th>Time</th>
+						<th>Totals</th>
+					</tr>
 					<tr>
 						<td>Total Logins</td>
 						<td id = 'total_logins'></td>
