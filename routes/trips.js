@@ -69,11 +69,6 @@ router.put('/addfriend/:trip_id', function(req, res, next) {
 });
 
 
-
-
-
-
-
 // GET /trips/:id
 router.get('/:id', function(req, res, next){
   var query = Trip.findById( req.params.id );
@@ -84,9 +79,6 @@ router.get('/:id', function(req, res, next){
 })
 
 
-
-
-
 // router.get('/:title', function(req, res, next){
 //   var query = Trip.find( {'title': req.params.title} ).populate('created_by');
 //   query.select('created_by location title');
@@ -95,8 +87,6 @@ router.get('/:id', function(req, res, next){
 //     res.json(trip)
 // })
 // })
-
-
 
 
 // /* PUT /todos/:id */

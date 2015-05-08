@@ -126,19 +126,34 @@ $('#friend_email').keypress(function(e){
 
 
 
-//invite friends
-// $('#invite_friends').click(function(event){
-//   $('#invite_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
-//   close_modal = '#invite_close';
-// })
 
-// $('#invite_close').click(function(event){
-//   $('#invite_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
-//     function(){
-//       $(this).css('visibility', 'hidden')
-//       close_modal = '';
-//     });
-// })
+
+
+//add suggestion
+$('#add_platupi').click(function(event){
+  $('#platupi_overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#close_platupi';
+})
+
+$('#close_platupi').click(function(event){
+  $('#platupi_overlay').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+    function(){
+      $(this).css('visibility', 'hidden')
+      //because it overlays the trip one
+      //if not change to empty
+      // close_modal = '#modal_close';
+      close_modal = '';
+
+    });
+})
+
+// $('#suggestion_link').keypress(function(e){
+//   if(e.keyCode == 13){
+//     $('#suggestion_submit').click();
+//     $('#suggestion_close').click();
+//   }
+// });
+
 
 
 

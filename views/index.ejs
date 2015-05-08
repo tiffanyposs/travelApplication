@@ -26,12 +26,14 @@
 <% include partials/modals/index_suggestion.ejs %>
 <!-- friends -->
 <% include partials/modals/index_friend.ejs %>
-<!-- invite friends -->
+<!-- platupi -->
+<% include partials/modals/index_platupi.ejs %>
 
 <!-- edit suggestion -->
 <% include partials/modals/index_suggestion_edit.ejs %>
 <!-- edit comment -->
 <% include partials/modals/index_comment_edit.ejs %>
+
 
 
 <header id = 'heading_container'>
@@ -61,6 +63,7 @@
 		<div id = 'main_nav'>
 			<h1 id = 'group_chat'>Group Chat</h1>
 			<div id = 'categories_nav'>
+				<h3 id = 'add_platupi'>+ Add your Avatar</h3>
 				<h1>Categories</h1>
 				<h3 id = 'add_category'>+ Create New Category</h3>
 				<div id = 'categories'></div>
@@ -194,6 +197,7 @@
 <script type="text/javascript" src = '/javascripts/api_stuff.js'></script>
 <script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
 <script type="text/javascript" src = '/javascripts/friends.js'></script>
+<script type="text/javascript" src = '/javascripts/platupi.js'></script>
 
 <% include partials/analytics/script.ejs %>
 

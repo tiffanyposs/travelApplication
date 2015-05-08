@@ -324,84 +324,6 @@
      outline: none;
 }
 
-/*
-
-
-
-#friend_title{
-     width: 250px;
-     font-size: 1.25em;
-     margin-bottom: 30px;
-}
-
-
-
-#find_friend_submit{
-     width: 100px;
-     outline: none;
-     border: none;
-     border-radius: 5px;
-     font-size: 1em;
-     padding: 5px;
-
-}
-
-#found_friends{
-     width: 400px;
-     height: 200px;
-}
-*/
-
-
-
-
-/*comment modal*/
-/*#invite_modal {
-     visibility: hidden;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     z-index: 1000;
-     background-color: rgba( 0, 0, 0, 0.5);
-     display: flex; display: -webkit-flex;
-}
-
-#invite_modal > div {
-     width: 750px;
-     height: 300px;
-     margin: auto;
-     background-color: rgb(255, 255, 255);
-     padding:30px 40px 15px 50px;
-     cursor: default;
-}
-
-
-#invite_modal h2{
-     font-size: 2em;
-     margin-bottom: 50px;
-     font-weight: bold;
-}
-
-#invite_modal h3{
-     font-size: 1em;
-     margin-bottom: 50px;
-     font-weight: bold;
-}
-
-#invite_modal a{
-     color: blue;
-}
-
-#invite_close{
-     position: relative;
-     float: right;
-     border: none;
-     background-color: white;
-     font-weight: bold;
-}*/
-
 
 
 
@@ -511,4 +433,73 @@
      border: none;
      background-color: white;
      font-weight: bold;
+}
+
+
+
+
+
+
+/*trip modal stylesheet*/
+#platupi_overlay {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 1000;
+     background-color: rgba( 0, 0, 0, 0.5);
+     display: flex; display: -webkit-flex;
+}
+
+#platupi_overlay > div {
+     width: 775px;
+     background-color: white;
+     padding: 20px;
+     margin: auto;
+     display: flex; display: -webkit-flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+
+#close_platupi{
+     /*position: relative;*/
+     border: none;
+     background-color: white;
+     font-weight: bold;
+     width: 15px;
+     align-self: flex-end; -webkit-align-self: flex-end;
+}
+
+
+#platupi_overlay > div > div{
+     margin: auto;
+     display: flex; display: -webkit-flex;
+}
+
+#platupi{
+     margin: auto;
+}
+
+#platupi_overlay h2{
+     font-size: 2em;
+}
+.platupus{
+     width: 125px;
+     height: auto;
+     margin: 10px;
+     border: 3px solid lightgrey;
+}
+
+#platupi_overlay button:last-child{
+     width: 200px;
+     background-color: orange;
+     border: none;
+     color: white;
+     font-size: 1.25em;
+     padding: 10px;
+     /*position: relative;*/
+     /*align-self: flex-end; -webkit-align-self: flex-end;*/
 }
