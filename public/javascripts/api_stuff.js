@@ -72,7 +72,7 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description);
         trip_card.click(function(){
-            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden')
+            $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'hidden')
             current_category = "";
             $('#categories').empty();
             $('#suggestion_content').empty();
@@ -243,7 +243,7 @@ $('#trip_add').click(function(){
         $('#categories').empty();
         current_suggestion = "";
         current_category = "";
-        $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
+        $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'hidden');
         $('#view_trips').click();
 
         }
@@ -284,7 +284,7 @@ var getTripCategoryInfo = function(data){
             
 
             current_suggestion = "";
-            $('#comment_suggestion_content, #comment_suggestion_info, #suggestion_comment_link').css('visibility', 'hidden');
+            $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden');
 
 
             $('.nav_clicked, .group_clicked').attr('class', '');
@@ -510,7 +510,7 @@ var getSuggestionInfo = function(data){
 
 
             var createSuggestionCard = function(data){
-                $('#comment_suggestion_content, #comment_suggestion_info').css('visibility', 'visible')
+                $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'visible')
                 $('#suggestion_name').text(suggestion.user_id.first_name + ' ' + suggestion.user_id.last_name);
                 $('#suggestion_date').text(data[0].created.substring(0, 10));
                 $('#suggestion_comment_about').text(data[0].content);
@@ -520,7 +520,7 @@ var getSuggestionInfo = function(data){
                 //and checks if its valid
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
-                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(7, 20) + "....");
+                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(7, 20) + "...");
                     $('#suggestion_comment_link').attr('href', data[0].link);
                 }else if(suggestion.link && valid_url === false){
                     $('#suggestion_comment_link').css('visibility', 'visible')
@@ -530,8 +530,25 @@ var getSuggestionInfo = function(data){
                     $('#suggestion_comment_link').css('visibility', 'hidden')
                 }
 
-                $('#comment_suggestion_upvote').text(data[0].upvote.length)
-                $('#comment_suggestion_downvote').text(data[0].downvote.length)
+                // $('#comment_suggestion_upvote').text(data[0].upvote.length)
+                $('#upvote_images').empty();
+                $('#downvote_images').empty();
+
+
+                //this appends the little platipi for voting
+                data[0].upvote.forEach(function(each){
+                    var image = $('<img>');
+                    image.attr('src', "images/platupi/Danoyshka.png")
+                    $('#upvote_images').append(image)             
+                })
+                data[0].downvote.forEach(function(each){
+                     var image_two = $('<img>');
+                    image_two.attr('src', "images/platupi/Danoyshka.png")
+                    $('#downvote_images').append(image_two)                   
+                })
+
+
+                // $('#comment_suggestion_downvote').text(data[0].downvote.length)
             }
 
 

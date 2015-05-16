@@ -11,6 +11,11 @@ $('#upvote').click(function(){
 
 	var makePutReqest = function(){
 	$('#comment_suggestion_upvote').text(vote_amount+1);
+
+	var image = $('<img>');
+	image.attr('src', "images/platupi/Danoyshka.png")
+
+	$('#upvote_images').append(image)
 	// $('.suggestion_upvote_count').text(vote_amount+1)
 	$('#' + current_suggestion).find('.suggestion_upvote_count').text(vote_amount+1);
 
@@ -82,6 +87,12 @@ $('#downvote').click(function(){
 		$('#comment_suggestion_downvote').text(vote_amount+1)
 		$('#' + current_suggestion).find('.suggestion_downvote_count').text(vote_amount+1);
 		// $('#comment_suggestion_upvote').text()
+
+		var image = $('<img>');
+		image.attr('src', "images/platupi/Danoyshka.png")
+
+		$('#downvote_images').append(image)
+
 		$.ajax({
 		        url: current_url + "suggestions/" + current_suggestion + '/downvote',
 		        type: 'PUT',
