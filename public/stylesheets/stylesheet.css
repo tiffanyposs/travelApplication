@@ -18,8 +18,9 @@ body, html{
 	width: 100%;
 	height: 100%;
 	font-family: 'Oxygen', sans-serif;
-	
 }
+
+
 
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
@@ -58,6 +59,7 @@ body, html{
 	color: white;
 	font-size: 2.25em;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 
@@ -94,6 +96,7 @@ body, html{
 	padding: 10px;
 	border-radius: 50px;
 	display: flex; display: -webkit-flex;
+	cursor: pointer;
 }
 
 .background_button > span{
@@ -106,6 +109,7 @@ body, html{
 	border-radius: 50px;
 	border: 3px solid #2f3743; /*dark blue*/
 	background-color: white;
+	cursor: pointer;
 }
 
 
@@ -126,13 +130,11 @@ body, html{
 	background-color: #2f3743; /*dark blue*/
 	display: flex; display: -webkit-flex;
 	color: white;
+	overflow: scroll;
 }
 
 /*hidden fields*/
-#group_chat{
-	display: none;
-	/*visibility: hidden;*/
-}
+/*#main_container > nav > div{}*/
 
 #categories_nav{
 	display: none;
@@ -155,11 +157,17 @@ body, html{
 	font-size: 1.75em;
 	font-weight: bold;
 	padding: 10px 5px 10px 10px;
+
+}
+
+#group_chat{
+	cursor: pointer;
 }
 
 .group_clicked{
 	background-color: #1e87c1;
 	padding: 10px 5px 10px 10px;
+	border-radius: 25px;
 }
 
 
@@ -183,8 +191,12 @@ body, html{
 	font-family: 'Gabriela', serif;
 	font-weight: lighter;
 	font-style: italic;
+	cursor: pointer;
 }
 
+#categories > h2{
+	cursor: pointer;
+}
 
 
 
@@ -212,6 +224,7 @@ body, html{
 	font-style: italic;
 	font-family: 'Gabriela', serif;
 	visibility: hidden;
+	cursor: pointer;
 }
 
 #suggestion_content{
@@ -229,6 +242,7 @@ body, html{
 	color: white;
 	font-family: 'Oxygen', sans-serif;
 	display: flex; display: -webkit-flex;
+	cursor: pointer;
 }
 
 .suggestion_clicked{
@@ -236,7 +250,7 @@ body, html{
 }
 
 .suggestion_info{
-	width: 60%;
+	width: 45%;
 	height: 100%;
 	display: flex; display: -webkit-flex;
 }
@@ -292,13 +306,13 @@ body, html{
 	font-weight: lighter;
 }
 
+
 .edit_div{
 	color: #425061;
 	width: 15%;
 	display: flex; display: -webkit-flex;
-
-	
 }
+
 .suggestion_pencil{
 	margin: 20px auto 0 auto;
 }
@@ -339,6 +353,10 @@ body, html{
 	margin: 20px auto 0 auto;
 	border-radius: 30px;
 	display: flex; display: -webkit-flex;
+}
+
+#upvote, #downvote{
+	cursor: pointer;
 }
 
 #comment_suggestion_info{
@@ -391,22 +409,24 @@ body, html{
 	display: flex; display: -webkit-flex;
 	flex-direction: column; -webkit-flex-direction: column;
 
-
 }
 
 #suggestion_voting > div{
 	width: 100%;
 	display: flex; display: -webkit-flex;
 	margin: auto;
+	/*background-color: red;*/
 }
 
 #suggestion_voting > div > div:first-child{
 	width: 15%;
 	display: flex; display: -webkit-flex;
+	/*background-color: red;*/
 }
 
 #suggestion_voting > div > div:first-child > span{
 	margin: auto;
+	/*background-color: red;*/
 }
 
 
@@ -414,12 +434,15 @@ body, html{
 .vote_images{
 	width: 85%;
 	display: flex; display: -webkit-flex;
+	/*border: 2px solid red;*/
 }
 
 .vote_images > div{
 	width: 80%;
 	margin: auto;
 	flex-wrap: wrap; -webkit-flex-wrap: wrap;
+	/*border: 2px solid red;*/
+	/*background-color: #d6dde0;*/
 }
 
 .vote_images img{
@@ -473,7 +496,7 @@ body, html{
 
 
 .comment_info{
-	width: 80%;
+	width: 65%;
 	padding: 10px;
 }
 
@@ -516,6 +539,7 @@ body, html{
 }
 .comment_pencil{
 	margin: 20px auto 0 auto;
+	cursor: pointer;
 }
 
 
@@ -554,4 +578,5 @@ body, html{
 	color: #1e87c1;
 	border: none;
 	background-color: #d6dde0;
+	cursor: pointer;
 }

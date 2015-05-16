@@ -640,7 +640,7 @@ var getCommentInfo = function(data){
         var comment_card = $('<div></div').attr('class', 'comment_card');
 
         var image_div = $('<div></div>');
-        var img = $('<img>').attr('src', '/images/users.jpg');
+        var img = $('<img>').attr('src', 'images/platupi/Danoyshka.png');
         image_div.append(img);
 
         var comment_info = $('<div></div>').attr('class', 'comment_info');
