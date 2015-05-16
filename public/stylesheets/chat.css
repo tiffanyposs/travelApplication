@@ -1,99 +1,159 @@
-.group_clicked{
-	background-color: orange;
-	border-radius: 30px;
-	/*width: 70%;*/
-}
+/*Group Chat*/
+
+/*#group_chat*/
 
 #chat_container{
 	display: none;
-	width: 85%;
+	width: 82%;
 	height: 100%;
-	background-color: #D8D8D8;
-	padding: 0 100px 0 100px;
-
+	background-color: #d6dde0;
 }
 
-#chat_container h2{
-	text-align: center;
-	font-size: 2.5em;
-	font-weight: bold;
-	padding: 30px;
-	height: 15%;
+
+
+#chat_container > div{
+	width: 80%;
+	height: 90%;
+	margin: auto;
+	margin-top: 40px;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+}
+
+
+#chat{
+	width: 100%;
+	height: 80%;
+	background-color: white;
+}
+
+#chat_input{
+	width: 100%;
+	height: 20%;
+	background-color: #2f3743;
+	display: flex; display: -webkit-flex;
+}
+
+#chat_input > div{
+	width: 100%;
+	margin: auto;
+	display: flex; display: -webkit-flex;
 }
 
 #chat{
 	overflow: scroll;
-	overflow-x: hidden;
-	background-color: white;
-	/*padding: 15px;*/
-	display: flex; display: -webkit-flex;
-	flex-direction: column; -webkit-flex-direction: column;
-	margin: auto;
-	height: 75%;
+}
+
+
+#chat_input_box{
+	height: 70px;
 	width: 80%;
+	border: none;
+	resize: none;
+	margin-left: auto;
+	margin-right: 15px;
+	outline: none;
+	font-size: 1.5em;
 }
 
-#chat h3{
-
+#chat_submit{
+	width: 70px;
+	height: 70px;
+	margin-right: auto;
+	color: #1e87c1;
+	border: none;
+	background-color: #d6dde0;
+	cursor: pointer;
 }
+
 
 .chat_card{
-	width: 600px;
-	padding: 30px;
-	word-wrap: break-word;
-	display: flex; display: -webkit-flex;
-	flex-direction: column; column; -webkit-flex-direction: column;
-	flex-shrink: 0; -webkit-flex-shrink: 0;
-}
-
-.chat_card > h3{
-	font-size: 1.25em;
 	margin-bottom: 20px;
-	font-weight: lighter;
-	font-style: italic;
 }
 
 .chat_card_other{
-	background-color: #696969;
-	margin-bottom: 30px; margin-left: 20px;
-	border-radius: 40px 40px 0 40px;
-	flex-shrink: 0; -webkit-flex-shrink: 0;
+	width: 100%;
+	display: flex; display: -webkit-flex;
+
 }
 
 .chat_card_current{
-	background-color: #2a2a2a;
-	color: white;
-	border-radius: 40px 40px 40px 0;
-	margin-bottom: 30px; margin-right: 20px;
-	align-self: flex-end; -webkit-align-self: flex-end;
-
-}
-
-
-#chat p{
-	
-}
-
-#chat_input{
+	width: 100%;
 	display: flex; display: -webkit-flex;
-	height: 10%;
+	flex-direction: row-reverse; -webkit-flex-direction: row-reverse;
+	text-align: right;
 }
 
-#chat_input > div{
-	margin: auto;
+.chat_card > div:first-child{
+	width: 20%;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+	align-items: center; -webkit-align-items: center;
+	justify-content: center; -webkit-justify-content: center;
 }
 
-#chat_input input{
-	/*width: 50%;*/
-	font-size: 2em;
+/*this is a container to be added to images*/
+.chat_card_current > div:nth-child(2) > div{
+	width: 100%;
 }
 
-#chat_input button{
-	font-size: 1.5em;
-	padding: 5px;
-	border-radius: 5px;
-	outline: 0;
-	border: none;
-	background-color: orange;
-	color: white;
+.chat_card > div:first-child > img{
+	width: 75px;
+	height: auto;
+	background-color: white;
+	border-radius: 50px;
+	border: 4px solid #1e87c1;
+	margin-bottom: 10px;
 }
+
+.chat_card > div:first-child > h4{
+	color: #d6dde0;
+	font-style: italic;
+}
+
+.chat_card > div:nth-child(2){
+	width: 80%;
+	background-color: green;
+	padding: 20px 60px 20px 60px;
+	margin: auto 20px auto 20px;
+	border-radius: 80px;
+	white-space: normal;
+}
+
+
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+*/
+.chat_card_current > div:nth-child(2){
+	background-color: #d6dde0;
+}
+
+.chat_card_other > div:nth-child(2){
+	background-color: #1e87c1;
+}
+
+.chat_card > div:nth-child(2) > p{
+	width: 100%;
+	line-height: 18px;
+}
+
+.chat_card > div:nth-child(2) a{
+	width: 100%;
+	padding: 40px 0 40px 0;
+	margin: auto 0 auto 0;
+	border-radius: 60px;
+	color: #2f3743;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.chat_card > div:nth-child(2) img{
+	height: 250px;
+	width: auto;
+	border-radius: 20px;
+}
+
+
+

@@ -13,10 +13,10 @@ if(client != undefined){
   client = undefined;
 }
 
-client = new WebSocket("ws://localhost:2000/" + current_trip);
+// client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-// client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
 // client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
@@ -57,13 +57,29 @@ client.addEventListener("message", function(message){
     new_chat_card.attr('class', 'chat_card chat_card_other');
   }
   
+      // <div class = 'chat_card chat_card_current'>
+      //   <div>
+      //     <img src="./images/Danoyshka.png">
+      //     <h4>Tiffany Poss</h4>
+      //   </div>
+      //   <div>
+      //     <a href="#" target='blank'>http://blahblahblah.com</a>
+      //   </div>
+      // </div>
+  var avatar_div = $('<div></div>');
 
   if(hash_message['name']){
-    var name = $('<h3></h3>').text(hash_message['name'])
+    var name = $('<h4></h4>').text(hash_message['name'])
   }else{
     var fullname = hash_message.user_id.first_name + ' ' + hash_message.user_id.last_name;
-    var name = $('<h3></h3>').text(fullname);
+    var name = $('<h4></h4>').text(fullname);
   }
+
+
+  var platupus = $('<img>').attr('src', "images/platupi/Danoyshka.png")
+
+  avatar_div.append(platupus, name);
+  new_chat_card.append(avatar_div);
 
   var split_message = hash_message.message.split(' ');
 
@@ -71,32 +87,52 @@ client.addEventListener("message", function(message){
 
 
   var counter = 0
+  var content_div = $('<div></div>');
   split_message.forEach(function(word, index){
     var end_digits = word.charAt(word.length-3) + word.charAt(word.length-2) + word.charAt(word.length- 1);
     var first_digits = word.charAt(0) + word.charAt(1) + word.charAt(2) + word.charAt(3);
     if(end_digits === "jpg" || end_digits === "png" || end_digits === "gif"){
-      var image = $('<img>').attr('src', word).css('width', '400px');
-      new_chat_card.prepend(image)
+      // if(message_section.length > 0){
+      //   var p = $('<p></p>').text(message_section.join(' '))
+      //   content_div.append(p);
+      //   message_section = [];
+      // }
+      
+      var image = $('<img>').attr('src', word);
+      var image_div = $('<div></div>');
+      image_div.append(image);
+      content_div.prepend(image_div);
+      // new_chat_card.append(content_div)
       }else if(first_digits === "http" || first_digits === "www."){
         if(message_section.length > 0){
-          new_chat_card.append(message_section.join(' '))
+          var p = $('<p></p>').text(message_section.join(' '))
+          content_div.append(p)
           message_section = [];
         }
         var link = $('<a></a>').attr('href', word).text(word);
         link.attr('target', '_blank')
-        new_chat_card.append(link);
+        content_div.append(link)
+        // new_chat_card.append(link);
+        // new_chat_card.append(content_div)
       }else{
         message_section.push(word)
       }
 
-      if(index === split_message.length - 1 && message_section.length > 0){
-        var card_content = $('<p></p>').text(message_section.join(' '))
-        new_chat_card.append(card_content)    
+      if(index === split_message.length - 1){
+
+        if(message_section.length > 0){
+          var card_content = $('<p></p>').text(message_section.join(' '));
+          content_div.append(card_content);
+          console.log('creating p')
+        }
+        // content_div.append(card_content);
+        new_chat_card.append(content_div) 
       }
+
   })
 
 
-  new_chat_card.prepend(name)
+  // new_chat_card.prepend(name)
   $('#chat').append(new_chat_card)
 
   //scrolls down
