@@ -25,6 +25,14 @@ var UserSchema = new Schema({
 
 UserSchema.plugin(timestamps);
 
-
+UserSchema.add({
+  taken_avatars: [{
+    trip_id: {
+      type: Schema.ObjectId,
+      ref: "Trip"
+    },
+    avatar: String
+  }]
+})
 module.exports = mongoose.model('User', UserSchema);
 

@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 // /* GET /users/stuff */
 router.get('/stuff', function(req, res, next) {
   var query = User.findById(req.session.user_id).populate('trips.trip_id friends');
-  query.select('username first_name last_name friends trips')
+  query.select('username first_name last_name friends trips taken_avatars')
   query.exec(function (err, user) {
     if (err) return handleError(err);
       res.json(user);
@@ -151,6 +151,41 @@ router.post('/logout', function(req, res){
   req.session.valid_user = false;
   res.redirect('/')
 })
+
+
+
+
+
+/* PUT users/avatar/:trip_id/:user_id/:update */
+router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
+  console.log(req.body)
+  req.body.trip_id = req.params.trip_id;
+  User.findByIdAndUpdate(
+    req.params.user_id,
+    {$set: {'taken_avatars': req.body}},
+    function(err, users) {
+      console.log("Also Worked!")
+      res.json(users)
+    })
+});
+
+
+
+/* PUT users/avatar/:trip_id/:user_id/:update */
+router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
+  console.log(req.body)
+  req.body.trip_id = req.params.trip_id;
+  User.findByIdAndUpdate(
+    req.params.user_id,
+    {$push: {'taken_avatars': req.body}},
+    function(err, users) {
+      console.log("Also Worked!")
+      res.json(users)
+    })
+});
+
+
+
 
 // router.get('/:title', function(req, res, next){
 //   var query = Trip.find( {'title': req.params.title} ).populate('created_by');

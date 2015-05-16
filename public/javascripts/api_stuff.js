@@ -28,6 +28,7 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
+        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         attendingTrips(data.trips)
@@ -40,7 +41,7 @@ getUser();
 
 //This renders the current user's trips
 var userTripInfo = function(data){
-
+    console.log(data);
     //this hides the the content if theres no trips
     if(data.length > 0){
         $('#group_chat, #categories_nav, #friends_nav').show('fold', 400);

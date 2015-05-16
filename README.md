@@ -1,32 +1,6 @@
-###Avatars
+###Git Branch Tutorial
 
-* One per person per trip
-* Avatar for each trip everything will change
-* bubbles of avatars for people who voted
-* One page/scroll with all the avatars, greyed out the ones that are already choosen
-* Sillouette of platius for default
-
-
-###Anaylsis
-
-*Find paper!
-
-
-
-
-###Some Other Random Todos
-
-* Ability to delete  your posts and update
-* Be able to press enter to submit forms
-* Be able to update the dates of the trip
-
-###Big Todos
-
-
-* Do Find Friends
-* Test MongoDB database
-* Work on Email Stuff
-* Make Responsive
+[Link to Branch Tutorial](https://www.atlassian.com/git/tutorials/using-branches)
 
 ###Running Locally
 

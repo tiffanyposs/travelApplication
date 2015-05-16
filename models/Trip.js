@@ -16,14 +16,25 @@ var TripSchema = new Schema({
   },
   attending: [{
     user_id: {
-  	type: Schema.ObjectId,
-  	ref: "User",
+    	type: Schema.ObjectId,
+    	ref: "User",
     }
   }]
 });
 
 TripSchema.plugin(timestamps);
 
+
+
+TripSchema.add({taken_avatars: [{
+  user_id: {
+  type: Schema.ObjectId,
+  ref: "User"
+  },
+  avatar: String,
+}]
+
+});
 
 module.exports = mongoose.model('Trip', TripSchema);
 
