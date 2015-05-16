@@ -4,7 +4,7 @@
 	<title></title>
 
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Gilda+Display|Quicksand:300,400,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400|Oxygen:400,300,700|Hind:400,300,700,600,500|Quattrocento:400,700|Gabriela' rel='stylesheet' type='text/css'>
 	
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -36,23 +36,47 @@
 
 
 
+
+
 <header id = 'heading_container'>
 	<div id = 'trip_container'>
 		<!-- the content is appeneded through js -->
-		<h1 id = 'current_trip'>+ Add Trips<span class = 'fa fa-arrow-down'></span></h1>
+		<h1 id = 'current_trip'>+ Add Trips<!-- <span class = 'fa fa-arrow-down'></span> --></h1>
 	</div>
 
 	<nav id = 'heading_nav'>
 		<ul>
-			<!-- <li><span class = 'fa fa-search fa-2x'></span></li> -->
-			<!-- <li><span class = 'fa fa-bell-o fa-2x'></span></li> -->
-			<li>
-				<form action = '/users/logout' method = 'POST'>
-				<button class = 'fa fa-sign-out fa-2x'></button>
-				</form>
+
+			<!-- <li>
+				<div class = 'background_button'>
+					<span class = 'fa fa-globe fa-2x'></span>
+				</div>
 			</li>
-			<li><img src="/images/users.jpg"></li>
-			<li><span class = 'fa fa-arrow-down'></span></li>
+			<li>
+				<div class = 'background_button'>
+					<span class = 'fa fa-plane fa-2x'></span>
+				</div>
+			</li>
+			<li>
+				<div class = 'background_button'>
+					<span class = 'fa fa-calendar fa-2x'></span>
+				</div>
+			</li>
+			<li>
+				<div class = 'background_button'>
+					<span class = 'fa fa-usd fa-2x'></span>
+				</div>
+			</li> -->
+			<!-- put the logout putton somewhere -->
+
+			<li><img src="images/platupi/Danoyshka.png"></li>
+			<li>
+				<div class = 'background_button'>
+					<form action = '/users/logout' method = 'POST'>
+						<span class = 'fa fa-sign-out fa-2x'></span>
+					</form>
+				</div>
+			</li>
 		</ul>
 	</nav>
 </header>
@@ -61,18 +85,34 @@
 <section id = 'main_container'>
 	<nav>
 		<div id = 'main_nav'>
-			<h1 id = 'group_chat'>Group Chat</h1>
+			
 			<div id = 'categories_nav'>
-				<h3 id = 'add_platupi'>+ Add your Avatar</h3>
+				<!-- figure out where to put the platupi modal trigger -->
+				<!-- <h3 id = 'add_platupi'>+ Add your Avatar</h3> -->
 				<h1>Categories</h1>
 				<h3 id = 'add_category'>+ Create New Category</h3>
-				<div id = 'categories'></div>
+				<div id = 'categories'>
+					<!-- check which tag is appended here -->
+					<h2>Transportation</h2>
+					<h2>Hotels</h2>
+					<h2>Food</h2>
+					<!-- <h2>Activities</h2> -->
+					<h2>...+</h2>
+				</div>
+			</div>
+			<div>
+				<h1 id = 'group_chat'>Group Chat</h1>
 			</div>
 			<div id = 'friends_nav'>
 				<h1>Friends</h1>
 				<h3 id = 'add_friend'>+ Add Friends</h3>
 				<div id = 'friends'>
-					
+					<!-- check whats appended here -->
+					<h2>Emily</h2>
+					<h2>Karl</h2>
+					<h2>Nichole</h2>
+					<!-- <h2>Anna</h2> -->
+					<h2>...+</h2>
 				</div>
 			</div>
 		</div>
@@ -88,7 +128,9 @@
 		</div>
 		<div id = 'suggestion_content'>
 		<!-- also has the id of the suggestion's id number -->
-<!-- 			<div class = 'suggestion_card'>
+		<!-- change 2x to 3x in js -->
+
+			<div class = 'suggestion_card'>
 				<div class = 'suggestion_info'>
 					<div>
 						<h1>Suggestion Title</h1>
@@ -96,19 +138,95 @@
 						<h3>April 25th, 2015</h3>
 					</div>
 				</div>
+
 				<div class = 'suggestion_voting'>
 						<div>
 							<div>
-								<span class = 'fa fa-arrow-circle-up fa-2x green'></span>
+								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
 								<h2 class = 'suggestion_upvote_count'>0</h2>
 							</div>
 							<div>
-								<span class = 'fa fa-arrow-circle-down fa-2x red'></span>
+								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
 								<h2 class = 'suggestion_downvote_count'>0</h2>
 							</div>
 						</div>
 				</div>
-			</div> -->
+			</div>
+
+
+			<div class = 'suggestion_card'>
+				<div class = 'suggestion_info'>
+					<div>
+						<h1>Suggestion Title</h1>
+						<h2>By: Jamie</h2>
+						<h3>April 25th, 2015</h3>
+					</div>
+				</div>
+
+				<div class = 'suggestion_voting'>
+						<div>
+							<div>
+								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
+								<h2 class = 'suggestion_upvote_count'>0</h2>
+							</div>
+							<div>
+								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
+								<h2 class = 'suggestion_downvote_count'>0</h2>
+							</div>
+						</div>
+				</div>
+			</div>
+
+
+
+			<div class = 'suggestion_card'>
+				<div class = 'suggestion_info'>
+					<div>
+						<h1>Suggestion Title</h1>
+						<h2>By: Jamie</h2>
+						<h3>April 25th, 2015</h3>
+					</div>
+				</div>
+
+				<div class = 'suggestion_voting'>
+						<div>
+							<div>
+								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
+								<h2 class = 'suggestion_upvote_count'>0</h2>
+							</div>
+							<div>
+								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
+								<h2 class = 'suggestion_downvote_count'>0</h2>
+							</div>
+						</div>
+				</div>
+			</div>
+
+
+			<div class = 'suggestion_card'>
+				<div class = 'suggestion_info'>
+					<div>
+						<h1>Suggestion Title</h1>
+						<h2>By: Jamie</h2>
+						<h3>April 25th, 2015</h3>
+					</div>
+				</div>
+
+				<div class = 'suggestion_voting'>
+						<div>
+							<div>
+								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
+								<h2 class = 'suggestion_upvote_count'>0</h2>
+							</div>
+							<div>
+								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
+								<h2 class = 'suggestion_downvote_count'>0</h2>
+							</div>
+						</div>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 
@@ -116,65 +234,153 @@
 
 	<div id = 'comments_container'>
 		<div id = 'comment_suggestion'>
-			<div id = 'comment_suggestion_info'>
-				<p id = 'suggestion_name'>Brian Smith</p>
-				<p id = 'suggestion_date'>10/23/2015</p>
-			</div>
-			<div>
-				<div id = 'comment_suggestion_content'>
-					<div>
+
+			<!-- <div id = 'comment_suggestion_info'> -->
+				
+				<!-- might have to remove from js -->
+				<!-- <p id = 'suggestion_date'>10/23/2015</p> -->
+			<!-- </div> -->
+
+				<!-- <div id = 'comment_suggestion_content'> -->
+					<div id = 'suggestion_avatar'>
 						<div>
-							<img src="/images/users.jpg">
+							<p id = 'suggestion_name'>Brian Smith</p>
+							<img src="images/platupi/Danoyshka.png">
+							<a id = 'suggestion_comment_link' href='https://www.google.com/' target = 'blank'>Link.....</a>
 						</div>
 					</div>
-					<div>
-						<p id = 'suggestion_comment_about'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua.</p>
-						<a id = 'suggestion_comment_link' href='https://www.google.com/' target = 'blank'>Link: TripAdvisor</a>
-					</div>
-					<div>
+						<!-- remove from js / put it as the first comment-->
+<!-- 						<p id = 'suggestion_comment_about'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua.</p> -->
+
+
+
+					<div id = 'suggestion_voting'>
 						<div>
-							<span id = 'upvote' class = 'fa fa-arrow-circle-up fa-3x green'></span>
-							<h2 id = 'comment_suggestion_upvote'>0</h2>
+							<div>
+								<span id = 'upvote' class = 'fa fa-arrow-circle-up fa-3x green'></span>
+							</div>
+							<!-- remove from js -->
+							<!-- <h2 id = 'comment_suggestion_upvote'>0</h2> -->
+
+							<!-- container to append vote images -->
+							<div id = 'upvote_vote_images' class = 'vote_images'>
+								<div id = 'upvote_images'>
+									<!-- <img src="./images/Danoyshka.png"> -->
+<!-- 									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png"> -->
+								</div>
+							</div>
 						</div>
 						<div>
-							<span id = 'downvote' class = 'fa fa-arrow-circle-down fa-3x red'></span>
-							<h2 id = 'comment_suggestion_downvote'>0</h2>
+							<div>
+								<span id = 'downvote' class = 'fa fa-arrow-circle-down fa-3x red'></span>
+							</div>
+							<!-- to append upvote images -->
+							<div id = 'downvote_vote_images' class = 'vote_images'>
+								<div id = 'downvote_images'>
+<!-- 									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png">
+									<img src="images/platupi/Danoyshka.png"> -->
+								</div>
+							</div>
+							<!-- remove from js -->
+							<!-- <h2 id = 'comment_suggestion_downvote'>0</h2> -->
 						</div>
 					</div>
-				</div>
-			</div>
+
+
+				<!-- </div> -->
+
+
 			<!-- <h1>Comments <span class = 'fa fa-plus'></span></h1> -->
 		</div>
-		<div id = 'comments'>
+		<div id = 'comment_wrapper'>
 
-<!-- 			<div class = 'comment_card'>
+		<div id = 'comments'>
+			<div class = 'comment_card'>
 				<div>
-					<img src="/images/users.jpg">
+					<img src="images/platupi/Danoyshka.png">
 				</div>
 				<div class = 'comment_info'>
 					<div>
-						<div>
-							<h2>Jamie</h2>
-							<h2>12/21/2015</h2>
-						</div>
+						<!-- <div> -->
+						<h2>Jamie</h2>
+							<!-- remove from js -->
+							<!-- <h2>12/21/2015</h2> -->
+						<!-- </div> -->
 						<h3>This is about the comment I'm making blah blah blah....
+						and this is more of the comment.... and this is even more
+						of my comments. This is about the comment I'm making blah blah blah....
 						and this is more of the comment.... and this is even more
 						of my comments.</h3>
 					</div>
 				</div>
-			</div> -->
+			</div>
+
+			<div class = 'comment_card'>
+				<div>
+					<img src="images/platupi/Danoyshka.png">
+				</div>
+				<div class = 'comment_info'>
+					<div>
+						<!-- <div> -->
+						<h2>Jamie</h2>
+							<!-- remove from js -->
+							<!-- <h2>12/21/2015</h2> -->
+						<!-- </div> -->
+						<h3>This is about the comment I'm making blah blah blah....
+						and this is more of the comment.... and this is even more
+						of my comments. This is about the comment I'm making blah blah blah....
+						and this is more of the comment.... and this is even more
+						of my comments.</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class = 'comment_card'>
+				<div>
+					<img src="images/platupi/Danoyshka.png">
+				</div>
+				<div class = 'comment_info'>
+					<div>
+						<!-- <div> -->
+						<h2>Jamie</h2>
+							<!-- remove from js -->
+							<!-- <h2>12/21/2015</h2> -->
+						<!-- </div> -->
+						<h3>This is about the comment I'm making blah blah blah....
+						and this is more of the comment....</h3>
+					</div>
+				</div>
+			</div>
+
 
 		</div>
-		<div id = 'comment_input'>
-			<div>
-				<textarea id = 'comment_input_area' placeholder = 'Enter Comment'></textarea>
-				<button id = 'comment_submit'><span class = 'fa fa-paper-plane'></span></button>
-			</div>
+
 		</div>
+
+		<div id = 'comment_input'>
+			<!-- <div> -->
+				<div>
+					<textarea id = 'comment_input_area'></textarea>
+					<button id = 'comment_submit'><span class = 'fa fa-paper-plane fa-3x'></span></button>
+				</div>
+			<!-- </div> -->
+		</div>
+
 	</div>
 <!-- 	<div id = 'chat_section'></div> -->
 
+
+
+<!-- Chats are here -->
 	<div id = 'chat_container'>
 		<h2>Group Chat</h2>
 		<div id = 'chat'>
