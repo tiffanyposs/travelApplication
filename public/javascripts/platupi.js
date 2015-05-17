@@ -1,3 +1,6 @@
+
+
+
 $('#add_platupi').click(function(){
 
 $('#platupi').empty();
@@ -21,8 +24,8 @@ $('.platupus').click(function(){
 	$('.platupus').css('border', '3px solid lightgrey')
 	$(this).css('border', '3px solid orange');
 	current_platupus = $(this).attr('id');
-	console.log(current_trip)
-	console.log(current_platupus);
+	// console.log(current_trip)
+	// console.log(current_platupus);
 })
 
 
@@ -31,6 +34,11 @@ $('#choose_avatar').click(function(){
 var avatar_file = {
 	avatar: current_platupus + '.png',
   user_id: current_user
+}
+
+var user_avatar_file = {
+  avatar: current_platupus + '.png',
+  trip_id: current_user
 }
 
 
@@ -48,17 +56,19 @@ var setAvatar = function(){
 
 
 
-  //   $.ajax({
-  //   url: current_url + 'users/avatar/' + current_trip + '/' + current_user + '/set',
-  //   type: 'PUT',
-  //   dataType: 'json',
-  //   data: avatar_file,
-  //   success: function(data){
-  //   	console.log(data)
-  //   	console.log('it set')
-  //   }
-  // });
+    $.ajax({
+    url: current_url + 'users/avatar/' + current_trip + '/' + current_user + '/set',
+    type: 'PUT',
+    dataType: 'json',
+    data: user_avatar_file,
+    success: function(data){
+    	console.log(data)
+    	console.log('users set')
+    }
+  });
 
+    $('.current_user_avatar').attr('src', '/images/hats/color_hats/' + current_platupus + '.png')
+    current_avatar = '/images/hats/color_hats/' + current_platupus + '.png';
 
 }
 
@@ -76,27 +86,24 @@ var pushAvatar = function(){
     }
   });
 
-  //   $.ajax({
-  //   url: current_url + 'users/avatar/' + current_trip + '/' + current_user + '/push', 
-  //   type: 'PUT',
-  //   dataType: 'json',
-  //   data: avatar_file,
-  //   success: function(data){
-  //   	console.log(data)
-  //   	console.log('it pushed')
-  //   }
-  // });
+    $.ajax({
+    url: current_url + 'users/avatar/' + current_trip + '/' + current_user + '/push', 
+    type: 'PUT',
+    dataType: 'json',
+    data: user_avatar_file,
+    success: function(data){
+    	console.log(data)
+    	console.log('users pushed')
+
+    }
+  });
+
+    $('.current_user_avatar').attr('src', '/images/hats/color_hats/' + current_platupus + '.png')
+    current_avatar = '/images/hats/color_hats/' + current_platupus + '.png';
 
 }
 
-    // $.ajax({
-    //     url: current_url + 'users/addtrip/' + foundfriend._id,
-    //     type: 'PUT',
-    //     data: trip,
-    //     success: function(data){
-    //         console.log("Added to the user's trips")
-    //     }
-    // })
+
 
 
 var updateAvatars = function(avatars){

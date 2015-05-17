@@ -19,7 +19,8 @@ server.on("connection", function(connection) {
 var updateChatroom = function(trip_id){
 	console.log('update')
 	var chatroom = Chat.find({'trip_id' : trip_id})
-	chatroom.populate('chat.user_id', 'first_name last_name _id');
+	chatroom.populate('chat.user_id', 'first_name last_name _id taken_avatars');
+  // chatroom.populate('trip_id', 'taken_avatars');
 	chatroom.exec(function(err, chats){
 		chats[0].chat.forEach(function(each){
 			var encoded_msg = JSON.stringify(each);

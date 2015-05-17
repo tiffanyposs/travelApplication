@@ -68,6 +68,15 @@ body, html{
 }
 
 
+
+
+
+
+
+
+
+
+
 #heading_nav{		
 	width: 80%;
 }
@@ -99,8 +108,19 @@ body, html{
 	cursor: pointer;
 }
 
-.background_button > span{
+.background_button > form{
+	display: flex; display: -webkit-flex;
+}
+
+.background_button button{
+	border: none;
+	background: transparent;
 	margin: auto;
+	/*display: flex;*/
+}
+
+.background_button span{
+	/*margin: auto;*/
 
 }
 

@@ -37,7 +37,6 @@
 
 
 
-
 <header id = 'heading_container'>
 	<div id = 'trip_container'>
 		<!-- the content is appeneded through js -->
@@ -69,23 +68,27 @@
 			</li> -->
 			<!-- put the logout putton somewhere -->
 
-			<li><img src="images/platupi/Danoyshka.png"></li>
+			<li><img class = 'current_user_avatar' src="images/platupi/Danoyshka.png"></li>
 			<li>
 				<div class = 'background_button'>
 					<form action = '/users/logout' method = 'POST'>
-						<span class = 'fa fa-sign-out fa-2x'></span>
+						<button><span class = 'fa fa-sign-out fa-2x'></span></button>
 					</form>
 				</div>
 			</li>
 		</ul>
+
+
 	</nav>
 </header>
+
 
 
 <section id = 'main_container'>
 	<nav>
 		<div id = 'main_nav'>
 			
+			<h3 id = 'add_platupi'>+ Change Avatar</h3>
 			<div id = 'categories_nav'>
 				<!-- figure out where to put the platupi modal trigger -->
 				<!-- <h3 id = 'add_platupi'>+ Add your Avatar</h3> -->

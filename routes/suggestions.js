@@ -32,7 +32,7 @@ router.get('/:suggestion_id/one', function(req, res, next) {
 
 // GET /suggestions/:category_id
 router.get('/:category_id', function(req, res, next) {
-  var query = Suggestion.find({'category_id' : req.params.category_id}).populate('user_id', 'first_name last_name username');
+  var query = Suggestion.find({'category_id' : req.params.category_id}).populate('user_id', 'first_name last_name username taken_avatars');
   query.exec(function(err, suggestions){
     if (err) return handleError(err);
     res.json(suggestions)

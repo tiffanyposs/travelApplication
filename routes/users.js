@@ -160,15 +160,14 @@ router.post('/logout', function(req, res){
 router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
   console.log(req.body)
   req.body.trip_id = req.params.trip_id;
-  User.findByIdAndUpdate(
-    req.params.user_id,
-    {$set: {'taken_avatars': req.body}},
+  User.update(
+    {_id: req.params.user_id, 'taken_avatars.trip_id': req.params.trip_id},
+    {$set: {'taken_avatars.$.avatar': req.body.avatar}},
     function(err, users) {
       console.log("Also Worked!")
       res.json(users)
     })
 });
-
 
 
 /* PUT users/avatar/:trip_id/:user_id/:update */
@@ -183,6 +182,14 @@ router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
       res.json(users)
     })
 });
+
+
+
+
+
+
+
+
 
 
 

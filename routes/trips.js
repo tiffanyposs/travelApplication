@@ -112,10 +112,10 @@ router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
 
   // req.body.user_id = req.params.user_id;
   console.log(req.body)
-  Trip.findByIdAndUpdate(
-    req.params.trip_id,
+  Trip.update(
+    {_id: req.params.trip_id, 'taken_avatars.user_id': req.params.user_id},
     // {"taken_avatars": {$elemMatch: {"user_id": req.params.user_id}}}, {$set: {"taken_avatars.$.avatar": req.body }},
-    {$set: {"taken_avatars": req.body}},
+    {$set: {"taken_avatars.$.avatar": req.body.avatar}},
     function(err, trips) {
       console.log("Trip Set!")
     })

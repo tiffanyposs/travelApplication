@@ -13,10 +13,10 @@ if(client != undefined){
   client = undefined;
 }
 
-// client = new WebSocket("ws://localhost:2000/" + current_trip);
+client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+// client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
 // client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
@@ -46,9 +46,12 @@ $('#chat_input_box').keypress(function(e){
 
 // listen for messages
 client.addEventListener("message", function(message){
+
+  // console.log(message)
   var hash_message = JSON.parse(message.data)
   // console.log(hash_message)
   var new_chat_card = $('<div></div>')
+
 
   //controls if the content is rendered as current user or other user
   if(hash_message.user_id === current_user || hash_message.user_id._id === current_user){
@@ -76,8 +79,34 @@ client.addEventListener("message", function(message){
   }
 
 
-  var platupus = $('<img>').attr('src', "images/platupi/Danoyshka.png")
 
+console.log(hash_message.user_id.taken_avatars)
+        var avatar;
+
+        if(hash_message.user_id.taken_avatars){
+        if(hash_message.user_id.taken_avatars.length === 0){
+            avatar = '/images/users.jpg'
+        }else{
+            // this sets the avatar for each
+            hash_message.user_id.taken_avatars.forEach(function(each, index){
+                if(each.trip_id === current_trip){
+                    avatar = '/images/hats/color_hats/' + each.avatar;
+                }
+                if(index === hash_message.user_id.taken_avatars.length - 1){
+                    if(avatar.length === 0){
+                        avatar = '/images/users.jpg'
+                    }
+                }    
+            })
+        }
+      }else{
+        avatar = current_avatar;
+      }
+        // console.log(avatar)
+
+
+  var platupus = $('<img>').attr('src', avatar);
+  platupus.attr('class', 'current_user_avatar')
   avatar_div.append(platupus, name);
   new_chat_card.append(avatar_div);
 
@@ -123,7 +152,6 @@ client.addEventListener("message", function(message){
         if(message_section.length > 0){
           var card_content = $('<p></p>').text(message_section.join(' '));
           content_div.append(card_content);
-          console.log('creating p')
         }
         // content_div.append(card_content);
         new_chat_card.append(content_div) 
