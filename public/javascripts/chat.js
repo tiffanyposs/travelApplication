@@ -13,10 +13,10 @@ if(client != undefined){
   client = undefined;
 }
 
-client = new WebSocket("ws://localhost:2000/" + current_trip);
+// client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-// client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
 // client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
