@@ -691,7 +691,7 @@ var getCommentInfo = function(data){
         // console.log(comment)
 
         var avatar;
-
+        console.log(comment)
         if(comment.user_id.taken_avatars.length === 0){
             avatar = '/images/users.jpg'
         }else{
