@@ -80,7 +80,7 @@ client.addEventListener("message", function(message){
 
 
 
-console.log(hash_message.user_id.taken_avatars)
+// console.log(hash_message.user_id.taken_avatars)
         var avatar;
 
         if(hash_message.user_id.taken_avatars){
