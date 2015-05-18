@@ -187,6 +187,7 @@ router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
   User.findByIdAndUpdate(
     req.params.user_id,
     {$push: {'taken_avatars': req.body}},
+    {safe: true, upsert: true},
     function(err, users) {
       console.log("Also Worked!")
       res.json(users)

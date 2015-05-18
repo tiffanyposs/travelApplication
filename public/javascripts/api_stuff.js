@@ -24,10 +24,12 @@ var attendingTrips = function(trips){
 
 
 var getUser = function(){
+
     $.ajax({
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
+        // console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         attendingTrips(data.trips)
@@ -442,6 +444,7 @@ var getSuggestionInfo = function(data){
                 upvote_array.push(each.user_id)
             }
             if(index === suggestion.upvote.length - 1){
+                // console.log(upvote_array)
                 up_count.text(upvote_array.length)
             }
         })
@@ -463,6 +466,7 @@ var getSuggestionInfo = function(data){
                 downvote_array.push(each.user_id)
             }
             if(index === suggestion.downvote.length - 1){
+                // console.log(downvote_array)
                 down_count.text(downvote_array.length)
             }
         })
@@ -636,51 +640,80 @@ var getSuggestionInfo = function(data){
                 var upvote_check = [];
 
                 //this appends the little platipi for voting
-                data[0].upvote.forEach(function(each){
-                    // console.log(each.user_id.taken_avatars)
-                    // console.log(each.user_id._id)
-                    
+                data[0].upvote.forEach(function(each, index){   
+                    console.log(each)      
+                    var found = false;
                     if(each.user_id.taken_avatars.length > 0 && upvote_check.indexOf(each.user_id._id) === -1){
                         upvote_check.push(each.user_id._id)
+                        
                         each.user_id.taken_avatars.forEach(function(y){
-                            if(y.trip_id === current_trip){
+                            if(y.trip_id === current_trip && found === false){
+                                found = true;
                                  var image = $('<img>');
-                                // image.attr('src', "images/platupi/Danoyshka.png")
                                 image.attr('src', 'images/hats/color_hats/' + y.avatar)
                                 $('#upvote_images').append(image) 
                                 if(each.user_id._id === current_user){
                                     image.attr('class', 'current_user_avatar')
-                                }                              
+                                }                           
                             }
                         })
-                    }if(each.user_id.taken_avatars.length === 0){
+                    }
+
+                    if(each.user_id.taken_avatars.length === 0){
                         var image = $('<img>');
                         image.attr('src', 'images/users.jpg');
                         $('#upvote_images').append(image);
                         if(each.user_id._id === current_user){
                             image.attr('class', 'current_user_avatar')
-                        }  
+                        }
                     }
+                    if(index === data[0].upvote.length - 1 && found === false){
+                        var image = $('<img>');
+                        image.attr('src', 'images/users.jpg');
+                        $('#upvote_images').append(image);
+                        if(each.user_id._id === current_user){
+                            image.attr('class', 'current_user_avatar')
+                        }
+                    }
+
                 })
 
                 //this safeguards from previous errors with double put requests
                 var downvote_check = [];
 
-                data[0].downvote.forEach(function(each){
-                    // console.log(each.user_id._id)
+                data[0].downvote.forEach(function(each, index){
+                    console.log(each)
+                    var found = false;
                     if(each.user_id.taken_avatars.length > 0 && downvote_check.indexOf(each.user_id._id) === -1){
                         downvote_check.push(each.user_id._id)
+                        
                         each.user_id.taken_avatars.forEach(function(y){
-                            if(y.trip_id === current_trip){
+                            if(y.trip_id === current_trip && found === false){
+                                found = true;
                                 var image_two = $('<img>');
                                 image_two.attr('src', 'images/hats/color_hats/' + y.avatar)
-                                $('#downvote_images').append(image_two)                             
+                                $('#downvote_images').append(image_two)
+                                if(each.user_id._id === current_user){
+                                    image_two.attr('class', 'current_user_avatar')
+                                }                              
                             }
                         })
                     }if(each.user_id.taken_avatars.length === 0){
                         var image_two = $('<img>');
                         image_two.attr('src', 'images/users.jpg');
                         $('#downvote_images').append(image_two);
+                        if(each.user_id._id === current_user){
+                            image_two.attr('class', 'current_user_avatar')
+                        } 
+                    }
+
+                    if(index === data[0].downvote.length - 1 && found === false){
+                        var image_two = $('<img>');
+                        image_two.attr('src', 'images/users.jpg');
+                        $('#downvote_images').append(image_two);
+                        if(each.user_id._id === current_user){
+                            image_two.attr('class', 'current_user_avatar')
+                        }
                     }
                  
                 })
@@ -833,6 +866,14 @@ var getCommentInfo = function(data){
             var edit = $('<span></span>').attr('class', 'comment_pencil fa fa-pencil fa-lg').hide();
             edit.attr('id', comment._id)
             edit_div.append(edit)
+            var edit_comment_modal = false;
+            //triggers the modal
+            edit.click(function(event){
+                edit_comment_modal = true
+                current_comment = $(this).attr('id')
+                $('#edit_comment').val(comment.content);
+                $('#edit_comment_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+            })
         }
 
         //when you hover on a comment it shows
@@ -867,14 +908,7 @@ var getCommentInfo = function(data){
             $('.' + current_comment).text(edit_content)
         });
 
-        var edit_comment_modal = false;
-        //triggers the modal
-        edit.click(function(event){
-            edit_comment_modal = true
-            current_comment = $(this).attr('id')
-            $('#edit_comment').val(comment.content);
-            $('#edit_comment_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
-        })
+
 
         $('#edit_comment_close').click(function(event){
             edit_comment_modal = false;

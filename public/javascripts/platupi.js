@@ -76,15 +76,15 @@ var logAvatars = function(avatars){
 }
 
 var checkTakenAvatars = function(){
-  //   $.ajax({
-  //   url: current_url + 'users/avatar/' + current_trip + '/' + current_user, 
-  //   dataType: 'json',
-  //   success: function(data){
-  //       console.log(data.taken_avatars)
-  //       // logAvatars(data.taken_avatars)
-  //       // updateAvatars(data.taken_avatars)
-  //   }
-  // });
+    $.ajax({
+    url: current_url + 'users/avatar/' + current_trip + '/' + current_user, 
+    dataType: 'json',
+    success: function(data){
+        console.log(data.taken_avatars)
+        // logAvatars(data.taken_avatars)
+        // updateAvatars(data.taken_avatars)
+    }
+  });
 
     $.ajax({
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user, 
