@@ -13,9 +13,15 @@ $('#upvote').click(function(){
 	$('#comment_suggestion_upvote').text(vote_amount+1);
 
 	var image = $('<img>');
-	image.attr('src', "images/platupi/Danoyshka.png")
+	image.attr('src', current_avatar);
+	image.attr('class', 'current_user_avatar')
+
+	console.log(current_avatar)
+	
+	// console.log(current_avatar);
 
 	$('#upvote_images').append(image)
+	console.log('new_vote')
 	// $('.suggestion_upvote_count').text(vote_amount+1)
 	$('#' + current_suggestion).find('.suggestion_upvote_count').text(vote_amount+1);
 
@@ -33,19 +39,34 @@ $('#upvote').click(function(){
 
 	
 	var userExists = function(data){
+		console.log('userexists')
 	var array = []
 	vote_amount = data.upvote.length;
-		data.upvote.forEach(function(each){
-			array.push(each.user_id);
-			// console.log(array)
-		})
-		data.downvote.forEach(function(each){
-			array.push(each.user_id);
-			// console.log(array)
-		})
-		if(array.indexOf(current_user) === -1){
+
+		if(data.upvote.length === 0 && data.downvote.length === 0){
 			makePutReqest()
+		}else{
+
+			var downvote = function(){
+				data.downvote.forEach(function(each, index){
+					array.push(each.user_id);
+					console.log(array)		
+					if(index === data.upvote.length - 1 && array.indexOf(current_user) === -1){
+						makePutReqest()
+						console.log('make put request')
+					}
+				})
+			}
+
+			data.upvote.forEach(function(each, index){
+				array.push(each.user_id);
+				console.log(array)
+				if(index === data.upvote.length - 1){
+					downvote();
+				}
+			})
 		}
+
 	}
 
 
@@ -56,11 +77,11 @@ $('#upvote').click(function(){
 	    success: function(data){
 	    	console.log(upvote_clicks.indexOf(current_suggestion))
 	    	if(upvote_clicks.indexOf(current_suggestion) > -1){
-	    		console.log(upvote_clicks)
-	    		console.log('already clicked today')
+	    		// console.log(upvote_clicks)
+	    		// console.log('already clicked today')
 	    	}else{
 	    	upvote_clicks.push(current_suggestion)
-	    	console.log('not today')
+	    	// console.log('not today')
 	        userExists(data)
 	    }
 	    }
@@ -89,7 +110,7 @@ $('#downvote').click(function(){
 		// $('#comment_suggestion_upvote').text()
 
 		var image = $('<img>');
-		image.attr('src', "images/platupi/Danoyshka.png")
+		image.attr('src', current_avatar)
 
 		$('#downvote_images').append(image)
 
@@ -109,11 +130,9 @@ $('#downvote').click(function(){
 	vote_amount = data.downvote.length;
 	data.downvote.forEach(function(each){
 		array.push(each.user_id);
-		console.log(array)
 	});
 	data.upvote.forEach(function(each){
 		array.push(each.user_id);
-		console.log(array)
 	});
 	if(array.indexOf(current_user) === -1){
 		makePutReqest()
@@ -131,11 +150,8 @@ $('#downvote').click(function(){
 	    dataType: 'json',
 	    success: function(data){
 	    	if(downvote_clicks.indexOf(current_suggestion) > -1){
-	    		console.log(upvote_clicks)
-	    		console.log('already clicked today')
 	    	}else{
 	    	downvote_clicks.push(current_suggestion)
-	    	console.log('not today')
 	        userExists(data)
 	    }
 	    }
