@@ -432,12 +432,12 @@ var getSuggestionInfo = function(data){
         var up_vote_div = $('<div></div>')
         var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green')
         var up_count = $('<h2></h2>').attr('class', 'suggestion_upvote_count')
-        console.log(suggestion.upvote.length)
+        // console.log(suggestion.upvote.length)
         
 
         var upvote_array = []
         suggestion.upvote.forEach(function(each, index){
-            console.log(each)
+            // console.log(each)
             if(upvote_array.indexOf(each.user_id) === -1){
                 upvote_array.push(each.user_id)
             }
@@ -454,11 +454,11 @@ var getSuggestionInfo = function(data){
         var down_vote_div = $('<div></div>')
         var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red')
         var down_count = $('<h2></h2>').attr('class', 'suggestion_downvote_count')
-        console.log(suggestion.downvote.length)
+        // console.log(suggestion.downvote.length)
 
         var downvote_array = []
         suggestion.downvote.forEach(function(each, index){
-            console.log(each)
+            // console.log(each)
             if(downvote_array.indexOf(each.user_id) === -1){
                 downvote_array.push(each.user_id)
             }
@@ -558,7 +558,7 @@ var getSuggestionInfo = function(data){
         inside_voting.append(up_vote_div, down_vote_div)
 
         suggestion_card.append(suggestion_info, suggestion_voting, edit_div);
-        $('#suggestion_content').append(suggestion_card)
+        $('#suggestion_content').prepend(suggestion_card)
         suggestion_card.click(function(){
             // console.log('suggestion_card')
             $('#comments').empty();
@@ -583,7 +583,8 @@ var getSuggestionInfo = function(data){
                 //and checks if its valid
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
-                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(7, 20) + "...");
+                    console.log(data[0].link)
+                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(12, 20) + "...");
                     $('#suggestion_comment_link').attr('href', data[0].link);
                 }else if(suggestion.link && valid_url === false){
                     $('#suggestion_comment_link').css('visibility', 'visible')
@@ -637,7 +638,7 @@ var getSuggestionInfo = function(data){
                 //this appends the little platipi for voting
                 data[0].upvote.forEach(function(each){
                     // console.log(each.user_id.taken_avatars)
-                    console.log(each.user_id._id)
+                    // console.log(each.user_id._id)
                     
                     if(each.user_id.taken_avatars.length > 0 && upvote_check.indexOf(each.user_id._id) === -1){
                         upvote_check.push(each.user_id._id)
@@ -666,7 +667,7 @@ var getSuggestionInfo = function(data){
                 var downvote_check = [];
 
                 data[0].downvote.forEach(function(each){
-                    console.log(each.user_id._id)
+                    // console.log(each.user_id._id)
                     if(each.user_id.taken_avatars.length > 0 && downvote_check.indexOf(each.user_id._id) === -1){
                         downvote_check.push(each.user_id._id)
                         each.user_id.taken_avatars.forEach(function(y){

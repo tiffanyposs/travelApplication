@@ -1,5 +1,4 @@
-###Little Fixes
-
+[bash profile](http://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
 ###Git Branch Tutorial
 

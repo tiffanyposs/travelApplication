@@ -8,8 +8,9 @@ the right segments :)
 2nd dark blue #425061
 blue #1e87c1
 light grey #d6dde0
-red #f0576b
-green #c8e2af*/
+red #F33533
+green #98C06A*/
+
 
 body, html{
   -webkit-box-sizing: border-box;
@@ -43,12 +44,14 @@ body, html{
 #heading_container{
 	width: 100%;
 	height: 13%;
+	min-height: 80px;
 	background-color: #1e87c1;/*blue*/
 	display: flex; display: -webkit-flex;
 }
 
 #trip_container{
 	width: 18%;
+	min-width: 240px;
 	height: 100%;
 	background-color: #425061;
 	display: flex; display: -webkit-flex;
@@ -127,7 +130,7 @@ body, html{
 #heading_nav img{
 	width: 70px;
 	border-radius: 50px;
-	border: 3px solid #2f3743; /*dark blue*/
+	border: 3px solid #425061; /*dark blue*/
 	background-color: white;
 	cursor: pointer;
 }
@@ -146,6 +149,7 @@ body, html{
 
 #main_container nav{
 	width: 18%;
+	min-width: 240px;
 	height: 100%;
 	background-color: #2f3743; /*dark blue*/
 	display: flex; display: -webkit-flex;
@@ -339,11 +343,11 @@ body, html{
 
 
 .red{
-	color: #f0576b;
+	color: #F33533;
 }
 
 .green{
-	color: #c8e2af;
+	color: #98C06A;
 }
 
 
@@ -474,11 +478,11 @@ body, html{
 }
 
 #upvote_vote_images img{
-	border: 3px solid #c8e2af;
+	border: 3px solid #98C06A;
 }
 
 #downvote_vote_images img{
-	border: 3px solid #f0576b;
+	border: 3px solid #F33533;
 }
 
 
@@ -565,6 +569,7 @@ body, html{
 
 #comment_input{
 	height: 15%;
+	min-height: 100px;
 	width: 100%;
 	background-color: #2f3743;
 	display: flex; display: -webkit-flex;
@@ -575,7 +580,7 @@ body, html{
 	width: 100%;
 	margin: auto;
 	display: flex; display: -webkit-flex;
-
+	/*min-height: 70px*/
 }
 
 
