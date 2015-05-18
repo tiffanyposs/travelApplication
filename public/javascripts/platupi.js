@@ -57,9 +57,12 @@ var logAvatars = function(avatars){
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
     // console.log(each)
-    var image_num = parseInt(each.avatar.split('_')[1].split('.')[0]);
-    if(used_avatars.indexOf(image_num) === -1){
-      used_avatars.push(image_num);
+    //this if statement guards if there are faulty .png avatars
+    if(each.avatar.length > 4){
+      var image_num = parseInt(each.avatar.split('_')[1].split('.')[0]);
+      if(used_avatars.indexOf(image_num) === -1){
+        used_avatars.push(image_num);
+      }
     }
 
 
