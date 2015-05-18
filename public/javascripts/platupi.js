@@ -55,12 +55,16 @@ var logAvatars = function(avatars){
   avatars.forEach(function(each, index){
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
+    console.log(each)
     used_avatars.push(parseInt(each.avatar.split('_')[1].split('.')[0]))
 
     if(index === avatars.length - 1){
       makeAvatarModal()
     }
   })
+  if(avatars.length === 0){
+    makeAvatarModal();
+  }
 }
 
 var checkTakenAvatars = function(){
