@@ -53,6 +53,7 @@ var makeAvatarModal = function(){
 
 var logAvatars = function(avatars){
   avatars.forEach(function(each, index){
+    console.log(each)
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
     // console.log(each)
