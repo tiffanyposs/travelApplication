@@ -39,19 +39,34 @@ $('#upvote').click(function(){
 
 	
 	var userExists = function(data){
+		console.log('userexists')
 	var array = []
 	vote_amount = data.upvote.length;
-		data.upvote.forEach(function(each){
-			array.push(each.user_id);
-			// console.log(array)
-		})
-		data.downvote.forEach(function(each){
-			array.push(each.user_id);
-			// console.log(array)
-		})
-		if(array.indexOf(current_user) === -1){
+
+		if(data.upvote.length === 0 && data.downvote.length === 0){
 			makePutReqest()
+		}else{
+
+			var downvote = function(){
+				data.downvote.forEach(function(each, index){
+					array.push(each.user_id);
+					console.log(array)		
+					if(index === data.upvote.length - 1 && array.indexOf(current_user) === -1){
+						makePutReqest()
+						console.log('make put request')
+					}
+				})
+			}
+
+			data.upvote.forEach(function(each, index){
+				array.push(each.user_id);
+				console.log(array)
+				if(index === data.upvote.length - 1){
+					downvote();
+				}
+			})
 		}
+
 	}
 
 

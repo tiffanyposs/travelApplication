@@ -56,7 +56,12 @@ var logAvatars = function(avatars){
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
     console.log(each)
-    used_avatars.push(parseInt(each.avatar.split('_')[1].split('.')[0]))
+    var image_num = parseInt(each.avatar.split('_')[1].split('.')[0]);
+    if(used_avatars.indexOf(image_num) === -1){
+      used_avatars.push(image_num);
+      console.log('push')
+    }
+
 
     if(index === avatars.length - 1){
       makeAvatarModal()

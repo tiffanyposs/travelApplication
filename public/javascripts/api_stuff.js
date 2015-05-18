@@ -410,9 +410,6 @@ var getSuggestionInfo = function(data){
 // console.log('suggestion')
     data.forEach(function(suggestion){
 
-
-
-
         var suggestion_card = $('<div></div>').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
         var suggestion_info = $('<div></div>').attr('class', 'suggestion_info')
@@ -434,12 +431,46 @@ var getSuggestionInfo = function(data){
 
         var up_vote_div = $('<div></div>')
         var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green')
-        var up_count = $('<h2></h2>').text(suggestion.upvote.length).attr('class', 'suggestion_upvote_count')
+        var up_count = $('<h2></h2>').attr('class', 'suggestion_upvote_count')
+        console.log(suggestion.upvote.length)
+        
+
+        var upvote_array = []
+        suggestion.upvote.forEach(function(each, index){
+            console.log(each)
+            if(upvote_array.indexOf(each.user_id) === -1){
+                upvote_array.push(each.user_id)
+            }
+            if(index === suggestion.upvote.length - 1){
+                up_count.text(upvote_array.length)
+            }
+        })
+        if(suggestion.upvote.length === 0){
+            up_count.text('0')
+        }
+
         up_vote_div.append(up_span, up_count)
 
         var down_vote_div = $('<div></div>')
         var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red')
-        var down_count = $('<h2></h2>').text(suggestion.downvote.length).attr('class', 'suggestion_downvote_count')
+        var down_count = $('<h2></h2>').attr('class', 'suggestion_downvote_count')
+        console.log(suggestion.downvote.length)
+
+        var downvote_array = []
+        suggestion.downvote.forEach(function(each, index){
+            console.log(each)
+            if(downvote_array.indexOf(each.user_id) === -1){
+                downvote_array.push(each.user_id)
+            }
+            if(index === suggestion.downvote.length - 1){
+                down_count.text(downvote_array.length)
+            }
+        })
+
+        if(suggestion.downvote.length === 0){
+            down_count.text('0')
+        }
+
         down_vote_div.append(down_span, down_count)
 
         //this is the editing pencil
@@ -600,11 +631,16 @@ var getSuggestionInfo = function(data){
                 $('#downvote_images').empty();
 
 
+                //this safeguards from previous errors with double put requests
+                var upvote_check = [];
+
                 //this appends the little platipi for voting
                 data[0].upvote.forEach(function(each){
                     // console.log(each.user_id.taken_avatars)
-                    // console.log(each)
-                    if(each.user_id.taken_avatars.length > 0){
+                    console.log(each.user_id._id)
+                    
+                    if(each.user_id.taken_avatars.length > 0 && upvote_check.indexOf(each.user_id._id) === -1){
+                        upvote_check.push(each.user_id._id)
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip){
                                  var image = $('<img>');
@@ -616,7 +652,7 @@ var getSuggestionInfo = function(data){
                                 }                              
                             }
                         })
-                    }else{
+                    }if(each.user_id.taken_avatars.length === 0){
                         var image = $('<img>');
                         image.attr('src', 'images/users.jpg');
                         $('#upvote_images').append(image);
@@ -625,9 +661,14 @@ var getSuggestionInfo = function(data){
                         }  
                     }
                 })
+
+                //this safeguards from previous errors with double put requests
+                var downvote_check = [];
+
                 data[0].downvote.forEach(function(each){
-                    // console.log(each)
-                    if(each.user_id.taken_avatars.length > 0){
+                    console.log(each.user_id._id)
+                    if(each.user_id.taken_avatars.length > 0 && downvote_check.indexOf(each.user_id._id) === -1){
+                        downvote_check.push(each.user_id._id)
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip){
                                 var image_two = $('<img>');
@@ -635,7 +676,7 @@ var getSuggestionInfo = function(data){
                                 $('#downvote_images').append(image_two)                             
                             }
                         })
-                    }else{
+                    }if(each.user_id.taken_avatars.length === 0){
                         var image_two = $('<img>');
                         image_two.attr('src', 'images/users.jpg');
                         $('#downvote_images').append(image_two);
