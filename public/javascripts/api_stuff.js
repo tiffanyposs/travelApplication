@@ -659,18 +659,20 @@ var getSuggestionInfo = function(data){
                         })
                     }
 
-                    if(each.user_id.taken_avatars.length === 0){
-                        var image = $('<img>');
-                        image.attr('src', 'images/users.jpg');
-                        $('#upvote_images').append(image);
-                        if(each.user_id._id === current_user){
-                            image.attr('class', 'current_user_avatar')
-                        }
-                    }
+                    // if(each.user_id.taken_avatars.length === 0){
+                    //     var image = $('<img>');
+                    //     image.attr('src', 'images/users.jpg');
+                    //     $('#upvote_images').append(image);
+                    //     console.log('appending image')
+                    //     if(each.user_id._id === current_user){
+                    //         image.attr('class', 'current_user_avatar')
+                    //     }
+                    // }
                     if(index === data[0].upvote.length - 1 && found === false){
                         var image = $('<img>');
                         image.attr('src', 'images/users.jpg');
                         $('#upvote_images').append(image);
+                        console.log('appending image 2')
                         if(each.user_id._id === current_user){
                             image.attr('class', 'current_user_avatar')
                         }
@@ -698,14 +700,16 @@ var getSuggestionInfo = function(data){
                                 }                              
                             }
                         })
-                    }if(each.user_id.taken_avatars.length === 0){
-                        var image_two = $('<img>');
-                        image_two.attr('src', 'images/users.jpg');
-                        $('#downvote_images').append(image_two);
-                        if(each.user_id._id === current_user){
-                            image_two.attr('class', 'current_user_avatar')
-                        } 
                     }
+
+                    // if(each.user_id.taken_avatars.length === 0){
+                    //     var image_two = $('<img>');
+                    //     image_two.attr('src', 'images/users.jpg');
+                    //     $('#downvote_images').append(image_two);
+                    //     if(each.user_id._id === current_user){
+                    //         image_two.attr('class', 'current_user_avatar')
+                    //     } 
+                    // }
 
                     if(index === data[0].downvote.length - 1 && found === false){
                         var image_two = $('<img>');
