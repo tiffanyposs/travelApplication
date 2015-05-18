@@ -110,7 +110,7 @@ router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
 /* PUT /trips/addfriend/trip_id */
 router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
 
-  // req.body.user_id = req.params.user_id;
+  req.body.user_id = req.params.user_id;
   console.log(req.body)
   Trip.update(
     {_id: req.params.trip_id, 'taken_avatars.user_id': req.params.user_id},
@@ -118,15 +118,10 @@ router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
     {$set: {"taken_avatars.$.avatar": req.body.avatar}},
     function(err, trips) {
       console.log("Trip Set!")
+      res.json(trips)
     })
 
 });
-
-
-
-
-
-
 
 
 

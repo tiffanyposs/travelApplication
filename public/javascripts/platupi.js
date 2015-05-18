@@ -55,11 +55,10 @@ var logAvatars = function(avatars){
   avatars.forEach(function(each, index){
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
-    console.log(each)
+    // console.log(each)
     var image_num = parseInt(each.avatar.split('_')[1].split('.')[0]);
     if(used_avatars.indexOf(image_num) === -1){
       used_avatars.push(image_num);
-      console.log('push')
     }
 
 
@@ -73,11 +72,21 @@ var logAvatars = function(avatars){
 }
 
 var checkTakenAvatars = function(){
+  //   $.ajax({
+  //   url: current_url + 'users/avatar/' + current_trip + '/' + current_user, 
+  //   dataType: 'json',
+  //   success: function(data){
+  //       console.log(data.taken_avatars)
+  //       // logAvatars(data.taken_avatars)
+  //       // updateAvatars(data.taken_avatars)
+  //   }
+  // });
+
     $.ajax({
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user, 
     dataType: 'json',
     success: function(data){
-        // console.log(data.taken_avatars)
+        console.log(data.taken_avatars)
         logAvatars(data.taken_avatars)
         // updateAvatars(data.taken_avatars)
     }
@@ -107,7 +116,7 @@ var setAvatar = function(){
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-    	// console.log(data)
+    	console.log(data)
     	// console.log('it set')
     }
   });
@@ -120,7 +129,7 @@ var setAvatar = function(){
     dataType: 'json',
     data: user_avatar_file,
     success: function(data){
-    	// console.log(data)
+    	console.log(data)
     	// console.log('users set')
     }
   });
@@ -167,7 +176,7 @@ var pushAvatar = function(){
 var updateAvatars = function(avatars){
 	// console.log(avatars)
 	if(avatars.length === 0){
-		// console.log('push no avatars choosen')
+		console.log('push no avatars choosen')
 		pushAvatar();
 	}else{
 
@@ -175,13 +184,13 @@ var updateAvatars = function(avatars){
     // console.log(each)
 		var found = false;
 		if(each.user_id === current_user){
-			// console.log('set');
+			console.log('set');
 			found = true;
 			setAvatar();
 		}
 
 		if(index === avatars.length - 1 && found === false){
-			// console.log('push user not found');
+			console.log('push user not found');
 			pushAvatar();
 		}
 	})

@@ -27,7 +27,8 @@ $('#chat_submit').click(function(){
     trip_id: current_trip,
     name: current_user_name,
     user_id: current_user,
-    message: $('#chat_input_box').val()
+    message: $('#chat_input_box').val(),
+    avatar: current_avatar
   }
   $('#chat_input_box').val('');
   var encoded_msg = JSON.stringify(msg);
@@ -82,31 +83,37 @@ client.addEventListener("message", function(message){
 
 // console.log(hash_message.user_id.taken_avatars)
         var avatar;
+        // console.log(hash_message)
+        var platupus = $('<img>')
 
+        //this is for loading the old messages from the database
         if(hash_message.user_id.taken_avatars){
         if(hash_message.user_id.taken_avatars.length === 0){
             avatar = '/images/users.jpg'
+            if(hash_message.user_id === current_user){
+              platupus.attr('class', 'current_user_avatar')
+            }
         }else{
             // this sets the avatar for each
             hash_message.user_id.taken_avatars.forEach(function(each, index){
+                if(hash_message.user_id._id === current_user){
+                  platupus.attr('class', 'current_user_avatar')
+                }
                 if(each.trip_id === current_trip){
                     avatar = '/images/hats/color_hats/' + each.avatar;
                 }
-                if(index === hash_message.user_id.taken_avatars.length - 1){
-                    if(avatar.length === 0){
-                        avatar = '/images/users.jpg'
-                    }
-                }    
             })
         }
       }else{
-        avatar = current_avatar;
+        // console.log(hash_message)
+        avatar = hash_message.avatar
+        if(hash_message.user_id === current_user){
+          platupus.attr('class', 'current_user_avatar')
+        }
       }
-        // console.log(avatar)
 
 
-  var platupus = $('<img>').attr('src', avatar);
-  platupus.attr('class', 'current_user_avatar')
+  platupus.attr('src', avatar);
   avatar_div.append(platupus, name);
   new_chat_card.append(avatar_div);
 

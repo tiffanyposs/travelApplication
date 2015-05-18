@@ -4,6 +4,7 @@ var router = express.Router();
 
 // var Trip = require('../models/Trip.js');
 var Chat = require('../models/Chat.js');
+var User = require('../models/User.js');
 
 
 //!!!!!!!!!!!!!
@@ -92,6 +93,10 @@ var addChatroom = function(trip_id){
 	        // console.log(chat);
 	    }
 	  );
+
+
+  
+
 
 
 

@@ -155,6 +155,16 @@ router.post('/logout', function(req, res){
 
 
 
+//gets the last trip a user posted
+router.get('/avatar/:trip_id/:user_id', function(req, res, next){
+  var query = User.findById( req.params.user_id);
+  query.exec(function( err, users){
+    if (err) return handleError(err);
+    res.json(users)
+  })
+})
+
+
 
 /* PUT users/avatar/:trip_id/:user_id/:update */
 router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
