@@ -120,8 +120,8 @@ var setAvatar = function(){
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-    	console.log(data)
-    	// console.log('it set')
+    	// console.log(data)
+    	console.log('it set')
     }
   });
 
@@ -185,11 +185,8 @@ var updateAvatars = function(avatars){
 	}else{
 
   var found = false;
-	avatars.forEach(function(each, index){
-    console.log(each)
-		
+	avatars.forEach(function(each, index){		
 		if(each.user_id === current_user){
-			console.log('set');
 			found = true;
 			setAvatar();
 		}

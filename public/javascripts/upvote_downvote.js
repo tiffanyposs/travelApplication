@@ -195,6 +195,27 @@ $('#upvote').click(function(){
 	}
 	}
 
+	// var userExists = function(data){
+	// 	var array = [];
+	// 	var upvote = function(){
+	// 		data.upvote.forEach(function(each, index){
+	// 			console.log(array)
+	// 			array.push(each.user_id);
+			
+	// 		if(index === data.upvote.length - 1 && array.indexOf(current_user === -1)){
+	// 			makePutReqest();
+	// 		}	
+	// 		});	
+	// 	}
+	// 	data.downvote.forEach(function(each, index){
+	// 		array.push(each.user_id);
+	// 		if(index === data.downvote.length - 1){
+	// 			upvote()
+	// 			console.log('upvote')
+	// 		}
+	// 	});	
+	// }
+
 
 	// var userExists = function(data){
 	// var array = []
