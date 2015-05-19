@@ -53,7 +53,7 @@ var makeAvatarModal = function(){
 
 var logAvatars = function(avatars){
   avatars.forEach(function(each, index){
-    console.log(each)
+    // console.log(each)
     // console.log(each.avatar.split('_')[1].split('.')[0])
     //this pushes the number
     // console.log(each)
@@ -184,9 +184,10 @@ var updateAvatars = function(avatars){
 		pushAvatar();
 	}else{
 
+  var found = false;
 	avatars.forEach(function(each, index){
-    // console.log(each)
-		var found = false;
+    console.log(each)
+		
 		if(each.user_id === current_user){
 			console.log('set');
 			found = true;
