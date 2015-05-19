@@ -45,9 +45,9 @@ var userTripInfo = function(data){
     // console.log(data);
     //this hides the the content if theres no trips
     if(data.length > 0){
-        $('#group_chat, #categories_nav, #friends_nav').show('fold', 400);
+        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
     }else{
-        $('#group_chat, #categories_nav, #friends_nav').hide('fold', 400);
+        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').hide('fold', 400);
     }
 
     //this sets the default of trip to the first one

@@ -186,6 +186,7 @@ body, html{
 
 #group_chat{
 	cursor: pointer;
+	display: none;
 }
 
 .group_clicked{
@@ -200,6 +201,10 @@ body, html{
 	font-size: 1.25em;
 	padding: 10px;
 
+}
+
+#add_platupi{
+	display: none;
 }
 
 .nav_clicked{
