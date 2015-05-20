@@ -31,14 +31,6 @@ body, html{
   }
 
 
-#template{
-	width: 100%;
-	height: auto;
-	position: absolute;
-	z-index: -1000;
-	opacity: 0.5;
-}
-
 
 /*header*/
 #heading_container{
@@ -374,6 +366,7 @@ body, html{
 	visibility: hidden;
 }
 
+
 #comment_suggestion{
 	background-color: white;
 	width: 90%;
@@ -383,6 +376,32 @@ body, html{
 	border-radius: 30px;
 	display: flex; display: -webkit-flex;
 }
+
+
+/*this is the hover div*/
+#voting_hover_div{
+	display:none;
+	position: absolute;
+	color: white;
+	background-color: #1e87c1;
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+}
+
+.hover_green_border{
+	border: 3px solid #98C06A;
+}
+
+.hover_red_border{
+	border: 3px solid #F33533;
+}
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
 
 #upvote, #downvote{
 	cursor: pointer;

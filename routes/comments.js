@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
 // /* GET /comments/suggestion_id */
 router.get('/:suggestion_id', function(req, res, next) {
   var query = Comment.find({'suggestion_id' : req.params.suggestion_id});
-  query.populate('user_id');
+  query.populate('user_id suggestion_id');
   query.exec(function(err, comments){
     if (err) return handleError(err);
     res.json(comments)

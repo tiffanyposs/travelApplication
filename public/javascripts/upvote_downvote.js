@@ -96,6 +96,18 @@ $('#downvote').click(function(){
 
 		var image = $('<img>');
 		image.attr('src', current_avatar).attr('class', 'current_user_avatar')
+
+        image.hover(function(e){
+            $('#voting_hover_div').text(current_user_name);
+            $('#voting_hover_div').css({
+                left: $(this).position().left + $(this).width()/2,
+                top: $(this).position().top - 20,
+                'border': '3px solid #F33533',
+            }).show()
+        }, function(){
+            $('#voting_hover_div').hide()
+        })  
+
 		$('#downvote_images').append(image)
 
 		$.ajax({
@@ -168,6 +180,18 @@ $('#upvote').click(function(){
 
 		var image = $('<img>');
 		image.attr('src', current_avatar).attr('class', 'current_user_avatar')
+
+        image.hover(function(e){
+            $('#voting_hover_div').text(current_user_name);
+            $('#voting_hover_div').css({
+                left: $(this).position().left + $(this).width()/2,
+                top: $(this).position().top - 20,
+                'border': '3px solid #98C06A',
+            }).show()
+        }, function(){
+            $('#voting_hover_div').hide()
+        })  
+
 		$('#upvote_images').append(image)
 
 		$.ajax({

@@ -24,8 +24,8 @@ router.post('/', function(req, res, next) {
 // GET /suggestions/:suggestion_id/one
 router.get('/:suggestion_id/one', function(req, res, next) {
   var query = Suggestion.find({'_id' : req.params.suggestion_id}).populate('user_id');
-  query.populate('upvote.user_id', 'taken_avatars');
-  query.populate('downvote.user_id', 'taken_avatars');
+  query.populate('upvote.user_id', 'taken_avatars first_name last_name username');
+  query.populate('downvote.user_id', 'taken_avatars first_name last_name username');
   query.exec(function(err, suggestions){
     if (err) return handleError(err);
     res.json(suggestions)

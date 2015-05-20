@@ -107,9 +107,7 @@ app.use('/trips', trips);
 app.use('/categories', categories);
 app.use('/suggestions', suggestions);
 app.use('/comments', comments);
-
 app.use('/chats', chats);
-
 app.use('/analysis', analysis);
 app.use('/sessions', sessions);
 

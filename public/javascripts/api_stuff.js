@@ -33,6 +33,9 @@ var getUser = function(){
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         attendingTrips(data.trips)
+        if(data.trips.length === 0){
+            $('#current_trip').click()
+        }
     }
   });
 };
@@ -42,12 +45,11 @@ getUser();
 
 //This renders the current user's trips
 var userTripInfo = function(data){
-    // console.log(data);
-    //this hides the the content if theres no trips
+
     if(data.length > 0){
         $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
     }else{
-        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').hide('fold', 400);
+        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').hide('fold', 400);        
     }
 
     //this sets the default of trip to the first one
@@ -174,8 +176,9 @@ var getUserTrips = function(){
     dataType: 'json',
     success: function(data){
         userTripInfo(data);
+        // console.log(data)
     }
-  });
+  })
 }
 
 
@@ -277,6 +280,7 @@ $('#trip_add').click(function(){
 
 var getTripCategoryInfo = function(data){
 
+
     //this hides the suggestion if theres no category
     if(data.length > 0){
         $('#suggestion_header h1').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
@@ -294,7 +298,6 @@ var getTripCategoryInfo = function(data){
         category_name.attr('class', 'categories')
         $( '#categories' ).append(category_name);
 
-        // $( '#categories' ).append(category_name).hide().show('slow');
 
         category_name.click(function(){
             $('#suggestion_content').empty();
@@ -394,7 +397,6 @@ function ValidUrl(str) {
 
 
 var getSuggestionInfo = function(data){
-    // console.log(data)
     //this hides the comment box if there is no suggestion
     if(data.length > 0){
         $('#comment_input').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
@@ -420,7 +422,7 @@ var getSuggestionInfo = function(data){
         var content_div = $('<div></div>');
         var title = $('<h1></h1>').text(suggestion.title).attr('class', 'title');
         var created_by = $('<h2></h2>').text("by: " + suggestion.user_id.first_name + " " + suggestion.user_id.last_name);
-        created_by.attr('class', 'created_by')
+        created_by.attr('class', 'created_by');
         var date = $('<h3></h3>').text(suggestion.created.substring(0, 10)).attr('class', 'date');
 
         content_div.append(title, created_by, date)
@@ -570,6 +572,8 @@ var getSuggestionInfo = function(data){
             
             current_suggestion = suggestion._id;
             $(this).addClass('suggestion_clicked')
+
+            //this passes the current suggestions content to be appended into comments
             getComments();
             // console.log(avatar)
 
@@ -587,7 +591,7 @@ var getSuggestionInfo = function(data){
                 //and checks if its valid
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
-                    console.log(data[0].link)
+                    // console.log(data[0].link)
                     $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(12, 20) + "...");
                     $('#suggestion_comment_link').attr('href', data[0].link);
                 }else if(suggestion.link && valid_url === false){
@@ -609,6 +613,7 @@ var getSuggestionInfo = function(data){
                     // console.log('else')
                     // console.log(data[0].user_id.taken_avatars)
                     if(data[0].user_id.taken_avatars.length > 0){
+                        // console.log(data[0].user_id)
                     data[0].user_id.taken_avatars.forEach(function(each, index){
                         if(each.trip_id === current_trip){
                             avatar = '/images/hats/color_hats/' + each.avatar;
@@ -629,7 +634,9 @@ var getSuggestionInfo = function(data){
                 }else{
                     $('#suggestion_avatar img').attr('class', '')
                 }
+
                 $('#suggestion_avatar img').attr('src', avatar)
+
 
                 // $('#comment_suggestion_upvote').text(data[0].upvote.length)
                 $('#upvote_images').empty();
@@ -639,37 +646,51 @@ var getSuggestionInfo = function(data){
                 //this safeguards from previous errors with double put requests
                 var upvote_check = [];
 
+
+                // console.log(data[0].upvote)
                 //this appends the little platipi for voting
                 data[0].upvote.forEach(function(each, index){   
                     // console.log(each)      
                     var found = false;
+                    var image;
                     if(each.user_id.taken_avatars.length > 0 && upvote_check.indexOf(each.user_id._id) === -1){
                         upvote_check.push(each.user_id._id)
                         
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip && found === false){
                                 found = true;
-                                 var image = $('<img>');
+                                image = $('<img>');
                                 image.attr('src', 'images/hats/color_hats/' + y.avatar)
                                 $('#upvote_images').append(image) 
                                 if(each.user_id._id === current_user){
                                     image.attr('class', 'current_user_avatar')
-                                }                           
+                                }
+
                             }
                         })
                     }
 
                     if(each.user_id.taken_avatars.length === 0){
-                        var image = $('<img>');
+                        image = $('<img>');
                         image.attr('src', 'images/users.jpg');
                         $('#upvote_images').append(image);
-                        console.log('appending image')
+                        // console.log('appending image')
                         if(each.user_id._id === current_user){
                             image.attr('class', 'current_user_avatar')
                         }
                     }
 
-                    
+                    //this shows the name on hover
+                    image.hover(function(e){
+                        $('#voting_hover_div').text(each.user_id.first_name + ' ' + each.user_id.last_name);
+                        $('#voting_hover_div').css({
+                            left: $(this).position().left + $(this).width()/2,
+                            top: $(this).position().top - 20,
+                            'border': '3px solid #98C06A',
+                        }).show()
+                    }, function(){
+                        $('#voting_hover_div').hide()
+                    })         
                     // if(index === data[0].upvote.length - 1 && found === false){
                     //     var image = $('<img>');
                     //     image.attr('src', 'images/users.jpg');
@@ -688,13 +709,14 @@ var getSuggestionInfo = function(data){
                 data[0].downvote.forEach(function(each, index){
                     // console.log(each)
                     var found = false;
+                    var image_two;
                     if(each.user_id.taken_avatars.length > 0 && downvote_check.indexOf(each.user_id._id) === -1){
                         downvote_check.push(each.user_id._id)
                         
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip && found === false){
                                 found = true;
-                                var image_two = $('<img>');
+                                image_two = $('<img>');
                                 image_two.attr('src', 'images/hats/color_hats/' + y.avatar)
                                 $('#downvote_images').append(image_two)
                                 if(each.user_id._id === current_user){
@@ -705,7 +727,7 @@ var getSuggestionInfo = function(data){
                     }
 
                     if(each.user_id.taken_avatars.length === 0){
-                        var image_two = $('<img>');
+                        image_two = $('<img>');
                         image_two.attr('src', 'images/users.jpg');
                         $('#downvote_images').append(image_two);
                         if(each.user_id._id === current_user){
@@ -713,6 +735,17 @@ var getSuggestionInfo = function(data){
                         } 
                     }
 
+                    //this shows the name on hover
+                    image_two.hover(function(e){
+                        $('#voting_hover_div').text(each.user_id.first_name + ' ' + each.user_id.last_name);
+                        $('#voting_hover_div').css({
+                            left: $(this).position().left + $(this).width()/2,
+                            top: $(this).position().top - 20,
+                            'border': '3px solid #F33533',
+                        }).show()
+                    }, function(){
+                        $('#voting_hover_div').hide()
+                    })    
                     // if(index === data[0].downvote.length - 1 && found === false){
                     //     var image_two = $('<img>');
                     //     image_two.attr('src', 'images/users.jpg');
@@ -761,6 +794,7 @@ var getSuggestions = function(){
     dataType: 'json',
     success: function(data){
       getSuggestionInfo(data);
+      // console.log(data)
     }    
   });
 }
@@ -817,8 +851,53 @@ var getComments = function(){
 }
 
 
+
+
+
 var getCommentInfo = function(data){
-    // console.log(data)
+
+    // this put the suggestion content as the first comment
+    var sug_card = $('<div></div').attr('class', 'comment_card');
+    var sug_avatar = '/images/users.jpg';
+
+    var sug_image = $('<div></div>');
+
+    //fix image
+    var sug_img = $('<img>').attr('src', sug_avatar);
+
+    sug_image.append(sug_img);
+
+    var suggestion_info = $('<div></div>').attr('class', 'comment_info');
+    var sug_inner_div = $('<div></div');
+    var sug_date = $('<div></div>');
+
+    //gets the username from the clicked suggestion
+    var sug_by = $('.suggestion_clicked .created_by').text().slice(4);
+
+    var name_user = $('<h2></h2>')
+    name_user.text(sug_by);
+
+    sug_date.append(name_user)
+
+    var sug_content = $('<h3></h3>');
+    var sug_edit = $('<div></div>').attr('class', 'edit_comment')
+
+    sug_inner_div.append(sug_date, sug_content);
+    suggestion_info.append(sug_inner_div)
+
+    sug_card.append(sug_image, suggestion_info, sug_edit)
+    $('#comments').append(sug_card)
+
+    if(data.length > 0){
+
+        sug_content.text(data[0].suggestion_id.content)
+    }else{
+
+    }
+
+
+
+    // this renders each comment
     data.forEach(function(comment){
         // console.log(comment.content)
         var comment_card = $('<div></div').attr('class', 'comment_card');
