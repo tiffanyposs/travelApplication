@@ -1,3 +1,5 @@
+var current_platupus = '';
+
 $('#add_platupi').click(function(){
 
 $('#platupi').empty();
@@ -9,10 +11,9 @@ var number = 1;
 var end = '.png';
 var total_avatars = 19;
 
-var current_platupus = '';
-
 
 var used_avatars = [];
+console.log(used_avatars)
 
 var makeAvatarModal = function(){
 
@@ -100,10 +101,17 @@ var checkTakenAvatars = function(){
 checkTakenAvatars();
 
 
+
+
+})
+
+
 $('#choose_avatar').click(function(){
 
+if(current_platupus != ""){
+
 var avatar_file = {
-	avatar: current_platupus + '.png',
+  avatar: current_platupus + '.png',
   user_id: current_user
 }
 
@@ -112,16 +120,19 @@ var user_avatar_file = {
   trip_id: current_user
 }
 
+console.log('click')
+
 
 var setAvatar = function(){
+  console.log('set Avatar')
     $.ajax({
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user + '/set',
     type: 'PUT',
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-    	// console.log(data)
-    	console.log('it set')
+      // console.log(data)
+      console.log('it set')
     }
   });
 
@@ -133,8 +144,8 @@ var setAvatar = function(){
     dataType: 'json',
     data: user_avatar_file,
     success: function(data){
-    	console.log(data)
-    	// console.log('users set')
+      console.log(data)
+      // console.log('users set')
     }
   });
 
@@ -152,8 +163,8 @@ var pushAvatar = function(){
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-    	// console.log(data)
-    	// console.log('it pushed')
+      // console.log(data)
+      // console.log('it pushed')
     }
   });
 
@@ -163,8 +174,8 @@ var pushAvatar = function(){
     dataType: 'json',
     data: user_avatar_file,
     success: function(data){
-    	// console.log(data)
-    	// console.log('users pushed')
+      // console.log(data)
+      // console.log('users pushed')
 
     }
   });
@@ -176,32 +187,29 @@ var pushAvatar = function(){
 
 
 
-
 var updateAvatars = function(avatars){
-	// console.log(avatars)
-	if(avatars.length === 0){
-		console.log('push no avatars choosen')
-		pushAvatar();
-	}else{
+  // console.log(avatars)
+  if(avatars.length === 0){
+    console.log('push no avatars choosen')
+    pushAvatar();
+  }else{
 
   var found = false;
-	avatars.forEach(function(each, index){		
-		if(each.user_id === current_user){
-			found = true;
-			setAvatar();
-		}
+  avatars.forEach(function(each, index){    
+    if(each.user_id === current_user){
+      found = true;
+      setAvatar();
+      console.log('hi')
+    }
 
-		if(index === avatars.length - 1 && found === false){
-			console.log('push user not found');
-			pushAvatar();
-		}
-	})
+    if(index === avatars.length - 1 && found === false){
+      console.log('push user not found');
+      pushAvatar();
+    }
+  })
 
   }
 }
-
-
-
 
 
 var getAvatars = function(){
@@ -219,19 +227,9 @@ getAvatars();
 
 
 
+}
 
-  //   $.ajax({
-  //   url: current_url + 'trips/avatar/' + current_trip + '/' + current_user, 
-  //   method: 'PUT',
-  //   data: avatar_file,
-  //   dataType: 'json',
-  //   success: function(data){
-  //       console.log('IT WORKED!')    }
-  // });
+  $('#close_platupi').click();
 
-
-
-	$('#close_platupi').click();
-})
 
 })

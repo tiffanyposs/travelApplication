@@ -65,11 +65,12 @@ router.get('/:suggestion_id/votes', function(req, res, next){
 
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/:suggestion_id/upvote', function(req, res, next) {
+  console.log('enter upvote')
   Suggestion.findByIdAndUpdate(
     req.params.suggestion_id,
     {$push: {"upvote": req.body}},
     function(err, suggestion) {
-        console.log(suggestion);
+        console.log('upvote success');
     }
 );
 });
@@ -81,7 +82,7 @@ router.put('/:suggestion_id/downvote', function(req, res, next) {
     req.params.suggestion_id,
     {$push: {"downvote": req.body}},
     function(err, suggestion) {
-        console.log(suggestion);
+        res.json(suggestion)
     }
 );
 });

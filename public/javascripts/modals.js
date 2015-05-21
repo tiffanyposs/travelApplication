@@ -156,6 +156,34 @@ $('#close_platupi').click(function(event){
 
 
 
+//this is for the dropdown menu
+var timer;
+$('#dropdown_menu_trigger').hover(function(){
+    clearTimeout( timer );
+    $('#dropdown_menu').slideDown(200).css({
+    left: $('#dropdown_menu_trigger').position().left - $('#dropdown_menu').width()/4,
+    top: $('#heading_container').position().top + $('#heading_container').height(),   
+    display: 'block' 
+    });
+
+}, function(){
+     timer = setTimeout(function(){
+         $('#dropdown_menu').slideUp(200, function(){
+             $('#dropdown_menu').css('display','none');
+         });
+     }, 500);
+});
+$('#dropdown_menu').hover(function(){
+    clearTimeout( timer );
+}, function(){
+     timer = setTimeout(function(){
+         $('#dropdown_menu').slideUp(200,function(){
+             $('#dropdown_menu').css('display','none');
+         });
+     }, 500);
+});   
+
+
 
 
 })//end document ready

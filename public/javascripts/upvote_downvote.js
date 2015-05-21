@@ -120,6 +120,10 @@ $('#downvote').click(function(){
 	}
 
 
+
+
+
+
 	
 	var userExists = function(data){
 	var array = []
@@ -174,7 +178,8 @@ $('#upvote').click(function(){
 	var vote_amount = 0;
 
 	var makePutReqest = function(){
-		$('#comment_suggestion_upvote').text(vote_amount+1)
+		// $('#comment_suggestion_upvote').text(vote_amount+1)
+		console.log('hellooooo')
 		$('#' + current_suggestion).find('.suggestion_upvote_count').text(vote_amount+1);
 		// $('#comment_suggestion_upvote').text()
 
