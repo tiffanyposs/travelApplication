@@ -58,7 +58,7 @@ nohup nodemon app.js &
 
 ssh root@45.55.221.131
 
-nohup mongod --dbpath=/data/db --port 27017 &
+
 
 nohup node app.js &
 
