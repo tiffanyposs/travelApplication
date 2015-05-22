@@ -75,7 +75,7 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description);
         trip_card.click(function(){
-            $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'hidden')
+            $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden')
             current_category = "";
             $('#categories').empty();
             $('#suggestion_content').empty();
@@ -151,6 +151,8 @@ var userTripInfo = function(data){
             
             var trip_name = this.children[0].innerHTML;
             $('#current_trip').text(trip_name);
+
+
             $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
             // $('#chat_container').hide();
             // $('#suggestions, #comments_container').show();

@@ -42,7 +42,7 @@ var makeAvatarModal = function(){
   $('.platupus').click(function(){
     //change this to toggle between classes, not changing the color here
   	$('.platupus').css('border', '3px solid lightgrey')
-  	$(this).css('border', '3px solid orange');
+  	$(this).css('border', '3px solid #1e87c1');
   	current_platupus = $(this).attr('id');
   	// console.log(current_trip)
   	// console.log(current_platupus);
