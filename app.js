@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // res.setHeader('Access-Control-Allow-Origin', 'http://tripppper.com');
     
