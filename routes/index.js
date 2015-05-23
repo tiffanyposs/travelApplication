@@ -17,6 +17,11 @@ router.get('/', function(req, res) {
   }
 });
 
+//this is the new splash page
+router.get('/splash', function(req, res){
+  res.render('splash_new')
+})
+
 router.get('/login', function(req, res){
 	res.render('login')
 })
