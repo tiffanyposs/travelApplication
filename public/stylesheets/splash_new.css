@@ -25,7 +25,7 @@ body, html{
   }
 
 
-nav{
+/*nav{
 	width: 100%;
 	height: 15%;
 	background-color: #1e87c1;
@@ -82,15 +82,15 @@ nav h2{
 nav > div{
 	
 }
-
+*/
 
 
 
 
 #intro{
 	width: 100%;
-	height: 85%;
-	background-image: url(../images/splash/cover/travel_11.jpg);
+	height: 100%;
+	background-image: url(../images/splash/cover/travel_14.jpg);
 	background-size: 100%; 
 	background-position: center;
 	background-attachment: fixed;
@@ -98,47 +98,152 @@ nav > div{
 
 }
 
-
-#intro > div{
-	width: 100%;
-	height: 100%;
-	/*background-color: rgba(0, 0, 0, 0.3);*/
-	/*opacity: 0.5;*/
-	/*margin: auto;*/
-	/*display: flex; display: -webkit-flex;*/
-	/*flex-direction: column;*/
-}
-
-#intro h1{
-	color: white;
-	font-size: 100px;
-	line-height: 110px;
-}
-
-.button{
-	color: white;
-	background-color: #98C06A;
-	font-size: 1.25em;
-	border: none;
-	padding: 15px 25px;
-	border-radius: 5px;
-}
-
-
-/*#banner{
-	width: 100%;
-	height: 60%;
-}*/
-
-.band{
+#intro > nav{
 	width: 100%;
 	height: 10%;
-	background-color: #d6dde0; 
+	background-color: #1e87c1;
+	/*opacity: 0.9;*/
+	display: flex; display: -webkit-flex;
 }
+
+
+
+/*this is the logo*/
+#intro nav ul:first-child{
+	width: 10%;
+	display: flex; display: -webkit-flex;
+}
+
+#intro nav ul:first-child > li{
+	height: 100%;
+	margin: auto 0 auto 20px;
+}
+
+#intro nav img{
+	height: 90%;
+	width: auto;
+}
+
+
+/*this is the nav*/
+#intro nav ul:nth-child(2){
+	width: 90%;
+	display: flex; display: -webkit-flex;
+	justify-content: flex-end;
+}
+
+#intro nav ul:nth-child(2) > li{
+	align-self: flex-end;
+	padding: 15px 20px;
+}
+
+
+#intro li > a{
+	color: white;
+	text-decoration: none;
+}
+
+
+#heading{
+	width: 100%;
+	height: 90%;
+}
+
+#heading > div:first-child{
+	width: 100%;
+	height: 75%;
+	display: flex; display: -webkit-flex;
+}
+
+#heading > div:first-child > div{
+	margin: auto;
+	text-align: center;
+}
+
+#heading h1{
+	font-size: 8em;
+	color: white;
+	margin-bottom: 20px;
+	/*margin: auto;*/
+}
+
+#heading h2{
+	font-size: 3em;
+	color: white;
+	margin-bottom: 15px;
+	/*margin: auto;*/
+}
+
+
+
+
+
+#beta_apply{
+	width: 100%;
+	height: 25%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex; display: -webkit-flex;
+}
+
+#beta_apply > div{
+	margin: auto;
+	text-align: center;
+}
+
+
+#beta_apply h3{
+	color: white;
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+#beta_apply input{
+	font-size: 1em;
+	padding: 10px;
+	margin: 0;
+	border: none;
+}
+
+
+.red_button{
+	color: white;
+	background-color: #F33533;
+	font-size: 1em;
+	border: none;
+	padding: 10px 15px;
+	/*border-radius: 5px;*/
+}
+
+.blue_button{
+	color: white;
+	background-color: #1e87c1;
+	font-size: 1em;
+	border: none;
+	padding: 10px 15px;
+	/*border-radius: 5px;*/
+}
+
+
+
+/*green band*/
+.band_green{
+	width: 100%;
+	height: 5px;
+	background-color: #98C06A; 
+}
+
+.band_blue{
+	width: 100%;
+	height: 5px;
+	background-color: #1e87c1; 	
+}
+
+
 
 .third{
 	width: 100%;
 	height: 75%;
+	display: flex; display: -webkit-flex;
 }
 
 .third img{
@@ -146,19 +251,152 @@ nav > div{
 	width: auto;
 }
 
+.text_div{
+	width: 60%;
+	height: 100%;
+	text-align: center;
+	display: flex; display: -webkit-flex;
+}
+
+.text_div > h1{
+	margin: auto;
+	font-size: 3.5em;
+	width: 70%;
+}
+
+.image_div{
+	width: 40%;
+	height: 100%;
+	display: flex; display: -webkit-flex;
+}
+
+.image_div >img{
+	margin: auto;
+}
+
+
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
+
+#one{
+	/*background-color: #d6dde0;*/
+	color: #425061;
+}
+
+#two{
+	color: white;
+	background-color: #98C06A;
+}
+
+
+
+#three{
+
+
+	/*background-image: */
+	background-image: url(../images/splash/cover/travel_14.jpg);
+	background-size: 100%; 
+	background-position: center;
+	background-attachment: fixed;
+	display: flex; display: -webkit-flex;
+	color: white;
+}
+
+#four{
+
+	/*background-color: #98C06A;*/
+	color: #425061;
+}
+
+/*
 #signup{
 	width: 100%;
 	height: 20%;
 	background-color: red;
-}
+}*/
 
 #contact_us{
 	width: 100%;
-	height: 60%;
+	height: 40%;
+	background-color: #98C06A;
+	display: flex; display: -webkit-flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+#contact_us > div{
+	margin: auto;
+	align-items: center;
+}
+
+
+
+#contact_us h3{
+	font-size: 2em;
+	color: white;
+	margin-bottom: 20px;
+}
+
+#contact_us input{
+	font-size: 1em;
+	padding: 10px;
+	margin-bottom: 20px;
+	/*margin: 0;*/
+	border: none;
+	width: 225px;
+}
+
+#contact_us > div > div:nth-child(3){
+	display: flex; display: -webkit-flex;
+	align-items: flex-end;
+}
+
+#contact_us textarea{
+	width: 450px;
+	height: 150px;
+	font-size: 1em;
+	margin-left: 100px;
+	margin-right: 20px;
+	outline: none;
+	border: none;
+	padding: 10px;
+}
+
+#contact_us button{
+
 }
 
 footer{
 	width: 100%;
 	height: 30%;
-	background-color: blue;
+	background-color: #425061;
+	display: flex; display: -webkit-flex;
+	/*flex-direction: column;*/
+}
+
+footer > div{
+	margin: auto;
+	text-align: center;
+}
+
+footer > div > div:first-child{
+	margin-bottom: 20px;
+}
+
+footer a{
+	color: white;
+	padding: 7px;
+}
+
+footer h4{
+	color: white;
+}
+
+footer h4 > span{
+	margin-right: 5px;
 }

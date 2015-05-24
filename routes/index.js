@@ -22,11 +22,21 @@ router.get('/splash', function(req, res){
   res.render('splash_new')
 })
 
+router.get('/about', function(req, res){
+  res.render('about')
+})
+
+router.get('/news', function(req, res){
+  res.render('news')
+})
+
 router.get('/login', function(req, res){
 	res.render('login')
 })
 
 
+
+//delete chat
 router.get('/chat', function(req, res){
 	res.render('chat')
 })
