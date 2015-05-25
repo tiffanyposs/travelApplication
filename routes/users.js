@@ -140,7 +140,7 @@ router.post('/session', function(req, res){
       req.session.login_time = moment();
       res.redirect('/')
     }else{
-      res.redirect('/login')
+      res.redirect('/')
     }
   })
 })

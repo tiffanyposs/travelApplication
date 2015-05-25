@@ -7,30 +7,44 @@ var Trip = require('../models/Trip.js');
 var User = require('../models/User.js');
 
 
+// /* GET home page. */
+// router.get('/', function(req, res) {
+//   console.log(req.session)
+//   if(req.session.valid_user === true){
+//     res.render('index');
+//   }else{
+//   	res.render('splash')
+//   }
+// });
+
+
 /* GET home page. */
 router.get('/', function(req, res) {
   console.log(req.session)
   if(req.session.valid_user === true){
     res.render('index');
   }else{
-  	res.render('splash')
+    res.render('splash_new')
   }
 });
 
 //this is the new splash page
-router.get('/splash', function(req, res){
-  res.render('splash_new')
-})
+// router.get('/splash', function(req, res){
+//   res.render('splash_new')
+// })
 
 router.get('/about', function(req, res){
   res.render('about')
 })
 
+
 router.get('/news', function(req, res){
   res.render('news')
 })
 
-router.get('/login', function(req, res){
+
+//this is for test only
+router.get('/login/secret/test', function(req, res){
 	res.render('login')
 })
 

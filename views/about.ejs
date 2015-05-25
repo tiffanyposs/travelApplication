@@ -1,8 +1,175 @@
 <html>
 <head>
 	<title></title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome-4.3.0/css/font-awesome.css">
+	<link rel='stylesheet' href='/stylesheets/reset.css'/>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/about.css">
 </head>
 <body>
-<h1>About</h1>
+
+<% include partials/modals/splash/login.ejs %>
+
+<section id = 'intro'>
+	<nav>
+			<ul>
+				<li><a href="/"><img src="/images/splash/Tripper.png"></a></li>
+			</ul>
+			<ul>
+				<li><a href="/about">About Us!</a></li>
+				<li><a href="/news">Tripper News</a></li>
+				<li id = 'sign_in'>Sign In</li>
+			</ul>
+	</nav>
+
+</section>
+
+<section id = 'about'>
+	<div>
+		<div>
+			<h3>About Us.</h3>
+			<p>Started in spring 2015 in GA labs in NYC by 3 aspiring world travelers who love traveling with friends, but always thought that making the plans themselves was too difficult. </p>
+
+			<p>What’s with the platypus? Well for our hackathon we needed a team name that had to be an adjective and an animal. Tripper is just the fresh eyed traveler who has traveled a little, but is excited to grow into a world traveler. But beware behind every platypus feet is a venom stinger behind it’s ankles. 
+			</p>
+		</div>
+	</div>
+
+</section>
+
+<section id = 'pictures'>
+	<h3>Who We Are.</h3>
+	<div>
+
+		<div class = 'pic_div'>
+			<h2>Jeremy</h2>
+			<h4>CEO?</h4>
+			<!-- <p>This is Jeremy</p> -->
+			<div class = 'image_div'>
+				<div class = 'pic_note'></div>
+				<img src="/images/about/jeremy_2.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'></div>
+				<img src="/images/about/jeremy_1.jpg">
+			</div>
+
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Washington DC</h4>
+				</div>
+				<img src="/images/about/jeremy_3.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Texas</h4>
+				</div>
+				<img src="/images/about/jeremy_4.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Location 1</h4>
+				</div>
+				<img src="/images/about/jeremy_5.jpg">
+			</div>
+		</div>
+
+		<div class = 'pic_div'>
+			<h2>Tiffany Poss</h2>
+			<h4>Developer & Designer</h4>
+			<!-- <p>This is Tiffany</p> -->
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Paris, France</h4>
+				</div>
+				<img src="/images/about/tiffany_5.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Florence, Italy</h4>
+				</div>
+				<img src="/images/about/tiffany_1.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Lake Como, Italy</h4>
+				</div>
+				<img src="/images/about/tiffany_2.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Essaouira, Morocco</h4>
+				</div>
+				<img src="/images/about/tiffany_3.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Napoli, Italy</h4>
+				</div>
+				<img src="/images/about/tiffany_4.jpg">
+			</div>
+
+		</div>
+
+		<div class = 'pic_div'>
+			<h2>David</h2>
+			<h4>Wildcard</h4>
+			<!-- <p>This is David</p> -->
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Hollywood, California</h4>
+				</div>
+				<img src="/images/about/dave_1.png">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>San Diego, California</h4>
+				</div>
+				<img src="/images/about/dave_2.jpg">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'></div>
+				<img src="/images/about/dave_3.png">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Outerspace</h4>
+				</div>
+				<img src="/images/about/dave_4.png">
+			</div>
+			<div class = 'image_div'>
+				<div class = 'pic_note'>
+					<h4>Shanghai, China</h4>
+				</div>
+				<img src="/images/about/dave_5.jpg">
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+<footer>
+	<div>
+		<div>
+			<a href="#"><span class = 'fa fa-facebook fa-2x'></span></a>
+			<a href="#"><span class = 'fa fa-twitter fa-2x'></span></a>
+			<!-- <a href="#"><span class = 'fa fa-pinterest-p fa-2x'></span></a> -->
+			<a href="#"><span class = 'fa fa-angellist fa-2x'></span></a>
+			<a href="#"><span class = 'fa fa-linkedin fa-2x'></span></a>
+			<a href="#"><span class = 'fa fa-instagram fa-2x'></span></a>
+		</div>
+		<div>
+			<h4><span class = 'fa fa-copyright'></span>Tripper Inc. 2015</h4>
+		</div>
+	</div>
+</footer>
+
+<script type="text/javascript" src = '/javascripts/vendors/jquery-2.1.3.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src = '/javascripts/splash/about.js'></script>
+<script type="text/javascript" src = '/javascripts/splash/signin.js'></script>
+
+
 </body>
 </html>

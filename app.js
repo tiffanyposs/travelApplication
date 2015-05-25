@@ -52,7 +52,10 @@ var comments = require('./routes/comments');
 
 var chats = require('./routes/chats');
 var analysis = require('./routes/analysis');
-var sessions = require('./routes/sessions')
+var sessions = require('./routes/sessions');
+
+var betas = require('./routes/betas')
+var notes = require('./routes/notes')
 
 
 
@@ -110,9 +113,10 @@ app.use('/comments', comments);
 app.use('/chats', chats);
 app.use('/analysis', analysis);
 app.use('/sessions', sessions);
+app.use('/betas', betas)
+app.use('/notes', notes)
 
-
-console.log(session)
+// console.log(session)
 
 
 
