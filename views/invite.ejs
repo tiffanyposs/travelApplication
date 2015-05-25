@@ -9,57 +9,75 @@
 <body>
 
 
+	<nav>
+			<ul>
+				<li><a href="/" target='blank'><img src="/images/splash/Tripper.png"></a></li>
+				<li><a href="/" target='blank'>Tripper</a></li>
+			</ul>
+			<ul>
+				<li><a href="/" target='blank'>Home</a></li>
+				<li><a href="/about" target='blank'>About Us!</a></li>
+				<li><a href="/news" target='blank'>Tripper News</a></li>
+				<!-- <li id = 'sign_in' target='blank'>Sign In</li> -->
+			</ul>
+	</nav>
 
+<section id = 'body'>
 
-<div id = 'login_header'>
-		<h2>Welcome to Tripppper!</h2>
+	<section id = 'login_header'>
+			<div>
+				<h2>Welcome to Tripper!</h2>
 
-		<h3>You've been invited by <span><%= user.first_name %> <%= user.last_name %></span></h3>
+				<h3>You've been invited by <span><%= user.first_name %> <%= user.last_name %></span></h3>
 
-		<p>They want your help planning a trip to <%= trip.location %></p>
+				<p>They want your help planning a trip to <%= trip.location %></p>
 
-		<p>Login or Sign up to start planning:</p>
-</div>
+				<p>Login or Sign up to start planning with them:</p>
+			</div>
+	</section>
 
-<section id = 'login_wrapper'>
-	<div id = 'login_container'>
-		<!-- sign in -->
-		<div>
-			<h2>Sign In</h2>
+	<section id = 'login_wrapper'>
+		<div id = 'login_container'>
+			<!-- sign in -->
+			<div>
+				<h2>Sign In</h2>
 
-			<form action = "session" method = "POST">
-				<label>E-mail:</label>
-				<input type = 'text' name = "email">
-				<!-- type = 'email' -->
-				<label>Password:</label>
-				<input type = 'password' name = "password">
-				<!-- <input type="hidden" name="trip_invite" value= "<%= trip._id %>"> -->
-				<!-- <input type = "submit"> -->
-				<button>Submit</button>
-			</form>
+				<form action = "session" method = "POST">
+					<label>E-mail:</label>
+					<input type = 'text' name = "email">
+					<!-- type = 'email' -->
+					<label>Password:</label>
+					<input type = 'password' name = "password">
+					<!-- <input type="hidden" name="trip_invite" value= "<%= trip._id %>"> -->
+					<!-- <input type = "submit"> -->
+					<button class = 'blue_button'>Submit</button>
+				</form>
+			</div>
+
+			<!-- sign up -->
+			<div>
+				<h2>Sign Up</h2>
+				<form action = "signup" method = "POST">
+					<label>First Name:</label>
+					<input type="text" name="first_name"> 
+					<label>Last Name:</label>
+					<input type="text" name="last_name">
+					<label>Username:</label>
+					<input type="text" name="username">
+					<label>E-mail:</label>
+					<input type = 'email' name="email">
+					<label>Password:</label>
+					<input type="password" name="password">
+					<label>Confirm Password:</label>
+					<input type="password" name="confirm_password">
+					<!-- <input type="submit"> -->
+					<button class = 'blue_button'>Submit</button>
+				</form>
+			</div>
 		</div>
+	</section>
 
-		<!-- sign up -->
-		<div>
-			<h2>Sign Up</h2>
-			<form action = "signup" method = "POST">
-				<label>First Name:</label>
-				<input type="text" name="first_name"> 
-				<label>Last Name:</label>
-				<input type="text" name="last_name">
-				<label>Username:</label>
-				<input type="text" name="username">
-				<label>E-mail:</label>
-				<input type = 'email' name="email">
-				<label>Password:</label>
-				<input type="password" name="password">
-				<label>Confirm Password:</label>
-				<input type="password" name="confirm_password">
-				<!-- <input type="submit"> -->
-				<button>Submit</button>
-			</form>
-		</div>
-	</div>
+
 </section>
 
 

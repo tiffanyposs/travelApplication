@@ -8,58 +8,135 @@
 body, html{
 	width: 100%;
 	height: 100%;
-	background-image: url('/images/background.jpg');
-	font-family: 'Open Sans', sans-serif;
+	background-image: url(../images/splash/cover/travel_14.jpg);
+	background-size: 100%; 
+	background-position: center;
+	background-attachment: fixed;
+	font-family: 'Oxygen', sans-serif;
 }
+
+
+
+
+/*heading*/
+
+nav{
+	width: 100%;
+	height: 10%;
+	background-color: #1e87c1;
+	display: flex; display: -webkit-flex;
+}
+
+/*this is the logo*/
+nav ul:first-child{
+	width: 20%;
+	display: flex; display: -webkit-flex;
+	margin-left: 10px;
+}
+
+nav ul:first-child > li{
+	height: 100%;
+	margin: auto 5px;
+	font-size: 2.5em;
+	display: flex; display: -webkit-flex;
+}
+
+nav ul:first-child > li > a{
+	margin: auto;
+}
+
+nav img{
+	height: 80%;
+	width: auto;
+}
+
+nav ul:nth-child(2){
+	width: 90%;
+	display: flex; display: -webkit-flex;
+	justify-content: flex-end; -webkit-justify-content: flex-end;
+}
+
+nav ul:nth-child(2) > li{
+	align-self: flex-end; -webkit-align-self: flex-end;
+	padding: 15px 20px;
+}
+
+nav li > a{
+	color: white;
+	text-decoration: none;
+}
+
+nav li{
+	color: white;
+	cursor: pointer;
+}
+
+
+
+
+#body{
+	height: 90%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5)
+}
+
 
 #login_header{
 	width: 100%;
-	height: 15%;
-	/*font-weight: bold;*/
-	padding-top: 40px;
+	height: 25%;
+	/*padding-top: 40px;*/
 	text-align: center;
 	display: flex; display: -webkit-flex;
 	flex-direction: column; -webkit-flex-direction: column;
-	/*justify-content: flex-end; -webkit-justify-content: flex-end;*/
+	/*background-color: red;*/
+	/*background-color: rgba(0, 0, 0, 0.5)*/
 }
 
-h2{
+#login_header > div{
+	margin: auto;
+}
+
+#login_header h2{
 	font-size: 2.5em;
 	font-weight: bold;
 	color: white;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
 
-h3{
+#login_header h3{
 	font-size: 1.5em;
 	color: white;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 }
 
-h3 > span{
+#login_header h3 > span{
 	font-weight: bold;
 	font-style: italic;
 }
 
-p{
+#login_header p{
 	color: white;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
+
+
+
+
 
 
 #login_wrapper{
 	display: flex; display: -webkit-flex;
 	width: 100%;
-	height: 85%;
+	height: 75%;
 }
 
 #login_container{
-	margin: auto;
+	margin: 0 auto 0 auto;
 	display: flex; display: -webkit-flex;
 }
 
 #login_container div{
-	margin: 50px 50px 0 50px;
+	margin: 0 50px 0 50px;
 }
 
 
@@ -80,24 +157,26 @@ form{
 
 form label{
 	margin-bottom: 5px;
+	color: white;
 }
 
 form input{
 	width: 300px;
 	font-size: 1.5em;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	outline: none;
 }
 
 
-
-form button{
-	width: 120px;
-	font-size: 1.5em;
-	border: none;
-	outline: none;
+.blue_button{
 	color: white;
-	padding: 8px;
-	border-radius: 5px;
-	margin: 10px;
+	background-color: #1e87c1;
+	font-size: 1em;
+	border: none;
+	padding: 10px 15px;
+	width: 100px;
+	margin-top: 20px;
+	/*border-radius: 5px;*/
 }
+
+

@@ -398,6 +398,10 @@ function ValidUrl(str) {
 }
 
 
+
+
+
+
 var getSuggestionInfo = function(data){
     //this hides the comment box if there is no suggestion
     if(data.length > 0){
@@ -574,6 +578,81 @@ var getSuggestionInfo = function(data){
             
             current_suggestion = suggestion._id;
             $(this).addClass('suggestion_clicked')
+
+
+
+            console.log(suggestion)
+
+// '/images/hats/color_hats/'
+
+            // this put the suggestion content as the first comment
+            var sug_card = $('<div></div').attr('class', 'comment_card');
+            var sug_avatar;
+
+            var sug_image = $('<div></div>');
+            
+
+            if(suggestion.user_id.taken_avatars.length === 0){
+                sug_avatar = '/images/users.jpg';
+            }else{
+                suggestion.user_id.taken_avatars.forEach(function(each, index){
+                    if(each.trip_id === current_trip){
+                        sug_avatar = '/images/hats/color_hats/' + each.avatar;
+                    }
+
+                    if(index === suggestion.user_id.taken_avatars.length - 1 && sug_avatar === undefined){
+                        sug_avatar = '/images/users.jpg'
+                    }
+                })
+            }
+
+            var sug_img = $('<img>').attr('src', sug_avatar);
+
+            if(suggestion.user_id._id === current_user){
+                sug_img.attr('class', 'current_user_avatar')
+            }
+            // var sug_avatar = $('#suggestion_avatar img').attr('src')
+
+            // console.log($('#suggestion_avatar img').attr('src'))
+
+            
+
+            //fix image
+           
+
+            // .attr('class', 'current_user_avatar');
+
+            sug_image.append(sug_img);
+
+            var suggestion_info = $('<div></div>').attr('class', 'comment_info');
+            var sug_inner_div = $('<div></div');
+            var sug_date = $('<div></div>');
+
+            //gets the username from the clicked suggestion
+            var sug_by = suggestion.user_id.first_name + " " + suggestion.user_id.last_name;
+
+            var name_user = $('<h2></h2>')
+            name_user.text(sug_by);
+
+            sug_date.append(name_user)
+
+            var sug_content = $('<h3></h3>');
+            var sug_edit = $('<div></div>').attr('class', 'edit_comment')
+
+            sug_inner_div.append(sug_date, sug_content);
+            suggestion_info.append(sug_inner_div)
+
+            sug_card.append(sug_image, suggestion_info, sug_edit)
+            $('#comments').append(sug_card)
+
+
+            sug_content.text(suggestion.content)
+            // if(data.length > 0){
+                
+            // }else{
+
+            // }
+
 
             //this passes the current suggestions content to be appended into comments
             getComments();
@@ -858,43 +937,7 @@ var getComments = function(){
 
 var getCommentInfo = function(data){
 
-    // // this put the suggestion content as the first comment
-    // var sug_card = $('<div></div').attr('class', 'comment_card');
-    // var sug_avatar = '/images/users.jpg';
 
-    // var sug_image = $('<div></div>');
-
-    // //fix image
-    // var sug_img = $('<img>').attr('src', sug_avatar);
-
-    // sug_image.append(sug_img);
-
-    // var suggestion_info = $('<div></div>').attr('class', 'comment_info');
-    // var sug_inner_div = $('<div></div');
-    // var sug_date = $('<div></div>');
-
-    // //gets the username from the clicked suggestion
-    // var sug_by = $('.suggestion_clicked .created_by').text().slice(4);
-
-    // var name_user = $('<h2></h2>')
-    // name_user.text(sug_by);
-
-    // sug_date.append(name_user)
-
-    // var sug_content = $('<h3></h3>');
-    // var sug_edit = $('<div></div>').attr('class', 'edit_comment')
-
-    // sug_inner_div.append(sug_date, sug_content);
-    // suggestion_info.append(sug_inner_div)
-
-    // sug_card.append(sug_image, suggestion_info, sug_edit)
-    // $('#comments').append(sug_card)
-
-    // if(data.length > 0){
-    //     sug_content.text(data[0].suggestion_id.content)
-    // }else{
-
-    // }
 
 
 
@@ -1046,7 +1089,9 @@ var getLastComment = function(){
 
 //post comment
 $('#comment_submit').click(function(){
-    if(current_suggestion != ""){
+    var trimmed = $('#comment_input_area').val().trim();
+    console.log(trimmed)
+    if(current_suggestion != "" && trimmed != ""){
       var formData = {
         content: $('#comment_input_area').val(),
         suggestion_id: current_suggestion,

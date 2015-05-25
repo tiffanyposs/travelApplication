@@ -202,12 +202,12 @@ body, html{
 
 #login_div{
 	display: flex; display: -webkit-flex;
-	flex-direction: column;
+	flex-direction: column; -webkit-flex-direction: column;
 }
 
 #login_div > form{
 	display: flex; display: -webkit-flex;
-	flex-direction: column;	
+	flex-direction: column;	-webkit-flex-direction: column;
 }
 
 
@@ -240,32 +240,34 @@ body, html{
 	width: 100%;
 	height: 10%;
 	background-color: #1e87c1;
-	/*opacity: 0.9;*/
 	display: flex; display: -webkit-flex;
 }
 
-
-
 /*this is the logo*/
 #intro nav ul:first-child{
-	width: 10%;
+	width: 20%;
 	display: flex; display: -webkit-flex;
+	margin-left: 10px;
 }
 
 #intro nav ul:first-child > li{
 	height: 100%;
-	margin: auto 0 auto 20px;
+	margin: auto 5px;
+	font-size: 2.5em;
+	display: flex; display: -webkit-flex;
 }
 
+#intro nav ul:first-child > li > a{
+	margin: auto;
+}
+
+
+
+
+
 #intro nav img{
-	height: 90%;
+	height: 80%;
 	width: auto;
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
 }
 
 
@@ -273,11 +275,11 @@ body, html{
 #intro nav ul:nth-child(2){
 	width: 90%;
 	display: flex; display: -webkit-flex;
-	justify-content: flex-end;
+	justify-content: flex-end; -webkit-justify-content: flex-end;
 }
 
 #intro nav ul:nth-child(2) > li{
-	align-self: flex-end;
+	align-self: flex-end; -webkit-align-self: flex-end;
 	padding: 15px 20px;
 }
 
@@ -316,7 +318,7 @@ body, html{
 }
 
 #heading h2{
-	font-size: 3em;
+	font-size: 4em;
 	color: white;
 	margin-bottom: 15px;
 	/*margin: auto;*/
@@ -486,18 +488,53 @@ green #98C06A*/
 	background-color: red;
 }*/
 
+
+#sign-up-div{
+	width: 100%;
+	height: 200px;
+	display: flex; display: -webkit-flex;
+	background-color: #F33533;
+}
+
+#sign-up-div h3{
+	font-size: 2em;
+	text-align: center;
+	margin-bottom: 20px;
+	color: white;
+}
+
+#sign-up-div > div{
+	margin: auto;
+}
+
+
+
+#sign-up-div input{
+	font-size: 1em;
+	padding: 10px;
+	margin: 0;
+	border: none;
+}
+
+
+
+
+
+
+
+
 #contact_us{
 	width: 100%;
-	height: 40%;
+	height: 400px;
 	background-color: #98C06A;
 	display: flex; display: -webkit-flex;
-	flex-direction: column;
+	flex-direction: column;	-webkit-flex-direction: column;
 	text-align: center;
 }
 
 #contact_us > div{
 	margin: auto;
-	align-items: center;
+	align-items: center; -webkit-align-items: center;
 }
 
 
@@ -519,7 +556,7 @@ green #98C06A*/
 
 #contact_us > div > div:nth-child(3){
 	display: flex; display: -webkit-flex;
-	align-items: flex-end;
+	align-items: flex-end; -webkit-align-items: flex-end;
 }
 
 #contact_us textarea{

@@ -77,6 +77,44 @@ var group_size = $('#group_size').val();
 }
 
 
+var submitBetaTwo = function(){
+
+
+var first_name = $('#first_name_two').val();
+var last_name = $('#last_name_two').val();
+var email = $('#beta_email_two').val();
+var group_size = $('#group_size_two').val();
+
+
+  if(first_name != "" && last_name != "" && email != "" && group_size != ""){
+
+    var formData = {
+      first_name: $('#first_name_two').val(),
+      last_name: $('#last_name_two').val(),
+      email: $('#beta_emai_twol').val(),
+      group_size: $('#group_size_two').val(),
+
+    }
+
+    $('#sign-up-div input').each(function(each){
+          this.value = '';
+     })
+
+      $.ajax({
+        url: '/betas',
+        type: 'POST',
+        data: formData,
+        success: function(data, textStatus, jqXHR)
+          {
+            betaModal(formData.first_name, formData.last_name)
+          }
+      });  
+
+  }
+
+}
+
+
 
 var noteModal = function(name){
 	//adds a trip
@@ -143,6 +181,11 @@ var submitNote = function(){
 
 $('#submit_beta').click(function(){
 	submitBeta()
+})
+
+
+$('#submit_beta_two').click(function(){
+  submitBetaTwo()
 })
 
 $('#note_submit').click(function(){

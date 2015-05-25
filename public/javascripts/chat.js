@@ -13,33 +13,37 @@ if(client != undefined){
   client = undefined;
 }
 
-// client = new WebSocket("ws://localhost:2000/" + current_trip);
+client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+// client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
 // client = new WebSocket("ws://tripppper.com:2000/" + current_trip);
 
 $('#chat_submit').click(function(){
-  if($('#chat_input_box').val() != ""){
+  if($('#chat_input_box').val().trim() != ""){
   var msg = {
     trip_id: current_trip,
     name: current_user_name,
     user_id: current_user,
-    message: $('#chat_input_box').val(),
+    message: $('#chat_input_box').val().trim(),
     avatar: current_avatar
   }
-  $('#chat_input_box').val('');
+ 
+
   var encoded_msg = JSON.stringify(msg);
   client.send(encoded_msg)
-  
+   $('#chat_input_box').val('');
   }
 })
 
 
+// $('#comment_input_area').blur();
+
 $('#chat_input_box').keypress(function(e){
-  if(e.keyCode == 13 && $('#chat_input_box').val() != ""){
+  if(e.keyCode == 13 && $('#chat_input_box').val().trim() != ""){
+    e.preventDefault();
     $('#chat_submit').click();
   }
 });

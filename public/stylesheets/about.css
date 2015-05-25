@@ -79,12 +79,12 @@ body, html{
 
 #login_div{
   display: flex; display: -webkit-flex;
-  flex-direction: column;
+  flex-direction: column; -webkit-flex-direction: column;
 }
 
 #login_div > form{
   display: flex; display: -webkit-flex;
-  flex-direction: column; 
+  flex-direction: column; -webkit-flex-direction: column;
 }
 
 
@@ -102,46 +102,38 @@ body, html{
 
 #intro{
   width: 100%;
-  /*height: 100%;*/
-/*  background-image: url(../images/splash/cover/travel_14.jpg);
-  background-size: 100%; 
-  background-position: center;
-  background-attachment: fixed;*/
-  /*display: flex; display: -webkit-flex;*/
-
 }
+
 
 #intro > nav{
   width: 100%;
   height: 10%;
   background-color: #1e87c1;
-  /*opacity: 0.9;*/
-  /*margin-bottom: 40px;*/
   display: flex; display: -webkit-flex;
 }
 
-
-
 /*this is the logo*/
 #intro nav ul:first-child{
-  width: 10%;
+  width: 20%;
   display: flex; display: -webkit-flex;
+  margin-left: 10px;
 }
 
 #intro nav ul:first-child > li{
   height: 100%;
-  margin: auto 0 auto 20px;
+  margin: auto 5px;
+  font-size: 2.5em;
+  display: flex; display: -webkit-flex;
 }
 
+#intro nav ul:first-child > li > a{
+  margin: auto;
+}
+
+
 #intro nav img{
-  height: 90%;
+  height: 80%;
   width: auto;
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: "FlipH";
 }
 
 
@@ -149,11 +141,11 @@ body, html{
 #intro nav ul:nth-child(2){
   width: 90%;
   display: flex; display: -webkit-flex;
-  justify-content: flex-end;
+  justify-content: flex-end; -webkit-justify-content: flex-end;
 }
 
 #intro nav ul:nth-child(2) > li{
-  align-self: flex-end;
+  align-self: flex-end; -webkit-align-self: flex-end;
   padding: 15px 20px;
 }
 
@@ -171,7 +163,7 @@ body, html{
 
 #about{
   width: 100%;
-  height: 60%;
+  height: 70%;
   display: flex; display: -webkit-flex;
   background-image: url(../images/splash/cover/travel_14.jpg);
   background-size: 100%; 
@@ -183,7 +175,7 @@ body, html{
 #about > div{
   margin: auto;
   width: 100%;
-  height: 65%;
+  height: 70%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex; display: -webkit-flex;
 }
@@ -229,7 +221,7 @@ green #98C06A*/
 #pictures > div{
   width: 100%;
   display: flex; display: -webkit-flex;
-  justify-content: center;
+  justify-content: center; -webkit-justify-content: center;
 }
 
 #pictures h3{
@@ -245,7 +237,7 @@ green #98C06A*/
 
 .pic_div{
    display: flex; display: -webkit-flex;
-   flex-direction: column;
+   flex-direction: column; -webkit-flex-direction: column;
    text-align: center;
    width: 25%;
    margin: 5px;
