@@ -44,9 +44,9 @@ router.get('/news', function(req, res){
 
 
 //this is for test only
-router.get('/login/secret/test', function(req, res){
-	res.render('login')
-})
+// router.get('/login/secret/test', function(req, res){
+// 	res.render('login')
+// })
 
 
 
