@@ -32,9 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // res.setHeader('Access-Control-Allow-Origin', 'http://104.131.57.112');
+    res.setHeader('Access-Control-Allow-Origin', 'http://tripper.co');
+
     
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -71,11 +73,6 @@ mongoose.connect('mongodb://localhost/data/db', function(err) {
     }
 });
 
-
-
-
-
-
 //for bcrypt
 var fileName = "./secrets/secrets.json";
 var config;
@@ -95,8 +92,8 @@ app.use(session({
   // cookie: {maxAge: 30000},
   //new stuff
   store: new MongoStore({
-    url: 'mongodb://localhost/data/db',
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
+    // url: 'mongodb://localhost/data/db',
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
     autoRemove: 'disabled',
     touchAfter: 4 * 3600 // time period in seconds wont make a new session
 

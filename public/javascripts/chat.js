@@ -16,12 +16,12 @@ if(client != undefined){
 // client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
-client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
+// client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
 
 //tripppper
 
 //production server
-// client = new WebSocket("ws://104.131.57.112:2000/" + current_trip);
+// client = new WebSocket("ws://tripper.co:2000/" + current_trip);
 
 $('#chat_submit').click(function(){
   if($('#chat_input_box').val().trim() != ""){
