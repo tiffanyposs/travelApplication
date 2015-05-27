@@ -403,6 +403,8 @@ function ValidUrl(str) {
 
 
 var getSuggestionInfo = function(data){
+
+    console.log(data)
     //this hides the comment box if there is no suggestion
     if(data.length > 0){
         $('#comment_input').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)

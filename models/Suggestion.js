@@ -29,7 +29,11 @@ var SuggestionSchema = new mongoose.Schema({
   },
 });
 
-SuggestionSchema.plugin(timestamps);
 
+SuggestionSchema.add({
+  archived: { type: Boolean, default: false }
+})
+
+SuggestionSchema.plugin(timestamps);
 
 module.exports = mongoose.model('Suggestion', SuggestionSchema);

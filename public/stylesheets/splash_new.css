@@ -220,16 +220,13 @@ body, html{
 }
 
 
-
-
-
 /*end modals*/
 
 #intro{
 	width: 100%;
 	height: 100%;
 	background-image: url(../images/splash/cover/travel_14.jpg);
-	background-size: 100%; 
+	background-size: auto 150%; 
 	background-position: center;
 	background-attachment: fixed;
 	/*display: flex; display: -webkit-flex;*/
@@ -335,6 +332,11 @@ body, html{
 	display: flex; display: -webkit-flex;
 }
 
+
+
+
+
+
 #beta_apply > div{
 	margin: auto;
 	text-align: center;
@@ -397,9 +399,15 @@ body, html{
 }
 
 .third img{
-	height: 70%;
-	width: auto;
+	height: auto;
+	width: 70%;
+	margin: auto;
 }
+
+
+
+
+
 
 .text_div{
 	width: 60%;
@@ -413,6 +421,15 @@ body, html{
 	font-size: 3.5em;
 	width: 70%;
 }
+
+
+
+
+
+
+
+
+
 
 .image_div{
 	width: 40%;
@@ -455,11 +472,9 @@ green #98C06A*/
 
 
 #three{
-
-
 	/*background-image: */
 	background-image: url(../images/splash/cover/travel_14.jpg);
-	background-size: 100%; 
+	background-size: auto 150%;
 	background-position: center;
 	background-attachment: fixed;
 	display: flex; display: -webkit-flex;
@@ -602,4 +617,74 @@ footer h4{
 
 footer h4 > span{
 	margin-right: 5px;
+}
+
+
+
+
+
+
+@media (max-width: 600px) {
+
+	#heading > div:first-child{
+		width: 100%;
+		height: 50%;
+	}
+
+	#beta_apply{
+		height: 50%;
+	}
+
+	#beta_apply > div{
+	margin: auto;
+	text-align: center;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+}
+
+	#heading h2{
+		font-size: 2.5em;
+		padding: 0 15px;
+		/*margin: auto;*/
+	}
+
+	.text_div > h1{
+		font-size: 1.5em;
+	}
+
+	#sign-up-div{
+		height: 400px;
+	}
+
+	#sign-up-div > div{
+		display: flex; display: -webkit-flex;
+		flex-direction: column; -webkit-flex-direction: column;
+		margin: auto;
+	}
+
+	#sign-up-div > div > div{
+		display: flex; display: -webkit-flex;
+		flex-direction: column; -webkit-flex-direction: column;
+	}
+
+	#contact_us{
+		height: 600px;
+	}
+
+	#contact_us textarea{
+		width: 90%;
+		height: 200px;
+		font-size: 1em;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 20px;
+
+	}
+
+#contact_us > div > div:nth-child(3){
+	display: flex; display: -webkit-flex;
+	align-items: center; -webkit-align-items: center;
+	flex-direction: column;
+}
+
 }

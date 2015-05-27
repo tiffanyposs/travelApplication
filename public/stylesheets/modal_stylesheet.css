@@ -522,6 +522,19 @@ green #98C06A*/
      font-size: 1.25em;
 }
 
+#suggestion_delete{
+     /*width: 100px;*/
+     /*float: right;*/
+     outline: none;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 20px;
+     background-color: #F33533; /*red*/
+     color: white;
+     font-size: 1.25em;
+     /*margin-left: 100px;*/
+}
+
 
 
 /*suggestion modal*/

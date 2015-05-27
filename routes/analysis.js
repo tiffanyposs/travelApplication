@@ -10,6 +10,8 @@ var Suggestion = require('../models/Suggestion.js');
 var Trip = require('../models/Trip.js');
 var User = require('../models/User.js');
 var Session = require('../models/Session.js');
+var Beta = require('../models/Beta.js');
+var Note = require('../models/Note.js')
 
 var secretroute = '/supersecret/platinum/platupi';
 
@@ -124,73 +126,22 @@ router.get(secretroute + '/comments', function(req, res) {
   });
 });
 
-// // POST users/session
-// router.post('/session', function(req, res){
-//   var email = req.body.email;
-//   var password = req.body.password;
-//   var query = User.findOne({ 'email': email }).select('email _id password');
-//   query.exec(function (err, user) {
-
-//     if (err) return handleError(err);
-//     if(user){
-//       var passwordMatches = bcrypt.compareSync(password, user.password);
-//     }if(passwordMatches){
-//       req.session.valid_user = true;
-//       req.session.user_id = user._id;
-//       res.redirect('/')
-//     }else{
-//       res.redirect('/login')
-//     }
-//   })
-// })
 
 
+router.get(secretroute + '/betas', function(req, res) {
+  Beta.find(function (err, betas) {
+    if (err) return next(err);
+    res.json(betas);
+  });
+});
 
+router.get(secretroute + '/notes', function(req, res) {
+  Note.find(function (err, notes) {
+    if (err) return next(err);
+    res.json(notes);
+  });
+});
 
-
-
-/* GET /analysis listing. */
-// router.get('/', function(req, res, next) {
-//   Category.find(function (err, categories) {
-//     if (err) return next(err);
-//     res.json(categories);
-//   });
-// });
-
-/* POST /categories */
-// router.post('/', function(req, res, next) {
-//   Category.create(req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(categories);
-//   });
-// });
-
-// // /* GET /categories/id */
-// // Gets all the categories from a trip
-// router.get('/:trip_id', function(req, res, next) {
-//   var query = Category.find({'trip_id' : req.params.trip_id});
-//   query.exec(function(err, categories){
-//     if (err) return handleError(err);
-//     res.json(categories)
-//   })
-// });
-
-// //this posts a category from a certain trip
-// router.post('/:trip_id', function(req, res, next){
-//   Category.create(req.body, function (err, categories){
-//     if (err) return next(err);
-//     res.json(categories)
-//   })
-// })
-
-
-// router.get('/:trip_id/last', function(req, res, next){
-//   var query = Category.find({'trip_id': req.params.trip_id}).sort({'created': 'desc'}).limit(1);
-//   query.exec(function( err, categories){
-//     if (err) return handleError(err);
-//     res.json(categories)
-//   })
-// })
 
 
 

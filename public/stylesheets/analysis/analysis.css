@@ -270,3 +270,43 @@ body{
 	margin-bottom: 10px;
 }
 
+
+
+#beta_signup{
+	width: 100%;
+	height: 100%;
+	background-color: yellow;
+}
+
+#beta_body{
+	display: flex; display: -webkit-flex;
+}
+
+#beta_body > div{
+	margin: auto;
+	height: 80%;
+	width: 60%;
+	overflow: scroll;
+}
+
+#beta_email{
+	width: auto;
+	height: 80%;
+}
+
+
+
+#note_body{
+	display: flex; display: -webkit-flex;
+}
+
+#note_body > div{
+	overflow: scroll;
+	width: 65%;
+	height: 80%;
+	margin: auto;
+}
+
+#note_body td:nth-child(4){
+	width: 300px;
+}

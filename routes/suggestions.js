@@ -34,7 +34,10 @@ router.get('/:suggestion_id/one', function(req, res, next) {
 
 // GET /suggestions/:category_id
 router.get('/:category_id', function(req, res, next) {
-  var query = Suggestion.find({'category_id' : req.params.category_id}).populate('user_id', 'first_name last_name username taken_avatars');
+  var query = Suggestion.find({'category_id' : req.params.category_id})
+  // where it is not archived
+  .where('archived').ne(true)
+  query.populate('user_id', 'first_name last_name username taken_avatars');
   query.exec(function(err, suggestions){
     if (err) return handleError(err);
     res.json(suggestions)
@@ -99,26 +102,19 @@ router.put('/:suggestion_id/update', function(req, res, next) {
 );
 });
 
-// Tank.findByIdAndUpdate(id, { $set: { size: 'large' }}, function (err, tank) {
-//   if (err) return handleError(err);
-//   res.send(tank);
-// });
 
-// Place.findById(req.params.id, function(err, p) {
-//   if (!p)
-//     return next(new Error('Could not load Document'));
-//   else {
-//     // do your updates here
-//     p.modified = new Date();
+/* PUT /suggestions/:suggestion_id/downvote */
+router.put('/archive/:suggestion_id', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion_id,
+    {$set: req.body},
+    function(err, suggestion) {
+        console.log(suggestion);
+    }
+);
+});
 
-//     p.save(function(err) {
-//       if (err)
-//         console.log('error')
-//       else
-//         console.log('success')
-//     });
-//   }
-// });
+
 
 // router.get('/last', function(req,res, next){
 //   var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);

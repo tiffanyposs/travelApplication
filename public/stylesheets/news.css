@@ -192,7 +192,7 @@ body, html{
 	/*background-color: #98C06A;*/
 
 	background-image: url(../images/splash/cover/travel_14.jpg);
-	background-size: 100%; 
+	background-size: auto 150%;
 	background-position: center;
 	background-attachment: fixed;
 	/*display: flex; display: -webkit-flex;*/
