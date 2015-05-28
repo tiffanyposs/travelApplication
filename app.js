@@ -10,19 +10,19 @@ var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
 var MongoStore = require('connect-mongo')(session);
 var moment = require('moment');
-
 var domain = require('domain');
 var d = domain.create();
 
 
 var app = express();
+
+// uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -32,12 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // res.setHeader('Access-Control-Allow-Origin', 'http://104.131.57.112');
     res.setHeader('Access-Control-Allow-Origin', 'http://tripper.co');
-
-    
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -90,13 +87,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   // cookie: {maxAge: 30000},
-  //new stuff
   store: new MongoStore({
-    // url: 'mongodb://localhost/data/db',
-    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
+    url: 'mongodb://localhost/data/db',
+    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
     autoRemove: 'disabled',
     touchAfter: 4 * 3600 // time period in seconds wont make a new session
-
   })
 }));
 
@@ -113,10 +108,6 @@ app.use('/sessions', sessions);
 app.use('/betas', betas)
 app.use('/notes', notes)
 
-// console.log(session)
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -125,7 +116,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace
