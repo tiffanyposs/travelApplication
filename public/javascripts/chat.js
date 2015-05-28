@@ -21,7 +21,7 @@ if(client != undefined){
 //tripppper
 
 //production server
-client = new WebSocket("ws://tripper.co:2000/" + current_trip);
+client = new WebSocket("ws://104.131.57.112:2000/" + current_trip);
 
 $('#chat_submit').click(function(){
   if($('#chat_input_box').val().trim() != ""){
