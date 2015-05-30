@@ -48,12 +48,6 @@ router.get('/findfriend/:email', function(req, res, next) {
   })
 });
 
-
-
-
-
-
-
 // GET users/trips
 // gets all the user's trips
 router.get('/trips', function(req, res, next) {
@@ -63,8 +57,6 @@ router.get('/trips', function(req, res, next) {
       res.redirect('/')
   })
 });
-
-
 
 /* PUT /users/addtrip/trip_id */
 router.put('/addtrip/:user_id', function(req, res, next) {
@@ -77,18 +69,6 @@ router.put('/addtrip/:user_id', function(req, res, next) {
     }
 );
 });
-
-// // /* GET /users/id */
-// router.get('/:user_id', function(req, res, next) {
-//   User.findById(req.params.user_id, function (err, users) {
-//     if (err) return next(err);
-//     res.json(users);
-//   });
-// });
-
-
-
-
 
 router.get('/:user_id', function(req, res, next) {
   var query = User.findById(req.params.user_id).populate('trips.trip_id friends');
@@ -152,9 +132,6 @@ router.post('/logout', function(req, res){
   res.redirect('/')
 })
 
-
-
-
 //gets the last trip a user posted
 router.get('/avatar/:trip_id/:user_id', function(req, res, next){
   var query = User.findById( req.params.user_id);
@@ -164,8 +141,7 @@ router.get('/avatar/:trip_id/:user_id', function(req, res, next){
   })
 })
 
-
-
+// SETS AN AVATAR TO A USER THAT DOESNT EXIST
 /* PUT users/avatar/:trip_id/:user_id/:update */
 router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
   console.log(req.body)
@@ -179,7 +155,7 @@ router.put('/avatar/:trip_id/:user_id/set', function(req, res, next) {
     })
 });
 
-
+// PUSHES AN AVATAR TO A USER THAT DOESN'T EXIST
 /* PUT users/avatar/:trip_id/:user_id/:update */
 router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
   console.log(req.body)
@@ -194,63 +170,6 @@ router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
     })
 });
 
-
-
-
-
-
-
-
-
-
-
-
-// router.get('/:title', function(req, res, next){
-//   var query = Trip.find( {'title': req.params.title} ).populate('created_by');
-//   query.select('created_by location title');
-//   query.exec(function (err, trip) {
-//   if (err) return handleError(err);
-//     res.json(trip)
-// })
-// })
-
-
-
-
-
-// // .findOne finds the first one
-// router.get('/signin/:first_name', function(req, res, next){
-//   var query = User.findOne({ 'first_name': req.params.first_name });
-//   query.select('first_name email');
-//   query.exec(function (err, user) {
-//   if (err) return handleError(err);
-//     res.json(user)
-//   console.log('%s is a %s.', user.first_name, user.email) // Space Ghost is a talk show host.
-// })
-// })
-
-// .find finds all of them
-// router.get('/signin/:first_name', function(req, res, next){
-//   var query = User.find({ 'first_name': req.params.first_name }).populate('trips');
-//   query.select('first_name email trips');
-//   query.exec(function (err, user) {
-//   if (err) return handleError(err);
-//     res.json(user)
-// })
-// })
-
-
-
-
-
-
-// /* PUT /todos/:id */
-// router.put('/:id', function(req, res, next) {
-//   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
 
 // /* DELETE /todos/:id */
 // router.delete('/:id', function(req, res, next) {

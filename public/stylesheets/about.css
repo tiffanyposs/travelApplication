@@ -166,7 +166,7 @@ body, html{
   height: 70%;
   display: flex; display: -webkit-flex;
   background-image: url(../images/splash/cover/travel_14.jpg);
-  background-size: 100%; 
+  background-size: 100% auto; 
   background-position: center;
   background-attachment: fixed;
   margin-bottom: 70px;
@@ -314,4 +314,12 @@ footer h4{
 
 footer h4 > span{
   margin-right: 5px;
+}
+
+
+
+@media (max-width: 600px) {
+  #about{
+    background-size: auto 100%;
+  }
 }

@@ -1,8 +1,6 @@
 // need to have variable outside so its can close
 // existing websockets if needed
 var client;
-
-
 //this is called from the trip card on click
 var makeNewWebsocket = function(){
 
@@ -13,7 +11,7 @@ if(client != undefined){
   client = undefined;
 }
 
-// client = new WebSocket("ws://localhost:2000/" + current_trip);
+client = new WebSocket("ws://localhost:2000/" + current_trip);
 
 //test server
 // client = new WebSocket("ws://45.55.221.131:2000/" + current_trip);
@@ -21,7 +19,7 @@ if(client != undefined){
 //tripppper
 
 //production server
-client = new WebSocket("ws://104.131.57.112:2000/" + current_trip);
+// client = new WebSocket("ws://104.131.57.112:2000/" + current_trip);
 
 $('#chat_submit').click(function(){
   if($('#chat_input_box').val().trim() != ""){
@@ -66,16 +64,7 @@ client.addEventListener("message", function(message){
   }else{
     new_chat_card.attr('class', 'chat_card chat_card_other');
   }
-  
-      // <div class = 'chat_card chat_card_current'>
-      //   <div>
-      //     <img src="./images/Danoyshka.png">
-      //     <h4>Tiffany Poss</h4>
-      //   </div>
-      //   <div>
-      //     <a href="#" target='blank'>http://blahblahblah.com</a>
-      //   </div>
-      // </div>
+
   var avatar_div = $('<div></div>');
 
   if(hash_message['name']){
@@ -85,11 +74,7 @@ client.addEventListener("message", function(message){
     var name = $('<h4></h4>').text(fullname);
   }
 
-
-
-// console.log(hash_message.user_id.taken_avatars)
         var avatar;
-        // console.log(hash_message)
         var platupus = $('<img>')
 
         //this is for loading the old messages from the database
@@ -111,7 +96,6 @@ client.addEventListener("message", function(message){
             })
         }
       }else{
-        // console.log(hash_message)
         avatar = hash_message.avatar
         if(hash_message.user_id === current_user){
           platupus.attr('class', 'current_user_avatar')
@@ -134,17 +118,10 @@ client.addEventListener("message", function(message){
     var end_digits = word.charAt(word.length-3) + word.charAt(word.length-2) + word.charAt(word.length- 1);
     var first_digits = word.charAt(0) + word.charAt(1) + word.charAt(2) + word.charAt(3);
     if(end_digits === "jpg" || end_digits === "png" || end_digits === "gif"){
-      // if(message_section.length > 0){
-      //   var p = $('<p></p>').text(message_section.join(' '))
-      //   content_div.append(p);
-      //   message_section = [];
-      // }
-      
       var image = $('<img>').attr('src', word);
       var image_div = $('<div></div>');
       image_div.append(image);
       content_div.prepend(image_div);
-      // new_chat_card.append(content_div)
       }else if(first_digits === "http" || first_digits === "www."){
         if(message_section.length > 0){
           var p = $('<p></p>').text(message_section.join(' '))
@@ -154,8 +131,6 @@ client.addEventListener("message", function(message){
         var link = $('<a></a>').attr('href', word).text(word);
         link.attr('target', '_blank')
         content_div.append(link)
-        // new_chat_card.append(link);
-        // new_chat_card.append(content_div)
       }else{
         message_section.push(word)
       }
@@ -166,16 +141,10 @@ client.addEventListener("message", function(message){
           var card_content = $('<p></p>').text(message_section.join(' '));
           content_div.append(card_content);
         }
-        // content_div.append(card_content);
         new_chat_card.append(content_div) 
       }
-
   })
-
-
-  // new_chat_card.prepend(name)
   $('#chat').append(new_chat_card)
-
   //scrolls down
   $('#chat').stop().animate({
     scrollTop: $("#chat")[0].scrollHeight

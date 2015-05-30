@@ -1,54 +1,42 @@
 var express = require('express');
 var router = express.Router();
 
-
 // var Trip = require('../models/Trip.js');
 var Chat = require('../models/Chat.js');
 var User = require('../models/User.js');
 
+  //!!!!!!!!!!!!!
+  //WEBSOCKET STUFF
+  var WebSocketServer = require("ws").Server;
+  var server = new WebSocketServer({port: 2000});
+  var clients = [];
 
-//!!!!!!!!!!!!!
-//WEBSOCKET STUFF
-var WebSocketServer = require("ws").Server;
-var server = new WebSocketServer({port: 2000});
-var clients = [];
+  server.on("connection", function(connection) {
 
+  var updateChatroom = function(trip_id){
+  	console.log('update')
+  	var chatroom = Chat.find({'trip_id' : trip_id})
+  	chatroom.populate('chat.user_id', 'first_name last_name _id taken_avatars');
+  	chatroom.exec(function(err, chats){
+  		chats[0].chat.forEach(function(each){
+  			var encoded_msg = JSON.stringify(each);
+  			connection.send(encoded_msg)
+  		})
+  	})
+  }
 
+  var addChatroom = function(trip_id){
+  	var trip = {
+  		trip_id: trip_id
+  	}
+  	Chat.create(trip, function (err, chat) {
+  	    if (err) return next(err);
+  	});
+  	console.log('adding trip')
+  }
 
-server.on("connection", function(connection) {
-
-var updateChatroom = function(trip_id){
-	console.log('update')
-	var chatroom = Chat.find({'trip_id' : trip_id})
-	chatroom.populate('chat.user_id', 'first_name last_name _id taken_avatars');
-  // chatroom.populate('trip_id', 'taken_avatars');
-	chatroom.exec(function(err, chats){
-		chats[0].chat.forEach(function(each){
-			var encoded_msg = JSON.stringify(each);
-			connection.send(encoded_msg)
-		})
-	})
-}
-
-var addChatroom = function(trip_id){
-	var trip = {
-		trip_id: trip_id
-	}
-	Chat.create(trip, function (err, chat) {
-	    if (err) return next(err);
-	    // res.json(comments);
-	    // console.log(chat)
-	});
-	console.log('adding trip')
-}
-
-
-
-  console.log("Client connected!");
-  // console.log(connection.upgradeReq.url);
-
+  // console.log("Client connected!");
   var trip_id = connection.upgradeReq.url.replace('/', '');
-  // console.log(trip_id);
 
 
   var query = Chat.find({'trip_id' : trip_id});
@@ -58,14 +46,10 @@ var addChatroom = function(trip_id){
     console.log(chats)
     // checks if this trips chat history exists
     if(chats.length === 0){
-    	// console.log("it doesn't exist")
     	addChatroom(trip_id, connection)
     }else{
-    	// console.log('it exists')
     	updateChatroom(trip_id, connection)
     }
-    // res.json(comments)
-    // console.log(chats)
   })
 
   clients.push(connection);
@@ -94,12 +78,6 @@ var addChatroom = function(trip_id){
 	    }
 	  );
 
-
-  
-
-
-
-
     clients.forEach(function(client){
         // client.send(msg);
         console.log(client.upgradeReq.url)
@@ -110,8 +88,5 @@ var addChatroom = function(trip_id){
 
   });
 });
-
-
-
 
 module.exports = router;

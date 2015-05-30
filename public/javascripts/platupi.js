@@ -18,20 +18,14 @@ console.log(used_avatars)
 var makeAvatarModal = function(){
 
   for(var i = 1; i <= total_avatars; i++){
-    // console.log(used_avatars)
-    // console.log(used_avatars.indexOf(i))
-    // console.log(route + start + i + end)
     if(used_avatars.indexOf(i) == -1){
     	var image = $('<img>').attr('src', route + start + i + end)
     		.attr('id', start + i)
     			.attr('class', 'platupus');
     	$('#platupi').append(image);
     }if(i === total_avatars){
-      // console.log('hiiiiii')
         used_avatars.forEach(function(each){
-          // console.log(each)
           var grey_image = $('<img>').attr('src', grey_route + 'grey_' + start + each + end)
-            // .attr('id', 'grey_' + start + each + end)
               .attr('class', 'taken_platupus');
           $('#platupi').append(grey_image);
         })
@@ -44,28 +38,18 @@ var makeAvatarModal = function(){
   	$('.platupus').css('border', '3px solid lightgrey')
   	$(this).css('border', '3px solid #1e87c1');
   	current_platupus = $(this).attr('id');
-  	// console.log(current_trip)
-  	// console.log(current_platupus);
   })
 
 }
 
-
-
 var logAvatars = function(avatars){
   avatars.forEach(function(each, index){
-    // console.log(each)
-    // console.log(each.avatar.split('_')[1].split('.')[0])
-    //this pushes the number
-    // console.log(each)
-    //this if statement guards if there are faulty .png avatars
     if(each.avatar.length > 4){
       var image_num = parseInt(each.avatar.split('_')[1].split('.')[0]);
       if(used_avatars.indexOf(image_num) === -1){
         used_avatars.push(image_num);
       }
     }
-
 
     if(index === avatars.length - 1){
       makeAvatarModal()
@@ -81,9 +65,7 @@ var checkTakenAvatars = function(){
     url: current_url + 'users/avatar/' + current_trip + '/' + current_user, 
     dataType: 'json',
     success: function(data){
-        console.log(data.taken_avatars)
-        // logAvatars(data.taken_avatars)
-        // updateAvatars(data.taken_avatars)
+        // console.log(data.taken_avatars)
     }
   });
 
@@ -91,9 +73,7 @@ var checkTakenAvatars = function(){
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user, 
     dataType: 'json',
     success: function(data){
-        console.log(data.taken_avatars)
         logAvatars(data.taken_avatars)
-        // updateAvatars(data.taken_avatars)
     }
   });
 }
@@ -120,7 +100,6 @@ var user_avatar_file = {
   trip_id: current_user
 }
 
-console.log('click')
 
 
 var setAvatar = function(){
@@ -131,8 +110,7 @@ var setAvatar = function(){
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-      // console.log(data)
-      console.log('it set')
+      // console.log('it set')
     }
   });
 
@@ -144,8 +122,6 @@ var setAvatar = function(){
     dataType: 'json',
     data: user_avatar_file,
     success: function(data){
-      console.log(data)
-      // console.log('users set')
     }
   });
 
@@ -156,15 +132,12 @@ var setAvatar = function(){
 
 
 var pushAvatar = function(){
-  // avatar_file.user_id = current_user;
     $.ajax({
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user + '/push', 
     type: 'PUT',
     dataType: 'json',
     data: avatar_file,
     success: function(data){
-      // console.log(data)
-      // console.log('it pushed')
     }
   });
 
@@ -174,9 +147,6 @@ var pushAvatar = function(){
     dataType: 'json',
     data: user_avatar_file,
     success: function(data){
-      // console.log(data)
-      // console.log('users pushed')
-
     }
   });
 
@@ -188,9 +158,7 @@ var pushAvatar = function(){
 
 
 var updateAvatars = function(avatars){
-  // console.log(avatars)
   if(avatars.length === 0){
-    console.log('push no avatars choosen')
     pushAvatar();
   }else{
 
@@ -199,11 +167,9 @@ var updateAvatars = function(avatars){
     if(each.user_id === current_user){
       found = true;
       setAvatar();
-      console.log('hi')
     }
 
     if(index === avatars.length - 1 && found === false){
-      console.log('push user not found');
       pushAvatar();
     }
   })
@@ -217,7 +183,6 @@ var getAvatars = function(){
     url: current_url + 'trips/avatar/' + current_trip + '/' + current_user, 
     dataType: 'json',
     success: function(data){
-        // console.log(data)
         updateAvatars(data.taken_avatars)
     }
   });

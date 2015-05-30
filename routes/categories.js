@@ -13,13 +13,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* POST /categories */
-// router.post('/', function(req, res, next) {
-//   Category.create(req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(categories);
-//   });
-// });
+
 
 // /* GET /categories/id */
 // Gets all the categories from a trip
@@ -48,32 +42,6 @@ router.get('/:trip_id/last', function(req, res, next){
   })
 })
 
-
-
-// router.get('/last', function(req,res, next){
-//   var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);
-//   query.exec(function( err, trips){
-//     if (err) return handleError(err);
-//     res.json(trips)
-//   })
-// })
-
-
-// router.get('/', function(req, res, next) {
-//   var query = Trip.find({'created_by': req.session.user_id});
-//   query.exec(function (err, trips) {
-//     if (err) return handleError(err);
-//       res.json(trips)
-//   })
-// });
-
-// /* PUT /todos/:id */
-// router.put('/:id', function(req, res, next) {
-//   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
 
 // /* DELETE /todos/:id */
 // router.delete('/:id', function(req, res, next) {

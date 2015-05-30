@@ -1,5 +1,4 @@
 $('#suggestion_delete').click(function(e){
-	// console.log('hello world');
 
 	var archive = {
 		archived: true
@@ -18,4 +17,27 @@ $('#suggestion_delete').click(function(e){
     $('#edit_close').click()
     //clicks a new suggestion
     $('#suggestion_content div').first().click();
+})
+
+
+
+$('#comment_delete').click(function(e){
+
+    var archive = {
+        archived: true
+    }
+
+    $.ajax({
+            url: current_url + "comments/archive/" + current_comment,
+            type: 'PUT',
+            data: archive,
+            timeout: 15000,
+    });
+
+    //removes the archived suggestion
+    $('#' + current_comment).remove()
+    //closes the modal
+    $('#edit_comment_close').click()
+    //clicks a new suggestion
+
 })

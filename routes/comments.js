@@ -21,15 +21,28 @@ router.post('/', function(req, res, next) {
   });
 });
 
-// /* GET /comments/suggestion_id */
+
+// GET /suggestions/:category_id
+//this gets all suggestions that belong to a category that are not archived.
 router.get('/:suggestion_id', function(req, res, next) {
-  var query = Comment.find({'suggestion_id' : req.params.suggestion_id});
+  var query = Comment.find({'suggestion_id' : req.params.suggestion_id})
+  .where('archived').ne(true)
   query.populate('user_id suggestion_id');
   query.exec(function(err, comments){
     if (err) return handleError(err);
     res.json(comments)
   })
 });
+
+// /* GET /comments/suggestion_id */
+// router.get('/:suggestion_id', function(req, res, next) {
+//   var query = Comment.find({'suggestion_id' : req.params.suggestion_id});
+//   query.populate('user_id suggestion_id');
+//   query.exec(function(err, comments){
+//     if (err) return handleError(err);
+//     res.json(comments)
+//   })
+// });
 
 
 // GET /comments/:suggestion_id/last
@@ -55,14 +68,40 @@ router.put('/:comment_id/update', function(req, res, next) {
 });
 
 
+/* PUT /comments/:suggestion_id/downvote */
+router.put('/archive/:comment_id', function(req, res, next) {
+  Comment.findByIdAndUpdate(
+    req.params.comment_id,
+    {$set: req.body},
+    function(err, comment) {
+        console.log(comment);
+    }
+);
+});
 
-// /* PUT /todos/:id */
-// router.put('/:id', function(req, res, next) {
-//   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
+
+/* PUT /comments/:suggestion_id/downvote */
+router.put('/archive/:comment_id/recover', function(req, res, next) {
+  Comment.findByIdAndUpdate(
+    req.params.comment_id,
+    {$set: req.body},
+    function(err, comment) {
+        console.log(comment);
+    }
+);
+});
+
+
+// GET /comments/:suggestion_id/last
+router.get('/archive/:user_id/all', function(req, res, next) {
+  var query = Comment.find({ $and : [{ user_id : req.params.user_id }, {archived : true}]});
+  query.populate('suggestion_id')
+  query.exec(function(err, comments){
+    if (err) return handleError(err);
+    res.json(comments)
+  })
+});
+
 
 // /* DELETE /todos/:id */
 // router.delete('/:id', function(req, res, next) {

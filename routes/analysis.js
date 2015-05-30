@@ -29,6 +29,7 @@ catch (err) {
 }
 
 
+// Renders main analytics page
 /* GET /analysis/supersecret/platinum/platupi listing. */
 router.get(secretroute, function(req, res) {
 	if(req.session.admin_user === true){
@@ -38,8 +39,6 @@ router.get(secretroute, function(req, res) {
 	}
 	  
 });
-
-
 
 // POST users/session
 router.post(secretroute + '/session', function(req, res){
@@ -61,8 +60,6 @@ router.post( secretroute + '/logout', function(req, res){
   res.redirect('/analysis' + secretroute)
 })
 
-
-
 // gets all the users
 // GET /analysis/supersecret/platinum/platupi/users/all
 router.get(secretroute + '/users', function(req, res, next) {
@@ -71,6 +68,7 @@ router.get(secretroute + '/users', function(req, res, next) {
     res.json(users);
   });
 });
+
 
 //gets all the sessions
 // /analysis/supersecret/platinum/platupi/sessions
@@ -81,8 +79,6 @@ router.get(secretroute + '/sessions', function(req, res) {
   });
 });
 
-
-// trips
 router.get(secretroute + '/trips', function(req, res) {
   Trip.find(function (err, trips) {
     if (err) return next(err);
@@ -90,25 +86,12 @@ router.get(secretroute + '/trips', function(req, res) {
   });
 });
 
-
-
-// categories
 router.get(secretroute + '/categories', function(req, res) {
   Category.find(function (err, categories) {
     if (err) return next(err);
     res.json(categories);
   });
 });
-
-
-// suggestions
-// router.get(secretroute + '/suggestions', function(req, res) {
-//   Suggestion.find(function (err, suggestions) {
-//     if (err) return next(err);
-//     res.json(suggestions);
-//   });
-// });
-
 
 router.get(secretroute + '/suggestions', function(req, res, next) {
   var query = Suggestion.find().populate('category_id user_id');
@@ -118,15 +101,12 @@ router.get(secretroute + '/suggestions', function(req, res, next) {
   })
 });
 
-// comments
 router.get(secretroute + '/comments', function(req, res) {
   Comment.find(function (err, comments) {
     if (err) return next(err);
     res.json(comments);
   });
 });
-
-
 
 router.get(secretroute + '/betas', function(req, res) {
   Beta.find(function (err, betas) {
@@ -141,9 +121,5 @@ router.get(secretroute + '/notes', function(req, res) {
     res.json(notes);
   });
 });
-
-
-
-
 
 module.exports = router;

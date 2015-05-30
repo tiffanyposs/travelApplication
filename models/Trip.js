@@ -24,8 +24,6 @@ var TripSchema = new Schema({
 
 TripSchema.plugin(timestamps);
 
-
-
 TripSchema.add({taken_avatars: [{
   user_id: {
   type: Schema.ObjectId,

@@ -13,10 +13,4 @@ var Session = require('../models/Session.js');
 //   });
 // });
 
-
-
-
-
-
-
 module.exports = router;

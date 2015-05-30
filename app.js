@@ -17,7 +17,7 @@ var d = domain.create();
 var app = express();
 
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,9 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // res.setHeader('Access-Control-Allow-Origin', 'http://104.131.57.112');
-    res.setHeader('Access-Control-Allow-Origin', 'http://tripper.co');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://tripper.co');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -48,21 +48,15 @@ var trips = require('./routes/trips');
 var categories = require('./routes/categories');
 var suggestions = require('./routes/suggestions');
 var comments = require('./routes/comments');
-
 var chats = require('./routes/chats');
 var analysis = require('./routes/analysis');
 var sessions = require('./routes/sessions');
-
 var betas = require('./routes/betas')
 var notes = require('./routes/notes')
 
 
-
-
-
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
-//THIS IS FOR DATABASE
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -88,8 +82,8 @@ app.use(session({
   saveUninitialized: true,
   // cookie: {maxAge: 30000},
   store: new MongoStore({
-    url: 'mongodb://localhost/data/db',
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
+    // url: 'mongodb://localhost/data/db',
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
     autoRemove: 'disabled',
     touchAfter: 4 * 3600 // time period in seconds wont make a new session
   })
@@ -139,8 +133,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-
 //catches all of the errors 
 d.on('error', function(err) {
   console.error(err);
@@ -148,5 +140,5 @@ d.on('error', function(err) {
 
 module.exports = app;
 
-// app.listen(3000)
-app.listen(80)
+app.listen(3000)
+// app.listen(80)

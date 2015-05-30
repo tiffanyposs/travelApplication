@@ -25,18 +25,12 @@ $('#modal_close').click(function(event){
     });
 });
 
-
-
 $('#trip_end_date').keypress(function(e){
   if(e.keyCode == 13){
     $('#trip_add').click();
     $('#modal_close').click();
   }
 });
-
-
-
-
 
 //toggles view of trips
 $('#add_trip').click(function(){
@@ -52,10 +46,6 @@ $('#view_trips').click(function(){
         $('#trip_content').show( "drop", { direction: "up" }, "slow" );
       });
 })
-
-
-
-
 
 //add suggestion
 $('#suggestion_header').click(function(event){
@@ -79,8 +69,6 @@ $('#suggestion_link').keypress(function(e){
 });
 
 
-
-
 //adds comments
 $('#add_category').click(function(event){
   $('#category_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
@@ -101,8 +89,6 @@ $('#category_title').keypress(function(e){
     $('#category_close').click();
   }
 });
-
-
 
 //add friends
 $('#add_friend').click(function(event){
@@ -126,9 +112,6 @@ $('#friend_email').keypress(function(e){
 
 
 
-
-
-
 //add suggestion
 $('#add_platupi').click(function(event){
   $('#platupi_overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
@@ -139,20 +122,26 @@ $('#close_platupi').click(function(event){
   $('#platupi_overlay').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
     function(){
       $(this).css('visibility', 'hidden')
-      //because it overlays the trip one
-      //if not change to empty
-      // close_modal = '#modal_close';
       close_modal = '';
-
     });
 })
 
-// $('#suggestion_link').keypress(function(e){
-//   if(e.keyCode == 13){
-//     $('#suggestion_submit').click();
-//     $('#suggestion_close').click();
-//   }
-// });
+
+
+//add friends
+$('#recover_archive').click(function(event){
+  $('#archive_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#archive_close';
+})
+
+$('#archive_close').click(function(event){
+  $('#archive_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+    function(){
+      $(this).css('visibility', 'hidden');
+      close_modal = '';
+    });
+})
+
 
 
 
@@ -181,9 +170,6 @@ $('#dropdown_menu').hover(function(){
              $('#dropdown_menu').css('display','none');
          });
      }, 500);
-});   
-
-
-
+});
 
 })//end document ready

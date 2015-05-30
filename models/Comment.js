@@ -18,6 +18,9 @@ var CommentSchema = new mongoose.Schema({
 
 CommentSchema.plugin(timestamps);
 
+CommentSchema.add({
+  archived: { type: Boolean, default: false }
+})
 
 module.exports = mongoose.model('Comment', CommentSchema);
 

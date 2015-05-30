@@ -33,9 +33,9 @@ router.get('/:suggestion_id/one', function(req, res, next) {
 });
 
 // GET /suggestions/:category_id
+//this gets all suggestions that belong to a category that are not archived.
 router.get('/:category_id', function(req, res, next) {
   var query = Suggestion.find({'category_id' : req.params.category_id})
-  // where it is not archived
   .where('archived').ne(true)
   query.populate('user_id', 'first_name last_name username taken_avatars');
   query.exec(function(err, suggestions){
@@ -43,7 +43,6 @@ router.get('/:category_id', function(req, res, next) {
     res.json(suggestions)
   })
 });
-
 
 // GET /suggestions/:category_id/last
 router.get('/:category_id/last', function(req, res, next) {
@@ -55,7 +54,6 @@ router.get('/:category_id/last', function(req, res, next) {
   })
 });
 
-
 router.get('/:suggestion_id/votes', function(req, res, next){
   var query = Suggestion.findById(req.params.suggestion_id, 'upvote downvote');
   // query.populate('user_id', 'first_name last_name')
@@ -64,7 +62,6 @@ router.get('/:suggestion_id/votes', function(req, res, next){
     res.json(suggestions)
   })
 })
-
 
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/:suggestion_id/upvote', function(req, res, next) {
@@ -78,7 +75,6 @@ router.put('/:suggestion_id/upvote', function(req, res, next) {
 );
 });
 
-
 /* PUT /suggestions/:suggestion_id/downvote */
 router.put('/:suggestion_id/downvote', function(req, res, next) {
   Suggestion.findByIdAndUpdate(
@@ -90,7 +86,6 @@ router.put('/:suggestion_id/downvote', function(req, res, next) {
 );
 });
 
-
 /* PUT /suggestions/:suggestion_id/downvote */
 router.put('/:suggestion_id/update', function(req, res, next) {
   Suggestion.findByIdAndUpdate(
@@ -101,7 +96,6 @@ router.put('/:suggestion_id/update', function(req, res, next) {
     }
 );
 });
-
 
 /* PUT /suggestions/:suggestion_id/downvote */
 router.put('/archive/:suggestion_id', function(req, res, next) {
@@ -116,29 +110,32 @@ router.put('/archive/:suggestion_id', function(req, res, next) {
 
 
 
-// router.get('/last', function(req,res, next){
-//   var query = Trip.find({'created_by': req.session.user_id}).sort({'created': 'desc'}).limit(1);
-//   query.exec(function( err, trips){
-//     if (err) return handleError(err);
-//     res.json(trips)
-//   })
-// })
+/* PUT /suggestions/:suggestion_id/downvote */
+router.put('/archive/:suggestion_id/recover', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion,
+    {$set: req.body},
+    function(err, suggestion) {
+        console.log(suggestion);
+    }
+);
+});
 
-// /* GET /categories/id */
-// router.get('/:id', function(req, res, next) {
-//   Suggestion.findById(req.params.id, function (err, suggestions) {
-//     if (err) return next(err);
-//     res.json(suggestions);
-//   });
-// });
 
-// /* PUT /todos/:id */
-// router.put('/:id', function(req, res, next) {
-//   Todo.findByIdAndUpdate(req.params.id, req.body, function (err, categories) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
+
+
+
+// GET /suggestions/:suggestion_id/last
+router.get('/archive/:user_id/all', function(req, res, next) {
+  var query = Suggestion.find({ $and : [{ user_id : req.params.user_id }, {archived : true}]});
+  query.populate('category_id')
+  query.exec(function(err, suggestions){
+    if (err) return handleError(err);
+    res.json(suggestions)
+  })
+});
+
+
 
 // /* DELETE /todos/:id */
 // router.delete('/:id', function(req, res, next) {

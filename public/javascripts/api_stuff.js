@@ -102,7 +102,6 @@ var userTripInfo = function(data){
             }
 
             // this sets the avatar
-            
             current_avatar = avatar;
             $('.current_user_avatar').attr('src', avatar);
 
@@ -185,32 +184,6 @@ var getUserTrips = function(){
 
 
 
-// getUserTrips();
-
-
-
-
-
-// this gets the trip someone just posted
-var getLastTrip = function(){
-    $.ajax({
-    url: current_url + 'trips/last',
-    dataType: 'json',
-    success: function(data){
-        if(data[0].attending.length === 0){
-            updateAttending(data)
-        }else if(data[0].attending.length > 0){
-            userTripInfo(data);
-        }else{
-            // console.log('else')
-        }
-    }
-  });  
-}
-
-
-
-
 var updateAttending = function(data){
     var user = {
         user_id: current_user
@@ -236,6 +209,26 @@ var updateAttending = function(data){
     });
     getLastTrip();
 }
+
+
+// this gets the trip someone just posted
+var getLastTrip = function(){
+    $.ajax({
+    url: current_url + 'trips/last',
+    dataType: 'json',
+    success: function(data){
+        if(data[0].attending.length === 0){
+            updateAttending(data)
+        }else if(data[0].attending.length > 0){
+            userTripInfo(data);
+        }else{
+            // console.log('else')
+        }
+    }
+  });  
+}
+
+
 
 //post request to POST a new trip
 $('#trip_add').click(function(){
@@ -281,8 +274,6 @@ $('#trip_add').click(function(){
 
 
 var getTripCategoryInfo = function(data){
-
-
     //this hides the suggestion if theres no category
     if(data.length > 0){
         $('#suggestion_header h1').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300)
@@ -323,10 +314,6 @@ var getTripCategoryInfo = function(data){
     })
     //clicks the first child on page load
     $('.categories:first-child').click();
-
-
-
-
 }
 
 
@@ -397,11 +384,6 @@ function ValidUrl(str) {
   }
 }
 
-
-
-
-
-
 var getSuggestionInfo = function(data){
 
     console.log(data)
@@ -416,12 +398,8 @@ var getSuggestionInfo = function(data){
           close_modal = '';
         });
     }
-
-    //this is for the avatar on suggestions
     
-// console.log('suggestion')
     data.forEach(function(suggestion){
-
         var suggestion_card = $('<div></div>').attr('class', 'suggestion_card')
         suggestion_card.attr('id', suggestion._id)
         var suggestion_info = $('<div></div>').attr('class', 'suggestion_info')
@@ -444,17 +422,14 @@ var getSuggestionInfo = function(data){
         var up_vote_div = $('<div></div>')
         var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green')
         var up_count = $('<h2></h2>').attr('class', 'suggestion_upvote_count')
-        // console.log(suggestion.upvote.length)
         
 
         var upvote_array = []
         suggestion.upvote.forEach(function(each, index){
-            // console.log(each)
             if(upvote_array.indexOf(each.user_id) === -1){
                 upvote_array.push(each.user_id)
             }
             if(index === suggestion.upvote.length - 1){
-                // console.log(upvote_array)
                 up_count.text(upvote_array.length)
             }
         })
@@ -467,16 +442,13 @@ var getSuggestionInfo = function(data){
         var down_vote_div = $('<div></div>')
         var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red')
         var down_count = $('<h2></h2>').attr('class', 'suggestion_downvote_count')
-        // console.log(suggestion.downvote.length)
 
         var downvote_array = []
         suggestion.downvote.forEach(function(each, index){
-            // console.log(each)
             if(downvote_array.indexOf(each.user_id) === -1){
                 downvote_array.push(each.user_id)
             }
             if(index === suggestion.downvote.length - 1){
-                // console.log(downvote_array)
                 down_count.text(downvote_array.length)
             }
         })
@@ -504,14 +476,11 @@ var getSuggestionInfo = function(data){
                 var $pencil = $( this ).find('.suggestion_pencil').hide('fade', 100);
         })
 
-
         //this is for updating a suggestion
         $('#suggestion_edit').click(function(){
             var edit_title = $('#edit_title').val();
             var edit_about = $('#edit_about').val();
             var edit_link = $('#edit_link').val();
-            // if(edit_title)
-
 
             var suggestion_update = {
                 title: edit_title,
@@ -574,25 +543,16 @@ var getSuggestionInfo = function(data){
         suggestion_card.append(suggestion_info, suggestion_voting, edit_div);
         $('#suggestion_content').prepend(suggestion_card)
         suggestion_card.click(function(){
-            // console.log('suggestion_card')
             $('#comments').empty();
             $('.suggestion_clicked').removeClass('suggestion_clicked')
             
             current_suggestion = suggestion._id;
             $(this).addClass('suggestion_clicked')
 
-
-
-            console.log(suggestion)
-
-// '/images/hats/color_hats/'
-
             // this put the suggestion content as the first comment
             var sug_card = $('<div></div').attr('class', 'comment_card');
             var sug_avatar;
-
             var sug_image = $('<div></div>');
-            
 
             if(suggestion.user_id.taken_avatars.length === 0){
                 sug_avatar = '/images/users.jpg';
@@ -613,16 +573,6 @@ var getSuggestionInfo = function(data){
             if(suggestion.user_id._id === current_user){
                 sug_img.attr('class', 'current_user_avatar')
             }
-            // var sug_avatar = $('#suggestion_avatar img').attr('src')
-
-            // console.log($('#suggestion_avatar img').attr('src'))
-
-            
-
-            //fix image
-           
-
-            // .attr('class', 'current_user_avatar');
 
             sug_image.append(sug_img);
 
@@ -649,17 +599,9 @@ var getSuggestionInfo = function(data){
 
 
             sug_content.text(suggestion.content)
-            // if(data.length > 0){
-                
-            // }else{
-
-            // }
-
 
             //this passes the current suggestions content to be appended into comments
             getComments();
-            // console.log(avatar)
-
 
             var createSuggestionCard = function(data){
                 $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'visible')
@@ -674,7 +616,6 @@ var getSuggestionInfo = function(data){
                 //and checks if its valid
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
-                    // console.log(data[0].link)
                     $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(12, 20) + "...");
                     $('#suggestion_comment_link').attr('href', data[0].link);
                 }else if(suggestion.link && valid_url === false){
@@ -688,19 +629,13 @@ var getSuggestionInfo = function(data){
                 var avatar;
 
                 //this changes main avatar
-
                 if(data[0].user_id.taken_avatars.length === 0){
                     avatar = '/images/users.jpg';
-                    // console.log('first_if')
                 }else{
-                    // console.log('else')
-                    // console.log(data[0].user_id.taken_avatars)
                     if(data[0].user_id.taken_avatars.length > 0){
-                        // console.log(data[0].user_id)
                     data[0].user_id.taken_avatars.forEach(function(each, index){
                         if(each.trip_id === current_trip){
                             avatar = '/images/hats/color_hats/' + each.avatar;
-                            // console.log(each)
                         }
                     })
                     }else{
@@ -708,8 +643,6 @@ var getSuggestionInfo = function(data){
                         }   
                     }
                 
-                // console.log(avatar)
-
                 //this checks if the current suggestion is by the current user and make
                 //the avatar change if they 
                 if(data[0].user_id._id === current_user){
@@ -719,26 +652,18 @@ var getSuggestionInfo = function(data){
                 }
 
                 $('#suggestion_avatar img').attr('src', avatar)
-
-
-                // $('#comment_suggestion_upvote').text(data[0].upvote.length)
                 $('#upvote_images').empty();
                 $('#downvote_images').empty();
-
 
                 //this safeguards from previous errors with double put requests
                 var upvote_check = [];
 
-
-                // console.log(data[0].upvote)
                 //this appends the little platipi for voting
                 data[0].upvote.forEach(function(each, index){   
-                    // console.log(each)      
                     var found = false;
                     var image;
                     if(each.user_id.taken_avatars.length > 0 && upvote_check.indexOf(each.user_id._id) === -1){
                         upvote_check.push(each.user_id._id)
-                        
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip && found === false){
                                 found = true;
@@ -774,28 +699,16 @@ var getSuggestionInfo = function(data){
                     }, function(){
                         $('#voting_hover_div').hide()
                     })         
-                    // if(index === data[0].upvote.length - 1 && found === false){
-                    //     var image = $('<img>');
-                    //     image.attr('src', 'images/users.jpg');
-                    //     $('#upvote_images').append(image);
-                    //     console.log('appending image 2')
-                    //     if(each.user_id._id === current_user){
-                    //         image.attr('class', 'current_user_avatar')
-                    //     }
-                    // }
-
                 })
 
                 //this safeguards from previous errors with double put requests
                 var downvote_check = [];
 
                 data[0].downvote.forEach(function(each, index){
-                    // console.log(each)
                     var found = false;
                     var image_two;
                     if(each.user_id.taken_avatars.length > 0 && downvote_check.indexOf(each.user_id._id) === -1){
                         downvote_check.push(each.user_id._id)
-                        
                         each.user_id.taken_avatars.forEach(function(y){
                             if(y.trip_id === current_trip && found === false){
                                 found = true;
@@ -829,19 +742,7 @@ var getSuggestionInfo = function(data){
                     }, function(){
                         $('#voting_hover_div').hide()
                     })    
-                    // if(index === data[0].downvote.length - 1 && found === false){
-                    //     var image_two = $('<img>');
-                    //     image_two.attr('src', 'images/users.jpg');
-                    //     $('#downvote_images').append(image_two);
-                    //     if(each.user_id._id === current_user){
-                    //         image_two.attr('class', 'current_user_avatar')
-                    //     }
-                    // }
-                 
                 })
-
-
-                // $('#comment_suggestion_downvote').text(data[0].downvote.length)
             }
 
 
@@ -877,7 +778,6 @@ var getSuggestions = function(){
     dataType: 'json',
     success: function(data){
       getSuggestionInfo(data);
-      // console.log(data)
     }    
   });
 }
@@ -933,23 +833,11 @@ var getComments = function(){
   });
 }
 
-
-
-
-
 var getCommentInfo = function(data){
-
-
-
-
-
     // this renders each comment
     data.forEach(function(comment){
-        // console.log(comment.content)
         var comment_card = $('<div></div').attr('class', 'comment_card');
-
-        // console.log(comment)
-
+        comment_card.attr('id', comment._id)
         var avatar;
 
         if(comment.user_id.taken_avatars.length === 0){
@@ -985,8 +873,7 @@ var getCommentInfo = function(data){
 
         var date_container = $('<div></div>');
         var name = $('<h2></h2>').text(comment.user_id.first_name + " " + comment.user_id.last_name);
-        // var date = $('<h2></h2').text(comment.created.substring(0, 10))
-        date_container.append(name)//, date);
+        date_container.append(name);
 
         var content = $('<h3></h3>').text(comment.content);
         content.attr('class', comment._id)
@@ -1018,8 +905,6 @@ var getCommentInfo = function(data){
                 var $comment_pencil = $( this ).find('.comment_pencil').hide('fade', 300);
         })
 
-
-
         //this is for updating a comment
         $('#comment_edit').click(function(){
             var edit_content = $('#edit_comment').val();
@@ -1027,8 +912,6 @@ var getCommentInfo = function(data){
             var comment_update = {
                 content: edit_content,
             }
-
-
               $.ajax({
                 url: current_url + 'comments/' + current_comment + '/update',
                 type: 'PUT',
@@ -1073,8 +956,6 @@ var getCommentInfo = function(data){
     })
 }
 
-
-
 // //this gets the last category posted in a group
 // //is called when you POST the category_submit
 var getLastComment = function(){
@@ -1087,8 +968,6 @@ var getLastComment = function(){
   });  
 }
 
-
-
 //post comment
 $('#comment_submit').click(function(){
     var trimmed = $('#comment_input_area').val().trim();
@@ -1099,7 +978,6 @@ $('#comment_submit').click(function(){
         suggestion_id: current_suggestion,
         user_id: current_user,
       }
-      // console.log('it clicked!upvote_vote_images')
       $.ajax({
         url: current_url + "comments",
         type: 'POST',
@@ -1121,4 +999,6 @@ $('#comment_input_area').keypress(function(e){
     $('#comment_submit').click();
   }
 });
+
+
 
