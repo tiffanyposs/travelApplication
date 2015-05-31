@@ -27,11 +27,11 @@ var getUser = function(){
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        console.log(data)
+        // console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
         current_trip = data.last_trip;
-        console.log(current_trip)
+        // console.log(current_trip)
         attendingTrips(data.trips)
         if(data.trips.length === 0){
             $('#current_trip').click()
@@ -95,7 +95,7 @@ var userTripInfo = function(data){
                     type: 'PUT',
                     data: last_trip,
                     success: function(data){
-                        console.log(data)
+                        // console.log(data)
                     }
             }); 
 
@@ -123,8 +123,51 @@ var userTripInfo = function(data){
             makeNewWebsocket()
 
             // THIS SETS THE INVITE MODAL TO HAVE THE CORRECT LINK
-            var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
-            $('#invite_url').text(invite_url).attr('href', invite_url)
+            // var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
+            // $('#invite_url').text(invite_url).attr('href', invite_url)
+
+
+            //when the add friends is clicked it make the 
+            $('#add_friend').click(function(){
+
+                var makeInviteUrl = function(){
+                    // console.log('hello')
+
+                var invite_body = {
+                    user_id: current_user,
+                    trip_id: current_trip
+                }
+
+
+                $.ajax({
+                  url: current_url + 'invites',
+                  type: 'POST',
+                  data: invite_body,
+                  success: function(data, textStatus, jqXHR)
+                    {
+                        // console.log(data)
+                    }
+                })
+                }
+
+
+                $.ajax({
+                    url: current_url + 'invites/' + current_user + '/' + current_trip,
+                    dataType: 'json',
+                    success: function(data){
+                        // console.log(data)
+                        if(data.length === 0){
+                            makeInviteUrl();
+                        }else{
+                            // console.log(data)
+                            var invite_url = current_url + 'invites/' + data[0].domain_name;
+                            $('#invite_url').text(invite_url).attr('href', invite_url);
+                            $('#invite_url').text(invite_url).attr('href', invite_url);
+                        }
+                    }
+                });       
+
+            })
 
             var makeFriends = function(trip){
             $('#friends').empty();
@@ -176,19 +219,16 @@ var userTripInfo = function(data){
 
             getTripCategories()
 
-
-
             var last_trip = {
                 last_trip: current_trip
             }
-
 
             $.ajax({
                     url: current_url + "users/settrip/" + current_user,
                     type: 'PUT',
                     data: last_trip,
                     success: function(data){
-                        console.log(data)
+                        // console.log(data)
                     }
             }); 
 
@@ -199,11 +239,11 @@ var userTripInfo = function(data){
 
     })
         // $('.trip_card:first').click()
-
-        // console.log($('#' + current_trip))
-        //this clicked the last trip that was clicked on page load
-        $('ul#' + current_trip + '.trip_card').click()
-
+        if(current_trip === undefined){
+            $('.trip_card:first').click()
+        }else{
+            $('ul#' + current_trip + '.trip_card').click()
+        }
 
 }
 
@@ -329,6 +369,15 @@ var getTripCategoryInfo = function(data){
         category_name.attr('class', 'categories')
         $( '#categories' ).append(category_name);
 
+        // $("#categories h2").hover(
+        //   function() {
+        //     $( this ).attr('background-color', 'red');
+        //     console.log('hi')
+        //   }, function() {
+        //     $( this ).attr('background-color', 'white');
+        //     console.log('bye')
+        //   }
+        // );
 
         category_name.click(function(){
             $('#suggestion_content').empty();
@@ -673,14 +722,16 @@ var getSuggestionInfo = function(data){
                 //and checks if its valid
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
-                    $('#suggestion_comment_link').text('Link: ' + data[0].link.substring(12, 20) + "...");
+                    $('#suggestion_comment_link').text('Link');
                     $('#suggestion_comment_link').attr('href', data[0].link);
-                }else if(suggestion.link && valid_url === false){
-                    $('#suggestion_comment_link').css('visibility', 'visible')
-                    $('#suggestion_comment_link').text('Not Valid Link');
-                    $('#suggestion_comment_link').removeAttr('href');
+                    $('#suggestion_comment_link').attr('class', 'valid_link');
+                    $('#suggestion_comment_link').removeAttr("disabled");
                 }else{
-                    $('#suggestion_comment_link').css('visibility', 'hidden')
+                    $('#suggestion_comment_link').css('visibility', 'visible')
+                    $('#suggestion_comment_link').text('Link');
+                    $('#suggestion_comment_link').removeAttr('href');
+                    $('#suggestion_comment_link').attr('class', 'invalid_link')
+                    $("#suggestion_comment_link").attr("disabled", "disabled");
                 }
 
                 var avatar;
@@ -1014,6 +1065,7 @@ var getCommentInfo = function(data){
         $('#comments').append(comment_card)
 
 
+        //this makes comments scroll
         $('#comment_wrapper').stop().animate({
           scrollTop: $("#comment_wrapper")[0].scrollHeight
         }, 600);
@@ -1039,7 +1091,7 @@ var getLastComment = function(){
 //post comment
 $('#comment_submit').click(function(){
     var trimmed = $('#comment_input_area').val().trim();
-    console.log(trimmed)
+    // console.log(trimmed)
     if(current_suggestion != "" && trimmed != ""){
       var formData = {
         content: $('#comment_input_area').val(),

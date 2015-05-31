@@ -53,6 +53,7 @@ var analysis = require('./routes/analysis');
 var sessions = require('./routes/sessions');
 var betas = require('./routes/betas')
 var notes = require('./routes/notes')
+var invites = require('./routes/invites')
 
 
 mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
@@ -101,6 +102,7 @@ app.use('/analysis', analysis);
 app.use('/sessions', sessions);
 app.use('/betas', betas)
 app.use('/notes', notes)
+app.use('/invites', invites)
 
 
 // catch 404 and forward to error handler

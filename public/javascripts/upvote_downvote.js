@@ -67,19 +67,7 @@ getTripVotes()
 
 
 
-
-
-// $('.upvote_button').click(function(e){
-// 	e.stopPropagation();
-// 	console.log('hiiii')
-// })
-
-
-
 var upvote_clicks = []
-
-
-
 
 
 $('#upvote').click(function(){

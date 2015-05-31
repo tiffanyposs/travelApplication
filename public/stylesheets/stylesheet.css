@@ -151,6 +151,16 @@ body, html{
 	display: none;
 }
 
+#friends > h2{
+	cursor: pointer;
+}
+
+/*this is for hover effect on categories*/
+#friends > h2:hover:not(.nav_clicked){
+	background-color: #292e35;
+	border-radius: 30px;
+}
+
 /*main nav*/
 #main_nav{
 	margin: 0 auto 0 auto;
@@ -210,6 +220,11 @@ body, html{
 	cursor: pointer;
 }
 
+/*this is for hover effect on categories*/
+#categories > h2:hover:not(.nav_clicked){
+	background-color: #292e35;
+	border-radius: 30px;
+}
 
 
 #suggestions{
@@ -434,13 +449,22 @@ green #98C06A*/
 }
 
 #suggestion_avatar a{
-	background-color: #1e87c1;
+	/*background-color: #1e87c1;*/
 	color: white; 
 	padding: 5px 20px 5px 20px;
 	border-radius: 10px;
 	text-decoration: none;
-
 }
+
+
+.valid_link{
+	background-color: #1e87c1;
+}
+
+.invalid_link{
+	background-color: lightgrey;
+}
+
 
 #suggestion_voting{
 	width: 60%;
