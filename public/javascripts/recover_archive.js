@@ -9,6 +9,9 @@ $('#recover_archive').click(function(){
 
 console.log('it clicked')
 
+
+var getArchivedComments = function(){
+
 var renderArchiveComments = function(comments){
 
 
@@ -73,7 +76,7 @@ var renderArchiveComments = function(comments){
   });
 
 
-
+}
 
 var renderArchiveSuggestions = function(suggestions){
 
@@ -84,7 +87,7 @@ var renderArchiveSuggestions = function(suggestions){
 	heading_div.append(heading);
 	$('#archived').append(heading_div);
 
-	suggestions.forEach(function(suggestion){
+	suggestions.forEach(function(suggestion, index){
 
 		console.log(suggestion)
 		var suggestion_card = $('<div></div>').attr('class', 'archive_card');
@@ -122,8 +125,13 @@ var renderArchiveSuggestions = function(suggestions){
 
 		})
 
+	if(index === suggestions.length - 1){
+		getArchivedComments()
+	}
 
 	})
+
+
 
 }
 
@@ -137,6 +145,8 @@ var renderArchiveSuggestions = function(suggestions){
     	console.log(data)
     	if(data.length > 0){
     		renderArchiveSuggestions(data)
+    	}else{
+    		getArchivedComments()
     	}
     }
   });

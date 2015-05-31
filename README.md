@@ -1,7 +1,8 @@
 ###Thing to Fix after Data restructure
 
-* Make trip_id and all model reference all nested data above them
+* Make trip_id and all model reference all nested data above them.
 * Make voting it's own model.
+* Make it so archive only shows deleted items from current trip.
 
 
 [bash profile](http://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)

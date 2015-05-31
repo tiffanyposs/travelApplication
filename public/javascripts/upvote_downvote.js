@@ -69,9 +69,24 @@ getTripVotes()
 
 
 
+// $('.upvote_button').click(function(e){
+// 	e.stopPropagation();
+// 	console.log('hiiii')
+// })
+
+
+
 var upvote_clicks = []
 
+
+
+
+
 $('#upvote').click(function(){
+
+
+
+
 	var user = {
 		user_id: current_user
 	}
@@ -133,6 +148,9 @@ $('#upvote').click(function(){
 
 getTripVotes()
 
-
 })
+
+
+
+
 

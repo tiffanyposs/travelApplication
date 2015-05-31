@@ -419,8 +419,8 @@ var getSuggestionInfo = function(data){
         var inside_voting = $('<div></div>');
         suggestion_voting.append(inside_voting);
 
-        var up_vote_div = $('<div></div>')
-        var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green')
+        var up_vote_div = $('<div></div>');
+        var up_span = $('<span></span').attr('class', 'fa fa-arrow-circle-up fa-2x green upvote_button')
         var up_count = $('<h2></h2>').attr('class', 'suggestion_upvote_count')
         
 
@@ -439,9 +439,10 @@ var getSuggestionInfo = function(data){
 
         up_vote_div.append(up_span, up_count)
 
-        var down_vote_div = $('<div></div>')
-        var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red')
+        var down_vote_div = $('<div></div>');
+        var down_span = $('<span></span>').attr('class', 'fa fa-arrow-circle-down fa-2x red downvote_button');
         var down_count = $('<h2></h2>').attr('class', 'suggestion_downvote_count')
+
 
         var downvote_array = []
         suggestion.downvote.forEach(function(each, index){
@@ -542,10 +543,16 @@ var getSuggestionInfo = function(data){
 
         suggestion_card.append(suggestion_info, suggestion_voting, edit_div);
         $('#suggestion_content').prepend(suggestion_card)
-        suggestion_card.click(function(){
+
+
+
+        suggestion_card.click(function(event){
+            event.stopPropagation();
             $('#comments').empty();
             $('.suggestion_clicked').removeClass('suggestion_clicked')
-            
+
+
+
             current_suggestion = suggestion._id;
             $(this).addClass('suggestion_clicked')
 
@@ -602,6 +609,18 @@ var getSuggestionInfo = function(data){
 
             //this passes the current suggestions content to be appended into comments
             getComments();
+
+            //voting from the middle column
+            $('.downvote_button').click(function(event){
+                event.stopPropagation();
+                $('#downvote').click();
+            })
+
+            $('.upvote_button').click(function(event){
+                event.stopPropagation();
+                $('#upvote').click();
+            })
+
 
             var createSuggestionCard = function(data){
                 $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'visible')
@@ -758,16 +777,19 @@ var getSuggestionInfo = function(data){
             }
 
             getSuggestion();
-            
-            
+
+
         })
 
 
-        
 
     })
     $('.suggestion_card:first-child').click();
+
+
+
 }
+
 
 
 
