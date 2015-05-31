@@ -32,7 +32,19 @@ UserSchema.add({
       ref: "Trip"
     },
     avatar: String
-  }]
+  }],
 })
+
+UserSchema.add({
+  last_trip: {
+    type: Schema.ObjectId,
+    ref: "Trip"
+    }
+})
+
+
+
+
+
 module.exports = mongoose.model('User', UserSchema);
 

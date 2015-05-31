@@ -11,7 +11,6 @@ var current_avatar;
 var attendingTrips = function(trips){
     var finaltrips = [];
     var counter = 0;
-
     trips.forEach(function(each){
         finaltrips.push(each.trip_id)
         if(finaltrips.length === trips.length){
@@ -24,14 +23,15 @@ var attendingTrips = function(trips){
 
 
 var getUser = function(){
-
     $.ajax({
     url: current_url + 'users/stuff',
     dataType: 'json',
     success: function(data){
-        // console.log(data)
+        console.log(data)
         current_user = data._id;
         current_user_name = data.first_name + " " + data.last_name;
+        current_trip = data.last_trip;
+        console.log(current_trip)
         attendingTrips(data.trips)
         if(data.trips.length === 0){
             $('#current_trip').click()
@@ -45,6 +45,8 @@ getUser();
 
 //This renders the current user's trips
 var userTripInfo = function(data){
+
+    // console.log(data)
 
     if(data.length > 0){
         $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
@@ -61,7 +63,7 @@ var userTripInfo = function(data){
         if(counter === data.length - 1){
 
         $('#current_trip').text(trip.title);
-        current_trip = trip._id;
+        // current_trip = trip._id;
         $('#current_trip').append('<span class = "fa fa-arrow-down"></span>')
         }
         counter++;
@@ -83,7 +85,19 @@ var userTripInfo = function(data){
             current_suggestion = "";
             current_trip = $(this).attr('id');
 
+            var last_trip = {
+                last_trip: current_trip
+            }
 
+
+            $.ajax({
+                    url: current_url + "users/settrip/" + current_user,
+                    type: 'PUT',
+                    data: last_trip,
+                    success: function(data){
+                        console.log(data)
+                    }
+            }); 
 
             var avatar;
 
@@ -161,10 +175,34 @@ var userTripInfo = function(data){
             $('.group_clicked').attr('class', '');
 
             getTripCategories()
+
+
+
+            var last_trip = {
+                last_trip: current_trip
+            }
+
+
+            $.ajax({
+                    url: current_url + "users/settrip/" + current_user,
+                    type: 'PUT',
+                    data: last_trip,
+                    success: function(data){
+                        console.log(data)
+                    }
+            }); 
+
+
         })
 
+
+
     })
-        $('.trip_card:first').click()
+        // $('.trip_card:first').click()
+
+        // console.log($('#' + current_trip))
+        //this clicked the last trip that was clicked on page load
+        $('ul#' + current_trip + '.trip_card').click()
 
 
 }
@@ -975,7 +1013,15 @@ var getCommentInfo = function(data){
         comment_card.append(image_div, comment_info, edit_div)
         $('#comments').append(comment_card)
 
+
+        $('#comment_wrapper').stop().animate({
+          scrollTop: $("#comment_wrapper")[0].scrollHeight
+        }, 600);
+
     })
+
+
+
 }
 
 // //this gets the last category posted in a group
@@ -1012,6 +1058,7 @@ $('#comment_submit').click(function(){
       })
       $('#comment_input_area').blur();
     }
+
 })// end getting categories
 
 

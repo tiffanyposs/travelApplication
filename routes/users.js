@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 // /* GET /users/stuff */
 router.get('/stuff', function(req, res, next) {
   var query = User.findById(req.session.user_id).populate('trips.trip_id friends');
-  query.select('username first_name last_name friends trips taken_avatars')
+  query.select('username first_name last_name friends trips taken_avatars last_trip')
   query.exec(function (err, user) {
     if (err) return handleError(err);
       res.json(user);
@@ -169,6 +169,22 @@ router.put('/avatar/:trip_id/:user_id/push', function(req, res, next) {
       res.json(users)
     })
 });
+
+//this updates the last clicked trip 
+router.put('/settrip/:user_id', function(req, res, next) {
+  User.findById(req.params.user_id, function (err, user) {
+    if (err) return handleError(err);
+    user.last_trip = req.body.last_trip;
+    user.save(function (err) {
+      if (err) return handleError(err);
+      res.send(user);
+    });
+  });
+});
+
+
+
+
 
 
 // /* DELETE /todos/:id */
