@@ -971,7 +971,7 @@ var getCommentInfo = function(data){
                     avatar = '/images/hats/color_hats/' + each.avatar;
                 }
                 if(index === comment.user_id.taken_avatars.length - 1){
-                    if(avatar.length === undefined){
+                    if(avatar === undefined){
                         avatar = '/images/users.jpg'
                     }
                 }    
