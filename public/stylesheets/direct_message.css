@@ -1,0 +1,71 @@
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
+.draggable{
+	width: 150px;
+	height: 200px;
+	background-color: yellow;
+	position: fixed;
+	z-index: 500;
+	display: flex; display: -webkit-flex;
+	flex-direction: column; -webkit-flex-direction: column;
+}
+
+
+.dm_header{
+	width: 100%;
+	height: 10%;
+	background-color: #1e87c1;
+	display: flex; display: -webkit-flex;
+	justify-content: space-between; -webkit-justify-content: space-between;
+	/*z-index: 400;*/
+	padding: 0 10px;
+	color: white;
+}
+
+.dm_header button{
+	background-color: transparent;
+	border: none;
+	color: white;
+	/*align-self: flex-end;*/
+	/*right: 0;*/
+	/*float: right;*/
+}
+
+.dm_messages{
+	width: 100%;
+	height: 75%;
+	background-color: white;
+
+}
+
+.dm_input{
+	width: 100%;
+	height: 15%;
+	background-color: blue;
+	display: flex; display: -webkit-flex;
+}
+
+
+.dm_input input{
+	margin: 0 auto;
+}
+
+.dm_input input:focus{
+	outline: none;
+}
+
+.dm_input button{
+	background-color: #98C06A;
+	color: white;
+	border: none;
+}
+
+
+.dm_input button:focus{
+	outline: none;
+}

@@ -178,14 +178,25 @@ var userTripInfo = function(data){
                         dataType: 'json',
                         success: function(data){
                             if(data._id != current_user){
-                                $('#friends').append('<h2>' + data.first_name + '</h2>');
+                                var name = $('<h2></h2>').text(data.first_name).attr('id', data._id);
+                                name.attr('class', 'friend_name')
+                                $('#friends').append(name)
+                                    // .attr('id', data._id)
+                                // name.click(function(){
+                                //     alert('it worked!')
+                                // })
                             }
                         }
                     });
 
                 }else{
                     if( typeof friend.user_id == "object" ){
-                        $('#friends').append('<h2>' + friend.user_id.first_name + '</h2>');
+                        var name = $('<h2></h2>').text(friend.user_id.first_name).attr('id', friend.user_id._id);
+                        name.attr('class', 'friend_name')
+                        $('#friends').append(name)
+                        // name.click(function(){
+                        //     alert('it worked 2!')
+                        // })
                     }
                 }
             })
