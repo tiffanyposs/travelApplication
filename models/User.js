@@ -20,12 +20,7 @@ var UserSchema = new Schema({
   friends: [{
   	type: Schema.ObjectId,
   	ref: "User"
-  }]
-});
-
-UserSchema.plugin(timestamps);
-
-UserSchema.add({
+  }],
   taken_avatars: [{
     trip_id: {
       type: Schema.ObjectId,
@@ -33,15 +28,13 @@ UserSchema.add({
     },
     avatar: String
   }],
-})
-
-UserSchema.add({
   last_trip: {
     type: Schema.ObjectId,
     ref: "Trip"
-    }
-})
+  }
+});
 
+UserSchema.plugin(timestamps);
 
 
 

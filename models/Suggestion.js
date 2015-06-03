@@ -27,12 +27,15 @@ var SuggestionSchema = new mongoose.Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
+  trip_id: {
+    type: Schema.ObjectId,
+    ref: 'Trip'
+  },
+  archived: { type: Boolean, default: false}
 });
 
 
-SuggestionSchema.add({
-  archived: { type: Boolean, default: false }
-})
+
 
 SuggestionSchema.plugin(timestamps);
 

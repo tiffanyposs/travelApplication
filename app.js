@@ -32,8 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add headers
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Origin', 'http://45.55.221.131');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://45.55.221.131');
     // res.setHeader('Access-Control-Allow-Origin', 'http://104.131.57.112');
     // res.setHeader('Access-Control-Allow-Origin', 'http://tripper.co');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -57,8 +57,8 @@ var notes = require('./routes/notes')
 var invites = require('./routes/invites')
 
 
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -84,8 +84,8 @@ app.use(session({
   saveUninitialized: true,
   // cookie: {maxAge: 30000},
   store: new MongoStore({
-    url: 'mongodb://localhost/data/db',
-    // url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
+    // url: 'mongodb://localhost/data/db',
+    url: 'mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db',
     autoRemove: 'disabled',
     touchAfter: 4 * 3600 // time period in seconds wont make a new session
   })
@@ -143,5 +143,5 @@ d.on('error', function(err) {
 
 module.exports = app;
 
-// app.listen(3000)
-app.listen(80)
+app.listen(3000)
+// app.listen(80)

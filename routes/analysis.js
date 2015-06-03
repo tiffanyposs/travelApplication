@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var bcrypt = require('bcrypt')
+
 var mongoose = require('mongoose');
 
 var Category = require('../models/Category.js');
@@ -68,6 +70,8 @@ router.get(secretroute + '/users', function(req, res, next) {
     res.json(users);
   });
 });
+
+
 
 
 //gets all the sessions
