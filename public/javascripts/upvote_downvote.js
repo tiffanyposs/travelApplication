@@ -31,6 +31,7 @@ $('#downvote').click(function(){
 		        url: current_url + "suggestions/" + current_suggestion + '/downvote',
 		        type: 'PUT',
 		        data: user,
+		        timeout: 15000,
 		        success: function(data){
 		        }
 		});		
@@ -103,6 +104,7 @@ $('#upvote').click(function(){
 		        url: current_url + "suggestions/" + current_suggestion + '/upvote',
 		        type: 'PUT',
 		        data: user,
+		        timeout: 15000,
 		        success: function(data){
 		        }
 		});		
