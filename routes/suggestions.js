@@ -65,7 +65,6 @@ router.get('/:suggestion_id/votes', function(req, res, next){
 
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/:suggestion_id/upvote', function(req, res, next) {
-  console.log('enter upvote')
   Suggestion.findByIdAndUpdate(
     req.params.suggestion_id,
     {$addToSet: {"upvote": req.body}},
