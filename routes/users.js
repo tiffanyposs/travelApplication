@@ -27,6 +27,39 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.get('/reset', function(req, res){
+  res.render('reset')
+})
+
+
+
+router.put('/reset', function(req, res, next) {
+  var email = req.body.email;
+  var first_name = req.body.first_name;
+  var last_name = req.body.last_name;
+  var query = User.find({ email: email, first_name: first_name, last_name: last_name });
+
+  query.exec(function (err, user) {
+    console.log(user)
+    if (err) return handleError(err);
+    if(user && req.body.password === req.body.confirm_password){
+      req.body.password = bcrypt.hashSync(req.body.password, 10);
+      user.password = req.body.password;
+      user.save(function(err){
+        if (err) return handleError(err);
+          // req.session.valid_user = true;
+          // req.session.user_id = user._id;
+          // req.session.login_time = moment();
+          // res.redirect('/')
+          res.json(user)
+      })
+    }
+  })
+
+
+});
+
+
 
 // /* GET /users/stuff */
 router.get('/stuff', function(req, res, next) {
@@ -181,6 +214,9 @@ router.put('/settrip/:user_id', function(req, res, next) {
     });
   });
 });
+
+
+
 
 
 

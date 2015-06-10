@@ -596,7 +596,10 @@ var getSuggestionInfo = function(data){
                 }
               });
               $('#suggestion_comment_about').text(edit_about);
-              $('#suggestion_comment_link').text(edit_link.substring(7, 20) + "....")
+              console.log(edit_link)
+              var start = edit_link(0, 4);
+
+              $('#suggestion_comment_link').text('Link')
                         .attr('href', edit_link);
               $('#' + current_suggestion).find('.title').text(edit_title);
         });
@@ -645,6 +648,7 @@ var getSuggestionInfo = function(data){
 
 
         suggestion_card.click(function(event){
+            if($(this).attr('id') != current_suggestion){
             event.stopPropagation();
             $('#comments').empty();
             $('.suggestion_clicked').removeClass('suggestion_clicked')
@@ -731,10 +735,19 @@ var getSuggestionInfo = function(data){
                 var valid_url = ValidUrl(suggestion.link);
                 // if there is a suggestion link render it
                 //and checks if its valid
+
+                var final_link = data[0].link;
+
+                var start = data[0].link.substr(0, 4)
+
+                if(start != 'http'){
+                    final_link = 'http://' + final_link
+                }
+
                 if(suggestion.link && valid_url === true){
                     $('#suggestion_comment_link').css('visibility', 'visible')
                     $('#suggestion_comment_link').text('Link');
-                    $('#suggestion_comment_link').attr('href', data[0].link);
+                    $('#suggestion_comment_link').attr('href', final_link);
                     $('#suggestion_comment_link').attr('class', 'valid_link');
                     $('#suggestion_comment_link').removeAttr("disabled");
                 }else{
@@ -818,7 +831,7 @@ var getSuggestionInfo = function(data){
                     }, function(){
                         $('#voting_hover_div').hide()
                     })         
-                })
+                })//end upvote
 
                 //this safeguards from previous errors with double put requests
                 var downvote_check = [];
@@ -861,7 +874,7 @@ var getSuggestionInfo = function(data){
                     }, function(){
                         $('#voting_hover_div').hide()
                     })    
-                })
+                })//end downvote
             }
 
 
@@ -874,12 +887,13 @@ var getSuggestionInfo = function(data){
                 }
                 
               });
-            }
+            }//end getSuggestion
 
             getSuggestion();
-
-
+        }
+        console.log('hiiii')
         })
+
 
 
 
