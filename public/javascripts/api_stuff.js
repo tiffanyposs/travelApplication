@@ -451,7 +451,8 @@ var getLastCategory = function(){
 $('#category_submit').click(function(){
   var formData = {
     name: $('#category_title').val(),
-    trip_id : current_trip
+    trip_id: current_trip,
+    user_id: current_user 
   }
   $.ajax({
     url: current_url + "categories/" + current_trip,
@@ -939,6 +940,7 @@ $('#suggestion_submit').click(function(){
     content: $('#suggestion_about').val(),
     link: $('#suggestion_link').val(),
     category_id: current_category,
+    trip_id: current_trip,
     user_id: current_user
   }
   $.ajax({
@@ -1122,6 +1124,8 @@ $('#comment_submit').click(function(){
         content: $('#comment_input_area').val(),
         suggestion_id: current_suggestion,
         user_id: current_user,
+        trip_id: current_trip,
+        category_id: current_category
       }
       $.ajax({
         url: current_url + "comments",

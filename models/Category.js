@@ -9,6 +9,10 @@ var CategorySchema = new mongoose.Schema({
   trip_id: {
     type: Schema.ObjectId,
     ref: 'Trip'
+  },
+  user_id: {
+  	type: Schema.ObjectId,
+  	ref: 'User'	
   }
 });
 

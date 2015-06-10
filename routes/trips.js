@@ -42,7 +42,7 @@ router.put('/addfriend/:trip_id', function(req, res, next) {
   console.log(req.body)
   Trip.findByIdAndUpdate(
     req.params.trip_id,
-    {$push: {"attending": req.body}},
+    {$addToSet: {"attending": req.body}},
     function(err, trips) {
         console.log(err);
     }

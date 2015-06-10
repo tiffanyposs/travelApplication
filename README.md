@@ -1,3 +1,6 @@
+text messages to vote on something
+
+
 ###Thing to Fix after Data restructure
 
 * Make trip_id and all model reference all nested data above them.

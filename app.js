@@ -57,8 +57,8 @@ var notes = require('./routes/notes')
 var invites = require('./routes/invites')
 
 
-// mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
-mongoose.connect('mongodb://localhost/data/db', function(err) {
+mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
+// mongoose.connect('mongodb://localhost/data/db', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {

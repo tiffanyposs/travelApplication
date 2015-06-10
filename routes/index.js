@@ -26,11 +26,6 @@ router.get('/news', function(req, res){
 })
 
 
-//delete chat
-router.get('/chat', function(req, res){
-	res.render('chat')
-})
-
 
 //this is for test only for login page
 router.get('/login/secret/test', function(req, res){

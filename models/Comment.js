@@ -10,17 +10,24 @@ var CommentSchema = new mongoose.Schema({
     type: Schema.ObjectId,
     ref: 'Suggestion'
   },
+  category_id: {
+    type: Schema.ObjectId,
+    ref: 'Category'
+  },
+  trip_id: {
+    type: Schema.ObjectId,
+    ref: 'Trip'
+  },
   user_id: {
     type: Schema.ObjectId,
     ref: 'User'
   },
+  archived: { type: Boolean, default: false }
 });
 
 CommentSchema.plugin(timestamps);
 
-CommentSchema.add({
-  archived: { type: Boolean, default: false }
-})
+
 
 module.exports = mongoose.model('Comment', CommentSchema);
 
