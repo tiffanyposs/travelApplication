@@ -33,21 +33,35 @@ body, html{
 
 
 
-/*header*/
 #heading_container{
 	width: 100%;
 	height: 13%;
 	min-height: 80px;
-	background-color: #1e87c1;/*blue*/
+	background-color: #1e87c1;
 	display: flex; display: -webkit-flex;
 }
 
 #trip_container{
-	width: 18%;
+	width: 10%;
 	min-width: 240px;
 	height: 100%;
-	background-color: #425061;
+	/*background-color: #425061;*/
 	display: flex; display: -webkit-flex;
+}
+
+#add_friend_nav{
+	width: 5%;
+	display: flex; display: -webkit-flex;
+}
+
+#add_friend_nav > div{
+	margin: auto;
+	display: flex; display: -webkit-flex;
+}
+
+#add_friend{
+	color: white;
+	font-size: 0.75em;
 }
 
 #trip_container h1{
@@ -77,12 +91,12 @@ body, html{
 #heading_nav ul{
 	display: flex; display: -webkit-flex;
 	list-style-type: none;
-	margin: auto 35px auto 0;
+	margin: auto 60px auto 0;
 }
 
 #heading_nav li{
 	margin: auto 7px auto 7px;
-	color: #2f3743; /*dark blue*/
+	color: #2f3743;
 }
 
 .background_button{
@@ -103,28 +117,38 @@ body, html{
 	border: none;
 	background: transparent;
 	margin: auto;
-	/*display: flex;*/
+	display: flex;
 }
 
 .background_button span{
-	/*margin: auto;*/
+	width: 40px;
+	height: 40px;
+	/*background-color: red;*/
+	margin: auto;
 
 }
 
 #heading_nav img{
 	width: 70px;
 	border-radius: 50px;
-	border: 3px solid #425061; /*dark blue*/
+	border: 3px solid #425061; 
 	background-color: white;
 	cursor: pointer;
 }
 
 
+#main_container{
+	width: 100%;
+	height: 87%;
+	display: flex; display: -webkit-flex;
+}
 
 
+#map-canvas { height: 100%; width: 60%;}
+
+/*
 
 
-/*main container*/
 #main_container{
 	width: 100%;
 	height: 87%;
@@ -135,14 +159,13 @@ body, html{
 	width: 18%;
 	min-width: 240px;
 	height: 100%;
-	background-color: #2f3743; /*dark blue*/
+	background-color: #2f3743;
 	display: flex; display: -webkit-flex;
 	color: white;
 	overflow: scroll;
 }
 
-/*hidden fields*/
-/*#main_container > nav > div{}*/
+
 
 #categories_nav{
 	display: none;
@@ -156,13 +179,11 @@ body, html{
 	cursor: pointer;
 }
 
-/*this is for hover effect on categories*/
 #friends > h2:hover:not(.nav_clicked){
 	background-color: #292e35;
 	border-radius: 30px;
 }
 
-/*main nav*/
 #main_nav{
 	margin: 0 auto 0 auto;
 	padding-top: 20px;
@@ -221,7 +242,6 @@ body, html{
 	cursor: pointer;
 }
 
-/*this is for hover effect on categories*/
 #categories > h2:hover:not(.nav_clicked){
 	background-color: #292e35;
 	border-radius: 30px;
@@ -356,7 +376,6 @@ body, html{
 
 
 
-/*COMMENTS*/
 #comments_container{
 	width: 47%;
 	height: 100%;
@@ -385,7 +404,6 @@ body, html{
 }
 
 
-/*this is the hover div*/
 #voting_hover_div{
 	display:none;
 	position: absolute;
@@ -402,12 +420,7 @@ body, html{
 .hover_red_border{
 	border: 3px solid #F33533;
 }
-/*dark blue #2f3743
-2nd dark blue #425061
-blue #1e87c1
-light grey #d6dde0
-red #F33533
-green #98C06A*/
+
 
 
 #upvote, #downvote{
@@ -450,7 +463,6 @@ green #98C06A*/
 }
 
 #suggestion_avatar a{
-	/*background-color: #1e87c1;*/
 	color: white; 
 	padding: 5px 20px 5px 20px;
 	border-radius: 10px;
@@ -479,18 +491,15 @@ green #98C06A*/
 	width: 100%;
 	display: flex; display: -webkit-flex;
 	margin: auto;
-	/*background-color: red;*/
 }
 
 #suggestion_voting > div > div:first-child{
 	width: 15%;
 	display: flex; display: -webkit-flex;
-	/*background-color: red;*/
 }
 
 #suggestion_voting > div > div:first-child > span{
 	margin: auto;
-	/*background-color: red;*/
 }
 
 
@@ -498,15 +507,13 @@ green #98C06A*/
 .vote_images{
 	width: 85%;
 	display: flex; display: -webkit-flex;
-	/*border: 2px solid red;*/
 }
 
 .vote_images > div{
 	width: 80%;
 	margin: auto;
 	flex-wrap: wrap; -webkit-flex-wrap: wrap;
-	/*border: 2px solid red;*/
-	/*background-color: #d6dde0;*/
+
 }
 
 .vote_images img{
@@ -620,7 +627,6 @@ green #98C06A*/
 	width: 100%;
 	margin: auto;
 	display: flex; display: -webkit-flex;
-	/*min-height: 70px*/
 }
 
 
@@ -644,4 +650,4 @@ green #98C06A*/
 	border: none;
 	background-color: #d6dde0;
 	cursor: pointer;
-}
+}*/

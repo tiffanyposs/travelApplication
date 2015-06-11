@@ -154,7 +154,7 @@ client.addEventListener("message", function(message){
 
 }
 
-
+//this changes the group chat
 $('#group_chat').click(function(){
 
 $('.nav_clicked').attr('class', '');

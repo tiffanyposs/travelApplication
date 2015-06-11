@@ -1,261 +1,303 @@
-// //these track what is clicked on
-// var current_url = document.URL;
-// var current_user;
-// var current_user_name;
-// var current_trip;
-// var current_category;
-// var current_suggestion;
-// var current_avatar;
+//these track what is clicked on
+var current_url = document.URL;
+var current_user;
+var current_user_name;
+var current_trip;
+var current_category;
+var current_suggestion;
+var current_avatar;
 
-// var attendingTrips = function(trips){
-//     var finaltrips = [];
-//     var counter = 0;
-//     trips.forEach(function(each){
-//         finaltrips.push(each.trip_id)
-//         if(finaltrips.length === trips.length){
-//             userTripInfo(finaltrips)
-//         }
-//         counter++;
-//     })
-
-// }
+// var map;
 
 
-// var getUser = function(){
-//     $.ajax({
-//     url: current_url + 'users/stuff',
-//     dataType: 'json',
-//     success: function(data){
-//         // console.log(data)
-//         current_user = data._id;
-//         current_user_name = data.first_name + " " + data.last_name;
-//         current_trip = data.last_trip;
-//         // console.log(current_trip)
-//         attendingTrips(data.trips)
-//         if(data.trips.length === 0){
-//             $('#current_trip').click()
-//         }
-//     }
-//   });
-// };
+//this makes the map
+var makeMap = function(lat, lng){
 
-// getUser();
+	console.log('hello')
+	var myLatlng = new google.maps.LatLng(lat, lng);
+	//this is the properties to configure how your map will look, there are more options
+	var mapOptions = {
+	center: { lat: lat, lng: lng},
+	zoom: 13
+	};
+	// var map creates a new google map with the id
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+	// var marker = new google.maps.Marker({
+	//       position: myLatlng,
+	//       map: map,
+	//       title: 'Hello World!'
+	// });
 
-// //This renders the current user's trips
-// var userTripInfo = function(data){
+}
 
-//     // console.log(data)
-
-//     if(data.length > 0){
-//         $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
-//     }else{
-//         $('#group_chat, #categories_nav, #friends_nav, #add_platupi').hide('fold', 400);        
-//     }
-
-//     //this sets the default of trip to the first one
-//     $('.trip_card_selected').attr('class', 'trip_card')
-//     var counter = 0;
-//     data.forEach(function(trip){
-
-//         var trip_card = $('<ul></ul>');
-//         if(counter === data.length - 1){
-
-//         $('#current_trip').text(trip.title);
-//         // current_trip = trip._id;
-//         $('#current_trip').append('<span class = "fa fa-arrow-down"></span>')
-//         }
-//         counter++;
-
-//         trip_card.attr('class', 'trip_card');
-//         trip_card.attr('id', trip._id);
-//         $( '#trip_list' ).prepend(trip_card)
-//         var title = $('<li></li>').text(trip.title);
-//         var location = $('<li></li>').text(trip.location);
-//         var duration = $('<li></li>').text(trip.duration);
-//         var description = $('<li></li>').text(trip.description);
-//         trip_card.append(title, location, duration, description);
-//         trip_card.click(function(){
-//             $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden')
-//             current_category = "";
-//             $('#categories').empty();
-//             $('#suggestion_content').empty();
-//             $('#comments').empty();
-//             current_suggestion = "";
-//             current_trip = $(this).attr('id');
-
-//             var last_trip = {
-//                 last_trip: current_trip
-//             }
+//defaults to new york
+makeMap(40.7127, -74.0059)
 
 
-//             $.ajax({
-//                     url: current_url + "users/settrip/" + current_user,
-//                     type: 'PUT',
-//                     data: last_trip,
-//                     success: function(data){
-//                         // console.log(data)
-//                     }
-//             }); 
 
-//             var avatar;
-
-//             if(trip.taken_avatars.length === 0){
-//                 avatar = '/images/users.jpg'
-//             }else{
-//                 trip.taken_avatars.forEach(function(each, index){
-//                     if(each.user_id === current_user){
-//                         avatar = '/images/hats/color_hats/' + each.avatar;
-
-//                     }
-//                     if(index === trip.taken_avatars.length - 1 && avatar === undefined){
-//                         avatar = '/images/users.jpg'
-//                     }
-//                 })
-//             }
-
-//             // this sets the avatar
-//             current_avatar = avatar;
-//             $('.current_user_avatar').attr('src', avatar);
-
-//             //this function is in the chat.js file
-//             makeNewWebsocket()
-
-//             // THIS SETS THE INVITE MODAL TO HAVE THE CORRECT LINK
-//             // var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
-//             // $('#invite_url').text(invite_url).attr('href', invite_url)
+//this makes the map
+  var autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('trip_location')),
+      {
+      	//this is for counties or regions
+        // types: ['(regions)'],
+        types: ['(cities)']
+        // componentRestrictions: countryRestrict
+  });
 
 
-//             //when the add friends is clicked it make the 
-//             $('#add_friend').click(function(){
+var attendingTrips = function(trips){
+    var finaltrips = [];
+    var counter = 0;
+    trips.forEach(function(each){
+        finaltrips.push(each.trip_id)
+        if(finaltrips.length === trips.length){
+            userTripInfo(finaltrips)
+        }
+        counter++;
+    })
 
-//                 var makeInviteUrl = function(){
-//                     // console.log('hello')
-
-//                 var invite_body = {
-//                     user_id: current_user,
-//                     trip_id: current_trip
-//                 }
-
-
-//                 $.ajax({
-//                   url: current_url + 'invites',
-//                   type: 'POST',
-//                   data: invite_body,
-//                   success: function(data, textStatus, jqXHR)
-//                     {
-//                         // console.log(data)
-//                     }
-//                 })
-//                 }
+}
 
 
-//                 $.ajax({
-//                     url: current_url + 'invites/' + current_user + '/' + current_trip,
-//                     dataType: 'json',
-//                     success: function(data){
-//                         // console.log(data)
-//                         if(data.length === 0){
-//                             makeInviteUrl();
-//                         }else{
-//                             // console.log(data)
-//                             var invite_url = current_url + 'invites/' + data[0].domain_name;
-//                             $('#invite_url').text(invite_url).attr('href', invite_url);
-//                             $('#invite_url').text(invite_url).attr('href', invite_url);
-//                         }
-//                     }
-//                 });       
+var getUser = function(){
+    $.ajax({
+    url: current_url + 'users/stuff',
+    dataType: 'json',
+    success: function(data){
+        // console.log(data)
+        current_user = data._id;
+        current_user_name = data.first_name + " " + data.last_name;
+        current_trip = data.last_trip;
+        // console.log(current_trip)
+        attendingTrips(data.trips)
+        if(data.trips.length === 0){
+            $('#current_trip').click()
+        }
+    }
+  });
+};
 
-//             })
+getUser();
 
-//             var makeFriends = function(trip){
-//             $('#friends').empty();
-//             trip.attending.forEach(function(friend){
-//                 if(typeof friend.user_id == "string"){
-//                     $.ajax({
-//                         url: current_url + 'users/' + friend.user_id,
-//                         dataType: 'json',
-//                         success: function(data){
-//                             if(data._id != current_user){
-//                                 var name = $('<h2></h2>').text(data.first_name).attr('id', data._id);
-//                                 name.attr('class', 'friend_name')
-//                                 $('#friends').append(name)
-//                                     // .attr('id', data._id)
-//                                 // name.click(function(){
-//                                 //     alert('it worked!')
-//                                 // })
-//                             }
-//                         }
-//                     });
 
-//                 }else{
-//                     if( typeof friend.user_id == "object" ){
-//                         var name = $('<h2></h2>').text(friend.user_id.first_name).attr('id', friend.user_id._id);
-//                         name.attr('class', 'friend_name')
-//                         $('#friends').append(name)
-//                         // name.click(function(){
-//                         //     alert('it worked 2!')
-//                         // })
-//                     }
-//                 }
-//             })
+//This renders the current user's trips
+var userTripInfo = function(data){
 
-//             }
-//             //call to get the most updated friends
-//               $.ajax({
-//                 url: current_url + 'trips/' + this.id,
-//                 dataType: 'json',
-//                 success: function(data){
-//                     makeFriends(data)
 
-//                 }
-//               });
+    if(data.length > 0){
+        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
+    }else{
+        $('#group_chat, #categories_nav, #friends_nav, #add_platupi').hide('fold', 400);        
+    }
 
-//             // create cards
-//             $( '.trip_card_selected' ).attr('class', 'trip_card');
-//             $( this ).attr('class', 'trip_card_selected')
+    //this sets the default of trip to the first one
+    $('.trip_card_selected').attr('class', 'trip_card')
+    var counter = 0;
+    data.forEach(function(trip){
+
+        var trip_card = $('<ul></ul>');
+        if(counter === data.length - 1){
+
+        $('#current_trip').text(trip.title);
+        // current_trip = trip._id;
+        $('#current_trip').append('<span class = "fa fa-arrow-down"></span>')
+        }
+        counter++;
+
+        trip_card.attr('class', 'trip_card');
+        trip_card.attr('id', trip._id);
+        $( '#trip_list' ).prepend(trip_card)
+        var title = $('<li></li>').text(trip.title);
+        var location = $('<li></li>').text(trip.location);
+        var duration = $('<li></li>').text(trip.duration);
+        var description = $('<li></li>').text(trip.description);
+        trip_card.append(title, location, duration, description);
+        trip_card.click(function(){
+
+        	makeMap(trip.lat, trip.lng)
+
+            $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden')
+            current_category = "";
+            $('#categories').empty();
+            $('#suggestion_content').empty();
+            $('#comments').empty();
+            current_suggestion = "";
+            current_trip = $(this).attr('id');
+
+            var last_trip = {
+                last_trip: current_trip
+            }
+
+
+            $.ajax({
+                    url: current_url + "users/settrip/" + current_user,
+                    type: 'PUT',
+                    data: last_trip,
+                    success: function(data){
+                        // console.log(data)
+                    }
+            }); 
+
+            var avatar;
+
+            if(trip.taken_avatars.length === 0){
+                avatar = '/images/users.jpg'
+            }else{
+                trip.taken_avatars.forEach(function(each, index){
+                    if(each.user_id === current_user){
+                        avatar = '/images/hats/color_hats/' + each.avatar;
+
+                    }
+                    if(index === trip.taken_avatars.length - 1 && avatar === undefined){
+                        avatar = '/images/users.jpg'
+                    }
+                })
+            }
+
+            // this sets the avatar
+            current_avatar = avatar;
+            $('.current_user_avatar').attr('src', avatar);
+
+            //this function is in the chat.js file
+            makeNewWebsocket()
+
+            // THIS SETS THE INVITE MODAL TO HAVE THE CORRECT LINK
+            // var invite_url = current_url + 'invite/' + current_trip + '/' + current_user;
+            // $('#invite_url').text(invite_url).attr('href', invite_url)
+
+
+            //when the add friends is clicked it make the 
+            $('#add_friend').click(function(){
+
+                var makeInviteUrl = function(){
+                    // console.log('hello')
+
+                var invite_body = {
+                    user_id: current_user,
+                    trip_id: current_trip
+                }
+
+
+                $.ajax({
+                  url: current_url + 'invites',
+                  type: 'POST',
+                  data: invite_body,
+                  success: function(data, textStatus, jqXHR)
+                    {
+                        // console.log(data)
+                    }
+                })
+                }
+
+
+                $.ajax({
+                    url: current_url + 'invites/' + current_user + '/' + current_trip,
+                    dataType: 'json',
+                    success: function(data){
+                        // console.log(data)
+                        if(data.length === 0){
+                            makeInviteUrl();
+                        }else{
+                            // console.log(data)
+                            var invite_url = current_url + 'invites/' + data[0].domain_name;
+                            $('#invite_url').text(invite_url).attr('href', invite_url);
+                            $('#invite_url').text(invite_url).attr('href', invite_url);
+                        }
+                    }
+                });       
+
+            })
+
+            var makeFriends = function(trip){
+            $('#friends').empty();
+            trip.attending.forEach(function(friend){
+                if(typeof friend.user_id == "string"){
+                    $.ajax({
+                        url: current_url + 'users/' + friend.user_id,
+                        dataType: 'json',
+                        success: function(data){
+                            if(data._id != current_user){
+                                var name = $('<h2></h2>').text(data.first_name).attr('id', data._id);
+                                name.attr('class', 'friend_name')
+                                $('#friends').append(name)
+                                    // .attr('id', data._id)
+                                // name.click(function(){
+                                //     alert('it worked!')
+                                // })
+                            }
+                        }
+                    });
+
+                }else{
+                    if( typeof friend.user_id == "object" ){
+                        var name = $('<h2></h2>').text(friend.user_id.first_name).attr('id', friend.user_id._id);
+                        name.attr('class', 'friend_name')
+                        $('#friends').append(name)
+                        // name.click(function(){
+                        //     alert('it worked 2!')
+                        // })
+                    }
+                }
+            })
+
+            }
+            //call to get the most updated friends
+              $.ajax({
+                url: current_url + 'trips/' + this.id,
+                dataType: 'json',
+                success: function(data){
+                    makeFriends(data)
+
+                }
+              });
+
+            // create cards
+            $( '.trip_card_selected' ).attr('class', 'trip_card');
+            $( this ).attr('class', 'trip_card_selected')
             
-//             var trip_name = this.children[0].innerHTML;
-//             $('#current_trip').text(trip_name);
+            var trip_name = this.children[0].innerHTML;
+            $('#current_trip').text(trip_name);
 
 
-//             $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
-//             // $('#chat_container').hide();
-//             // $('#suggestions, #comments_container').show();
-//             $('#chat_container').hide('slow', function(){
-//                     $('#suggestions, #comments_container').show('slow');
-//             });
-//             $('.group_clicked').attr('class', '');
+            $('#current_trip').append('<span class = "fa fa-arrow-down"></span>');
+            // $('#chat_container').hide();
+            // $('#suggestions, #comments_container').show();
+            $('#chat_container').hide('slow', function(){
+                    $('#suggestions, #comments_container').show('slow');
+            });
+            $('.group_clicked').attr('class', '');
 
-//             getTripCategories()
+            getTripCategories()
 
-//             var last_trip = {
-//                 last_trip: current_trip
-//             }
+            var last_trip = {
+                last_trip: current_trip
+            }
 
-//             $.ajax({
-//                     url: current_url + "users/settrip/" + current_user,
-//                     type: 'PUT',
-//                     data: last_trip,
-//                     success: function(data){
-//                         // console.log(data)
-//                     }
-//             }); 
-
-
-//         })
+            $.ajax({
+                    url: current_url + "users/settrip/" + current_user,
+                    type: 'PUT',
+                    data: last_trip,
+                    success: function(data){
+                        // console.log(data)
+                    }
+            }); 
 
 
+        })
 
-//     })
-//         // $('.trip_card:first').click()
-//         if(current_trip === undefined){
-//             $('.trip_card:first').click()
-//         }else{
-//             $('ul#' + current_trip + '.trip_card').click()
-//         }
 
-// }
+
+    })
+        // $('.trip_card:first').click()
+        if(current_trip === undefined){
+            $('.trip_card:first').click()
+        }else{
+            $('ul#' + current_trip + '.trip_card').click()
+        }
+
+}
 
 
 //this gets the current user's trips they created then passes it to another function to render it
@@ -318,48 +360,100 @@ var getLastTrip = function(){
 
 
 
-// //post request to POST a new trip
-// $('#trip_add').click(function(){
+//post request to POST a new trip
+$('#trip_add').click(function(){
 
-//     var attending_data = {
-//         user_id: current_user
-//     }
-//   var formData = {
-//     location: $('#trip_location').val(),
-//     title: $('#trip_name').val(),
-//     description: $('#trip_description').val(),
-//     start: $('#trip_start_date').val(),
-//     finish: $('#trip_end_date').val(),
-//     created_by: current_user,
-//     attending: attending_data
-//   }
-//     $.ajax({
-//       url: current_url + 'trips',
-//       type: 'POST',
-//       data: formData,
-//       success: function(data, textStatus, jqXHR)
-//         {
-//         getLastTrip();
+    var attending_data = {
+        user_id: current_user
+    }
 
-//         // this removes the content from the inputs
-//         $('#make_trip_content input').each(function(each){
-//         this.value = "";
-//         })
 
-//         //this deletes everything when you make a new post
-//         $('#suggestion_content').empty();
-//         $('#getLastTrip').empty();
-//         $('#categories').empty();
-//         current_suggestion = "";
-//         current_category = "";
-//         $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'hidden');
-//         $('#view_trips').click();
+  var formData = {
+    title: $('#trip_name').val(),
+    description: $('#trip_description').val(),
+    start: $('#trip_start_date').val(),
+    finish: $('#trip_end_date').val(),
+    created_by: current_user,
+    attending: attending_data,
+    location: ""
+  }
 
-//         }
-//     });  
+
+
+
+	 	var location = $('#trip_location').val();
+	 	console.log(location)
+
+		var plus = location.split(' ').join('+');
+		// console.log(plus)
+		console.log(plus)
+	    
+
+	    var stuff = {
+	    	location: plus
+	    }
+	    console.log(stuff)
+
+
+	    $.ajax({
+	    	url: 'maps/find_geocode',
+	    	dataType: 'json',
+	    	type: 'POST',
+	    	data: stuff,
+	    	success: function(data){
+	    		var lat = data.results[0].geometry.location.lat;
+	    		var lng = data.results[0].geometry.location.lng;
+	    		console.log(data)
+
+	    		// formData.geolocation = {};
+	    		formData.lat = lat;
+	    		formData.lng = lng;
+
+	    		formData.location = data.results[0].address_components[0].long_name;
+	    		console.log(formData)
+	    		// getActivites(lat, lng)
+	    		// makeMap(lat, lng)
+	    		makeTrip()
+
+	    	}
+	    })
+
+		var makeTrip = function(){
+		    $.ajax({
+		      url: current_url + 'trips',
+		      type: 'POST',
+		      data: formData,
+		      success: function(data, textStatus, jqXHR)
+		        {
+		        getLastTrip();
+
+		        // this removes the content from the inputs
+		        $('#make_trip_content input').each(function(each){
+		        this.value = "";
+		        })
+
+		        //this deletes everything when you make a new post
+		        $('#suggestion_content').empty();
+		        $('#getLastTrip').empty();
+		        $('#categories').empty();
+		        current_suggestion = "";
+		        current_category = "";
+		        $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar').css('visibility', 'hidden');
+		        $('#view_trips').click();
+
+		        }
+		    });  
+
+		}
+
+})//end POST user trip info
+
+
+
+
+
 
 // })//end POST user trip info
-
 
 var getTripCategoryInfo = function(data){
     //this hides the suggestion if theres no category

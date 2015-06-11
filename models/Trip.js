@@ -5,6 +5,8 @@ var Schema = mongoose.Schema;
 
 var TripSchema = new Schema({
   location: String,
+  lat: Number,
+  lng: Number,
   title: String,
   description: String,
   duration: String,
@@ -19,20 +21,18 @@ var TripSchema = new Schema({
     	type: Schema.ObjectId,
     	ref: "User",
     }
+  }],
+  taken_avatars: [{
+  user_id: {
+  type: Schema.ObjectId,
+  ref: "User"},
+  avatar: String,
   }]
+
+
 });
 
 TripSchema.plugin(timestamps);
-
-TripSchema.add({taken_avatars: [{
-  user_id: {
-  type: Schema.ObjectId,
-  ref: "User"
-  },
-  avatar: String,
-}]
-
-});
 
 module.exports = mongoose.model('Trip', TripSchema);
 

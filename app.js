@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express')
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,6 +10,7 @@ var relationship = require("mongoose-relationship");
 var bcrypt = require("bcrypt");
 var MongoStore = require('connect-mongo')(session);
 var moment = require('moment');
+var request = require('request')
 var domain = require('domain');
 var d = domain.create();
 
@@ -48,13 +49,13 @@ var users = require('./routes/users');
 var trips = require('./routes/trips');
 var categories = require('./routes/categories');
 var suggestions = require('./routes/suggestions');
-var comments = require('./routes/comments');
 var chats = require('./routes/chats');
 var analysis = require('./routes/analysis');
 var sessions = require('./routes/sessions');
 var betas = require('./routes/betas')
 var notes = require('./routes/notes')
 var invites = require('./routes/invites')
+var maps = require('./routes/maps')
 
 
 mongoose.connect('mongodb://localhost/Users/tiffany_poss/Desktop/TravelTest/data/db', function(err) {
@@ -97,13 +98,13 @@ app.use('/users', users);
 app.use('/trips', trips);
 app.use('/categories', categories);
 app.use('/suggestions', suggestions);
-app.use('/comments', comments);
 app.use('/chats', chats);
 app.use('/analysis', analysis);
 app.use('/sessions', sessions);
 app.use('/betas', betas)
 app.use('/notes', notes)
 app.use('/invites', invites)
+app.use('/maps', maps)
 
 
 // catch 404 and forward to error handler

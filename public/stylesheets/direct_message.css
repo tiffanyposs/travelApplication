@@ -5,7 +5,7 @@ light grey #d6dde0
 red #F33533
 green #98C06A*/
 
-.draggable{
+/*.draggable{
 	width: 150px;
 	height: 200px;
 	background-color: yellow;
@@ -22,7 +22,6 @@ green #98C06A*/
 	background-color: #1e87c1;
 	display: flex; display: -webkit-flex;
 	justify-content: space-between; -webkit-justify-content: space-between;
-	/*z-index: 400;*/
 	padding: 0 10px;
 	color: white;
 }
@@ -31,9 +30,6 @@ green #98C06A*/
 	background-color: transparent;
 	border: none;
 	color: white;
-	/*align-self: flex-end;*/
-	/*right: 0;*/
-	/*float: right;*/
 }
 
 .dm_messages{
@@ -68,4 +64,4 @@ green #98C06A*/
 
 .dm_input button:focus{
 	outline: none;
-}
+}*/

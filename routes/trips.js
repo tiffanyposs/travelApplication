@@ -4,6 +4,26 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Trip = require('../models/Trip.js');
 var User = require('../models/User.js');
+var Category = require('../models/Category.js')
+
+
+//this makes the default categories
+var makeCategories = function(trip_id){
+  var defaults = ["Food", "Lodging", "Activities", "Nightlife"]
+
+  defaults.forEach(function(each){
+    var content = {
+      name: each,
+      trip_id: trip_id
+    }
+
+    Category.create(content, function(err, category) {
+      if (err) return next(err);
+      console.log('itworked!')
+    })
+  })
+}
+
 
 /* POST /trips */
 // this creates a new trip with the user's id
@@ -12,7 +32,8 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   Trip.create(req.body, function (err, trips) {
     if (err) return next(err);
-    res.redirect('/')
+    res.json(trips)
+    makeCategories(trips._id)
   });
 
 });

@@ -48,7 +48,6 @@
 
 #chat_input_box{
 	height: 70px;
-	/*min-height: 100px;*/
 	width: 80%;
 	border: none;
 	resize: none;
@@ -94,7 +93,6 @@
 	justify-content: center; -webkit-justify-content: center;
 }
 
-/*this is a container to be added to images*/
 .chat_card_current > div:nth-child(2) > div{
 	width: 100%;
 }
@@ -123,11 +121,7 @@
 }
 
 
-/*dark blue #2f3743
-2nd dark blue #425061
-blue #1e87c1
-light grey #d6dde0
-*/
+
 .chat_card_current > div:nth-child(2){
 	background-color: #d6dde0;
 }

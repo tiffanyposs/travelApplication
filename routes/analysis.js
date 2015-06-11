@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 
 var Category = require('../models/Category.js');
 var Chat = require('../models/Chat.js');
-var Comment = require('../models/Comment.js');
 var Suggestion = require('../models/Suggestion.js');
 var Trip = require('../models/Trip.js');
 var User = require('../models/User.js');

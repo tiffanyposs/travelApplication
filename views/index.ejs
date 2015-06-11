@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<title>Tripper</title>
 
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
 	<link href='http://fonts.googleapis.com/css?family=Gilda+Display|Quicksand:300,400,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400|Oxygen:400,300,700|Hind:400,300,700,600,500|Quattrocento:400,700|Gabriela' rel='stylesheet' type='text/css'>
@@ -15,13 +16,6 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/direct_message.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css">
 
-<style type="text/css">
-
-
-
-
-
-</style>
 
 </head>
 <body>
@@ -70,21 +64,33 @@
 </div>
 
 
+
+
+
+
+
 <header id = 'heading_container'>
 	<div id = 'trip_container'>
 		<!-- the content is appeneded through js -->
 		<h1 id = 'current_trip'>+ Add Trips<!-- <span class = 'fa fa-arrow-down'></span> --></h1>
 	</div>
 
+	<div id = 'add_friend_nav'>
+		<div id = 'add_friend'>
+			<span class = 'fa fa-user fa-2x'></span>
+			<span class = 'fa fa-plus'></span>
+		</div>
+	</div>
+
 	<nav id = 'heading_nav'>
 		<ul>
 
-			<!-- <li>
+<!-- 			<li>
 				<div class = 'background_button'>
 					<span class = 'fa fa-globe fa-2x'></span>
 				</div>
-			</li>
-			<li>
+			</li> -->
+<!-- 			<li>
 				<div class = 'background_button'>
 					<span class = 'fa fa-plane fa-2x'></span>
 				</div>
@@ -99,7 +105,6 @@
 					<span class = 'fa fa-usd fa-2x'></span>
 				</div>
 			</li> -->
-			<!-- put the logout putton somewhere -->
 
 			<li><img id = 'dropdown_menu_trigger' class = 'current_user_avatar' src="images/users.jpg"></li>
 <!-- 			<li>
@@ -117,7 +122,12 @@
 
 
 
+
+
 <section id = 'main_container'>
+	
+	<div id="map-canvas"></div>
+
 	<nav>
 		<div id = 'main_nav'>
 			
@@ -139,18 +149,18 @@
 			<div id = 'group_chat_container'>
 				<h1 id = 'group_chat'>Group Chat</h1>
 			</div>
-			<div id = 'friends_nav'>
-				<h1>Friends</h1>
-				<h3 id = 'add_friend'>+ Add Friends</h3>
-				<div id = 'friends'>
+			<!-- <div id = 'friends_nav'> -->
+				<!-- <h1>Friends</h1> -->
+				<!-- <h3 id = 'add_friend'>+ Add Friends</h3> -->
+				<!-- <div id = 'friends'> -->
 					<!-- check whats appended here -->
 					<!-- <h2>Emily</h2> -->
 					<!-- <h2>Karl</h2> -->
 					<!-- <h2>Nichole</h2> -->
 					<!-- <h2>Anna</h2> -->
 					<!-- <h2>...+</h2> -->
-				</div>
-			</div>
+				<!-- </div> -->
+			<!-- </div> -->
 		</div>
 <!-- 		<div id = 'calendar'>
 			<img src="/images/calendar.jpg">
@@ -335,70 +345,12 @@
 					</div>
 
 
-				<!-- </div> -->
-
-
-			<!-- <h1>Comments <span class = 'fa fa-plus'></span></h1> -->
-		</div>
-		<div id = 'comment_wrapper'>
-
-		<div id = 'comments'>
-
-<!-- 			<div class = 'comment_card'>
-				<div>
-					<img src="images/platupi/Danoyshka.png">
-				</div>
-				<div class = 'comment_info'>
-					<div>
-						<h2>Jamie</h2>
-						<h3>This is about the comment I'm making blah blah blah....
-						and this is more of the comment.... and this is even more
-						of my comments. This is about the comment I'm making blah blah blah....
-						and this is more of the comment.... and this is even more
-						of my comments.</h3>
-					</div>
-				</div>
-			</div> -->
-
-
-<!-- 			<div class = 'comment_card'>
-				<div>
-					<img src="images/platupi/Danoyshka.png">
-				</div>
-				<div class = 'comment_info'>
-					<div>
-
-						<h2>Jamie</h2> -->
-							<!-- remove from js -->
-							<!-- <h2>12/21/2015</h2> -->
-<!-- 						<h3>This is about the comment I'm making blah blah blah....
-						and this is more of the comment.... and this is even more
-						of my comments. This is about the comment I'm making blah blah blah....
-						and this is more of the comment.... and this is even more
-						of my comments.</h3>
-					</div>
-				</div>
-			</div> -->
-
-		</div>
-
-		</div>
-
-		<div id = 'comment_input'>
-			<!-- <div> -->
-				<div>
-					<textarea id = 'comment_input_area'></textarea>
-					<button id = 'comment_submit'><span class = 'fa fa-paper-plane fa-3x'></span></button>
-				</div>
-			<!-- </div> -->
 		</div>
 
 	</div>
-<!-- 	<div id = 'chat_section'></div> -->
 
 
 
-<!-- Chats are here -->
 <!-- Chats are here -->
 	<div id = 'chat_container'>
 		<div>
@@ -517,15 +469,18 @@
 
 <script type="text/javascript" src = '/javascripts/vendors/jquery-2.1.3.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <script type="text/javascript" src = '/javascripts/modals.js'></script>
 <script type="text/javascript" src = '/javascripts/chat.js'></script>
-<script type="text/javascript" src = '/javascripts/api_stuff.js'></script>
+<script type="text/javascript" src = '/javascripts/index.js'></script>
+<!-- <script type="text/javascript" src = '/javascripts/api_stuff.js'></script> -->
 <script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
 <script type="text/javascript" src = '/javascripts/friends.js'></script>
 <script type="text/javascript" src = '/javascripts/platupi.js'></script>
 <script type="text/javascript" src = '/javascripts/delete.js'></script>
 <script type="text/javascript" src = '/javascripts/recover_archive.js'></script>
 <script type="text/javascript" src = '/javascripts/direct_message.js'></script>
+<script type="text/javascript" src = '/javascripts/maps.js'></script>
 
 <% include partials/analytics/script.ejs %>
 
