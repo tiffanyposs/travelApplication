@@ -1,3 +1,4 @@
+
 //these track what is clicked on
 var current_url = document.URL;
 var current_user;
@@ -7,44 +8,7 @@ var current_category;
 var current_suggestion;
 var current_avatar;
 
-// var map;
 
-
-//this makes the map
-var makeMap = function(lat, lng){
-
-	console.log('hello')
-	var myLatlng = new google.maps.LatLng(lat, lng);
-	//this is the properties to configure how your map will look, there are more options
-	var mapOptions = {
-	center: { lat: lat, lng: lng},
-	zoom: 13
-	};
-	// var map creates a new google map with the id
-	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-	// var marker = new google.maps.Marker({
-	//       position: myLatlng,
-	//       map: map,
-	//       title: 'Hello World!'
-	// });
-
-}
-
-//defaults to new york
-makeMap(40.7127, -74.0059)
-
-
-
-//this makes the map
-  var autocomplete = new google.maps.places.Autocomplete(
-      (document.getElementById('trip_location')),
-      {
-      	//this is for counties or regions
-        // types: ['(regions)'],
-        types: ['(cities)']
-        // componentRestrictions: countryRestrict
-  });
 
 
 var attendingTrips = function(trips){
@@ -488,9 +452,7 @@ var getTripCategoryInfo = function(data){
             $('#comments').empty();
 
             // this toggles the chat
-            $('#chat_container').hide('slow', function(){
-                $('#suggestions, #comments_container').show('slow');
-            }); 
+
             
 
             current_suggestion = "";
@@ -561,6 +523,7 @@ $('#category_submit').click(function(){
 })// end getting categories
 
 
+
 //checks of something is valid url
 function ValidUrl(str) {
   var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -575,6 +538,8 @@ function ValidUrl(str) {
     return true;
   }
 }
+
+
 
 var getSuggestionInfo = function(data){
 
@@ -959,17 +924,24 @@ var getSuggestions = function(){
   });
 }
 
-// //this gets the last category posted in a group
-// //is called when you POST the category_submit
-var getLastSuggestion = function(){
-    $.ajax({
-    url: current_url + 'suggestions/' + current_category + "/last",
-    dataType: 'json',
-    success: function(data){
-        getSuggestionInfo(data);
-    }
-  });  
-}
+
+
+
+
+// // //this gets the last category posted in a group
+// // //is called when you POST the category_submit
+// var getLastSuggestion = function(){
+//     $.ajax({
+//     url: current_url + 'suggestions/' + current_category + "/last",
+//     dataType: 'json',
+//     success: function(data){
+//         getSuggestionInfo(data);
+//     }
+//   });  
+// }
+
+
+
 
 
 
@@ -997,7 +969,6 @@ $('#suggestion_submit').click(function(){
       }
   })
 })// end getting categories
-
 
 
 

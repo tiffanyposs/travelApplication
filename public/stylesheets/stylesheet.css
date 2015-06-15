@@ -143,8 +143,168 @@ body, html{
 	display: flex; display: -webkit-flex;
 }
 
+#map-container{
+	height: 100%;
+	width: 50%;
 
-#map-canvas { height: 100%; width: 60%;}
+	/*position: relative;*/
+
+}
+
+#map-canvas { 
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#map_button{
+	width: 100px;
+	height: 100px;
+	/*background-color: red;*/
+	position: absolute;
+	/*z-index: 500;*/
+	/*float: right;*/
+	right: 40%;
+	bottom: 0;
+	display: flex; display: -webkit-flex;
+}
+
+#map_button > span{
+	margin: auto;
+	color: #425061;
+}
+
+#map_suggestions {
+	width: 400px;
+	height: 500px;
+	position: absolute;
+	display: none;
+	/*z-index: 500;*/
+	background-color: white;
+	/*made flex with jquery*/
+	flex-direction: column; -webkit-flex-direction: column;
+
+}
+
+#map_search{
+	width: 100%;
+	padding: 10px;
+}
+
+.search_suggestion_card{
+	padding: 20px;
+	background-color: #1e87c1;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	position: relative;
+
+}
+
+#about_place{
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	background-color: white;
+	display: none;
+}
+
+
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
+
+
+#close_about_place{
+	background-color: #1e87c1;
+	color: white;
+	outline: none;
+	border: 3px solid #98C06A;
+	border-radius: 3px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 10px;
+}
+
+.search_heading{
+	text-align: center;
+	padding: 10px;
+	background-color: #425061;
+	color: white;
+}
+
+#search-suggestions{
+	width: 80%;
+	height: 70%;
+	background-color: #2f3743;
+	overflow: scroll;
+}
+
+
+.add_star{
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 10px;
+}
+
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
+.search_button{
+	background-color: #d6dde0;
+	font-size: 1.25em;
+	border: none;
+	outline: 0;
+	color: #2f3743;
+	padding: 5px 10px;
+	margin: 5px;
+}
+
+.search_button_clicked{
+	background-color: #98C06A;
+	font-size: 1.25em;
+	border: none;
+	outline: 0;
+	color: #2f3743;
+	padding: 5px 10px;
+	margin: 5px;
+}
+
+
+
+#map_search input{
+	width: 80%;
+}
+
+
+
+
+#suggestion_container{ 
+	height: 100%;
+ 	width: 40%;
+ 	position: absolute;
+ 	/*z-index: 500;*/
+ 	background-color: white;
+ 	right: 0;
+ }
+
+
+#suggestions{
+	width: 80%;
+	height: 80%;
+	background-color: red;
+}
 
 /*
 

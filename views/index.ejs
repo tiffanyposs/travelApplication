@@ -85,11 +85,11 @@
 	<nav id = 'heading_nav'>
 		<ul>
 
-<!-- 			<li>
-				<div class = 'background_button'>
+			<li>
+				<div class = 'background_button' id = 'explore'>
 					<span class = 'fa fa-globe fa-2x'></span>
 				</div>
-			</li> -->
+			</li>
 <!-- 			<li>
 				<div class = 'background_button'>
 					<span class = 'fa fa-plane fa-2x'></span>
@@ -105,6 +105,13 @@
 					<span class = 'fa fa-usd fa-2x'></span>
 				</div>
 			</li> -->
+
+			<li>
+				<div class = 'background_button' id = 'group_chat'>
+					<span class = 'fa fa-paragraph fa-2x'></span>
+				</div>
+			</li>
+
 
 			<li><img id = 'dropdown_menu_trigger' class = 'current_user_avatar' src="images/users.jpg"></li>
 <!-- 			<li>
@@ -126,224 +133,70 @@
 
 <section id = 'main_container'>
 	
-	<div id="map-canvas"></div>
+	<div id = 'map-container'>
 
-	<nav>
-		<div id = 'main_nav'>
-			
-			<!-- <h3 id = 'add_platupi'>+ Change Avatar</h3> -->
-			<div id = 'categories_nav'>
-				<!-- figure out where to put the platupi modal trigger -->
-				<!-- <h3 id = 'add_platupi'>+ Add your Avatar</h3> -->
-				<h1>Categories</h1>
-				<h3 id = 'add_category'>+ Create New Category</h3>
-				<div id = 'categories'>
-					<!-- check which tag is appended here -->
-					<!-- <h2>Transportation</h2> -->
-					<!-- <h2>Hotels</h2> -->
-					<!-- <h2>Food</h2> -->
-					<!-- <h2>Activities</h2> -->
-					<!-- <h2>...+</h2> -->
-				</div>
-			</div>
-			<div id = 'group_chat_container'>
-				<h1 id = 'group_chat'>Group Chat</h1>
-			</div>
-			<!-- <div id = 'friends_nav'> -->
-				<!-- <h1>Friends</h1> -->
-				<!-- <h3 id = 'add_friend'>+ Add Friends</h3> -->
-				<!-- <div id = 'friends'> -->
-					<!-- check whats appended here -->
-					<!-- <h2>Emily</h2> -->
-					<!-- <h2>Karl</h2> -->
-					<!-- <h2>Nichole</h2> -->
-					<!-- <h2>Anna</h2> -->
-					<!-- <h2>...+</h2> -->
-				<!-- </div> -->
-			<!-- </div> -->
+
+
+		<div id="map-canvas"></div>
+
+		<div id = 'about_place'>
+			<button id = 'close_about_place'><span class = 'fa fa-times'></span></button>
 		</div>
-<!-- 		<div id = 'calendar'>
-			<img src="/images/calendar.jpg">
-		</div> -->
-	</nav>
 
-	<!-- start suggestions -->
-	<div id = 'suggestions'>
-		<div id = 'suggestion_header'>
-			<h1>+ Create New Suggestion</h1>
+
+		<div id = 'map_button'>
+			<span id = 'open_button' class = 'fa fa-long-arrow-right fa-2x'></span>
 		</div>
-		<div id = 'suggestion_content'>
-		<!-- also has the id of the suggestion's id number -->
-		<!-- change 2x to 3x in js -->
 
-<!-- 			<div class = 'suggestion_card'>
-				<div class = 'suggestion_info'>
-					<div>
-						<h1>Suggestion Title</h1>
-						<h2>By: Jamie</h2>
-						<h3>April 25th, 2015</h3>
-					</div>
-				</div>
-
-				<div class = 'suggestion_voting'>
-						<div>
-							<div>
-								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
-								<h2 class = 'suggestion_upvote_count'>0</h2>
-							</div>
-							<div>
-								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
-								<h2 class = 'suggestion_downvote_count'>0</h2>
-							</div>
-						</div>
-				</div>
+		<div id = 'map_suggestions'>
+			<div id = 'map_search'>
+				<input>
+				<button>Find</button>
 			</div>
-
-
-			<div class = 'suggestion_card'>
-				<div class = 'suggestion_info'>
-					<div>
-						<h1>Suggestion Title</h1>
-						<h2>By: Jamie</h2>
-						<h3>April 25th, 2015</h3>
-					</div>
-				</div>
-
-				<div class = 'suggestion_voting'>
-						<div>
-							<div>
-								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
-								<h2 class = 'suggestion_upvote_count'>0</h2>
-							</div>
-							<div>
-								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
-								<h2 class = 'suggestion_downvote_count'>0</h2>
-							</div>
-						</div>
-				</div>
+			<div>
+				<button id = 'find_food' class = 'search_button'>Food</button>
+				<button id = 'find_lodging' class = 'search_button'>Lodging</button>
+				<button id = 'find_nightlife' class = 'search_button'>Nightlife</button>
+				<button id = 'find_culture' class = 'search_button'>Culture</button>
+				<button id = 'find_parks' class = 'search_button'>Parks</button>
+				<button id = 'find_shopping' class = 'search_button'>Shopping</button>
 			</div>
-
-
-
-			<div class = 'suggestion_card'>
-				<div class = 'suggestion_info'>
-					<div>
-						<h1>Suggestion Title</h1>
-						<h2>By: Jamie</h2>
-						<h3>April 25th, 2015</h3>
-					</div>
+			<div id = 'search-suggestions'>
+<!-- 				<div class = 'search_suggestion_card'>
+					<h3>Craft Bar</h3>
+					<p>5 Stars</p>
 				</div>
-
-				<div class = 'suggestion_voting'>
-						<div>
-							<div>
-								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
-								<h2 class = 'suggestion_upvote_count'>0</h2>
-							</div>
-							<div>
-								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
-								<h2 class = 'suggestion_downvote_count'>0</h2>
-							</div>
-						</div>
+				<div class = 'search_suggestion_card'>
+					<h3>Craft Bar</h3>
+					<p>5 Stars</p>
 				</div>
+				<div class = 'search_suggestion_card'>
+					<h3>Craft Bar</h3>
+					<p>5 Stars</p>
+				</div> -->
 			</div>
-
-
-			<div class = 'suggestion_card'>
-				<div class = 'suggestion_info'>
-					<div>
-						<h1>Suggestion Title</h1>
-						<h2>By: Jamie</h2>
-						<h3>April 25th, 2015</h3>
-					</div>
-				</div>
-
-				<div class = 'suggestion_voting'>
-						<div>
-							<div>
-								<span class = 'fa fa-arrow-circle-up fa-3x green'></span>
-								<h2 class = 'suggestion_upvote_count'>0</h2>
-							</div>
-							<div>
-								<span class = 'fa fa-arrow-circle-down fa-3x red'></span>
-								<h2 class = 'suggestion_downvote_count'>0</h2>
-							</div>
-						</div>
-				</div>
-			</div> -->
-
-
 		</div>
-	</div>
 
- 
-	<!-- this is the hover div for avatar names -->
-	<div id = 'voting_hover_div'></div>
-
-
-	<div id = 'comments_container'>
-		<div id = 'comment_suggestion'>
-
-			<!-- <div id = 'comment_suggestion_info'> -->
-				
-				<!-- might have to remove from js -->
-				<!-- <p id = 'suggestion_date'>10/23/2015</p> -->
-			<!-- </div> -->
-
-				<!-- <div id = 'comment_suggestion_content'> -->
-					<div id = 'suggestion_avatar'>
-						<div>
-							<p id = 'suggestion_name'>Brian Smith</p>
-							<img src="images/users.jpg">
-							<a id = 'suggestion_comment_link' href='https://www.google.com/' target = 'blank'>Link.....</a>
-						</div>
-					</div>
-						<!-- remove from js / put it as the first comment-->
-<!-- 						<p id = 'suggestion_comment_about'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua.</p> -->
-
-
-
-					<div id = 'suggestion_voting'>
-						<div>
-							<div>
-								<span id = 'upvote' class = 'fa fa-arrow-circle-up fa-3x green'></span>
-							</div>
-							<!-- remove from js -->
-							<!-- <h2 id = 'comment_suggestion_upvote'>0</h2> -->
-
-							<!-- container to append vote images -->
-							<div id = 'upvote_vote_images' class = 'vote_images'>
-								<div id = 'upvote_images'>
-									<!-- <img src="./images/Danoyshka.png"> -->
-<!-- 									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png"> -->
-								</div>
-							</div>
-						</div>
-						<div>
-							<div>
-								<span id = 'downvote' class = 'fa fa-arrow-circle-down fa-3x red'></span>
-							</div>
-							<!-- to append upvote images -->
-							<div id = 'downvote_vote_images' class = 'vote_images'>
-								<div id = 'downvote_images'>
-<!-- 									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png">
-									<img src="images/platupi/Danoyshka.png"> -->
-								</div>
-							</div>
-							<!-- remove from js -->
-							<!-- <h2 id = 'comment_suggestion_downvote'>0</h2> -->
-						</div>
+		<div id = 'suggestion_container'>
+			<nav>
+				<div id = 'main_nav'>
+					<div id = 'categories_nav'>
+						<h1>Categories</h1>
+						<div id = 'categories'></div>
 					</div>
 
+				</div>
+			</nav>
+
+			<!-- start suggestions -->
+			<div id = 'suggestions'>
+				<div id = 'suggestion_header'>
+					<h1>+ Create New Suggestion</h1>
+				</div>
+				<div id = 'suggestion_content'></div>
+			</div>
+
+			<!-- <div id = 'voting_hover_div'></div> -->
 
 		</div>
 
@@ -355,107 +208,8 @@
 	<div id = 'chat_container'>
 		<div>
 			<!-- <h2>Group Chat</h2> -->
-			<div id = 'chat'>
-			<!-- chat appends here -->
+			<div id = 'chat'></div>
 
-<!-- 			<div class = 'chat_card chat_card_current'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<a href="#" target='blank'>http://blahblahblah.com</a>
-				</div>
-			</div>
-
-			<div class = 'chat_card chat_card_current'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<div>
-						<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ-B5wmvSSCHEypnAb7S6eZ7RBlwTzLK9aeejLl_-axP8pgENil2WhFR8OT">
-					</div>
-				</div>
-			</div>
-
-
-			<div class = 'chat_card chat_card_current'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-
-
-			<div class = 'chat_card chat_card_other'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-
-			<div class = 'chat_card chat_card_other'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-
-			<div class = 'chat_card chat_card_other'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<a href="#" target='blank'>http://blahblahblah.com</a>
-				</div>
-			</div>
-
-			<div class = 'chat_card chat_card_other'>
-				<div>
-					<img src="./images/Danoyshka.png">
-					<h4>Tiffany Poss</h4>
-				</div>
-				<div>
-					<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ-B5wmvSSCHEypnAb7S6eZ7RBlwTzLK9aeejLl_-axP8pgENil2WhFR8OT">
-				</div>
-			</div> -->
-
-
-
-			</div>
 			<div id = 'chat_input'>
 				<div>
 					<textarea id = 'chat_input_box'></textarea>
@@ -472,6 +226,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <script type="text/javascript" src = '/javascripts/modals.js'></script>
 <script type="text/javascript" src = '/javascripts/chat.js'></script>
+<script type="text/javascript" src = '/javascripts/maps.js'></script>
 <script type="text/javascript" src = '/javascripts/index.js'></script>
 <!-- <script type="text/javascript" src = '/javascripts/api_stuff.js'></script> -->
 <script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
@@ -480,7 +235,7 @@
 <script type="text/javascript" src = '/javascripts/delete.js'></script>
 <script type="text/javascript" src = '/javascripts/recover_archive.js'></script>
 <script type="text/javascript" src = '/javascripts/direct_message.js'></script>
-<script type="text/javascript" src = '/javascripts/maps.js'></script>
+
 
 <% include partials/analytics/script.ejs %>
 

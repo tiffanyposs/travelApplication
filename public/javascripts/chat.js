@@ -154,13 +154,9 @@ client.addEventListener("message", function(message){
 
 }
 
-//this changes the group chat
+//this changes the group chat and closes the rest
 $('#group_chat').click(function(){
-
-$('.nav_clicked').attr('class', '');
-$(this).attr('class', 'group_clicked');
-  //toggles the chat
-  $('#suggestions, #comments_container').hide('slow', function(){
+  $('#suggestion_container, #map-container').hide('slow', function(){
     $('#chat_container').show('slow')
     $('#chat').stop().animate({
       scrollTop: $("#chat")[0].scrollHeight
@@ -170,6 +166,11 @@ $(this).attr('class', 'group_clicked');
 
 })
 
+//this opens explore
+$('#explore').click(function(){
 
+$('#chat_container').hide('slow', function(){
+    $('#suggestion_container, #map-container').show('slow');
+}); 
 
-
+})

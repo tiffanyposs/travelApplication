@@ -154,7 +154,6 @@ $('#dropdown_menu_trigger').hover(function(){
     top: $('#heading_container').position().top + $('#heading_container').height(),   
     display: 'block' 
     });
-
 }, function(){
      timer = setTimeout(function(){
          $('#dropdown_menu').slideUp(200, function(){
@@ -162,7 +161,9 @@ $('#dropdown_menu_trigger').hover(function(){
          });
      }, 500);
 });
+
 $('#dropdown_menu').hover(function(){
+    console.log('hello')
     clearTimeout( timer );
 }, function(){
      timer = setTimeout(function(){
