@@ -27,6 +27,8 @@
 <% include partials/modals/index_category.ejs %>
 <!-- suggestion modal -->
 <% include partials/modals/index_suggestion.ejs %>
+<!-- map suggestions -->
+<% include partials/modals/index_map_suggestion.ejs %>
 <!-- friends -->
 <% include partials/modals/index_friend.ejs %>
 <!-- platupi -->
@@ -35,7 +37,7 @@
 <!-- edit suggestion -->
 <% include partials/modals/index_suggestion_edit.ejs %>
 <!-- edit comment -->
-<% include partials/modals/index_comment_edit.ejs %>
+
 <!-- archive recover -->
 <% include partials/modals/archive.ejs %>
 
@@ -141,6 +143,17 @@
 
 		<div id = 'about_place'>
 			<button id = 'close_about_place'><span class = 'fa fa-times'></span></button>
+			<div id = 'about_place_info'>
+				<!-- <h3>Name</h3>
+				<h4>Formatted Address</h4>
+				<h4>Formatted Phone Number</h4>
+				<h4>Rating</h4>
+				<h4>Reviews</h4>
+				<a href="http://hello.com" target = 'blank'>hello.com</a> -->
+			</div>
+			<div>
+				<button id = 'add_map_suggestion'>Add</button>
+			</div>
 		</div>
 
 

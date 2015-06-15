@@ -69,6 +69,31 @@ $('#suggestion_link').keypress(function(e){
 });
 
 
+//map suggestion modal
+$('#add_map_suggestion').click(function(event){
+  $('#map_suggestion_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#map_suggestion_close'
+})
+
+$('#map_suggestion_close').click(function(event){
+  $('#map_suggestion_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+    function(){
+      $(this).css('visibility', 'hidden')
+      close_modal = '';
+    });
+})
+
+// $('#suggestion_link').keypress(function(e){
+//   if(e.keyCode == 13){
+//     $('#suggestion_submit').click();
+//     $('#suggestion_close').click();
+//   }
+// });
+
+
+
+
+
 //adds comments
 $('#add_category').click(function(event){
   $('#category_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);

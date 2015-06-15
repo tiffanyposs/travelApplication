@@ -232,6 +232,12 @@ green #98C06A*/
 	margin: 10px;
 }
 
+#review_scroll{
+	width: 100%;
+	height: 200px;
+	overflow: scroll;
+}
+
 .search_heading{
 	text-align: center;
 	padding: 10px;

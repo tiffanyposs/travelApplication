@@ -108,18 +108,49 @@ var makeMarker = function(lat, lng, title){
 }
 
 
-//here
-var getDetails = function(place_id){
-	// var place_id = data.results[0].place_id;
+// <h3>Name</h3>
+// 				<h4>Formatted Address</h4>
+// 				<h4>Formatted Phone Number</h4>
+// 				<h4>Rating</h4>
+// 				<h4>Reviews</h4>
+// 				<a href="http://hello.com" target = 'blank'>hello.com</a>
 
-	// console.log(data.results[0])
-	// console.log(place_id);
+var aboutPlace = function(place){
+	console.log(place)
+	$('#about_place_info').empty();
+
+	$h3 = $('<h3></h3>')
+	$h4 = $('<h4></h4>')
+
+	var name = $h3.clone().text(place.name)
+	var address = $h4.clone().text(place.formatted_address)
+	var number = $h4.clone().text(place.formatted_phone_number)
+	var rating = $h4.clone().text(place.rating);
+
+	var link = $('<a></a>').attr('href', place.website).attr('target', 'blank');
+
+	$('#about_place_info').append(name, address, number, rating, link)
+
+	// place.reviews.forEach(function(each){
+	// 	var card = $('<div></div>');
+	// 	var rating = $h4.clone().text(each.rating);
+	// 	var review = $h4.clone().text(each.text);
+
+	// 	review_div.append(card.append(rating, review))
+	// })
+
+
+}
+
+
+
+
+//gets the gooogle place details
+var getDetails = function(place_id){
 
 	var request = {
 		placeId: place_id
 	}
-
-	// console.log(request)
 
 	var service = new google.maps.places.PlacesService(map);
 
@@ -128,7 +159,8 @@ var getDetails = function(place_id){
 	function callback(place, status) {
 	  if (status == google.maps.places.PlacesServiceStatus.OK) {
 	    // createMarker(place);
-	    console.log(place)
+	    // console.log(place)
+	    aboutPlace(place)
 	  }
 	}
 

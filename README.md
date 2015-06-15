@@ -1,11 +1,12 @@
-text messages to vote on something
+###Ideas
 
-
-###Thing to Fix after Data restructure
-
-* Make trip_id and all model reference all nested data above them.
-* Make voting it's own model.
-* Make it so archive only shows deleted items from current trip.
+* Search buttons are different colors and so are the markers that represent them
+* suggestion cards are color coded as well
+* There are static hotel pins of hotels that have been suggested
+* People can change the radius of the search
+* Add plus sign to render more options
+* Remember what they've looked at?
+* 
 
 
 [bash profile](http://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
