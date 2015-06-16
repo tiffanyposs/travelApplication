@@ -1,5 +1,3 @@
-
-
 var map;
 var latLng = {};
 
@@ -60,6 +58,7 @@ var makeMap = function(lat, lng){
       $('#map_button').animate({right: '40%'}, 'slow')
       $('#about_place').hide('slow')
       $('#suggestion_container').show('slow', function(){
+
         $('#map-container').animate({
             width: '60%',
         }, {
@@ -116,7 +115,8 @@ var makeMarker = function(lat, lng, title){
 // 				<a href="http://hello.com" target = 'blank'>hello.com</a>
 
 var aboutPlace = function(place){
-	console.log(place)
+	// console.log(place)
+	//populates the info
 	$('#about_place_info').empty();
 
 	$h3 = $('<h3></h3>')
@@ -127,18 +127,124 @@ var aboutPlace = function(place){
 	var number = $h4.clone().text(place.formatted_phone_number)
 	var rating = $h4.clone().text(place.rating);
 
-	var link = $('<a></a>').attr('href', place.website).attr('target', 'blank');
+	var link = $('<a></a>').attr('href', place.website).attr('target', 'blank').text(place.website);
 
 	$('#about_place_info').append(name, address, number, rating, link)
 
-	// place.reviews.forEach(function(each){
-	// 	var card = $('<div></div>');
-	// 	var rating = $h4.clone().text(each.rating);
-	// 	var review = $h4.clone().text(each.text);
 
-	// 	review_div.append(card.append(rating, review))
-	// })
 
+	//renders the categories in the modal
+	var makeCategoryCards = function(data){
+		// $('map_suggestion_category')
+		// console.log(data)
+		$('#map_suggestion_category').empty()
+		data.forEach(function(each){
+			var $card = $('<div></div>').attr('class', 'category_sug_card')
+			var $category_name = $('<h4></h4>').text(each.name)
+			var $add_button = $('<button></button>').text('Add It!')
+
+			$card.append($category_name, $add_button)
+			$('#map_suggestion_category').append($card)
+
+			$add_button.click(function(){
+				// alert('it worked fuck yea')
+				// console.log(place.name);
+				// console.log(place.place_id)
+				// console.log(each._id)
+				// console.log(place.website)
+
+				var content = {
+					'title': place.name,
+					'link': place.website,
+					// 'references': [{
+					// 	'name': 'Google',
+					// 	'ref_id': place.place_id,
+					// }],
+				 //    'votes': [{
+				 //      'user_id': current_user,
+				 //      'vote': true,
+				 //      'comment': 'I want to do this'
+				 //    }],
+				    'user_id': current_user,
+				    'category_id': each._id,
+				    'trip_id': current_trip,
+				    'archived': false
+				}
+
+				var votes = {
+					'user_id': current_user,
+					'vote': true,
+					'comment': 'I want to do this'
+				}
+
+				var reference = {
+					'name': 'Google',
+					'ref_id': place.place_id
+				}
+
+				var makeVote = function(id){
+				  $.ajax({    
+				    url: current_url + "suggestions/votes/" + id,
+				    type: 'PUT',
+				    data: votes,
+				    timeout: 1000,
+				    success: function(data){
+				    	console.log(data)
+				      }
+				  })
+				}
+
+				var makeReference = function(id){
+					console.log('make reference!')
+				  $.ajax({    
+				    url: current_url + "suggestions/reference/" + id,
+				    type: 'PUT',
+				    data: reference,
+				    timeout: 1000,
+				    success: function(data){
+				    	console.log(data)
+				      }
+				  })
+				}
+		
+
+			  $.ajax({    
+			    url: current_url + "suggestions",
+			    type: 'POST',
+			    data: content,
+			    success: function(data){
+			    	$('#map_suggestion_close').click()
+			    	$('#close_about_place').click()
+			        makeReference(data._id)
+			        makeVote(data._id)
+			        // makereference
+			      }
+			  })
+
+
+			})
+
+		})
+	}
+
+	//when someone clicks the add button
+	$('#add_map_suggestion').click(function(){
+	    $.ajax({
+		    url: current_url + 'categories/' + current_trip,
+		    dataType: 'json',
+		    success: function(data){
+		    	// console.log(data)
+		    	makeCategoryCards(data)
+		       
+		    }
+	  	});
+
+	})//add click
+
+
+	$('.category_sug_card button').click(function(){
+		// console.log(place.name)
+	})
 
 }
 
@@ -228,7 +334,7 @@ var getFood = function(lat, lng){
         dataType: 'json',
         data: latLng,
         success: function(data){
-            console.log(data)
+            // console.log(data)
             makeCards(title, data)
             // renderFood(data)
             // getDetails(data)
@@ -245,7 +351,7 @@ var getLodging = function(lat, lng){
         dataType: 'json',
         data: latLng,
         success: function(data){
-        	console.log(data)
+        	// console.log(data)
         	makeCards(title, data)
         	// renderLodging(data)
         }
@@ -260,7 +366,7 @@ var getNightlife = function(lat, lng){
         dataType: 'json',
         data: latLng,
         success: function(data){
-        	console.log(data)
+        	// console.log(data)
         	makeCards(title, data)
         	// renderNightlife(data)
         }
@@ -275,7 +381,7 @@ var getCulture = function(lat, lng){
 	        dataType: 'json',
 	        data: latLng,
 	        success: function(data){
-	        	console.log(data)
+	        	// console.log(data)
 	        	makeCards(title, data)
 	        	// renderCulture(data)
 	        }
@@ -291,7 +397,7 @@ var getParks = function(lat, lng){
         dataType: 'json',
         data: latLng,
         success: function(data){
-        	console.log(data)
+        	// console.log(data)
         	makeCards(title, data)
         	// renderParks(data)
         }
@@ -307,7 +413,7 @@ var getShopping = function(lat, lng){
         dataType: 'json',
         data: latLng,
         success: function(data){
-        	console.log(data)
+        	// console.log(data)
         	makeCards(title, data)
         	// renderShopping(data)
         }

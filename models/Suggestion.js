@@ -7,17 +7,21 @@ var SuggestionSchema = new mongoose.Schema({
   title: String,
   content: String,
   link: String,
-  upvote: [{
-    user_id: {
-    type: Schema.ObjectId,
-    ref: 'User'
-    }
+  references: [{
+    name: String,
+    ref_id: String
   }],
-  downvote: [{
+  geocode:{
+    lat: Number,
+    lng: Number
+  },
+  votes: [{
     user_id: {
     type: Schema.ObjectId,
-    ref: 'User'
-    }
+    ref: 'User',
+    },
+    comment: String,
+    vote: Boolean
   }],
   user_id: {
     type: Schema.ObjectId,

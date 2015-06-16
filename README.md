@@ -6,7 +6,13 @@
 * People can change the radius of the search
 * Add plus sign to render more options
 * Remember what they've looked at?
-* 
+* Make search area larger
+
+
+###To Do
+
+*make callback that updates the references and votes on
+
 
 
 [bash profile](http://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
