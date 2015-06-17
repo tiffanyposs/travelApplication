@@ -147,24 +147,10 @@ var aboutPlace = function(place){
 			$('#map_suggestion_category').append($card)
 
 			$add_button.click(function(){
-				// alert('it worked fuck yea')
-				// console.log(place.name);
-				// console.log(place.place_id)
-				// console.log(each._id)
-				// console.log(place.website)
 
 				var content = {
 					'title': place.name,
 					'link': place.website,
-					// 'references': [{
-					// 	'name': 'Google',
-					// 	'ref_id': place.place_id,
-					// }],
-				 //    'votes': [{
-				 //      'user_id': current_user,
-				 //      'vote': true,
-				 //      'comment': 'I want to do this'
-				 //    }],
 				    'user_id': current_user,
 				    'category_id': each._id,
 				    'trip_id': current_trip,

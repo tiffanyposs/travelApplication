@@ -7,11 +7,13 @@ var SuggestionSchema = new mongoose.Schema({
   title: String,
   content: String,
   link: String,
-  references: [{
-    name: String,
-    ref_id: String
-  }],
-  geocode:{
+  references: [
+    {
+      name: String,
+      ref_id: String
+    }
+  ],
+  geocode: {
     lat: Number,
     lng: Number
   },
