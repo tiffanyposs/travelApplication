@@ -657,7 +657,7 @@ var makeSuggestions = function(data){
             if(vote.user_id.taken_avatars.length === 0){
                     $img.attr('src', '/images/users.jpg')
             }
-            vote.user_id.taken_avatars.forEach(function(avatar){
+            vote.user_id.taken_avatars.forEach(function(avatar, index){
                 if(avatar.trip_id === current_trip){
                     $img.attr('src', '/images/hats/color_hats/' + avatar.avatar)
                     downvote_found = true;
