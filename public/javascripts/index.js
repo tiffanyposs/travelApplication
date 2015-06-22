@@ -693,7 +693,7 @@ var makeSuggestions = function(data){
                 // $('#suggestion_modal_upvote')
             }else{
                 voting.user_id.taken_avatars.forEach(function(down){
-                    if(up.trip_id === current_trip){
+                    if(down.trip_id === current_trip){
                         console.log(down.avatar)
                         // var $card = $('<div></div>')
                         var $image = $('<img>').attr('src', '/images/hats/color_hats/' + down.avatar)
