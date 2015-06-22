@@ -110,6 +110,18 @@ router.put('/votes/:suggestion_id', function(req, res, next) {
 );
 });
 
+
+// GET /suggestions/:category_id/last
+router.get('/:trip_id/last', function(req, res, next) {
+  var query = Suggestion.find({'trip_id' : req.params.trip_id}).sort({'created': 'desc'}).limit(1);
+  query.populate('user_id', 'first_name last_name username taken_avatars')
+  query.populate('votes.user_id')
+  query.exec(function(err, suggestions){
+    if (err) return handleError(err);
+    res.json(suggestions)
+  })
+});
+
 /* PUT /suggestions/:suggestion_id/upvote */
 // router.put('/votes/:suggestion_id', function(req, res, next) {
 // Suggestion.update( {_id : req.params.suggestion_id, "votes.user_id" : req.body.user_id} , 

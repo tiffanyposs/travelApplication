@@ -79,7 +79,7 @@ var userTripInfo = function(data){
         var description = $('<li></li>').text(trip.description);
         trip_card.append(title, location, duration, description);
         trip_card.click(function(){
-
+            $('#suggestion_content').empty()
             // console.log(trip.taken_avatars)
             trip_avatars = trip.taken_avatars
 
@@ -626,7 +626,7 @@ var makeSuggestions = function(data){
 
     each.votes.forEach(function(vote){
         // if upvote
-        if(vote.vote === true){
+    if(vote.vote === true){
             console.log(vote)
             var up_total = parseInt($upvote_count.text());
             $upvote_count.text(up_total += 1);
@@ -634,9 +634,17 @@ var makeSuggestions = function(data){
             $upvote_div.append($img)
 
             console.log(vote.user_id.taken_avatars)
-            vote.user_id.taken_avatars.forEach(function(avatar){
+            var upvote_found = false;
+            if(vote.user_id.taken_avatars.length === 0){
+                    $img.attr('src', '/images/users.jpg')
+            }
+            vote.user_id.taken_avatars.forEach(function(avatar, index){
                 if(avatar.trip_id === current_trip){
                     $img.attr('src', '/images/hats/color_hats/' + avatar.avatar)
+                    upvote_found = true
+                }if(index === vote.user_id.taken_avatars.length - 1 && upvote_found === false){
+                    console.log('it entered')
+                    $img.attr('src', '/images/users.jpg')
                 }
             })
         // if downvote
@@ -645,9 +653,17 @@ var makeSuggestions = function(data){
             $downvote_count.text(down_total += 1)
             $img = $('<img>')
             $downvote_div.append($img)
+            var downvote_found = false;
+            if(vote.user_id.taken_avatars.length === 0){
+                    $img.attr('src', '/images/users.jpg')
+            }
             vote.user_id.taken_avatars.forEach(function(avatar){
                 if(avatar.trip_id === current_trip){
                     $img.attr('src', '/images/hats/color_hats/' + avatar.avatar)
+                    downvote_found = true;
+                }if(index === vote.user_id.taken_avatars.length - 1 && downvote_found === false){
+                    console.log('it entered')
+                    $img.attr('src', '/images/users.jpg')
                 }
             })
         }
@@ -854,6 +870,22 @@ var getSuggestions = function(){
     }    
   });
 }
+
+
+// //this gets the last category posted in a group
+// //is called when you POST the category_submit
+var getLastSuggestion = function(){
+    $.ajax({
+    url: current_url + 'suggestions/' + current_trip + "/last",
+    dataType: 'json',
+    success: function(data){
+        makeSuggestions(data);
+    }
+  });  
+}
+
+
+// $('#category_sug_card button').click(function(){})
 
 
 // getSuggestions()

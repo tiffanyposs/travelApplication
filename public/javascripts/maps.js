@@ -200,7 +200,7 @@ var aboutPlace = function(place, lat, lng){
 				}
 
 				var makeReference = function(id){
-					console.log('make reference!')
+					// console.log('make reference!')
 				  $.ajax({    
 				    url: current_url + "suggestions/reference/" + id,
 				    type: 'PUT',
@@ -214,7 +214,7 @@ var aboutPlace = function(place, lat, lng){
 
 
 				var makeGeocode = function(id){
-					console.log('make reference!')
+					// console.log('make reference!')
 				  $.ajax({    
 				    url: current_url + "suggestions/geocode/" + id,
 				    type: 'PUT',
@@ -237,6 +237,7 @@ var aboutPlace = function(place, lat, lng){
 			        makeReference(data._id)
 			        makeVote(data._id)
 			        makeGeocode(data._id)
+			        getLastSuggestion(data._id)
 			        // makereference
 			      }
 			  })

@@ -418,7 +418,7 @@ green #98C06A*/
      display: flex; display: -webkit-flex;
      flex-direction: column; -webkit-flex-direction: column;
      overflow: scroll;
-     background-color: red;
+     background-color: #d6dde0;
 }
 
 .category_sug_card{
@@ -426,7 +426,7 @@ green #98C06A*/
      /*height: 50px;*/
      padding: 25px;
      margin-bottom: 20px;
-     background-color: purple;
+     background-color: #425061;
      display: flex; display: -webkit-flex;
      justify-content: space-between; -webkit-justify-content: space-between;
      align-items: center; -webkit-align-items: center;
@@ -434,6 +434,7 @@ green #98C06A*/
 
 .category_sug_card > h4{
      padding: 20px;
+     color: white;
 }
 
 .category_sug_card > button{
