@@ -307,10 +307,144 @@ green #98C06A*/
 
 
 #suggestions{
-	width: 80%;
+	width: 100%;
 	height: 80%;
-	background-color: red;
+	/*background-color: red;*/
+	overflow: scroll;
 }
+
+#suggestion_content{
+	/*overflow: scroll;*/
+}
+
+
+.suggestion_card{
+	width: 100%;
+	height: 175px;
+	background-color: #425061;
+	display: flex; display: -webkit-flex;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.suggestion_ave{
+	width: 20%;
+	/*background-color: orange;*/
+	display: flex; display: -webkit-flex;
+}
+
+.suggestion_ave img{
+	width: 100px;
+	background-color: white;
+	border-radius: 50px;
+	border: 2px solid #F33533;
+	margin: auto;
+}
+
+
+.suggestion_title{
+	width: 30%;
+	/*background-color: cyan;*/
+	display: flex; display: -webkit-flex;
+	padding: 20px;
+}
+
+.suggestion_title h3{
+	margin: auto;
+	color: white;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.suggestion_voting{
+	width: 50%;
+	height: 100%;
+	/*background-color: yellow;*/
+}
+
+.vote_button{
+	display: flex;
+	align-items: center;
+}
+
+.vote_button h3{
+	width: 10px;
+	margin: 10px;
+}
+
+.suggestion_voting > div{
+	width: 100%;
+	height: 50%;
+	/*background-color: grey;*/
+	display: flex; display: -webkit-flex;
+	align-items: center;
+	/*padding: 5px;*/
+}
+
+.suggestion_voting img{
+	width: 35px;
+	border-radius: 20px;
+	background-color: white;
+	/*padding: 5px;*/
+}
+
+.suggestion_voting button{
+	width: 40px;
+	height: 40px;
+	border: 2px solid white;
+	border-radius: 30px;
+	margin: 10px;
+	color: white;
+}
+
+
+.upvote_button{
+	background-color: #98C06A;
+}
+
+.downvote_button{
+	background-color: #F33533;
+}
+
+
+
+.suggestion_upvote button{
+	background-color: #98C06A;
+}
+
+.upvote_div{
+	/*display: flex;*/
+	/*flex-wrap: wrap;*/
+	width: 200px;
+	/*background-color: red;*/
+}
+
+.suggestion_upvote img{
+	border: 2px solid #98C06A;
+}
+
+
+.suggestion_downvote button{
+	background-color: #F33533;
+}
+
+.downvote_div{
+	width: 200px;
+}
+
+.suggestion_downvote img{
+	border: 2px solid #F33533;
+}
+
+
+
+/*dark blue #2f3743
+2nd dark blue #425061
+blue #1e87c1
+light grey #d6dde0
+red #F33533
+green #98C06A*/
+
 
 /*
 

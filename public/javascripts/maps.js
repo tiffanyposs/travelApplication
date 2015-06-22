@@ -2,6 +2,23 @@ var map;
 var latLng = {};
 
 
+//this will make markers
+var makeMarker = function(lat, lng, title){
+	var myLatlng = new google.maps.LatLng(lat, lng);
+
+	var marker = new google.maps.Marker({
+	      position: myLatlng,
+	      map: map,
+	      title: title
+	});
+
+}
+
+
+
+
+
+
 //this makes the map
 var makeMap = function(lat, lng){
 
@@ -12,25 +29,27 @@ var makeMap = function(lat, lng){
 	var myLatlng = new google.maps.LatLng(lat, lng);
 	//this is the properties to configure how your map will look, there are more options
 	var mapOptions = {
-	center: { lat: lat, lng: lng},
+	center: { lat: lat, lng: lng },
 	zoom: 13
 	};
 	// var map creates a new google map with the id
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 
-    var makeMarkers = function(){
-    var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Hello World!'
-    });     
-    }
+    // var makeMarkers = function(){
+    // var marker = new google.maps.Marker({
+    //       position: myLatlng,
+    //       map: map,
+    //       title: 'Hello World!'
+    // });     
+    // }
+
 
 
   var open = false
   $('#open_button').click(function(){
     if(open === false){
+    	// console.log(false)
       $('#map_button').animate({right: '0'}, 'slow')
       $('#suggestion_container').hide('slow', function(){
         $('#map-container').animate({
@@ -78,8 +97,7 @@ var makeMap = function(lat, lng){
     })//end click
 }
 
-//defaults to new york
-// makeMap(40.7127, -74.0059)
+
 
 
 
@@ -95,28 +113,15 @@ var makeMap = function(lat, lng){
 
 
 
-var makeMarker = function(lat, lng, title){
-	var myLatlng = new google.maps.LatLng(lat, lng);
-
-	var marker = new google.maps.Marker({
-	      position: myLatlng,
-	      map: map,
-	      title: title
-	});
-
-}
 
 
-// <h3>Name</h3>
-// 				<h4>Formatted Address</h4>
-// 				<h4>Formatted Phone Number</h4>
-// 				<h4>Rating</h4>
-// 				<h4>Reviews</h4>
-// 				<a href="http://hello.com" target = 'blank'>hello.com</a>
-
-var aboutPlace = function(place){
+var aboutPlace = function(place, lat, lng){
 	// console.log(place)
 	//populates the info
+
+	console.log(lat)
+	console.log(lng)
+
 	$('#about_place_info').empty();
 
 	$h3 = $('<h3></h3>')
@@ -148,6 +153,10 @@ var aboutPlace = function(place){
 
 			$add_button.click(function(){
 
+				// console.log(place)
+				// console.log(each)
+				// console.log(data)
+
 				var content = {
 					'title': place.name,
 					'link': place.website,
@@ -167,6 +176,16 @@ var aboutPlace = function(place){
 					'name': 'Google',
 					'ref_id': place.place_id
 				}
+
+				var geolocation = {
+					'lat': lat,
+					'lng': lng
+				}
+
+				// var geocode = {
+				// 	'lat': ,
+				// 	'lng':
+				// }
 
 				var makeVote = function(id){
 				  $.ajax({    
@@ -192,6 +211,20 @@ var aboutPlace = function(place){
 				      }
 				  })
 				}
+
+
+				var makeGeocode = function(id){
+					console.log('make reference!')
+				  $.ajax({    
+				    url: current_url + "suggestions/geocode/" + id,
+				    type: 'PUT',
+				    data: geolocation,
+				    timeout: 1000,
+				    success: function(data){
+				    	console.log(data)
+				      }
+				  })
+				}
 		
 
 			  $.ajax({    
@@ -203,6 +236,7 @@ var aboutPlace = function(place){
 			    	$('#close_about_place').click()
 			        makeReference(data._id)
 			        makeVote(data._id)
+			        makeGeocode(data._id)
 			        // makereference
 			      }
 			  })
@@ -238,7 +272,7 @@ var aboutPlace = function(place){
 
 
 //gets the gooogle place details
-var getDetails = function(place_id){
+var getDetails = function(place_id, lat, lng){
 
 	var request = {
 		placeId: place_id
@@ -252,7 +286,8 @@ var getDetails = function(place_id){
 	  if (status == google.maps.places.PlacesServiceStatus.OK) {
 	    // createMarker(place);
 	    // console.log(place)
-	    aboutPlace(place)
+	    console.log(lat)
+	    aboutPlace(place, lat, lng)
 	  }
 	}
 
@@ -278,8 +313,8 @@ var makeCards = function(title, data){
 		var $star = $('<span></span>').attr('class', 'fa fa-star-o add_star')
 
 		$card.click(function(event){
-			// console.log(each.place_id)
-			getDetails(each.place_id)
+			// console.log(each)
+			getDetails(each.place_id, each.geometry.location.lat, each.geometry.location.lng)
 
 			var place = $('#map_suggestions').position();
 			var width = $('#map_suggestions').width();
@@ -408,7 +443,7 @@ var getShopping = function(lat, lng){
 
 
 
-
+//this is for clicking on the buttons to find things
 $('button#find_food.search_button').click(function(){
 	if($(this).attr('class') != 'search_button search_button_clicked'){
 		getFood(latLng.lat, latLng.lng)

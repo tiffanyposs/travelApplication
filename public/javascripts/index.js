@@ -1,4 +1,3 @@
-
 //these track what is clicked on
 var current_url = document.URL;
 var current_user;
@@ -8,7 +7,7 @@ var current_category;
 var current_suggestion;
 var current_avatar;
 
-
+var trip_avatars;
 
 
 var attendingTrips = function(trips){
@@ -49,6 +48,7 @@ getUser();
 //This renders the current user's trips
 var userTripInfo = function(data){
 
+    // console.log(data)
 
     if(data.length > 0){
         $('#group_chat, #categories_nav, #friends_nav, #add_platupi').show('fold', 400);
@@ -80,12 +80,15 @@ var userTripInfo = function(data){
         trip_card.append(title, location, duration, description);
         trip_card.click(function(){
 
+            // console.log(trip.taken_avatars)
+            trip_avatars = trip.taken_avatars
+
         	makeMap(trip.lat, trip.lng)
 
             $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden')
             current_category = "";
             $('#categories').empty();
-            $('#suggestion_content').empty();
+            // $('#suggestion_content').empty();
             $('#comments').empty();
             current_suggestion = "";
             current_trip = $(this).attr('id');
@@ -397,7 +400,7 @@ $('#trip_add').click(function(){
 		        })
 
 		        //this deletes everything when you make a new post
-		        $('#suggestion_content').empty();
+		        // $('#suggestion_content').empty();
 		        $('#getLastTrip').empty();
 		        $('#categories').empty();
 		        current_suggestion = "";
@@ -448,13 +451,10 @@ var getTripCategoryInfo = function(data){
         // );
 
         category_name.click(function(){
-            $('#suggestion_content').empty();
+            // $('#suggestion_content').empty();
             $('#comments').empty();
 
             // this toggles the chat
-
-            
-
             current_suggestion = "";
             $('#comment_suggestion_content, #suggestion_voting, #suggestion_avatar, #suggestion_comment_link').css('visibility', 'hidden');
 
@@ -525,16 +525,339 @@ $('#category_submit').click(function(){
 
 
 
+// <div class = 'suggestion_card'>
+
+//     <div class = 'suggestion_ave'>
+//         <img src="images/hats/color_hats/hat_1.png">
+//     </div>
+
+//     <div class = 'suggestion_title'>
+//         <h3>Best hotel ever ever</h3>
+//     </div>
+
+//     <div class = 'suggestion_voting'>
+//         <div class = 'suggestion_upvote'>
+//             <div class = 'vote_button'>
+//                 <h3>2</h3>
+//                 <button>YES</button>
+//             </div>
+//             <div class = 'upvote_div'>
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//             </div>
+//         </div>
+//         <div class = 'suggestion_downvote'>
+//             <div class = 'vote_button'>
+//                 <h3>7</h3>
+//                 <button>NO</button>
+//             </div>
+//             <div class = 'downvote_div'>
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//                 <img src="images/hats/color_hats/hat_1.png">
+//             </div>
+//         </div>
+//     </div>
+// </div>
+
+
+
+var makeSuggestions = function(data){
+ console.log(data)
+  data.forEach(function(each){
+    console.log(each)
+
+    $suggestion_card = $('<div></div>').attr('class', 'suggestion_card').attr('id', each._id)
+
+    $suggestion_ave = $('<div></div>').attr('class', 'suggestion_ave')
+    //make right avatar
+    $ave_img = $('<img>').attr('src', '/images/hats/color_hats/hat_1.png')
+    $suggestion_ave.append($ave_img)
+
+    $suggestion_title = $('<div></div>').attr('class', 'suggestion_title')
+    $title = $('<h3></h3>').text(each.title)
+    $suggestion_title.append($title)
+
+    $suggestion_voting = $('<div></div>').attr('class', 'suggestion_voting')
+
+    $suggestion_upvote = $('<div></div>').attr('class', 'suggestion_upvote')
+    $up_vote_button = $('<div></div>').attr('class', 'vote_button')
+    $upvote_count = $('<h3></h3>').text(0).attr('class', 'upvote_total')
+    $up_button = $('<button></button>').text('YES')
+    $up_vote_button.append($upvote_count, $up_button)
+
+    $upvote_div = $('<div></div>').attr('class', 'upvote_div')
+
+    $suggestion_upvote.append($up_vote_button, $upvote_div)
+
+    // var makeVoteImage = function(){
+    //     $upvote_div.append($('<img>').attr('src', current_avatar))
+    // }
+
+
+    $suggestion_downvote = $('<div></div>').attr('class', 'suggestion_downvote')
+    $down_vote_button = $('<div></div>').attr('class', 'vote_button')
+    $downvote_count = $('<h3></h3>').text(0).attr('class', 'downvote_total')
+    $down_button = $('<button></button>').text('NO')
+    $down_vote_button.append($downvote_count, $down_button)
+
+    $downvote_div = $('<div></div>').attr('class', 'downvote_div')
+
+    $suggestion_downvote.append($down_vote_button, $downvote_div)
+
+    $suggestion_voting.append($suggestion_upvote, $suggestion_downvote)
+
+    $suggestion_card.append($suggestion_ave, $suggestion_title, $suggestion_voting)
+    $('#suggestion_content').append($suggestion_card)
+
+
+
+
+    each.votes.forEach(function(vote){
+        // if upvote
+        if(vote.vote === true){
+            console.log(vote)
+            var up_total = parseInt($upvote_count.text());
+            $upvote_count.text(up_total += 1);
+            $img = $('<img>')
+            $upvote_div.append($img)
+
+            console.log(vote.user_id.taken_avatars)
+            vote.user_id.taken_avatars.forEach(function(avatar){
+                if(avatar.trip_id === current_trip){
+                    $img.attr('src', '/images/hats/color_hats/' + avatar.avatar)
+                }
+            })
+        // if downvote
+        }else{
+            var down_total = parseInt($downvote_count.text());
+            $downvote_count.text(down_total += 1)
+            $img = $('<img>')
+            $downvote_div.append($img)
+            vote.user_id.taken_avatars.forEach(function(avatar){
+                if(avatar.trip_id === current_trip){
+                    $img.attr('src', '/images/hats/color_hats/' + avatar.avatar)
+                }
+            })
+        }
+    })//end votes for each
+
+
+    $suggestion_card.click(function(){
+        console.log(each)
+        $('#suggestion_modal_upvote').empty();
+        // event.stopPropagation()
+        // makeSuggestionModal()
+        $('#title_link h3').text(each.title)
+        $('#title_link a').attr('href', each.link).text(each.link)
+
+        each.votes.forEach(function(voting){
+            console.log(voting)
+            var $card = $('<div></div>').attr('class', 'voting_card')
+            if(voting.vote === true){
+                voting.user_id.taken_avatars.forEach(function(up){
+                    if(up.trip_id === current_trip){
+                        console.log(up.avatar)
+                        var $image = $('<img>').attr('src', '/images/hats/color_hats/' + up.avatar)
+                        $card.append($image)
+                        $('#suggestion_modal_upvote').append($card)
+                    }
+                })
+                // $('#suggestion_modal_upvote')
+            }else{
+                voting.user_id.taken_avatars.forEach(function(down){
+                    if(up.trip_id === current_trip){
+                        console.log(down.avatar)
+                        // var $card = $('<div></div>')
+                        var $image = $('<img>').attr('src', '/images/hats/color_hats/' + down.avatar)
+                        $card.append($image)
+                        $('#suggestion_modal_downvote').append($card)
+                    }
+                })
+                // $('#suggestion_modal_downvote')
+            }
+            var $comment = $('<p></p>').text(voting.comment);
+            $card.append($comment);
+        })
+        // $('#suggestion_modal_upvote')
+        // $('#suggestion_modal_downvote')
+
+        console.log('suggestion card')
+    })//end suggestion card click
+
+
+    //upvote button clicked
+    $up_button.click(function(event){
+      event.stopPropagation()
+      console.log('up')
+      var vote_update = {
+        user_id: current_user,
+        // comment: '',
+        vote: true,
+      }
+
+    var makeUpvote = function(){
+        $.ajax({
+            url: current_url + 'suggestions/votes/' + each._id,
+            type: 'PUT',
+            data: vote_update,
+            dataType: 'json',
+            timeout: 1000,
+            success: function(data){
+
+            }
+          });
+    }
+
+
+
+    var checkUpvotes = function(data){
+        var found = false;
+        data.votes.forEach(function(vote, index){
+            console.log(vote)
+            if(vote.user_id === current_user){
+                found = true;
+                console.log('found')
+            }
+            if(index === data.votes.length - 1){
+                if(found === false){
+                    makeUpvote()
+                    $('#' + each._id + ' .upvote_div').append($('<img>').attr('src', current_avatar))
+                    var total = parseInt($('#' + each._id + ' .upvote_total').text());
+                    $('#' + each._id + ' .upvote_total').text(total+=1)
+                    // var up_total = parseInt($upvote_count.text());
+                    // $upvote_count.text(up_total += 1);
+                }else{
+
+                }
+            }
+        })
+    }
+
+
+    $.ajax({
+        url: current_url + 'suggestions/votes/' + each._id,
+        dataType: 'json',
+        success: function(data){
+        console.log(data)
+          checkUpvotes(data);
+        }
+    
+    });
+
+
+    })//end up_button click
+
+
+    //downvote clicked
+    $down_button.click(function(event){
+        event.stopPropagation()
+        console.log('up')
+      var vote_update = {
+        user_id: current_user,
+        // comment: '',
+        vote: false,
+      }
+
+    var makeDownvote = function(){
+        $.ajax({
+            url: current_url + 'suggestions/votes/' + each._id,
+            type: 'PUT',
+            data: vote_update,
+            dataType: 'json',
+            timeout: 1000,
+            success: function(data){
+            }
+          });
+    }
+
+    var checkDownvotes = function(data){
+        var found = false;
+        data.votes.forEach(function(vote, index){
+            console.log(vote)
+            if(vote.user_id === current_user){
+                found = true;
+                console.log('found')
+            }
+            if(index === data.votes.length - 1){
+                if(found === false){
+                    makeDownvote()
+                    $('#' + each._id + ' .downvote_div').append($('<img>').attr('src', current_avatar))
+                    var total = parseInt($('#' + each._id + ' .downvote_total').text());
+                    $('#' + each._id + ' .downvote_total').text(total+=1)
+                }else{
+                    console.log('not found')
+                }
+            }
+        })
+    }
+
+
+    $.ajax({
+        url: current_url + 'suggestions/votes/' + each._id,
+        dataType: 'json',
+        success: function(data){
+        console.log(data)
+          checkDownvotes(data);
+        }
+    
+    });
+
+
+    })//end down_button click
+
+
+
+
+
+  })
+
+//this is the modal for suggestion
+$('.suggestion_card').click(function(event){
+  console.log('it worked')
+  $('#suggestion_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
+  close_modal = '#suggestion_close'
+})
+
+$('#suggestion_close').click(function(event){
+  $('#suggestion_modal').css({opacity: 1, visibility: "visible"}).animate({opacity: 0}, 300,
+    function(){
+      $(this).css('visibility', 'hidden')
+      close_modal = '';
+    });
+})
+
+}
+
+
+
+
 //triggered when you click on a trip
 var getSuggestions = function(){
     $.ajax({
     url: current_url + 'suggestions/' + current_trip,
     dataType: 'json',
     success: function(data){
-      console.log(data)
+      // console.log(data)
+      makeSuggestions(data)
     }    
   });
 }
+
+
+// getSuggestions()
+
 
 
 

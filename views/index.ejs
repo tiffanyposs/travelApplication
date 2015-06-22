@@ -26,7 +26,7 @@
 <!-- category modal -->
 <% include partials/modals/index_category.ejs %>
 <!-- suggestion modal -->
-<% include partials/modals/index_suggestion.ejs %>
+<!-- add suggestion one here -->
 <!-- map suggestions -->
 <% include partials/modals/index_map_suggestion.ejs %>
 <!-- friends -->
@@ -190,7 +190,15 @@
 			</div>
 		</div>
 
+
+
+
 		<div id = 'suggestion_container'>
+
+
+			<% include partials/modals/suggestion_view.ejs %>
+
+
 			<nav>
 				<div id = 'main_nav'>
 					<div id = 'categories_nav'>
@@ -203,10 +211,59 @@
 
 			<!-- start suggestions -->
 			<div id = 'suggestions'>
-				<div id = 'suggestion_header'>
+<!-- 				<div id = 'suggestion_header'>
 					<h1>+ Create New Suggestion</h1>
+				</div> -->
+				<div id = 'suggestion_content'>
+
+<!-- 					<div class = 'suggestion_card'>
+
+						<div class = 'suggestion_ave'>
+							<img src="images/hats/color_hats/hat_1.png">
+						</div>
+
+						<div class = 'suggestion_title'>
+							<h3>Best hotel ever ever</h3>
+						</div>
+
+						<div class = 'suggestion_voting'>
+							<div class = 'suggestion_upvote'>
+								<div class = 'vote_button'>
+									<h3>2</h3>
+									<button>YES</button>
+								</div>
+								<div class = 'upvote_div'>
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+								</div>
+							</div>
+							<div class = 'suggestion_downvote'>
+								<div class = 'vote_button'>
+									<h3>7</h3>
+									<button>NO</button>
+								</div>
+								<div class = 'downvote_div'>
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+									<img src="images/hats/color_hats/hat_1.png">
+								</div>
+							</div>
+						</div>
+					</div> -->
+
+
 				</div>
-				<div id = 'suggestion_content'></div>
 			</div>
 
 			<!-- <div id = 'voting_hover_div'></div> -->
@@ -241,6 +298,7 @@
 <script type="text/javascript" src = '/javascripts/chat.js'></script>
 <script type="text/javascript" src = '/javascripts/maps.js'></script>
 <script type="text/javascript" src = '/javascripts/index.js'></script>
+
 <!-- <script type="text/javascript" src = '/javascripts/api_stuff.js'></script> -->
 <script type="text/javascript" src = '/javascripts/upvote_downvote.js'></script>
 <script type="text/javascript" src = '/javascripts/friends.js'></script>

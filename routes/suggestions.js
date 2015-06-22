@@ -37,10 +37,22 @@ router.put('/votes/:id', function(req, res, next) {
 
 /* PUT /suggestions/:suggestion_id/upvote */
 router.put('/reference/:id', function(req, res, next) {
-  console.log('hello world')
   Suggestion.findByIdAndUpdate(
     req.params.id,
     {$addToSet: {"references": req.body}},
+    function(err, suggestion) {
+        console.log('upvote success');
+    }
+);
+});
+
+
+
+/* PUT /suggestions/geocode/:suggestion_id */
+router.put('/geocode/:id', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.id,
+    {$set: {"geocode": req.body}},
     function(err, suggestion) {
         console.log('upvote success');
     }
@@ -65,12 +77,62 @@ router.get('/:trip_id', function(req, res, next) {
   var query = Suggestion.find({'trip_id' : req.params.trip_id})
   .where('archived').ne(true)
   query.populate('user_id', 'first_name last_name username taken_avatars');
+  query.populate('votes.user_id')
   query.exec(function(err, suggestions){
     if (err) return handleError(err);
     res.json(suggestions)
   })
 });
 
+
+
+
+//gets all the suggestions from a trip
+router.get('/votes/:suggestion_id', function(req, res, next) {
+  var query = Suggestion.findById(req.params.suggestion_id)
+  // query.populate('user_id', 'first_name last_name username taken_avatars');
+  // query.populate('votes.user_id')
+  query.exec(function(err, suggestions){
+    if (err) return handleError(err);
+    res.json(suggestions)
+  })
+});
+
+
+/* PUT /suggestions/:suggestion_id/upvote */
+router.put('/votes/:suggestion_id', function(req, res, next) {
+  Suggestion.findByIdAndUpdate(
+    req.params.suggestion_id,
+    {$set: {"votes": req.body}},
+    function(err, suggestion) {
+        console.log('upvote success');
+    }
+);
+});
+
+/* PUT /suggestions/:suggestion_id/upvote */
+// router.put('/votes/:suggestion_id', function(req, res, next) {
+// Suggestion.update( {_id : req.params.suggestion_id, "votes.user_id" : req.body.user_id} , 
+//                 {$addToSet : {"$.votes" : req.body} } ,
+//                 function(err, suggestion){
+//                   res.json(suggestion)
+//                 });
+// });
+
+
+// Suggestion.update( {_id : req.params.suggestion_id, "votes.user_id" : req.body.user_id} , 
+//                 {$addToSet : {"votes" : req.body} } ,
+//                 function(err, suggestion){
+//                   res.json(suggestion)
+//                 });
+
+ // db.bar.update( {user_id : 123456, "items.item_name" : {$ne : "my_item_two" }} , 
+ //                {$addToSet : {"items" : {'item_name' : "my_item_two" , 'price' : 1 }} } ,
+ //                false , 
+ //                true);
+
+
+// db.foo.update({"array.value" : 22}, {"$set" : {"array.$.text" : "blah"}})
 
 // // GET /suggestions/:category_id
 // //this gets all suggestions that belong to a category that are not archived.

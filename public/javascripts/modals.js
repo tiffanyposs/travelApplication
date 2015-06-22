@@ -47,8 +47,10 @@ $('#view_trips').click(function(){
       });
 })
 
+
 //add suggestion
-$('#suggestion_header').click(function(event){
+$('.suggestion_card').click(function(event){
+  console.log('it worked')
   $('#suggestion_modal').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 300);
   close_modal = '#suggestion_close'
 })
@@ -61,12 +63,6 @@ $('#suggestion_close').click(function(event){
     });
 })
 
-$('#suggestion_link').keypress(function(e){
-  if(e.keyCode == 13){
-    $('#suggestion_submit').click();
-    $('#suggestion_close').click();
-  }
-});
 
 
 //map suggestion modal
