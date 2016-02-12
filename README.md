@@ -1,3 +1,7 @@
+##Travel App With Node.js, Mongoose, & MongoDB
+
+Travel planning app leftover from an extended hackathon.
+
 ###Ideas
 
 * Search buttons are different colors and so are the markers that represent them
@@ -17,11 +21,6 @@
 
 [bash profile](http://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
-
-
-###Git Branch Tutorial
-
-[Link to Branch Tutorial](https://www.atlassian.com/git/tutorials/using-branches)
 
 ###Running Locally
 
